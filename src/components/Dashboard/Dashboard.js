@@ -6,7 +6,7 @@ import dashboardStyles from './Dashboard.module.scss'
 
 const Dashboard = () => {
     return(
-        <div style={{overflow: "hidden", height: "100vh", width: "100vw", position: "relative"}} >
+        <div style={{overflow: "hidden", height: "100vh", width: "100vw", position: "relative", marginTop:"5%"}} >
             <div className={dashboardStyles.container}>
                 <div className={dashboardStyles.section}>
                     <SideNav />
