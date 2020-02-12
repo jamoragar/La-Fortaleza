@@ -1,5 +1,5 @@
 import React from 'react'
-import { Nav, Navbar, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import styled from 'styled-components';
 
 const NavBar = () => {
@@ -31,10 +31,6 @@ const NavBar = () => {
                             <NavDropdown.Item href="/">Comics</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    <Form className="ml-auto px-3 py-1" inline>
-                        <FormControl type="text" placeholder="Buscar..." className="mr-sm-2" />
-                        <Button variant="outline-light"> Buscar</Button>
-                    </Form>
                 </Navbar.Collapse>
             </Navbar>
         </NavbarContainer>
@@ -45,15 +41,21 @@ export default NavBar
 
 const NavbarContainer = styled.div`
     margin-bottom: 1rem;
-    background: lightgray;
+    background: #343a40;
     font-size: 20px;
     .nav-link {
-        color: #000 !important;
+        color: #ffffff !important;
         
         }
-    
+    .dropdown-divider {
+        border-top: 1px solid #9E9E9E;
+    }
+    .dropdown-menu{
+        background: #343a40;
+    }
     .dropdown-item {
-        color: #000 !important;
+        background: #343a40;
+        color: #ffffff !important;
         
         &:hover{
             color: white;
