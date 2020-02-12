@@ -1,71 +1,70 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import React from 'react'
 import styled from 'styled-components';
+import Logo from './Logo.png';
 
-const Styles = styled.div`
-  .navbar {
-    background-color: #343a40;
-    font-size: 25px;
-  }
+const Navbar = () => {
+    return (
+        <NavbarContainer>
+            <nav className="navbar navbar-expand-lg navbar-light px-3 py-0">
+                <a className="navbar-brand" href="/">
+                    <img style={{ width: "50px" }} src={Logo} alt="Logo" />
+                </a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul className="navbar-nav mr-auto">
+                        <li className="nav-item active">
+                            <a className="nav-link" href="/">Home<span className="sr-only"></span></a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/">Novedades</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/">Lanzamientos</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/">Ofertas</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/">Calendario</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/">Eventos</a>
+                        </li>
+                        
+                        <li className="nav-item dropdown">
+                            <a href="/"  className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Mas</a>
+                            <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a className="dropdown-item" href="/">Juegos De Mesa</a>
+                                <a className="dropdown-item" href="/">Juegos De Cartas</a>
+                                <a className="dropdown-item" href="/">Modelos A Escala</a>
+                                <a className="dropdown-item" href="/">Coleccionables</a>
+                                <a className="dropdown-item" href="/">Comics</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul className="navbar-nav ml-auto">
+                        <li>aa</li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </nav>
+        </NavbarContainer>
+    )
+}
 
-  a, .navbar-brand, .navbar-nav .nav-link {
-    color: #bbb;
-    
-    &:hover {
-      color: white;
+export default Navbar
+
+const NavbarContainer = styled.div`
+    background: lightgray;
+    .nav-link {
+        color: #000 !important;
+        &:hover {
+            background: var(---light-green);
+        }
     }
-  }
 `;
-
-export const NavBar = () => (
-  <Styles>
-    <Navbar expand="lg" bg="dark">
-      <Navbar.Brand href="/"></Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto mr-auto">
-          <Nav.Item>
-            <Nav.Link> 
-              <Link href="/">Home</Link> 
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link>
-              <Link href="/">Novedades</Link>
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link>
-              <Link href="/">Lanzamientos</Link>
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link>
-              <Link href="/">Ofertas</Link>
-            </Nav.Link>
-          </Nav.Item>
-            <Nav.Item>
-              <Nav.Link>
-                <Link href="/">Calendario</Link>
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link>
-                <Link href="/">Eventos</Link>
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-            <NavDropdown id="nav-dropdown-4" eventkey={4} title="Mas">
-                <NavDropdown.Item href="/">Juegos De Mesa</NavDropdown.Item>
-                <NavDropdown.Item href="/">Juegos De Cartas</NavDropdown.Item>
-                <NavDropdown.Item href="/">Modelos A Escala</NavDropdown.Item>
-                <NavDropdown.Item href="/">Coleccionables</NavDropdown.Item>
-                <NavDropdown.Item href="/">Comics</NavDropdown.Item>
-              </NavDropdown>    
-            </Nav.Item>                
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  </Styles >
-)  

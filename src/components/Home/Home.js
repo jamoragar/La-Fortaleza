@@ -1,17 +1,22 @@
 import React from 'react';
-import { Header } from '../Header/Header';
-import { NavBar } from '../Navbar/Navbar';
-import { Content } from '../Content/Content';
-import { Footer } from '../Footer/Footer';
+import Header from '../Header/Header';
+import Navbar from '../Navbar/Navbar';
+import Carousel from '../Carousel/Carousel';
+import MainContent from '../MainContent/MainContent';
+import Footer from '../Footer/Footer';
+
+
 
 const Home = () =>{
     return(
-        <>    
-        <Header/>   
-        <NavBar/>
-        <Content/>
-        <Footer/>
-        </>
+        <div>  
+            <Header />
+            <Navbar />
+            <Carousel />
+            <MainContent />
+            <Footer />
+         
+        </div>
     )
 }
 

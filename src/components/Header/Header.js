@@ -1,23 +1,27 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
 
-const Style = styled.div`
-  background: #343a40;
+
+
+const Header = () => {
+    return (
+        <MainContainer />
+    ) 
+}
+
+export default Header;
+
+const MainContainer = styled.header`
+    background: url(../../../img/Header.jpg) no-repeat center/cover;
+    height: 35rem;
+   
+     img {
+      width: 30%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto
+      
+    }
 `;
 
-export const Header = () => (
-  <>
-  
-    <Style>
-      <Container fluid>
-        <Row>
-        <Col xs="3"><a href="/"><img src="img/Logo.png" width="350px" class="img-fluid" alt="logo" /></a></Col>
-        <Col xs="auto">.col-auto - variable width content</Col>
-        <Col xs="3">.col-3</Col>
-        </Row>
-      </Container>
-    </Style>
-    
-  </>
-)
+
