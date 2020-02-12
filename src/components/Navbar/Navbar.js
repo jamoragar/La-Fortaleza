@@ -1,70 +1,62 @@
 import React from 'react'
+import { Nav, Navbar, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
 import styled from 'styled-components';
-import Logo from './Logo.png';
 
-const Navbar = () => {
+const NavBar = () => {
     return (
         <NavbarContainer>
-            <nav className="navbar navbar-expand-lg navbar-light px-3 py-0">
-                <a className="navbar-brand" href="/">
-                    <img style={{ width: "50px" }} src={Logo} alt="Logo" />
-                </a>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/">Home<span className="sr-only"></span></a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/">Novedades</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/">Lanzamientos</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/">Ofertas</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/">Calendario</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/">Eventos</a>
-                        </li>
-                        
-                        <li className="nav-item dropdown">
-                            <a href="/"  className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Mas</a>
-                            <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a className="dropdown-item" href="/">Juegos De Mesa</a>
-                                <a className="dropdown-item" href="/">Juegos De Cartas</a>
-                                <a className="dropdown-item" href="/">Modelos A Escala</a>
-                                <a className="dropdown-item" href="/">Coleccionables</a>
-                                <a className="dropdown-item" href="/">Comics</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul className="navbar-nav ml-auto">
-                        <li>aa</li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </div>
-            </nav>
+            <Navbar expand="lg xs">
+                <Navbar.Brand href="/"><img
+                    src="img/LogoS.png"
+                    width="30"
+                    height="30"
+                    className="d-inline-block align-top"
+                    alt="logo"
+                    />
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/">Novedades</Nav.Link>
+                        <Nav.Link href="/">Lanzamientos</Nav.Link>
+                        <Nav.Link href="/">Ofertas</Nav.Link>
+                        <Nav.Link href="/">Calendario</Nav.Link>
+                        <Nav.Link href="/">Eventos</Nav.Link>
+                        <NavDropdown title="Dropdown" id="basic-nav-dropdown" variant="light">
+                            <NavDropdown.Item href="/">Juegos De Mesa</NavDropdown.Item>
+                            <NavDropdown.Item href="/">Juegos De Cartas</NavDropdown.Item>
+                            <NavDropdown.Item href="/">Modelos A Escala</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item href="/">Comics</NavDropdown.Item>
+                        </NavDropdown>
+                    </Nav>
+                    <Form className="ml-auto px-3 py-1" inline>
+                        <FormControl type="text" placeholder="Buscar..." className="mr-sm-2" />
+                        <Button variant="outline-light"> Buscar</Button>
+                    </Form>
+                </Navbar.Collapse>
+            </Navbar>
         </NavbarContainer>
     )
 }
 
-export default Navbar
+export default NavBar
 
 const NavbarContainer = styled.div`
+    margin-bottom: 1rem;
     background: lightgray;
+    font-size: 20px;
     .nav-link {
         color: #000 !important;
-        &:hover {
-            background: var(---light-green);
+        
+        }
+    
+    .dropdown-item {
+        color: #000 !important;
+        
+        &:hover{
+            color: white;
         }
     }
 `;
