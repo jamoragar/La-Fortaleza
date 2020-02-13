@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const NavBar = () => {
     return (
         <NavbarContainer>
-            <Navbar expand="lg xs">
+            <Navbar bg="dark" variant="light" expand="lg xs">
                 <Navbar.Brand href="/"><img
                     src="img/LogoS.png"
                     width="30"
@@ -14,7 +14,7 @@ const NavBar = () => {
                     alt="logo"
                     />
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Toggle bg="light" aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="/">Home</Nav.Link>
@@ -41,8 +41,8 @@ export default NavBar
 
 const NavbarContainer = styled.div`
     margin-bottom: 1rem;
-    background: #343a40;
     font-size: 20px;
+
     .nav-link {
         color: #ffffff !important;
         

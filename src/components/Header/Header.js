@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const Header = () => {
     return (
-        <MainContainer />
+        <MainContainer className="xs-lg" />
     ) 
 }
 
