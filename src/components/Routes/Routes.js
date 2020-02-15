@@ -3,6 +3,7 @@ import {Switch, BrowserRouter, Route, } from 'react-router-dom';
 
 import Home from '../Home/Home';
 import Dashboard from '../Dashboard/Dashboard';
+import Calendar from 'react-calendar';
 
 const Routes = () => {
     return(
@@ -10,6 +11,7 @@ const Routes = () => {
             <Switch>
                 <Route path='/' exact component={Home} />
                 <Route path='/Dashboard' component={Dashboard} />
+                <Route path='/Calendar' component={Calendar}/>
             </Switch>
         </BrowserRouter>
     )

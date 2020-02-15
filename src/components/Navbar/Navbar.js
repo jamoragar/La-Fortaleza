@@ -1,5 +1,5 @@
 import React from 'react'
-import { Nav, Navbar, NavDropdown} from 'react-bootstrap';
+import { Nav, Navbar, NavDropdown, Button} from 'react-bootstrap';
 import styled from 'styled-components';
 
 const NavBar = () => {
@@ -18,20 +18,24 @@ const NavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/">Novedades</Nav.Link>
-                        <Nav.Link href="/">Lanzamientos</Nav.Link>
-                        <Nav.Link href="/">Ofertas</Nav.Link>
-                        <Nav.Link href="/">Calendario</Nav.Link>
-                        <Nav.Link href="/">Eventos</Nav.Link>
+                        <Nav.Link href="/Novedades">Novedades</Nav.Link>
+                        <Nav.Link href="/Lanzamientos">Lanzamientos</Nav.Link>
+                        <Nav.Link href="/Ofertas">Ofertas</Nav.Link>
+                        <Nav.Link href="/Calendar">Calendario</Nav.Link>
+                        <Nav.Link href="/Eventos">Eventos</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown" variant="light">
-                            <NavDropdown.Item href="/">Juegos De Mesa</NavDropdown.Item>
-                            <NavDropdown.Item href="/">Juegos De Cartas</NavDropdown.Item>
-                            <NavDropdown.Item href="/">Modelos A Escala</NavDropdown.Item>
+                            <NavDropdown.Item href="/BG">Juegos De Mesa</NavDropdown.Item>
+                            <NavDropdown.Item href="/TCG">Juegos De Cartas</NavDropdown.Item>
+                            <NavDropdown.Item href="/Modelos">Modelos A Escala</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="/">Comics</NavDropdown.Item>
+                            <NavDropdown.Item href="/COmics">Comics</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
+                <Nav>
+                    <Nav.Link href="/"><Button variant='light'>Login</Button></Nav.Link>
+                    <Nav.Link href="/"><Button variant='light'>Login</Button></Nav.Link>
+                </Nav>
             </Navbar>
         </NavbarContainer>
     )
