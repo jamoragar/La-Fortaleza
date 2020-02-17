@@ -2,7 +2,7 @@
 import mobiscroll from '@mobiscroll/react';
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
 
-class App extends React.Component {
+class Calendar extends React.Component {
     constructor(props) {
         super(props);
 
@@ -16,20 +16,20 @@ class App extends React.Component {
     }
     render() {
         return (
-            <div className="mbsc-grid-fixed mbsc-grid-md md-event-list-agenda">
-                <mobiscroll.Eventcalendar
-                    lang="es"
-                    theme="ios"
-                    themeVariant="light"
-                    display="inline"
-                    data={this.state.myEvents}
-                    view={{
-                        calendar: { type: 'month' },
-                        eventList: { type: 'month', scrollable: true }
-                    }}
-                />
-            </div>
+            <mobiscroll.Eventcalendar
+                lang="es"
+                theme="ios"
+                themeVariant="light"
+                display="inline"
+                calendarHeight={513}
+                view={{
+                    calendar: {
+                        labels: true,
+                        popover: true
+                    }
+                }}
+                data={this.state.myEvents}
+            />
         );
-    }    
 
 export default Calendar;
