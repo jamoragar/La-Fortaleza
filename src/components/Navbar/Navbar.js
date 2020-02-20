@@ -23,12 +23,12 @@ const NavBar = () => {
                         <Nav.Link href="/Ofertas">Ofertas</Nav.Link>
                         <Nav.Link href="/Calendar">Calendario</Nav.Link>
                         <Nav.Link href="/Eventos">Eventos</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown" variant="light">
+                        <NavDropdown title="Articulos" id="basic-nav-dropdown" variant="light">
                             <NavDropdown.Item href="/BG">Juegos De Mesa</NavDropdown.Item>
                             <NavDropdown.Item href="/TCG">Juegos De Cartas</NavDropdown.Item>
                             <NavDropdown.Item href="/Modelos">Modelos A Escala</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="/COmics">Comics</NavDropdown.Item>
+                            <NavDropdown.Item href="/Comics">Comics</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                     <Nav>
