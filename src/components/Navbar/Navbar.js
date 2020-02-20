@@ -31,11 +31,10 @@ const NavBar = () => {
                             <NavDropdown.Item href="/COmics">Comics</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                </Navbar.Collapse>
-                <Nav>
-                    <Nav.Link href="/"><Button variant='light'>Login</Button></Nav.Link>
+                    <Nav>
                     <Nav.Link href="/"><Button variant='light'>Login</Button></Nav.Link>
                 </Nav>
+                </Navbar.Collapse>
             </Navbar>
         </NavbarContainer>
     )

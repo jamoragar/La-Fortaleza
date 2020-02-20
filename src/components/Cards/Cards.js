@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const Cards = () => {
     return (
-        <cardeckContent>
+        <Cardeckcontent>
             <CardDeck className="px-3 py-3 sm" >
                 <Card>
                     <Card.Img variant="top" src="img/card1.jpg" />
@@ -17,7 +17,7 @@ const Cards = () => {
                             </Card.Text>
                         </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <Button title="Comprar" variant="dark">Comprar</Button>
                     </Card.Footer>
                 </Card>
                 <Card>
@@ -30,7 +30,7 @@ const Cards = () => {
                             </Card.Text>
                         </Card.Body>
                     <Card.Footer>
-                        <Button title="Comprar">Comprar</Button>
+                        <Button title="Comprar" variant="dark">Comprar</Button>
                     </Card.Footer>
                 </Card>
                 <Card>
@@ -44,7 +44,7 @@ const Cards = () => {
                             </Card.Text>
                         </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <Button title="Comprar" variant="dark">Comprar</Button>
                     </Card.Footer>
                 </Card>
                 <Card>
@@ -58,7 +58,7 @@ const Cards = () => {
                             </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <Button title="Comprar" variant="dark">Comprar</Button>
                     </Card.Footer>
                 </Card><Card>
                     <Card.Img variant="top" src="img/grid5.jpg" />
@@ -71,17 +71,17 @@ const Cards = () => {
                             </Card.Text>
                     </Card.Body>
                     <Card.Footer>
-                        <small className="text-muted">Last updated 3 mins ago</small>
+                        <Button title="Comprar" variant="dark">Comprar</Button>
                     </Card.Footer>
                 </Card>
             </CardDeck>
-        </cardeckContent>
+        </Cardeckcontent>
    )
 }
 
 export default Cards;
 
-const cardeckContent = styled.div`
+const Cardeckcontent = styled.div`
 
     .card-footer {
         text-align: center;
