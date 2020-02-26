@@ -12,6 +12,7 @@ import JuegosDeMesa from '../Articulos/BG';
 import JuegosDeCartas from '../Articulos/TCG';
 import ModelosEscala from '../Articulos/Modelos';
 import Comics from '../Articulos/Comics';
+import Login from '../Login/Login';
 
 const Routes = () => {
     return(
@@ -28,6 +29,7 @@ const Routes = () => {
                 <Route path='/TCG' component={JuegosDeCartas} />
                 <Route path='/Modelos' component={ModelosEscala} />
                 <Route path='/Comics' component={Comics} />
+                <Route path='/Login' component={Login} />
             </Switch>
         </BrowserRouter>
     )

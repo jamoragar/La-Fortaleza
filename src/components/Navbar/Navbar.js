@@ -32,7 +32,7 @@ const NavBar = () => {
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                    <Nav.Link href="/"><Button variant='light'>Login</Button></Nav.Link>
+                    <Nav.Link href="/Login"><Button id='login' variant='light'>Login</Button></Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Navbar>

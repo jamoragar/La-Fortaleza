@@ -6,6 +6,8 @@ import Header from '../src/components/Header/Header';
 import NavBar from '../src/components/Navbar/Navbar';
 import Footer from '../src/components/Footer/Footer';
 
+
+
 function App() {
   return (
     <div className="App">
