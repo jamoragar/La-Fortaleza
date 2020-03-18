@@ -1,13 +1,11 @@
 import React from 'react';
-import { Card, CardDeck, Button} from 'react-bootstrap';
-import styled from 'styled-components';
+import { Card, Button, CardColumns} from 'react-bootstrap';
 
-
+import './Cads.scss';
 
 const Cards = () => {
     return (
-        <Cardeckcontent>
-            <CardDeck className="px-3 py-3 sm" >
+            <CardColumns className="px-3 py-3 sm" >
                 <Card>
                     <Card.Img variant="top" src="img/card1.jpg" />
                         <Card.Body>
@@ -74,22 +72,8 @@ const Cards = () => {
                         <Button title="Comprar" variant="dark">Comprar</Button>
                     </Card.Footer>
                 </Card>
-            </CardDeck>
-        </Cardeckcontent>
-   )
+            </CardColumns>
+        )
 }
 
 export default Cards;
-
-const Cardeckcontent = styled.div`
-
-    .card-footer {
-        text-align: center;
-    }
-
-`;
-
-
-
-
-

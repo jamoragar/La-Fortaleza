@@ -3,7 +3,7 @@ import {Switch, BrowserRouter, Route, } from 'react-router-dom';
 
 import Home from '../Home/Home';
 import Dashboard from '../Dashboard/Dashboard';
-import Calendar from 'react-calendar';
+import Calendar from '../Calendar/Calendar';
 import Ofertas from '../Ofertas/Ofertas';
 import Novedades from '../Novedades/Novedades';
 import Lanzamientos from '../Lanzamientos/Lanzamientos';
