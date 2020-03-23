@@ -1,17 +1,17 @@
 import React from "react";
 import Image from "react-bootstrap/Image";
 
-const Calendar = () => {
+const RolGames = () => {
   return (
-    <a href="/BoardingGames">
+    <a href="/RolGames">
       <Image
         className="p-3"
-        title="Juegos de Mesa"
-        src="img/banners/BannerBg.png"
+        title="Juegos de Rol"
+        src="img/banners/BannerRG.png"
         fluid
       />
     </a>
   );
 };
 
-export default Calendar;
+export default RolGames;

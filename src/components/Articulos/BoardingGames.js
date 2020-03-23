@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "react-bootstrap/Image";
 
-const Calendar = () => {
+const BoardingGames = () => {
   return (
     <a href="/BoardingGames">
       <Image
@@ -14,4 +14,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default BoardingGames;

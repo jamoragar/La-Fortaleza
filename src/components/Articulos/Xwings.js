@@ -1,14 +1,14 @@
 import React from "react";
 import Image from "react-bootstrap/Image";
 
-const Comics = () => {
+const Xwings = () => {
   return (
     <div>
-      <a href="/Comics">
+      <a href="/X-Wings">
         <Image
           className="p-3"
-          title="Comics"
-          src="img/banners/BannerComics.png"
+          title="X-Wings"
+          src="img/banners/BannerX-Wings.png"
           fluid
         />
       </a>
@@ -16,4 +16,4 @@ const Comics = () => {
   );
 };
 
-export default Comics;
+export default Xwings;

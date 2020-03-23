@@ -1,14 +1,14 @@
 import React from "react";
 import Image from "react-bootstrap/Image";
 
-const Comics = () => {
+const Preventa = () => {
   return (
     <div>
-      <a href="/Comics">
+      <a href="/Preventa">
         <Image
           className="p-3"
-          title="Comics"
-          src="img/banners/BannerComics.png"
+          title="Juegos de Mesa"
+          src="img/banners/BannerPreventa.png"
           fluid
         />
       </a>
@@ -16,4 +16,4 @@ const Comics = () => {
   );
 };
 
-export default Comics;
+export default Preventa;
