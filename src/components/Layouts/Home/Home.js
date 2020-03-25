@@ -12,7 +12,7 @@ const Home = () => {
         <Image
           className="p-3"
           title="Preventa"
-          src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Banners%2FCategorias%2FBannerPreVenta.png?alt=media&token=5d7a6890-1fd3-4da8-8e11-d586cfef1711"
+          src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Banners%2FCategorias%2FBannerPreVenta.png?alt=media&token=466dc91e-a82a-4481-b0bb-1f8730cadd9a"
           fluid
         />
       </a>
