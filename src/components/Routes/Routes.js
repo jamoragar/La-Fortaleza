@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, BrowserRouter, Route } from "react-router-dom";
 
-import Home from "../Home/Home";
+import Home from "../Layouts/Home/Home";
 import Dashboard from "../Dashboard/Dashboard";
 import Ofertas from "../Ofertas/Ofertas";
 import Preventa from "../Preventa/Preventa";

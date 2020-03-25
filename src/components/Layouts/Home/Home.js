@@ -1,7 +1,7 @@
 import React from "react";
 import CarouselContainer from "../Carousel/Carousel";
-import MainContent from "../MainContent/MainContent";
-import Cards from "../Cards/Cards";
+import MainContent from "../../MainContent/MainContent";
+import Store from "../../Store/Store";
 import Image from "react-bootstrap/Image";
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
           fluid
         />
       </a>
-      <Cards />
+      <Store />
       <a href="/BoardingGames">
         <Image
           className="p-3"
@@ -25,7 +25,6 @@ const Home = () => {
           fluid
         />
       </a>
-      <Cards />
       <a href="/RolGames">
         <Image
           className="p-3"
@@ -34,7 +33,6 @@ const Home = () => {
           fluid
         />
       </a>
-      <Cards />
       <a href="/traidingCardsGames">
         <Image
           className="p-3"
@@ -43,7 +41,6 @@ const Home = () => {
           fluid
         />
       </a>
-      <Cards />
       <a href="/ModelosEscala">
         <Image
           className="p-3"
@@ -52,7 +49,6 @@ const Home = () => {
           fluid
         />
       </a>
-      <Cards />
       <a href="/Comics">
         <Image
           className="p-3"
@@ -61,7 +57,6 @@ const Home = () => {
           fluid
         />
       </a>
-      <Cards />
       <a href="/X-Wings">
         <Image
           className="p-3"
@@ -70,7 +65,6 @@ const Home = () => {
           fluid
         />
       </a>
-      <Cards />
       <a href="/Accesorios">
         <Image
           className="p-3"
@@ -79,9 +73,8 @@ const Home = () => {
           fluid
         />
       </a>
-      <Cards />
       <MainContent />
-    </div>
+    </div >
   );
 };
 

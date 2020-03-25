@@ -1,13 +1,12 @@
 import React from "react";
 import { Nav, Navbar, NavDropdown, Button } from "react-bootstrap";
-
-import "./Navbar.scss";
+import "./Navbar.css";
 
 const NavBar = () => {
   return (
-    <Navbar className="navbar" bg="dark" variant="light" expand="lg xs">
+    <Navbar className="navbar" bg="dark" expand="lg xs">
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
+      <Navbar.Collapse className="nav-icon" id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/Preventa">Preventa</Nav.Link>
@@ -33,7 +32,9 @@ const NavBar = () => {
         </Nav>
         <Nav>
           <Nav.Link href="/Login">
-            <Button id="login">Login</Button>
+            <Button id="login" variant="outline-light">
+              Login
+            </Button>
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
