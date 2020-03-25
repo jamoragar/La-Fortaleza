@@ -9,16 +9,20 @@ const SideNav = () =>{
             </div>
             <ul className={sideNavStyles.nav}>
                 <li>
-                    <i class="fas fa-chart-bar fa-fw"></i>
-                    Reportes
+                    <i class="fas fa-calendar-alt fa-fw"></i>
+                    Agenda
                 </li>
                 <li>
                     <i class="fas fa-shopping-cart fa-fw"></i>
                     Productos
                 </li>
                 <li>
-                    <i class="fas fa-calendar-alt fa-fw"></i>
-                    Eventos
+                    <i class="fas fa-project-diagram"></i>         
+                    Categorias
+                </li>
+                <li>
+                    <i class="fas fa-box-open fa-fw"></i>
+                    Ordenes
                 </li>
             </ul>
         </nav>
