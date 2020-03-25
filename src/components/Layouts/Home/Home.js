@@ -11,11 +11,13 @@ const Home = () => {
       <a href="/Preventa">
         <Image
           className="p-3"
-          title="Juegos de Mesa"
-          src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Banners%2FCategorias%2FBannerBG.png?alt=media&token=04dc0441-f06a-408c-8f75-1df61cab4feb"
+          title="Preventa"
+          src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Banners%2FCategorias%2FBannerPreVenta.png?alt=media&token=5d7a6890-1fd3-4da8-8e11-d586cfef1711"
           fluid
         />
-        <Store />
+      </a>
+      <Store />
+      <a href="/BoardingGames">
         <Image
           className="p-3"
           title="Juegos de Mesa"
