@@ -2,9 +2,6 @@
   border: none;
   outline: none;
 }
-.navbar-light .navbar-toggler-icon {
-  background-image: url(Toggle.svg);
-}
 
 .nav-link {
   color: #ffffff !important;

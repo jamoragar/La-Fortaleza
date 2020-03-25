@@ -7,7 +7,7 @@ import './Store.css';
 
 export default function Store(props) {
     return (
-        <div xs={12} sm={12} md={12} lg={6}>
+        <div>
             {Object.entries(productos).map(([categoriaName, productos]) => (
                 <div>
                     <h1 className="p-3">{categoriaName}</h1>

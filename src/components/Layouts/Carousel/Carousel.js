@@ -6,7 +6,7 @@ const CarouselContainer = () => {
   return (
     <Container className="p-3 mt-3 mr-0" fluid>
       <Row>
-        <Col lg={6} md={6} sm={6} xs={12}>
+        <Col lg={8} md={8} sm={6} xs={12}>
           <Carousel interval="3000" className="w-100">
             <Carousel.Item>
               <img
@@ -54,7 +54,7 @@ const CarouselContainer = () => {
           </Carousel>
           <br />
         </Col>
-        <Col lg={6} md={6} sm={6} xs={12}>
+        <Col lg={4} md={4} sm={6} xs={12}>
           <img
             className="d-block w-100 "
             src="img/grid3.jpg"

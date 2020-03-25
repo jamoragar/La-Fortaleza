@@ -12,12 +12,10 @@ const Home = () => {
         <Image
           className="p-3"
           title="Juegos de Mesa"
-          src="img/banners/BannerPreventa.png"
+          src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Banners%2FCategorias%2FBannerBG.png?alt=media&token=04dc0441-f06a-408c-8f75-1df61cab4feb"
           fluid
         />
-      </a>
-      <Store />
-      <a href="/BoardingGames">
+        <Store />
         <Image
           className="p-3"
           title="Juegos de Mesa"
