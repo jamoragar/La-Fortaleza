@@ -1,19 +1,20 @@
 import React from 'react';
 import { productos } from "../Data/DataProductos";
 import { formatPrice } from "../Data/DataProductos";
-import { Card, CardDeck, Button } from "react-bootstrap";
+import { CardDeck, Card, Button } from "react-bootstrap";
 
 import './Store.css';
 
-export default function Store(props) {
+
+export default function Store() {
     return (
-        <div>
-            {Object.entries(productos).map(([categoriaName, productos]) => (
-                <div>
-                    <h1 className="p-3">{categoriaName}</h1>
-                    <CardDeck className="p-3" fluid>
-                        {productos.map(producto => (
-                            <Card>
+        <div className="p-3">
+            {Object.entries(productos).map(([categoriaName, productos], i) => (
+                <div key={i}>
+                    <h1>{categoriaName}</h1>
+                    <CardDeck>
+                        {productos.map((producto, i) => (
+                            <Card border="light" style={{ width: '18rem' }} key={i}>
                                 <Card.Img src={producto.img} variant="top" />
                                 <Card.Body>
                                     <Card.Title>{producto.name}</Card.Title>
@@ -30,12 +31,12 @@ export default function Store(props) {
                                 </Card.Footer>
                             </Card>
                         ))}
-
                     </CardDeck>
                 </div>
             ))
             }
-        </div>
+        </div >
     );
 }
 
+/*  */
