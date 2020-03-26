@@ -1,23 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { productos } from "../Data/DataProductos";
 import { formatPrice } from "../Data/DataProductos";
 import { CardDeck, Card, Button } from "react-bootstrap";
-import firebase from '../../config/firebase';
 
 import './Store.css';
 
 
-const Store = () => {
-
-    const [fbData, setFbData] = useState(null);
-
-    useEffect(() => {
-        firebase.database().ref('/Product').on('value', (snapshot) => {
-            setFbData(snapshot.val());
-        });
-    }, []);
-    console.log(fbData);
-
+export default function Store() {
     return (
         <div className="p-3">
             {Object.entries(productos).map(([categoriaName, productos], i) => (
@@ -47,11 +36,7 @@ const Store = () => {
             ))
             }
         </div >
-    )
+    );
 }
-export default Store
 
-
-
-
-
+/*  */
