@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import imagenation from "imagenation";
 import {Form, Button, Modal} from 'react-bootstrap';
 import firebase from '../../../../config/firebase';
 import productosStyles from './Productos.module.scss'
@@ -87,57 +86,40 @@ const AgregarProducto = (props) => {
                             null
                         }
                         <Form.Group controlId="formPriceProducts">
-<<<<<<< HEAD
-                                <Form.Label>Precio:</Form.Label>
-                                <Form.Control type="number" placeholder='Ingrese el valor del producto.' />
-                            </Form.Group>
+                            <Form.Label>Precio:</Form.Label>
+                            <Form.Control type="number" placeholder='Ingrese el valor del producto.' />
+                        </Form.Group>
 
-                            <div className={'custom-file'} style={{ marginBottom: '12px' }}>
-                                <input type="file" className={'custom-file-input'} id="customFile" onChange={orientImage} accept="image/*" multiple />
-                                <label className="custom-file-label" htmlFor="customFile">Buscar Imagen(es)</label>
-                            </div>
-                            {
-                                image ? (
-                                    <div className={productosStyles.containerImg}>
+                        <div className={'custom-file'} style={{marginBottom: '12px'}}>
+                            <input type="file" className={'custom-file-input'} id="customFile" onChange={orientImage} accept="image/*" multiple/>
+                            <label className="custom-file-label" htmlFor="customFile">Buscar Imágen(es)</label>
+                        </div>
+                        {
+                            image ? (
+                                <div className={productosStyles.containerImg}>
                                         {
                                             (image || []).map((url, i) => {
-                                                return (
+                                                return(
                                                     <div className={productosStyles.boxImg} key={i}>
                                                         <img src={url} alt="..." />
                                                         <div className={productosStyles.optionImg}>
                                                             <button className={productosStyles.deleteImg}>
-                                                                <svg class={productosStyles.svgX} focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+                                                            <svg class={productosStyles.svgX} focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
                                                             </button>
                                                         </div>
                                                     </div>
                                                 )
                                             })
                                         }
-                                    </div>
-                                )
-                                    :
-                                    null
-                            }
-
-                            <br />
-                            <Button variant="success" block>
-                                <i className="far fa-save fa-fw" />
-=======
-                            <Form.Label>Precio:</Form.Label>
-                            <Form.Control type="number" placeholder='Ingrese el valor del producto.' />
-                        </Form.Group>
-
-                        <input  type="file" onChange={orientImage} accept="image/*" multiple/>
-                        {
-                            (image || []).map((url, i) => {
-                                return <img key={i} width='150' src={url} alt="..." />
-                                })
+                                </div>
+                            )
+                            :
+                            null
                         }
           
                         <br/>
                         <Button variant="success" block>
                             <i className="far fa-save fa-fw" />
->>>>>>> parent of 847d4de... mantencion
                             Aceptar
                         </Button>
                         {' '}
