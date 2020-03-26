@@ -1,12 +1,26 @@
 import React, {useState, useEffect} from 'react';
+import imagenation from "imagenation";
 import {Form, Button, Modal} from 'react-bootstrap';
 import firebase from '../../../../config/firebase';
 
 const AgregarProducto = (props) => {
     const [fbCategoria, setFbCategoria] = useState(null);
     const [subCat, setSubCat] = useState(null);
+    const [image, setImage] = useState(null);
     const fbDbCategory = firebase.database().ref('/Category');
-    let descripciones = []
+    let descripciones = [];
+    let images = [];
+    let fileArray = []
+
+
+    const orientImage = async ({ target }) => {
+        
+        images.push(target.files)
+        for (let i = 0; i < images[0].length; i++) {
+            fileArray.push(URL.createObjectURL(images[0][i]));
+        }
+        setImage(await fileArray);
+    }
 
     useEffect(() =>{
         fbDbCategory.orderByChild('description').on('value', (snapshot) => {
@@ -74,6 +88,15 @@ const AgregarProducto = (props) => {
                             <Form.Label>Precio:</Form.Label>
                             <Form.Control type="number" placeholder='Ingrese el valor del producto.' />
                         </Form.Group>
+
+                        <input  type="file" onChange={orientImage} accept="image/*" multiple/>
+                        {
+                            (image || []).map((url, i) => {
+                                return <img key={i} width='150' src={url} alt="..." />
+                                })
+                        }
+          
+                        <br/>
                         <Button variant="success" block>
                             <i className="far fa-save fa-fw" />
                             Aceptar
