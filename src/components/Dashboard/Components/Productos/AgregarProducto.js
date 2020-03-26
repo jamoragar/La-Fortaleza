@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Modal } from 'react-bootstrap';
-=======
-import React, {useState, useEffect} from 'react';
-import {Form, Button, Modal} from 'react-bootstrap';
->>>>>>> 104549cd04d9c360ec978f4e3cfd511208d8c0bf
 import firebase from '../../../../config/firebase';
 import productosStyles from './Productos.module.scss'
 
