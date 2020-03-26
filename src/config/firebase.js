@@ -2,9 +2,11 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
+import 'firebase/analytics';
+import 'firebase/database';
 
 const firebaseConfig = {
-  aapiKey: "AIzaSyB3RDp5bPyATXDkubYncRoby1uZkndZyM8",
+  apiKey: "AIzaSyB3RDp5bPyATXDkubYncRoby1uZkndZyM8",
   authDomain: "la-fortaleza-18fbf.firebaseapp.com",
   databaseURL: "https://la-fortaleza-18fbf.firebaseio.com",
   projectId: "la-fortaleza-18fbf",
@@ -16,3 +18,5 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics(); 
+
+export default firebase;

@@ -13,25 +13,25 @@ const SideNav = () =>{
             <ul className={sideNavStyles.nav}>
                 <Link to='/Dashboard/Agenda'>
                     <li>
-                        <i class="fas fa-calendar-alt fa-fw"></i>
+                        <i className="fas fa-calendar-alt fa-fw"></i>
                         Agenda
                     </li>
                 </Link>
                 <Link to='/Dashboard/Productos'>
                     <li>
-                        <i class="fas fa-shopping-cart fa-fw"></i>
+                        <i className="fas fa-shopping-cart fa-fw"></i>
                         Productos
                     </li>
                 </Link>
                 <Link to='/Dashboard/Categorias'>
                     <li>
-                        <i class="fas fa-project-diagram"></i>         
+                        <i className="fas fa-project-diagram fa-fw"></i>         
                         Categorías
                     </li>
                 </Link>
                 <Link to='/Dashboard/Ordenes'>
                     <li>
-                        <i class="fas fa-box-open fa-fw"></i>
+                        <i className="fas fa-box-open fa-fw"></i>
                         Ordenes
                     </li>
                 </Link>
