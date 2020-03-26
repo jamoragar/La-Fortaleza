@@ -52,6 +52,33 @@ export const productoItems = [
         price: 5990
     },
     {
+        name: 'producto 2',
+        img: '/img/grid2.jpg',
+        detail: 'juegos demesa blabla bla blabla',
+        stock: 10,
+        section: 'BoardingGames',
+        categoria: 'Generico',
+        price: 5990
+    },
+    {
+        name: 'producto 2',
+        img: '/img/grid2.jpg',
+        detail: 'juegos demesa blabla bla blabla',
+        stock: 10,
+        section: 'BoardingGames',
+        categoria: 'Generico',
+        price: 5990
+    },
+    {
+        name: 'producto 2',
+        img: '/img/grid2.jpg',
+        detail: 'juegos demesa blabla bla blabla',
+        stock: 10,
+        section: 'BoardingGames',
+        categoria: 'Generico',
+        price: 5990
+    },
+    {
         name: 'producto 3',
         img: '/img/grid3.jpg',
         detail: 'juegos demesa blabla bla blabla',
