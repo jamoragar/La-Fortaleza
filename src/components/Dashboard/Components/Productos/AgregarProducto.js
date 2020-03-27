@@ -87,6 +87,7 @@ const AgregarProducto = (props) => {
                                 console.log(FbDownloadURL);
                                 const key = firebase.database().ref().push().key;
                                 firebase.database().ref().child(`/Productos/${key}`).set({
+                                    id: key,
                                     nombre: nombre.value.trim(),
                                     descripcion: descripcion.value,
                                     categoria: categoria.value,

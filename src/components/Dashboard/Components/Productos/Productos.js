@@ -35,28 +35,28 @@ const Productos = () => {
         {
             name:'Control',
             button:true,
-            cell: () => {return(
+            cell: (data) => {return(
                             <>
-                            <OverlayTrigger key={'ver'} placement={'bottom'}
+                            <OverlayTrigger key={'ver'} placement={'left'}
                                 overlay={
                                 <Tooltip id={`tooltip-bottom`}><strong>Ver</strong></Tooltip>
                                 }
                             >
-                                <a href='#' className="text-success"><i className="fas fa-fw fa-search" /> </a> 
+                                <div style={{cursor:'pointer'}} className="text-success"><i className="fas fa-fw fa-search fa-lg" style={{width:'35px',height:'20px'}}/> </div> 
                             </OverlayTrigger>
-                            <OverlayTrigger key={'editar'} placement={'bottom'} 
+                            <OverlayTrigger key={'editar'} placement={'left'} 
                                 overlay={
                                 <Tooltip id={`tooltip-bottom`}><strong>Editar</strong></Tooltip>
                                 }
                             >
-                                <a href='#' className="text-primary"><i className="fa fa-fw fa-edit" /> </a> 
+                                <div style={{cursor:'pointer'}} className="text-primary"><i className="fa fa-fw fa-edit fa-lg" style={{width:'35px',height:'20px'}}/> </div> 
                             </OverlayTrigger>
-                            <OverlayTrigger key={'eliminar'} placement={'bottom'}
+                            <OverlayTrigger key={'eliminar'} placement={'left'}
                                 overlay={
                                 <Tooltip id={`tooltip-bottom`}><strong>Eliminar</strong></Tooltip>
                                 }
                             >
-                                <a href='#' className="text-danger"><i className="fa fa-fw fa-trash" /></a>
+                                <div style={{cursor:'pointer'}} onClick={()=>deleteProduct(data.id)} className="text-danger"><i className="fa fa-fw fa-trash fa-lg" style={{height:'20px'}}/></div>
                             </OverlayTrigger>
                             </>
                         )
@@ -72,6 +72,11 @@ const Productos = () => {
             setProductos(snapshot.val());
         });
     }, []);
+
+    const deleteProduct = (product) => {
+        console.log(product);
+        firebase.database().ref(`/Productos/${product}`).remove();
+    }
     
     if(productos){
         Object.keys(productos).map((key, i) => {
