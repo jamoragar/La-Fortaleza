@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import firebase from '../../config/firebase';
+import React from 'react';
 
 const Login = () => {
-  return(
+  return (
     <h1>Login...</h1>
   )
 }

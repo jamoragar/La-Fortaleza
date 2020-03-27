@@ -2,7 +2,8 @@ import React from "react";
 import { Container, Carousel, Col, Row } from "react-bootstrap";
 import "./Carousel.css";
 
-const CarouselContainer = () => {
+const CarouselContainer = (s) => {
+
   return (
     <Container className="p-3 mt-3 mr-0" fluid>
       <Row>
@@ -11,7 +12,7 @@ const CarouselContainer = () => {
             <Carousel.Item>
               <img
                 className="d-block w-100"
-                src="img/grid3.jpg"
+                src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2Fgrid3.jpg?alt=media&token=8a6651b2-98d5-4175-adaa-283e1bf98c00"
                 alt="First slide"
                 height="475"
               />
@@ -26,7 +27,7 @@ const CarouselContainer = () => {
             <Carousel.Item>
               <img
                 className="d-block w-100"
-                src="img/grid4.jpg"
+                src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2Fgrid5.jpg?alt=media&token=08bf8c34-4c99-4306-b3cd-d796e5f32c77"
                 alt="Third slide"
                 height="475"
               />

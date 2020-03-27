@@ -16,6 +16,7 @@ import Xwings from "../Articulos/Xwings";
 import Accesorios from "../Articulos/Accesorios";
 
 const Routes = () => {
+
   return (
     <BrowserRouter>
       <Switch>

@@ -7,6 +7,7 @@ import NavBar from "../src/components/Layouts/Navbar/Navbar";
 import Footer from "../src/components/Layouts/Footer/Footer";
 
 function App() {
+
   return (
     <div className="App">
       <Header />
