@@ -8,20 +8,22 @@ const AgregarProducto = (props) => {
     const [fbCategoria, setFbCategoria] = useState(null);
     const [subCat, setSubCat] = useState(null);
     const [image, setImage] = useState(null);
+    const [files, setFiles] = useState([]);
     const fbDbCategory = firebase.database().ref('/Category');
     let descripciones = [];
     let images = [];
     let fileArray = []
 
-
+    //Función que recorre los archivos subidos y los transforma en blob para, posteriormente crear un array de estos y previsualizarlos dentro del formulario.
     const orientImage = async ({ target }) => {
         images.push(target.files)
+        setFiles(target.files)
         for (let i = 0; i < images[0].length; i++) {
             fileArray.push(URL.createObjectURL(images[0][i]));
         }
         setImage(await fileArray);
     }
-
+    //Al renderisar el componente, se hace un llamado a firebase consultando por las descripciones de cada categoría.
     useEffect(() =>{
         fbDbCategory.orderByChild('description').on('value', (snapshot) => {
             // console.log('nombre del nodo: ' + snapshot.key + ' description: ' + snapshot.val().description);
@@ -32,18 +34,73 @@ const AgregarProducto = (props) => {
             setFbCategoria(descripciones);
         })
     }, []);
-
+    //Función que llama las subcategorías según corresponda en firebase.
     const handleSubCategory = (categoria) => {
-        fbDbCategory.orderByChild('description/').equalTo(`${categoria}`).on('value', snapshot => {
-            snapshot.forEach((child) => {
-                setSubCat(child.val().subCat)
-            })
-        });
+        if(categoria === '0'){
+            setSubCat(null);
+        }else{
+            fbDbCategory.orderByChild('description/').equalTo(`${categoria}`).on('value', snapshot => {
+                snapshot.forEach((child) => {
+                    setSubCat(child.val().subCat)
+                })
+            });
+        }
     }
+    //Función que borra un elemento del array que contiene las imagenes agregadas en el formulario.
     const deleteImage = (e, name) => {
         e.preventDefault();
         setImage(image.filter((image) => image !== name))
 
+    }
+    //Función que toma el valor de cada input en el formulario para, posteriormente, validarlos y subirlos a la BD de firebase.
+    const submitProduct = (e) => {
+        //Se previene que la página refresque.
+        e.preventDefault();
+        const promises = [];
+        const {nombre, descripcion, categoria, subcategoria, precio} = e.target.elements;
+        const FbDownloadURL = []
+
+        if(files.length > 0 && categoria.value !== '0' ){
+            //Según la cantidad de archivos recorremos el hook files y subimos dichos archivos al bucket de firebase.
+            for(let i = 0; i < files.length; i++){
+                const uploadTask = firebase.storage().ref().child(`IMG/Productos/${nombre.value.trim()}/img_${nombre.value.trim()}_${i}`).put(files[i])
+                promises.push(uploadTask);
+                uploadTask.on(
+                    firebase.storage.TaskEvent.STATE_CHANGED,
+                    snapshot => {
+                     const progress = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                        if (snapshot.state === firebase.storage.TaskState.RUNNING) {
+                         console.log(`Progress: ${progress}%`);
+                        }
+                    },
+                    error => console.log(error.code),
+                        async () => {
+                            const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+                            FbDownloadURL.push(downloadURL);
+                            if(FbDownloadURL.length === files.length){
+                                console.log(FbDownloadURL);
+                                const key = firebase.database().ref().push().key;
+                                firebase.database().ref().child(`/Productos/${key}`).set({
+                                    nombre: nombre.value.trim(),
+                                    descripcion: descripcion.value,
+                                    categoria: categoria.value,
+                                    subcategoria: subcategoria.value,
+                                    precio: precio.value,
+                                    img: FbDownloadURL.map((img) => {
+                                        return img
+                                    }),
+                                })
+                            }
+                        }
+                );        
+            }
+            Promise.all(promises)
+                .then(() => alert('Producto creado con éxito!'))
+                .catch(err => console.log(err.code));
+            
+        }else{
+            alert('Debe completar todos los campos y agregar al menos una imágen.');
+        }
     }
     return (
         <Modal {...props} style={{background:'none'}} size="lg">
@@ -55,50 +112,51 @@ const AgregarProducto = (props) => {
             {
                 fbCategoria ?
                 <Modal.Body>
-                    <Form>
+                    <Form onSubmit={submitProduct}>
                         <Form.Group controlId='formNameProducts'>
                             <Form.Label>Nombre:</Form.Label>
-                            <Form.Control type='text' placeholder='Ingrese el nombre del producto.' />
+                            <Form.Control name='nombre' type='text' placeholder='Ingrese el nombre del producto.' required/>
                         </Form.Group>
                         <Form.Group controlId="formDescriptionProducts">
                             <Form.Label>Descripción:</Form.Label>
-                            <Form.Control as="textarea" rows="3" placeholder='Ingrese la descripción del producto.' />
+                            <Form.Control name='descripcion' as="textarea" rows="3" placeholder='Ingrese la descripción del producto.' required/>
                         </Form.Group>
                         <Form.Group controlId="formCategory">
                             <Form.Label>Categoría:</Form.Label>
-                            <Form.Control name='selectCategory' as="select" onChange={(categoria) => handleSubCategory(categoria.target.value)}>
-                                <option value='no_select' key='alfa'>Seleccione una categoría</option>
+                            <Form.Control name='categoria' as="select" 
+                                onChange={(categoria) => handleSubCategory(categoria.target.value)}
+                                >
+                                <option value='0' key='alfa'>Seleccione una categoría</option>
                                 {fbCategoria.map((categoria, i) => {
                                     return <option value={categoria} key={i}>{categoria}</option>
                                 })}
                             </Form.Control>
                         </Form.Group>
-                        {
-                            subCat ? 
-                            <Form.Group controlId="formCategory">
-                                <Form.Label>Sub-Categoría:</Form.Label>
-                                <Form.Control name='selectSubCategory' as="select">
-                                    {
-                                        Object.entries(subCat).map(([abreviacion, nombre], i) => {
-                                            return <option value={nombre} key={i}>{nombre}</option>
-                                        })
-                                    }
-                                </Form.Control>
-                            </Form.Group>
-                            :
-                            null
-                        }
+                        {subCat ? 
+                        <Form.Group controlId="formCategory">
+                            <Form.Label>Sub-Categoría:</Form.Label>
+                            <Form.Control name='subcategoria' as="select">
+                                {/* Transformamos el hook subCat a array, ya que firebase lo entrega como Objeto, y se procede a recorrerlo. */
+                                    Object.entries(subCat).map(([abreviacion, nombre], i) => {
+                                        return <option value={nombre} key={i}>{nombre}</option>
+                                    })
+                                }
+                            </Form.Control>
+                        </Form.Group>
+                        :
+                        null}
                         <Form.Group controlId="formPriceProducts">
                             <Form.Label>Precio:</Form.Label>
-                            <Form.Control type="number" placeholder='Ingrese el valor del producto.' />
+                            <Form.Control name='precio' type="number" placeholder='Ingrese el valor del producto.' required/>
                         </Form.Group>
-
-                        <div className={'custom-file'} style={{marginBottom: '12px'}}>
-                            <input type="file" className={'custom-file-input'} id="customFile" onChange={orientImage} accept="image/*" multiple/>
-                            <label className="custom-file-label" htmlFor="customFile">Buscar Imágen(es)</label>
-                        </div>
-                        {
-                            image ? (
+                        <Form.Group controlId='formUploadImages'>
+                            <Form.Label>Imágenes:</Form.Label>
+                            <div className={'custom-file'} style={{marginBottom: '12px'}}>
+                                <input type="file" className={'custom-file-input'} id="customFile" onChange={orientImage} accept="image/*" multiple/>
+                                <label className="custom-file-label" htmlFor="customFile">Buscar Imágen(es)</label>
+                            </div>
+                            { /* Consultamos que existan elementos en el hook image, y despues recorremos este */
+                                image ? (
                                 <div className={productosStyles.containerImg}>
                                 {(image || []).map((url, i) => {
                                     return(
@@ -113,13 +171,12 @@ const AgregarProducto = (props) => {
                                     )
                                 })}
                                 </div>
-                            )
+                                )
                             :
-                            null
-                        }
+                            null}
+                        </Form.Group>
           
-                        <br/>
-                        <Button variant="success" block>
+                        <Button type='submit' variant="success" block>
                             <i className="far fa-save fa-fw" />
                             Aceptar
                         </Button>
@@ -131,7 +188,7 @@ const AgregarProducto = (props) => {
                     </Form>
                 </Modal.Body>
             :
-            <h3>Loading...</h3>
+            <h3>Cargando...</h3>
             }
         </Modal>
     )
