@@ -15,7 +15,6 @@ const AgregarProducto = (props) => {
 
 
     const orientImage = async ({ target }) => {
-        
         images.push(target.files)
         for (let i = 0; i < images[0].length; i++) {
             fileArray.push(URL.createObjectURL(images[0][i]));
@@ -41,9 +40,13 @@ const AgregarProducto = (props) => {
             })
         });
     }
+    const deleteImage = (e, name) => {
+        e.preventDefault();
+        setImage(image.filter((image) => image !== name))
 
+    }
     return (
-        <Modal {...props} style={{background:'none'}}>
+        <Modal {...props} style={{background:'none'}} size="lg">
             <Modal.Header closeButton>
                 <Modal.Title>
                 Agregar Nuevo Producto
@@ -97,20 +100,18 @@ const AgregarProducto = (props) => {
                         {
                             image ? (
                                 <div className={productosStyles.containerImg}>
-                                        {
-                                            (image || []).map((url, i) => {
-                                                return(
-                                                    <div className={productosStyles.boxImg} key={i}>
-                                                        <img src={url} alt="..." />
-                                                        <div className={productosStyles.optionImg}>
-                                                            <button className={productosStyles.deleteImg}>
-                                                            <svg class={productosStyles.svgX} focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                )
-                                            })
-                                        }
+                                {(image || []).map((url, i) => {
+                                    return(
+                                        <div className={productosStyles.boxImg} key={i}>
+                                            <img src={url} alt="..." />
+                                            <div className={productosStyles.optionImg}>
+                                                <button onClick={(e)=>deleteImage(e, url)} className={productosStyles.deleteImg}>
+                                                    <svg className={productosStyles.svgX} focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
                                 </div>
                             )
                             :
