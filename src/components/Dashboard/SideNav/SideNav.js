@@ -11,6 +11,12 @@ const SideNav = () =>{
                 </Link>
             </div>
             <ul className={sideNavStyles.nav}>
+                <Link to='/Dashboard/Slider'>
+                    <li>
+                        <i className="far fa-image fa-fw" />
+                        Slider
+                    </li>
+                </Link>
                 <Link to='/Dashboard/Agenda'>
                     <li>
                         <i className="fas fa-calendar-alt fa-fw"></i>

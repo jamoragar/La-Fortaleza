@@ -43,7 +43,7 @@ const Productos = () => {
                             productosToArray.map((producto, i) => {
                                 return(
                                     <tr key={i}>
-                                        <td>{i}</td>
+                                        <td>{i + 1}</td>
                                         <td><img src={producto.img[0]} width='80' alt="..."/></td>
                                         <td>{producto.nombre}</td>
                                         <td>{producto.precio}</td>
