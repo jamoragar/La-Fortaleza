@@ -36,7 +36,7 @@ const Productos = () => {
             name:'Control',
             button:true,
             cell: (data) => {return(
-                            <div>
+                        <div>
                             <OverlayTrigger key={'ver'} placement={'left'}
                                 overlay={
                                 <Tooltip id={`tooltip-bottom`}><strong>Ver</strong></Tooltip>
@@ -58,12 +58,11 @@ const Productos = () => {
                             >
                                 <div style={{cursor:'pointer'}} onClick={()=>deleteProduct(data)} className="text-danger"><i className="fa fa-fw fa-trash fa-lg" style={{height:'20px'}}/></div>
                             </OverlayTrigger>
-                            </div>
+                        </div>
                         )
                     }
 
             }
-        }
     ];
     const [showModal, setShowModal] = useState(false);
     const [productos, setProductos] = useState([])
