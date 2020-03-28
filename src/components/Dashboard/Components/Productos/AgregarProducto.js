@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Form, Button, Modal} from 'react-bootstrap';
+import {Form, Button, Modal, Col, Spinner} from 'react-bootstrap';
 import firebase from '../../../../config/firebase';
 import productosStyles from './Productos.module.scss'
 
@@ -9,6 +9,7 @@ const AgregarProducto = (props) => {
     const [subCat, setSubCat] = useState(null);
     const [image, setImage] = useState(null);
     const [files, setFiles] = useState([]);
+    const [buttonAceptarText, setButtonAceptarText] = 'Aceptar'
     const fbDbCategory = firebase.database().ref('/Category');
     let descripciones = [];
     let images = [];
@@ -52,12 +53,17 @@ const AgregarProducto = (props) => {
         setImage(image.filter((image) => image !== name))
 
     }
+    const handleReset = () =>{
+        document.getElementById('myForm').reset();
+        setImage(null);
+        setSubCat(null);
+    }
     //Función que toma el valor de cada input en el formulario para, posteriormente, validarlos y subirlos a la BD de firebase.
     const submitProduct = (e) => {
         //Se previene que la página refresque.
         e.preventDefault();
         const promises = [];
-        const {nombre, descripcion, categoria, subcategoria, precio} = e.target.elements;
+        const {nombre, descripcion, categoria, subcategoria, precio, stock} = e.target.elements;
         const FbDownloadURL = []
 
         if(files.length > 0 && categoria.value !== '0' ){
@@ -81,11 +87,13 @@ const AgregarProducto = (props) => {
                                 console.log(FbDownloadURL);
                                 const key = firebase.database().ref().push().key;
                                 firebase.database().ref().child(`/Productos/${key}`).set({
+                                    id: key,
                                     nombre: nombre.value.trim(),
                                     descripcion: descripcion.value,
                                     categoria: categoria.value,
                                     subcategoria: subcategoria.value,
                                     precio: precio.value,
+                                    stock: stock.value,
                                     img: FbDownloadURL.map((img) => {
                                         return img
                                     }),
@@ -112,7 +120,7 @@ const AgregarProducto = (props) => {
             {
                 fbCategoria ?
                 <Modal.Body>
-                    <Form onSubmit={submitProduct}>
+                    <Form onSubmit={submitProduct} id='myForm'>
                         <Form.Group controlId='formNameProducts'>
                             <Form.Label>Nombre:</Form.Label>
                             <Form.Control name='nombre' type='text' placeholder='Ingrese el nombre del producto.' required/>
@@ -145,10 +153,20 @@ const AgregarProducto = (props) => {
                         </Form.Group>
                         :
                         null}
-                        <Form.Group controlId="formPriceProducts">
-                            <Form.Label>Precio:</Form.Label>
-                            <Form.Control name='precio' type="number" placeholder='Ingrese el valor del producto.' required/>
-                        </Form.Group>
+                        <Form.Row>
+                            <Col>
+                                <Form.Group controlId="formPriceProducts">
+                                    <Form.Label>Precio:</Form.Label>
+                                    <Form.Control name='precio' type="number" placeholder='Ingrese el valor del producto.' required/>
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group controlId="formStockProducts">
+                                    <Form.Label>Stock Web:</Form.Label>
+                                    <Form.Control name='stock' type="number" placeholder='Ingrese el stock online para el producto.' required/>
+                                </Form.Group>
+                            </Col>
+                        </Form.Row>
                         <Form.Group controlId='formUploadImages'>
                             <Form.Label>Imágenes:</Form.Label>
                             <div className={'custom-file'} style={{marginBottom: '12px'}}>
@@ -181,7 +199,7 @@ const AgregarProducto = (props) => {
                             Aceptar
                         </Button>
                         {' '}
-                        <Button variant="outline-secondary" block>
+                        <Button variant="outline-secondary" onClick={handleReset} block>
                             <i className="fas fa-undo fa-fw" />
                             Reiniciar
                         </Button>
