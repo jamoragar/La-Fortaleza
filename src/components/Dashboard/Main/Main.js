@@ -1,8 +1,7 @@
 import React from 'react';
-import mainStyles from '../Main.module.scss';
 
 const Main = () => {
-    return(
+    return (
         <h1>Main :D</h1>
     )
 }

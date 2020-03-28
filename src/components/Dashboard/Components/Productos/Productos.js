@@ -1,4 +1,4 @@
-import React , {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import firebase from '../../../../config/firebase';
 import {OverlayTrigger, Tooltip, Button} from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
@@ -90,27 +90,28 @@ const Productos = () => {
     }
     
     if(productos || productos.length >= 0){
+
         Object.keys(productos).map((key, i) => {
             productosToArray[i] = productos[key]
         });
         return (
             <div>
-            <Button style={{float:'right'}} onClick={handleShow} variant="primary">
-                <i className="fas fa-tag fa-fw" />
-                Agregar Producto
-            </Button>
-            <AgregarProducto show={showModal} onHide={() => setShowModal(false)} />
-            <DataTable
-                title="Productos"
-                columns={columns}
-                data={productosToArray}
-                fixedHeader
-                fixedHeaderScrollHeight="300px"
-            />
+                <Button style={{float:'right'}} onClick={handleShow} variant="primary">
+                    <i className="fas fa-tag fa-fw" />
+                    Agregar Producto
+                </Button>
+                <AgregarProducto show={showModal} onHide={() => setShowModal(false)} />
+                <DataTable
+                    title="Productos"
+                    columns={columns}
+                    data={productosToArray}
+                    fixedHeader
+                    fixedHeaderScrollHeight="300px"
+                />
             </div>
         )
-    }else{
-        return(
+    } else {
+        return (
             <h3>Cargando...</h3>
         )
     }

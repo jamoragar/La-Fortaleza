@@ -1,42 +1,65 @@
-import React from 'react';
-import { productos } from "../Data/DataProductos";
+import React, { useState, useEffect } from 'react';
 import { formatPrice } from "../Data/DataProductos";
 import { CardDeck, Card, Button } from "react-bootstrap";
-
+import firebase from '../../config/firebase';
 import './Store.css';
 
+const Store = () => {
 
-export default function Store() {
-    return (
-        <div className="p-3">
-            {Object.entries(productos).map(([categoriaName, productos], i) => (
-                <div key={i}>
-                    <h1>{categoriaName}</h1>
-                    <CardDeck>
-                        {productos.map((producto, i) => (
-                            <Card border="light" style={{ width: '18rem' }} key={i}>
-                                <Card.Img src={producto.img} variant="top" />
-                                <Card.Body>
-                                    <Card.Title>{producto.name}</Card.Title>
-                                    <Card.Text>
-                                        Stock: {producto.stock}
-                                    </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <small className="text-muted">{formatPrice(producto.price)}</small>
-                                    <br />
-                                    <Button title="Comprar" variant="dark">
-                                        Agregar
+    const [productos, setProductos] = useState(null)
+    let productosToArray = [];
+    useEffect(() => {
+
+        firebase.database().ref('/Productos').on('value', snapshot => {
+            setProductos(snapshot.val());
+
+        });
+    }, []);
+
+    if (productos) {
+        Object.keys(productos).map((key, i) => {
+            productosToArray[i] = productos[key]
+
+        })
+
+        return (
+            <div className="p-3">
+                <CardDeck>
+                    {
+                        productosToArray.map((producto, i) => {
+                            return (
+                                <div key={i}>
+                                    <Card border="light" style={{ width: '18rem' }}>
+                                        <Card.Img src={producto.img} variant="top" />
+                                        <Card.Body>
+                                            <Card.Title>{producto.nombre}</Card.Title>
+                                            <Card.Text>
+                                                {producto.subcategoria}
+                                            </Card.Text>
+                                        </Card.Body>
+                                        <Card.Footer>
+                                            <small className="text-muted">{formatPrice(producto.precio)}</small>
+                                            <br />
+                                            <Button title="Comprar" variant="dark">
+                                                Agregar
                                     </Button>
-                                </Card.Footer>
-                            </Card>
-                        ))}
-                    </CardDeck>
-                </div>
-            ))
-            }
-        </div >
-    );
+                                        </Card.Footer>
+                                    </Card>
+                                </div>
+                            )
+                        })
+                    }
+                </CardDeck>
+            </div>
+        )
+    } else {
+        return (
+            <div>
+                <h3>Cargando...</h3>
+            </div>
+        )
+    }
 }
 
-/*  */
+export default Store;
+

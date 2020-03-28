@@ -5,6 +5,7 @@ import Store from "../../Store/Store";
 import Image from "react-bootstrap/Image";
 
 const Home = () => {
+
   return (
     <div>
       <CarouselContainer />
