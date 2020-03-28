@@ -1,34 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../../../../config/firebase';
-import {OverlayTrigger, Tooltip, Button} from 'react-bootstrap';
+import { OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import AgregarProducto from './AgregarProducto';
 const Productos = () => {
     const columns = [
         {
-          name: 'Foto',
-          grow: 1,
-          cell: row => <img src={row.img[0]} width='75' alt="..."/>
+            name: 'Foto',
+            grow: 1,
+            cell: row => <img src={row.img[0]} width='75' alt="..." />
         },
         {
-          name: 'Nombre',
-          selector: 'nombre',
-          sortable: true,
-          grow: 1
+            name: 'Nombre',
+            selector: 'nombre',
+            sortable: true,
+            grow: 1
         },
         {
-            name:'Categoría',
+            name: 'Categoría',
             selector: 'categoria',
             sortable: true,
             grow: 2
         },
         {
-            name:'Precio',
+            name: 'Precio',
             sortable: true,
             cell: row => `$ ${row.precio}`
         },
         {
-            name:'Stock',
+            name: 'Stock',
             selector: 'stock',
             sortable: true
         },
@@ -40,19 +40,19 @@ const Productos = () => {
                             <OverlayTrigger key={'ver'} placement={'left'}
                                 overlay={
                                 <Tooltip id={`tooltip-bottom`}><strong>Ver</strong></Tooltip>
-                                }
-                            >
-                                <div style={{cursor:'pointer'}} className="text-success"><i className="fas fa-fw fa-search fa-lg" style={{width:'35px',height:'20px'}}/> </div> 
-                            </OverlayTrigger>
-                            <OverlayTrigger key={'editar'} placement={'left'} 
-                                overlay={
+                            }
+                        >
+                            <div style={{ cursor: 'pointer' }} className="text-success"><i className="fas fa-fw fa-search fa-lg" style={{ width: '35px', height: '20px' }} /> </div>
+                        </OverlayTrigger>
+                        <OverlayTrigger key={'editar'} placement={'left'}
+                            overlay={
                                 <Tooltip id={`tooltip-bottom`}><strong>Editar</strong></Tooltip>
-                                }
-                            >
-                                <div style={{cursor:'pointer'}} className="text-primary"><i className="fa fa-fw fa-edit fa-lg" style={{width:'35px',height:'20px'}}/> </div> 
-                            </OverlayTrigger>
-                            <OverlayTrigger key={'eliminar'} placement={'left'}
-                                overlay={
+                            }
+                        >
+                            <div style={{ cursor: 'pointer' }} className="text-primary"><i className="fa fa-fw fa-edit fa-lg" style={{ width: '35px', height: '20px' }} /> </div>
+                        </OverlayTrigger>
+                        <OverlayTrigger key={'eliminar'} placement={'left'}
+                            overlay={
                                 <Tooltip id={`tooltip-bottom`}><strong>Eliminar</strong></Tooltip>
                                 }
                             >
@@ -60,9 +60,11 @@ const Productos = () => {
                             </OverlayTrigger>
                             </div>
                         )
+                    }
+
             }
         }
-      ];
+    ];
     const [showModal, setShowModal] = useState(false);
     const [productos, setProductos] = useState([])
     const handleShow = () => setShowModal(true);
@@ -75,8 +77,8 @@ const Productos = () => {
 
     const deleteProduct = (product) => {
         const ref = firebase.storage().ref(`/IMG/Productos/${product.nombre}`);
-        firebase.database().ref(`/Productos/${product.id}`).remove().then(() =>{
-            ref.listAll().then((dir) =>{
+        firebase.database().ref(`/Productos/${product.id}`).remove().then(() => {
+            ref.listAll().then((dir) => {
                 dir.items.forEach(fileRef => {
                     deleteFile(ref.fullPath, fileRef.name)
                 });
@@ -86,9 +88,9 @@ const Productos = () => {
             const ref = firebase.storage().ref(pathToFile);
             const childRef = ref.child(fileName);
             childRef.delete()
-          }
+        }
     }
-    
+
     if(productos || productos.length >= 0){
 
         Object.keys(productos).map((key, i) => {
@@ -109,6 +111,7 @@ const Productos = () => {
                     fixedHeaderScrollHeight="300px"
                 />
             </div>
+
         )
     } else {
         return (
