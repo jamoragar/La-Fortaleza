@@ -56,7 +56,7 @@ const Productos = () => {
                                 <Tooltip id={`tooltip-bottom`}><strong>Eliminar</strong></Tooltip>
                                 }
                             >
-                                <div style={{cursor:'pointer'}} onClick={()=>deleteProduct(data.id)} className="text-danger"><i className="fa fa-fw fa-trash fa-lg" style={{height:'20px'}}/></div>
+                                <div style={{cursor:'pointer'}} onClick={()=>deleteProduct(data)} className="text-danger"><i className="fa fa-fw fa-trash fa-lg" style={{height:'20px'}}/></div>
                             </OverlayTrigger>
                             </>
                         )
@@ -74,15 +74,25 @@ const Productos = () => {
     }, []);
 
     const deleteProduct = (product) => {
-        console.log(product);
-        firebase.database().ref(`/Productos/${product}`).remove();
+        const ref = firebase.storage().ref(`/IMG/Productos/${product.nombre}`);
+        firebase.database().ref(`/Productos/${product.id}`).remove().then(() =>{
+            ref.listAll().then((dir) =>{
+                dir.items.forEach(fileRef => {
+                    deleteFile(ref.fullPath, fileRef.name)
+                });
+            })
+        });
+        const deleteFile = (pathToFile, fileName) => {
+            const ref = firebase.storage().ref(pathToFile);
+            const childRef = ref.child(fileName);
+            childRef.delete()
+          }
     }
     
     if(productos){
         Object.keys(productos).map((key, i) => {
             productosToArray[i] = productos[key]
         });
-        console.log(productosToArray)
         return (
             <>
             <Button style={{float:'right'}} onClick={handleShow} variant="primary">
