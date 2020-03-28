@@ -7,49 +7,54 @@ const Productos = () => {
     const columns = [
         {
             name: 'Foto',
-            grow: 1,
-            cell: row => <img src={row.img[0]} width='75' alt="..." />
+            cell: row => <img src={row.img[0]} width='75' alt="..." />,
+            grow:1
         },
         {
             name: 'Nombre',
             selector: 'nombre',
             sortable: true,
-            grow: 1
+            grow:2,
+            sortable: true,
+
         },
         {
             name: 'Categoría',
             selector: 'categoria',
             sortable: true,
-            grow: 2
+            width: '20%'
         },
         {
             name: 'Precio',
             sortable: true,
-            cell: row => `$ ${row.precio}`
+            cell: row => `$ ${row.precio}`,
+            width:'10%'
         },
         {
             name: 'Stock',
             selector: 'stock',
-            sortable: true
+            sortable: true,
+            width:'50px',
+
         },
         {
             name:'Control',
             button:true,
             cell: (data) => {return(
-                        <div>
+                        <div style={{display: 'flex'}}>
                             <OverlayTrigger key={'ver'} placement={'left'}
                                 overlay={
                                 <Tooltip id={`tooltip-bottom`}><strong>Ver</strong></Tooltip>
-                            }
-                        >
-                            <div style={{ cursor: 'pointer' }} className="text-success"><i className="fas fa-fw fa-search fa-lg" style={{ width: '35px', height: '20px' }} /> </div>
+                                }
+                            >
+                            <div style={{ cursor: 'pointer' }} className="text-success"><i className="fas fa-fw fa-search fa-lg" style={{ width: '35px', height: '20px' }} /></div>
                         </OverlayTrigger>
                         <OverlayTrigger key={'editar'} placement={'left'}
                             overlay={
                                 <Tooltip id={`tooltip-bottom`}><strong>Editar</strong></Tooltip>
-                            }
-                        >
-                            <div style={{ cursor: 'pointer' }} className="text-primary"><i className="fa fa-fw fa-edit fa-lg" style={{ width: '35px', height: '20px' }} /> </div>
+                                }
+                            >
+                            <div style={{ cursor: 'pointer' }} className="text-primary"><i className="fa fa-fw fa-edit fa-lg" style={{ width: '35px', height: '20px' }} /></div>
                         </OverlayTrigger>
                         <OverlayTrigger key={'eliminar'} placement={'left'}
                             overlay={
@@ -60,9 +65,9 @@ const Productos = () => {
                             </OverlayTrigger>
                         </div>
                         )
-                    }
+                    },
 
-            }
+        }
     ];
     const [showModal, setShowModal] = useState(false);
     const [productos, setProductos] = useState([])
