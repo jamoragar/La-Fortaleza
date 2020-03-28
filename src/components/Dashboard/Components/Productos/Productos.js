@@ -36,7 +36,7 @@ const Productos = () => {
             name:'Control',
             button:true,
             cell: (data) => {return(
-                            <>
+                            <div>
                             <OverlayTrigger key={'ver'} placement={'left'}
                                 overlay={
                                 <Tooltip id={`tooltip-bottom`}><strong>Ver</strong></Tooltip>
@@ -58,18 +58,18 @@ const Productos = () => {
                             >
                                 <div style={{cursor:'pointer'}} onClick={()=>deleteProduct(data)} className="text-danger"><i className="fa fa-fw fa-trash fa-lg" style={{height:'20px'}}/></div>
                             </OverlayTrigger>
-                            </>
+                            </div>
                         )
             }
         }
       ];
     const [showModal, setShowModal] = useState(false);
-    const [productos, setProductos] = useState(null)
+    const [productos, setProductos] = useState([])
     const handleShow = () => setShowModal(true);
     let productosToArray = [];
     useEffect(() => {
         firebase.database().ref('/Productos').on('value', snapshot => {
-            setProductos(snapshot.val());
+            if(snapshot.val()){setProductos(snapshot.val());}
         });
     }, []);
 
@@ -89,12 +89,12 @@ const Productos = () => {
           }
     }
     
-    if(productos){
+    if(productos || productos.length >= 0){
         Object.keys(productos).map((key, i) => {
             productosToArray[i] = productos[key]
         });
         return (
-            <>
+            <div>
             <Button style={{float:'right'}} onClick={handleShow} variant="primary">
                 <i className="fas fa-tag fa-fw" />
                 Agregar Producto
@@ -107,7 +107,7 @@ const Productos = () => {
                 fixedHeader
                 fixedHeaderScrollHeight="300px"
             />
-            </>
+            </div>
         )
     }else{
         return(
