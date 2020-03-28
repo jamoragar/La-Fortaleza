@@ -8,7 +8,7 @@ const Productos = () => {
         {
             name: 'Foto',
             cell: row => <img src={row.img[0]} width='75' alt="..." />,
-            grow:1
+            grow:1,
         },
         {
             name: 'Nombre',
@@ -111,8 +111,7 @@ const Productos = () => {
                     title="Productos"
                     columns={columns}
                     data={productosToArray}
-                    fixedHeader
-                    fixedHeaderScrollHeight="300px"
+
                 />
             </div>
 

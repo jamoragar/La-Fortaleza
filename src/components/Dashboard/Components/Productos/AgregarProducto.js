@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Form, Button, Modal, Col, Spinner} from 'react-bootstrap';
+import {Form, Button, Modal, Col, Alert, Spinner} from 'react-bootstrap';
 import firebase from '../../../../config/firebase';
 import productosStyles from './Productos.module.scss'
 
@@ -9,6 +9,7 @@ const AgregarProducto = (props) => {
     const [subCat, setSubCat] = useState(null);
     const [image, setImage] = useState(null);
     const [files, setFiles] = useState([]);
+    const [alertShow, setAlertShow] = useState(false);
     const [buttonAceptarText, setButtonAceptarText] = 'Aceptar'
     const fbDbCategory = firebase.database().ref('/Category');
     let descripciones = [];
@@ -103,15 +104,20 @@ const AgregarProducto = (props) => {
                 );        
             }
             Promise.all(promises)
-                .then(() => alert('Producto creado con éxito!'))
+                .then(() => {
+                    setAlertShow(true);
+                    handleReset();
+                    setTimeout(() => setAlertShow(false), 3500);
+                })
                 .catch(err => console.log(err.code));
+                
             
         }else{
             alert('Debe completar todos los campos y agregar al menos una imágen.');
         }
     }
     return (
-        <Modal {...props} style={{background:'none'}} size="lg">
+        <Modal {...props} style={{background:'none'}} >
             <Modal.Header closeButton>
                 <Modal.Title>
                 Agregar Nuevo Producto
@@ -203,6 +209,10 @@ const AgregarProducto = (props) => {
                             <i className="fas fa-undo fa-fw" />
                             Reiniciar
                         </Button>
+                        <br/>
+                        <Alert show={alertShow} variant={'success'} onClose={() => setAlertShow(false)} dismissible>
+                            Producto creado con éxito!
+                        </Alert>
                     </Form>
                 </Modal.Body>
             :
