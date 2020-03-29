@@ -15,12 +15,14 @@ import RolGames from "../Articulos/RolGames";
 import Xwings from "../Articulos/Xwings";
 import Accesorios from "../Articulos/Accesorios";
 
-const Routes = () => {
+export default function Routes(props) {
+  const { fbData } = props;
+  //console.log(fbData);
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={Home} />
+        <Route path="/" exact component={() => <Home fbData={fbData} />} />
         <Route path="/Dashboard" component={Dashboard} />
         <Route path="/Preventa" component={Preventa} />
         <Route path="/Ofertas" component={Ofertas} />
@@ -38,4 +40,3 @@ const Routes = () => {
   );
 };
 
-export default Routes;

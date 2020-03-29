@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Carousel, Col, Row } from "react-bootstrap";
 import "./Carousel.css";
 
-const CarouselContainer = (s) => {
+const CarouselContainer = () => {
 
   return (
     <Container className="p-3 mt-3 mr-0" fluid>

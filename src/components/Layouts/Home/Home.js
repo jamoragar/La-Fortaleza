@@ -4,8 +4,9 @@ import MainContent from "../../MainContent/MainContent";
 import Store from "../../Store/Store";
 import Image from "react-bootstrap/Image";
 
-const Home = () => {
-
+const Home = (props) => {
+  const { fbData } = props;
+  //console.log(fbData);
   return (
     <div>
       <CarouselContainer />
@@ -17,7 +18,7 @@ const Home = () => {
           fluid
         />
       </a>
-      <Store />
+      <Store fbData={fbData} />
       <a href="/BoardingGames">
         <Image
           className="p-3"

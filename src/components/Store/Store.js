@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { formatPrice } from "../Data/DataProductos";
 import { CardDeck, Card, Button } from "react-bootstrap";
-import firebase from '../../config/firebase';
 import './Store.css';
 
-const Store = () => {
+const Store = (props) => {
+    const { fbData } = props;
+    const { Productos } = fbData;
+    const productos = Productos;
+    let productosToArray = [];
+    //console.log(Productos);
 
-    const [productos, setProductos] = useState(null)
+    /*const [productos, setProductos] = useState(null)
     let productosToArray = [];
     useEffect(() => {
 
@@ -14,7 +18,7 @@ const Store = () => {
             setProductos(snapshot.val());
 
         });
-    }, []);
+    }, []);*/
 
     if (productos) {
         Object.keys(productos).map((key, i) => {
