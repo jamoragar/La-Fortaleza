@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../../../../config/firebase';
 import { OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import AgregarProducto from './AgregarProducto';
 const Productos = () => {
@@ -47,7 +48,9 @@ const Productos = () => {
                                 <Tooltip id={`tooltip-bottom`}><strong>Ver</strong></Tooltip>
                                 }
                             >
-                            <div style={{ cursor: 'pointer' }} className="text-success"><i className="fas fa-fw fa-search fa-lg" style={{ width: '35px', height: '20px' }} /></div>
+                            <Link to={{pathname: `/Dashboard/Producto/${data.id}`, data: data }}>
+                                <div style={{ cursor: 'pointer' }} className="text-success"><i className="fas fa-fw fa-search fa-lg" style={{ width: '35px', height: '20px' }} /></div>
+                            </Link>
                         </OverlayTrigger>
                         <OverlayTrigger key={'editar'} placement={'left'}
                             overlay={

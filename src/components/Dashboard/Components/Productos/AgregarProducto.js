@@ -171,7 +171,7 @@ const AgregarProducto = (props) => {
                             <Col>
                                 <Form.Group controlId="formStockProducts">
                                     <Form.Label>Stock Web:</Form.Label>
-                                    <Form.Control name='stock' type="number" placeholder='Stock online para el producto.' required/>
+                                    <Form.Control name='stock' type="number" placeholder='Stock online del producto.' required/>
                                 </Form.Group>
                             </Col>
                         </Form.Row>

@@ -7,6 +7,7 @@ import Slider from './Components/Slider/Slider';
 import Productos from './Components/Productos/Productos';
 import Categorias from './Components/Categorias/Categorias';
 import Ordenes from './Components/Ordenes/Ordenes';
+import VerProducto from './Components/Productos/VerProducto';
 
 import dashboardStyles from './Dashboard.module.scss'
 import mainStyles from './Main.module.scss';
@@ -26,7 +27,8 @@ const Dashboard = () => {
                                     <Route exact path='/Dashboard/Slider' component={Slider} />    
                                     <Route exact path='/Dashboard/Productos' component={Productos} />
                                     <Route exact path='/Dashboard/Categorias' component={Categorias} />
-                                    <Route exact path='/Dashboard/Ordenes' component={Ordenes} />    
+                                    <Route exact path='/Dashboard/Ordenes' component={Ordenes} /> 
+                                    <Route exact path="/Dashboard/Producto/:id" component={VerProducto} />
                                 </Switch>
                             </div>
                         </div>
