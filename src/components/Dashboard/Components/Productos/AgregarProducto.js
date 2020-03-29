@@ -80,7 +80,6 @@ const AgregarProducto = (props) => {
                      const progress = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
                         if (snapshot.state === firebase.storage.TaskState.RUNNING) {
                             setProgress(progress);
-                         console.log(`Progress: ${progress}%`);
                         }
                     },
                     error => console.log(error.code),

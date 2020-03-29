@@ -16,7 +16,6 @@ const Productos = () => {
             selector: 'nombre',
             sortable: true,
             grow:2,
-            sortable: true,
 
         },
         {
@@ -100,7 +99,7 @@ const Productos = () => {
 
     if(productos || productos.length >= 0){
 
-        Object.keys(productos).map((key, i) => {
+        Object.keys(productos).forEach((key, i) => {
             productosToArray[i] = productos[key]
         });
         return (
