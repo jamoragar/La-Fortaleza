@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Form, Button, Modal, Col, Alert, Spinner} from 'react-bootstrap';
+import {Form, Button, Modal, Col, Alert, Spinner, ProgressBar} from 'react-bootstrap';
 import firebase from '../../../../config/firebase';
 import productosStyles from './Productos.module.scss'
 
@@ -11,6 +11,7 @@ const AgregarProducto = (props) => {
     const [files, setFiles] = useState([]);
     const [alertShow, setAlertShow] = useState(false);
     const [buttonAceptarText, setButtonAceptarText] = useState(true);
+    const [progress, setProgress] = useState(0);
     const fbDbCategory = firebase.database().ref('/Category');
     let descripciones = [];
     let images = [];
@@ -78,6 +79,7 @@ const AgregarProducto = (props) => {
                     snapshot => {
                      const progress = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
                         if (snapshot.state === firebase.storage.TaskState.RUNNING) {
+                            setProgress(progress);
                          console.log(`Progress: ${progress}%`);
                         }
                     },
@@ -86,7 +88,6 @@ const AgregarProducto = (props) => {
                             const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
                             FbDownloadURL.push(downloadURL);
                             if(FbDownloadURL.length === files.length){
-                                console.log(FbDownloadURL);
                                 const key = firebase.database().ref().push().key;
                                 firebase.database().ref().child(`/Productos/${key}`).set({
                                     id: key,
@@ -185,20 +186,25 @@ const AgregarProducto = (props) => {
                             </div>
                             { /* Consultamos que existan elementos en el hook image, y despues recorremos este */
                                 image ? (
-                                <div className={productosStyles.containerImg}>
-                                {(image || []).map((url, i) => {
-                                    return(
-                                        <div className={productosStyles.boxImg} key={i}>
-                                            <img src={url} alt="..." />
-                                            <div className={productosStyles.optionImg}>
-                                                <button onClick={(e)=>deleteImage(e, url)} className={productosStyles.deleteImg}>
-                                                    <svg className={productosStyles.svgX} focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
-                                                </button>
-                                            </div>
+                                    <div>
+                                        <div className={productosStyles.containerImg}>
+                                        {(image || []).map((url, i) => {
+                                            return(
+                                                <div key={i}>
+                                                    <div className={productosStyles.boxImg} key={i}>
+                                                        <img src={url} alt="..." />
+                                                        <div className={productosStyles.optionImg}>
+                                                            <button onClick={(e)=>deleteImage(e, url)} className={productosStyles.deleteImg}>
+                                                                <svg className={productosStyles.svgX} focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
                                         </div>
-                                    )
-                                })}
-                                </div>
+                                        <ProgressBar variant="success" now={progress} />
+                                    </div>
                                 )
                             :
                             null}

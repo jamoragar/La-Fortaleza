@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from'react';
-import {Form, Col, Button, } from 'react-bootstrap';
-import {useParams} from 'react-router-dom';
+import {Form, Col, Button} from 'react-bootstrap';
+import {useParams, Link} from 'react-router-dom';
 import firebase from '../../../../config/firebase';
 
 const ProductoModal = (id, nombre, descripcion, categoria, subcategoria, precio, stock, images) => {
@@ -42,10 +42,12 @@ const ProductoModal = (id, nombre, descripcion, categoria, subcategoria, precio,
                         </Form.Group>
                     </Col>
                 </Form.Row>
-                <Button variant="outline-primary" block>
-                    <i className="fas fa-undo fa-fw" />
-                    Volver
-                </Button>
+                <Link to='/Dashboard/Productos'>
+                    <Button variant="outline-primary" block>
+                        <i className="fas fa-undo fa-fw" />
+                        Volver
+                    </Button>
+                </Link>
             </Form>
         </div>
     )
