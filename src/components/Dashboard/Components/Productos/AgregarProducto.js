@@ -10,7 +10,7 @@ const AgregarProducto = (props) => {
     const [image, setImage] = useState(null);
     const [files, setFiles] = useState([]);
     const [alertShow, setAlertShow] = useState(false);
-    const [buttonAceptarText, setButtonAceptarText] = 'Aceptar'
+    const [buttonAceptarText, setButtonAceptarText] = useState(true);
     const fbDbCategory = firebase.database().ref('/Category');
     let descripciones = [];
     let images = [];
@@ -68,6 +68,7 @@ const AgregarProducto = (props) => {
         const FbDownloadURL = []
 
         if(files.length > 0 && categoria.value !== '0' ){
+            setButtonAceptarText(false)
             //Según la cantidad de archivos recorremos el hook files y subimos dichos archivos al bucket de firebase.
             for(let i = 0; i < files.length; i++){
                 const uploadTask = firebase.storage().ref().child(`IMG/Productos/${nombre.value.trim()}/img_${nombre.value.trim()}_${i}`).put(files[i])
@@ -105,6 +106,7 @@ const AgregarProducto = (props) => {
             }
             Promise.all(promises)
                 .then(() => {
+                    setButtonAceptarText(true);
                     setAlertShow(true);
                     setTimeout(() => {
                         setAlertShow(false);
@@ -203,8 +205,7 @@ const AgregarProducto = (props) => {
                         </Form.Group>
           
                         <Button type='submit' variant="success" block>
-                            <i className="far fa-save fa-fw" />
-                            Aceptar
+                            {buttonAceptarText ? (<><i className="far fa-save fa-fw" />Aceptar</>) : (<Spinner animation="border" />)}
                         </Button>
                         {' '}
                         <Button variant="outline-secondary" onClick={handleReset} block>
