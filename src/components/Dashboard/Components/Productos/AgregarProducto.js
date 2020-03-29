@@ -106,8 +106,10 @@ const AgregarProducto = (props) => {
             Promise.all(promises)
                 .then(() => {
                     setAlertShow(true);
-                    handleReset();
-                    setTimeout(() => setAlertShow(false), 3500);
+                    setTimeout(() => {
+                        setAlertShow(false);
+                        handleReset();
+                    }, 2173);
                 })
                 .catch(err => console.log(err.code));
                 
@@ -163,13 +165,13 @@ const AgregarProducto = (props) => {
                             <Col>
                                 <Form.Group controlId="formPriceProducts">
                                     <Form.Label>Precio:</Form.Label>
-                                    <Form.Control name='precio' type="number" placeholder='Ingrese el valor del producto.' required/>
+                                    <Form.Control name='precio' type="number" placeholder='Palor del producto.' required/>
                                 </Form.Group>
                             </Col>
                             <Col>
                                 <Form.Group controlId="formStockProducts">
                                     <Form.Label>Stock Web:</Form.Label>
-                                    <Form.Control name='stock' type="number" placeholder='Ingrese el stock online para el producto.' required/>
+                                    <Form.Control name='stock' type="number" placeholder='Stock online para el producto.' required/>
                                 </Form.Group>
                             </Col>
                         </Form.Row>
