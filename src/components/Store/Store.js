@@ -1,24 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { formatPrice } from "../Data/DataProductos";
-import { CardDeck, Card, Button, Spinner } from "react-bootstrap";
+import { CardDeck, Card, Button, Spinner, Image } from "react-bootstrap";
+import firebase from '../../config/firebase';
 import './Store.css';
 
 const Store = (props) => {
-    const { fbData, categorias } = props;
+    const [category, setCategory] = useState(null);
+    const { fbData, categoriasProductos } = props;
+    // LLamado a firebase para obtener todo el nodo Category y poder trabajarlo
+    useEffect(() => {
+        firebase.database().ref('/Category').on('value', snapshot => {
+            setCategory(snapshot.val());
+        })
+    }, []);
 
-    console.log(categorias);
-
-    if (fbData) {
+    if (fbData && category) {
         return (
             <div>
-                {categorias.map((categoria, i) => {
+                {categoriasProductos.map((categoriaProducto, i) => {
                     return (
                         <div key={i}>
-                            <h1>{categoria}</h1>
+                            {/*Transformamos el nodo Category a array, y diferenciamos entre su valor (description) y el subnodo que contiene mas contenido, valga la redundancia...*/}
+                            {Object.entries(category).map(([abreviacion, contenido], i) => {
+                                return categoriaProducto === contenido.description ? (
+                                    <a key={i} href={contenido.path}>
+                                        <Image
+                                            key={i}
+                                            className="p-3"
+                                            title="Modelos a Escala"
+                                            src={contenido.banner}
+                                            fluid
+                                        />
+                                    </a>
+                                ) : null
+                            })}
                             <div className="p-3">
                                 <CardDeck>
                                     {fbData.map((producto, j) => {
-                                        return producto.categoria === categoria ? (
+                                        return producto.categoria === categoriaProducto ? (
                                             <div key={j}>
                                                 <Card border="light" style={{ width: '18rem' }}>
                                                     <Card.Img src={producto.img} variant="top" />
@@ -29,7 +48,7 @@ const Store = (props) => {
                                                         </Card.Text>
                                                     </Card.Body>
                                                     <Card.Footer>
-                                                        <small className="text-muted">{formatPrice(producto.precio)}</small>
+                                                        <small>{formatPrice(producto.precio)}</small>
                                                         <br />
                                                         <Button title="Comprar" variant="dark">
                                                             Agregar
