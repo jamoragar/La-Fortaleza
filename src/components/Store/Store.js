@@ -5,18 +5,20 @@ import './Store.css';
 
 const Store = (props) => {
     const { fbData, categorias } = props;
-    
+
+    //console.log(Productos);
+
     if (fbData) {
-        return(
+        return (
             <div>
-            {categorias.map((categoria, i)=>{
-                return(
-                    <div key={i}>
-                        <h1>{categoria}</h1>
+                {categorias.map((categoria, i) => {
+                    return (
+                        <div key={i}>
+                            <h1>{categoria}</h1>
                             <div className="p-3">
                                 <CardDeck>
                                     {fbData.map((producto, j) => {
-                                        return producto.categoria == categoria ? (
+                                        return producto.categoria === categoria ? (
                                             <div key={j}>
                                                 <Card border="light" style={{ width: '18rem' }}>
                                                     <Card.Img src={producto.img} variant="top" />
@@ -36,18 +38,18 @@ const Store = (props) => {
                                                 </Card>
                                             </div>
                                         )
-                                        :
-                                        null
+                                            :
+                                            null
                                     })}
                                 </CardDeck>
                             </div>
                         </div>
                     )
                 })
-            }
+                }
             </div>
         )
-                
+
     } else {
         return (
             <div>

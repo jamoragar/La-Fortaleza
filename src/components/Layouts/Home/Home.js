@@ -13,12 +13,12 @@ const Home = (props) => {
     productosToArray[i] = fbData[key]
   });
   // Del array generado, extraemos todas las categorias de los productos
-  productosToArray.forEach((producto, i) => { 
+  productosToArray.forEach((producto, i) => {
     categoriaProductos[i] = producto.categoria;
   });
   // filtramos las categorias, para que no existan elementos repetidos
-  categoriaProductos = categoriaProductos.reduce((unique, item) => 
-  unique.includes(item) ? unique : [...unique, item], []
+  categoriaProductos = categoriaProductos.reduce((unique, item) =>
+    unique.includes(item) ? unique : [...unique, item], []
   );
   return (
     <div>
