@@ -1,5 +1,6 @@
 export function formatPrice(price) {
-    return price.toLocaleString('es-CL', {
+    const finalPrice = parseInt(price)
+    return finalPrice.toLocaleString('es-CL', {
         style: 'currency',
         currency: 'CLP'
     })
