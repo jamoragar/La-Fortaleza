@@ -20,6 +20,7 @@ const Home = (props) => {
   categoriaProductos = categoriaProductos.reduce((unique, item) =>
     unique.includes(item) ? unique : [...unique, item], []
   );
+
   return (
     <div>
       <CarouselContainer />

@@ -6,7 +6,7 @@ import './Store.css';
 const Store = (props) => {
     const { fbData, categorias } = props;
 
-    //console.log(Productos);
+    console.log(categorias);
 
     if (fbData) {
         return (
