@@ -6,9 +6,6 @@ import Image from "react-bootstrap/Image";
 
 const Home = (props) => {
   const { fbData } = props;
-<<<<<<< HEAD
-
-=======
   let productosToArray = [];
   let categoriaProductos = []
   //Convertimos el objeto entregado por firebase de productos en un array
@@ -16,15 +13,14 @@ const Home = (props) => {
     productosToArray[i] = fbData[key]
   });
   // Del array generado, extraemos todas las categorias de los productos
-  productosToArray.forEach((producto, i) => { 
+  productosToArray.forEach((producto, i) => {
     categoriaProductos[i] = producto.categoria;
   });
   // filtramos las categorias, para que no existan elementos repetidos
-  categoriaProductos = categoriaProductos.reduce((unique, item) => 
-  unique.includes(item) ? unique : [...unique, item], []
+  categoriaProductos = categoriaProductos.reduce((unique, item) =>
+    unique.includes(item) ? unique : [...unique, item], []
   );
   //console.log(fbData);
->>>>>>> a525a20e91b24697016c57d46b6a9c97d11f5b63
   return (
     <div>
       <CarouselContainer />
