@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const Header = () => {
     return (
         <MainContainer className="xs-lg" />
-    ) 
+    )
 }
 
 export default Header;

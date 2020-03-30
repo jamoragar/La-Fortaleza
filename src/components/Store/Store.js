@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatPrice } from "../Data/DataProductos";
-import { CardDeck, Card, Button } from "react-bootstrap";
+import { CardDeck, Card, Button, Spinner } from "react-bootstrap";
 import './Store.css';
 
 const Store = (props) => {
@@ -8,22 +8,15 @@ const Store = (props) => {
     const { Productos } = fbData;
     const productos = Productos;
     let productosToArray = [];
-    //console.log(Productos);
 
-    /*const [productos, setProductos] = useState(null)
-    let productosToArray = [];
-    useEffect(() => {
+    console.log(productos);
 
-        firebase.database().ref('/Productos').on('value', snapshot => {
-            setProductos(snapshot.val());
 
-        });
-    }, []);*/
+
 
     if (productos) {
         Object.keys(productos).map((key, i) => {
             productosToArray[i] = productos[key]
-
         })
 
         return (
@@ -38,7 +31,7 @@ const Store = (props) => {
                                         <Card.Body>
                                             <Card.Title>{producto.nombre}</Card.Title>
                                             <Card.Text>
-                                                {producto.subcategoria}
+                                                Stock: {producto.stock}
                                             </Card.Text>
                                         </Card.Body>
                                         <Card.Footer>
@@ -59,7 +52,16 @@ const Store = (props) => {
     } else {
         return (
             <div>
-                <h3>Cargando...</h3>
+                <>
+                    <Spinner animation="grow" variant="primary" />
+                    <Spinner animation="grow" variant="secondary" />
+                    <Spinner animation="grow" variant="success" />
+                    <Spinner animation="grow" variant="danger" />
+                    <Spinner animation="grow" variant="warning" />
+                    <Spinner animation="grow" variant="info" />
+                    <Spinner animation="grow" variant="light" />
+                    <Spinner animation="grow" variant="dark" />
+                </>
             </div>
         )
     }

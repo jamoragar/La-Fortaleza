@@ -34,7 +34,7 @@ class Footer extends Component {
             <FooterContainer fixed="bottom" className="main-footer">
                 <div className="footer-middle">
                     <div className="container">
-                        <div className="row">                            
+                        <div className="row">
                             <div className="col-md-3 col-sm-6">
                                 <h4>Informacion de la tienda</h4>
                                 <ul className="list-unstyled">

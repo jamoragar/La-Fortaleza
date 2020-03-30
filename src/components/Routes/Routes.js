@@ -6,14 +6,15 @@ import Dashboard from "../Dashboard/Dashboard";
 import Ofertas from "../Ofertas/Ofertas";
 import Preventa from "../Preventa/Preventa";
 import Eventos from "../Eventos/Eventos";
-import BoardingGames from "../Articulos/BoardingGames";
-import JuegosDeCartas from "../Articulos/TraidingCardsGames";
-import ModelosEscala from "../Articulos/ModelosEscala";
-import Comics from "../Articulos/Comics";
+import BoardingGames from "../Articulos/Categorias/BoardingGames";
+import JuegosDeCartas from "../Articulos/Categorias/TraidingCardsGames";
+import ModelosEscala from "../Articulos/Categorias/ModelosEscala";
+import Comics from "../Articulos/Categorias/Comics";
 import Login from "../Login/Login";
-import RolGames from "../Articulos/RolGames";
-import Xwings from "../Articulos/Xwings";
-import Accesorios from "../Articulos/Accesorios";
+import RolGames from "../Articulos/Categorias/RolGames";
+import Xwings from "../Articulos/Categorias/Xwings";
+import Accesorios from "../Articulos/Categorias/Accesorios";
+import VistaProducto from "../Articulos/Vistas/VistaProducto";
 
 export default function Routes(props) {
   const { fbData } = props;
@@ -27,7 +28,8 @@ export default function Routes(props) {
         <Route path="/Preventa" component={Preventa} />
         <Route path="/Ofertas" component={Ofertas} />
         <Route path="/Eventos" component={Eventos} />
-        <Route path="/BoardingGames" component={BoardingGames} />
+        <Route path="/ProductoView" component={() => <VistaProducto fbData={fbData} />} />
+        <Route path="/BoardingGames" component={() => <BoardingGames fbData={fbData} />} />
         <Route path="/RolGames" component={RolGames} />
         <Route path="/traidingCardsGames" component={JuegosDeCartas} />
         <Route path="/ModelosEscala" component={ModelosEscala} />

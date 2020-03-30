@@ -6,7 +6,7 @@ import Image from "react-bootstrap/Image";
 
 const Home = (props) => {
   const { fbData } = props;
-  //console.log(fbData);
+
   return (
     <div>
       <CarouselContainer />
