@@ -6,6 +6,20 @@ import Image from "react-bootstrap/Image";
 
 const Home = (props) => {
   const { fbData } = props;
+  let productosToArray = [];
+  let categoriaProductos = []
+  //Convertimos el objeto entregado por firebase de productos en un array
+  Object.keys(fbData).map((key, i) => {
+    productosToArray[i] = fbData[key]
+  });
+  // Del array generado, extraemos todas las categorias de los productos
+  productosToArray.forEach((producto, i) => { 
+    categoriaProductos[i] = producto.categoria;
+  });
+  // filtramos las categorias, para que no existan elementos repetidos
+  categoriaProductos = categoriaProductos.reduce((unique, item) => 
+  unique.includes(item) ? unique : [...unique, item], []
+  );
   //console.log(fbData);
   return (
     <div>
@@ -18,7 +32,7 @@ const Home = (props) => {
           fluid
         />
       </a>
-      <Store fbData={fbData} />
+      <Store fbData={productosToArray} categorias={categoriaProductos} />
       <a href="/BoardingGames">
         <Image
           className="p-3"

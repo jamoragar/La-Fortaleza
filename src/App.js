@@ -11,7 +11,7 @@ import firebase from './config/firebase';
 function App() {
   const [fbData, setFbData] = useState(null)
   useEffect(() => {
-    firebase.database().ref('/').on('value', snapshot => {
+    firebase.database().ref('/Productos').on('value', snapshot => {
       setFbData(snapshot.val());
 
     });
