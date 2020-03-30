@@ -19,7 +19,7 @@ const SideNav = () =>{
                 </Link>
                 <Link to='/Dashboard/Blog'>
                     <li>
-                        <i class="fas fa-pencil-alt fa-fw" />
+                        <i className="fas fa-pencil-alt fa-fw" />
                         Blog
                     </li>
                 </Link>
