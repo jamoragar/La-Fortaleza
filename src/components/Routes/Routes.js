@@ -18,24 +18,38 @@ import VistaProducto from "../Articulos/Vistas/VistaProducto";
 
 export default function Routes(props) {
   const { fbData } = props;
-  //console.log(fbData);
+  let productosToArray = [];
+  let categoriaProductos = [];
+  let subCategoriaProductos = [];
+  //Convertimos el objeto entregado por firebase de productos en un array
+  Object.keys(fbData).map((key, i) => {
+    productosToArray[i] = fbData[key]
+  });
+  // Del array generado, extraemos todas las categorias de los productos
+  productosToArray.forEach((producto, i) => {
+    categoriaProductos[i] = producto.categoria;
+  });
+  // filtramos las categorias, para que no existan elementos repetidos dentro del array
+  categoriaProductos = categoriaProductos.reduce((unique, item) =>
+    unique.includes(item) ? unique : [...unique, item], []
+  );
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={() => <Home fbData={fbData} />} />
+        <Route path="/" exact component={() => <Home fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Dashboard" component={Dashboard} />
-        <Route path="/Preventa" component={Preventa} />
+        <Route path="/Preventa" component={() => <Preventa fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Ofertas" component={Ofertas} />
         <Route path="/Eventos" component={Eventos} />
         <Route path="/ProductoView" component={() => <VistaProducto fbData={fbData} />} />
-        <Route path="/BoardingGames" component={() => <BoardingGames fbData={fbData} />} />
-        <Route path="/RolGames" component={RolGames} />
-        <Route path="/traidingCardsGames" component={JuegosDeCartas} />
-        <Route path="/ModelosEscala" component={ModelosEscala} />
-        <Route path="/Comics" component={Comics} />
-        <Route path="/X-Wings" component={Xwings} />
-        <Route path="/Accesorios" component={Accesorios} />
+        <Route path="/BoardingGames" component={() => <BoardingGames fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+        <Route path="/RolGames" component={() => <RolGames fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+        <Route path="/traidingCardsGames" component={() => <JuegosDeCartas fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+        <Route path="/ModelosEscala" component={() => <ModelosEscala fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+        <Route path="/Comics" component={() => <Comics fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+        <Route path="/X-Wings" component={() => <Xwings fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+        <Route path="/Accesorios" component={() => <Accesorios fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Login" component={Login} />
       </Switch>
     </BrowserRouter>
