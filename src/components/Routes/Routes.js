@@ -17,10 +17,10 @@ import Accesorios from "../Articulos/Categorias/Accesorios";
 import VistaProducto from "../Articulos/Vistas/VistaProducto";
 
 export default function Routes(props) {
-  const { fbData } = props;
+  const { fbData, fbSlider } = props;
   let productosToArray = [];
   let categoriaProductos = [];
-  let subCategoriaProductos = [];
+
   //Convertimos el objeto entregado por firebase de productos en un array
   Object.keys(fbData).map((key, i) => {
     productosToArray[i] = fbData[key]
@@ -34,11 +34,12 @@ export default function Routes(props) {
     unique.includes(item) ? unique : [...unique, item], []
   );
 
+
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={() => <Home fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-        <Route path="/Dashboard" component={Dashboard} />
+        <Route path="/" exact component={() => <Home fbData={productosToArray} categoriasProductos={categoriaProductos} fbSlider={fbSlider} />} />
+        <Route path="/Dashboard" component={() => <Dashboard fbSlider={fbSlider} />} />
         <Route path="/Preventa" component={() => <Preventa fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Ofertas" component={Ofertas} />
         <Route path="/Eventos" component={Eventos} />

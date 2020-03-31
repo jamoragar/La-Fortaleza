@@ -3,13 +3,12 @@ import CarouselContainer from "../Carousel/Carousel";
 import TableInfo from "../TableInfo/TableInfo";
 import Store from "../../Store/Store";
 
-
 const Home = (props) => {
-  const { fbData, categoriasProductos } = props;
+  const { fbData, categoriasProductos, fbSlider } = props;
 
   return (
     <div>
-      <CarouselContainer />
+      <CarouselContainer fbSlider={fbSlider} />
       <TableInfo />
       <Store fbData={fbData} categoriasProductos={categoriasProductos} />
     </div>

@@ -8,8 +8,9 @@ const EditarProducto = (props) => {
         e.preventDefault();
         console.log('updateing product...');
     }
+    console.log(props);
     return (
-        <Modal {...props}>
+        <Modal {...props} style={{background: 'none'}}>
             <Modal.Header closeButton>
                 <Modal.Title>Editar Producto ID: {producto.id}</Modal.Title>
             </Modal.Header>
@@ -21,7 +22,16 @@ const EditarProducto = (props) => {
                     </Form.Group>
                     <Form.Group controlId="formDescriptionProducts">
                         <Form.Label>Descripción:</Form.Label>
-                        <Form.Control name='descripcion' as="textarea" rows="3" defaultValue={producto.descripcion} required/>
+                        <Form.Control name='descripcion' as="textarea" rows="4" defaultValue={producto.descripcion} required/>
+                    </Form.Group>
+                    <Form.Group controlId="formCategory">
+                        <Form.Label>Categoría:</Form.Label>
+                        <Form.Control name='categoria' as="select">
+                            <option value='0' key='alfa'>Seleccione una categoría</option>
+                            {/*fbCategoria.map((categoria, i) => {
+                                return <option value={categoria} key={i}>{categoria}</option>
+                            })*/}
+                        </Form.Control>
                     </Form.Group>
                 </Form>
             </Modal.Body>
