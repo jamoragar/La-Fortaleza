@@ -12,21 +12,24 @@ import firebase from './config/firebase';
 
 
 function App() {
-  const [fbData, setFbData] = useState(null)
+  const [fbData, setFbData] = useState(null);
+  const [fbSlider, setFbSlider] = useState(null);
   useEffect(() => {
     firebase.database().ref('/Productos').on('value', snapshot => {
       setFbData(snapshot.val());
-
+    });
+    firebase.database().ref('/Slider').on('value', snapshot => {
+      setFbSlider(snapshot.val());
     });
   }, []);
 
 
-  if (fbData) {
+  if (fbData && fbSlider) {
     return (
       <div className="App">
         <Header />
         <NavBar />
-        <Routes fbData={fbData} />
+        <Routes fbData={fbData} fbSlider={fbSlider} />
         <Footer />
       </div>
     );

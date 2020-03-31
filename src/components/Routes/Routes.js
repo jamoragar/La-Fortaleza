@@ -17,14 +17,14 @@ import Accesorios from "../Articulos/Categorias/Accesorios";
 import VistaProducto from "../Articulos/Vistas/VistaProducto";
 
 export default function Routes(props) {
-  const { fbData } = props;
+  const { fbData, fbSlider } = props;
   //console.log(fbData);
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={() => <Home fbData={fbData} />} />
-        <Route path="/Dashboard" component={Dashboard} />
+        <Route path="/" exact component={() => <Home fbData={fbData} fbSlider={fbSlider} />} />
+        <Route path="/Dashboard" component={() => <Dashboard fbSlider={fbSlider} />} />
         <Route path="/Preventa" component={Preventa} />
         <Route path="/Ofertas" component={Ofertas} />
         <Route path="/Eventos" component={Eventos} />

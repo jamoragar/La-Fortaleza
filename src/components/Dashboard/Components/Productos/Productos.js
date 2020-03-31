@@ -42,7 +42,6 @@ const Productos = () => {
             name:'Control',
             button:true,
             cell: (data) => {return(
-                    <div>
                         <div style={{display: 'flex'}}>
                             <OverlayTrigger key={'ver'} placement={'left'}
                                 overlay={
@@ -58,7 +57,16 @@ const Productos = () => {
                                 <Tooltip id={`tooltip-bottom`}><strong>Editar</strong></Tooltip>
                                 }
                             >
-                            <div style={{ cursor: 'pointer' }} className="text-primary"><i className="fa fa-fw fa-edit fa-lg" style={{ width: '35px', height: '20px' }} onClick={handleShowEditarProductos} /></div>
+                            <div 
+                                style={{ cursor: 'pointer' }}
+                                className="text-primary"
+                                onClick={() => {
+                                    setDataProducto(data);
+                                    handleShowEditarProductos();
+                                }}
+                            >
+                                <i className="fa fa-fw fa-edit fa-lg" style={{ width: '35px', height: '20px' }}/>
+                            </div>
                         </OverlayTrigger>
                         <OverlayTrigger key={'eliminar'} placement={'left'}
                             overlay={
@@ -68,30 +76,25 @@ const Productos = () => {
                                 <div style={{cursor:'pointer'}} onClick={()=>deleteProduct(data)} className="text-danger"><i className="fa fa-fw fa-trash fa-lg" style={{height:'20px'}}/></div>
                             </OverlayTrigger>
                         </div>
-                        {
-                            showEditarProductos ? (
-                                <EditarProducto style={{background:'none'}} show={showEditarProductos} onHide={() => setShowEditarProductos(false)} product={data} />
-                            )
-                            :
-                            null
-                        }
-                    </div>
                         )
                     },
 
         }
     ];
+    const [dataProducto, setDataProducto] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [showEditarProductos, setShowEditarProductos] = useState(false)
     const [productos, setProductos] = useState([])
     const handleShow = () => setShowModal(true);
-    const handleShowEditarProductos = (data) => setShowEditarProductos(true);
     let productosToArray = [];
     useEffect(() => {
         firebase.database().ref('/Productos').on('value', snapshot => {
             if(snapshot.val()){setProductos(snapshot.val());}
         });
     }, []);
+    const handleShowEditarProductos = (data) => {
+        setShowEditarProductos(true);
+    }
     const deleteProduct = (product) => {
         const ref = firebase.storage().ref(`/IMG/Productos/${product.nombre}`);
         firebase.database().ref(`/Productos/${product.id}`).remove().then(() => {
@@ -120,6 +123,9 @@ const Productos = () => {
                     Agregar Producto
                 </Button>
                 <AgregarProducto show={showModal} onHide={() => setShowModal(false)} />
+                {
+                    showEditarProductos ? <EditarProducto show={showEditarProductos} onHide={() => setShowEditarProductos(false)} product={dataProducto} /> : null
+                }    
                 <DataTable
                     title="Productos"
                     columns={columns}

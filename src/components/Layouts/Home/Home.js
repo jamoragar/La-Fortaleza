@@ -5,7 +5,7 @@ import Store from "../../Store/Store";
 
 const Home = (props) => {
 
-  const { fbData } = props;
+  const { fbData, fbSlider } = props;
   let productosToArray = [];
   let categoriaProductos = [];
   //Convertimos el objeto entregado por firebase de productos en un array
@@ -23,7 +23,7 @@ const Home = (props) => {
 
   return (
     <div>
-      <CarouselContainer />
+      <CarouselContainer fbSlider={fbSlider} />
       <Store fbData={productosToArray} categoriasProductos={categoriaProductos} />
       <MainContent />
     </div>
