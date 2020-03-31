@@ -6,6 +6,7 @@ import { formatPrice } from '../../Data/DataProductos';
 export default function JuegosDeCartas(props) {
   const [category, setCategory] = useState(null);
   const { fbData, categoriasProductos } = props;
+
   useEffect(() => {
     firebase.database().ref('/Category').on('value', snapshot => {
       setCategory(snapshot.val());
@@ -16,7 +17,6 @@ export default function JuegosDeCartas(props) {
     return (
       <div>
         {categoriasProductos.map((categoriaProducto, i) => {
-          console.log(categoriaProducto);
           return categoriaProducto === 'Juegos De Cartas' ? (
             <div key={i}>
               {}

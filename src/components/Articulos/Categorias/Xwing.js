@@ -3,7 +3,7 @@ import { CardDeck, Card, Image, Spinner, Button } from 'react-bootstrap';
 import firebase from "../../../config/firebase";
 import { formatPrice } from '../../Data/DataProductos';
 
-export default function Xwings(props) {
+export default function Xwing(props) {
   const [category, setCategory] = useState(null);
   const { fbData, categoriasProductos } = props;
   useEffect(() => {

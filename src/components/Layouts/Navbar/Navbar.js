@@ -28,6 +28,7 @@ const NavBar = () => {
               Modelos A Escala
             </NavDropdown.Item>
             <NavDropdown.Item href="/Comics">Comics</NavDropdown.Item>
+            <NavDropdown.Item href="/X-Wing">X-Wing</NavDropdown.Item>
           </NavDropdown>
         </Nav>
         <Nav>
