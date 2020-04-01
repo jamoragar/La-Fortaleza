@@ -12,7 +12,7 @@ import ModelosEscala from "../Articulos/Categorias/ModelosEscala";
 import Comics from "../Articulos/Categorias/Comics";
 import Login from "../Login/Login";
 import RolGames from "../Articulos/Categorias/RolGames";
-import Xwing from "../Articulos/Categorias/Xwing";
+import Xwings from "../Articulos/Categorias/Xwings";
 import Accesorios from "../Articulos/Categorias/Accesorios";
 import VistaProducto from "../Articulos/Vistas/VistaProducto";
 
@@ -48,7 +48,7 @@ export default function Routes(props) {
         <Route path="/traidingCardsGames" component={() => <JuegosDeCartas fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/ModelosEscala" component={() => <ModelosEscala fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Comics" component={() => <Comics fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-        <Route path="/X-Wing" component={() => <Xwing fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+        <Route path="/X-Wings" component={() => <Xwings fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Accesorios" component={() => <Accesorios fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Login" component={Login} />
       </Switch>

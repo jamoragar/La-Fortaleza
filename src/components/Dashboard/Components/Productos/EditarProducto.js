@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from '../../../../config/firebase';
-import { Form, Modal } from 'react-bootstrap';
+import {Form, Modal} from 'react-bootstrap';
 
 const EditarProducto = (props) => {
     const producto = props.product;
@@ -17,11 +17,11 @@ const EditarProducto = (props) => {
                 <Form onSubmit={handleUpdate}>
                     <Form.Group controlId='formNameProducts'>
                         <Form.Label>Nombre:</Form.Label>
-                        <Form.Control name='nombre' type='text' defaultValue={producto.nombre} required />
+                        <Form.Control name='nombre' type='text' defaultValue={producto.nombre} required/>
                     </Form.Group>
                     <Form.Group controlId="formDescriptionProducts">
                         <Form.Label>Descripción:</Form.Label>
-                        <Form.Control name='descripcion' as="textarea" rows="3" defaultValue={producto.descripcion} required />
+                        <Form.Control name='descripcion' as="textarea" rows="3" defaultValue={producto.descripcion} required/>
                     </Form.Group>
                 </Form>
             </Modal.Body>
