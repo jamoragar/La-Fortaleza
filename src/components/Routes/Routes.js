@@ -4,7 +4,7 @@ import { Switch, BrowserRouter, Route } from "react-router-dom";
 import Home from "../Layouts/Home/Home";
 import Dashboard from "../Dashboard/Dashboard";
 import Ofertas from "../Ofertas/Ofertas";
-import Preventa from "../Preventa/Preventa";
+import Preventa from "../Articulos/Categorias/Preventa";
 import Eventos from "../Eventos/Eventos";
 import BoardingGames from "../Articulos/Categorias/BoardingGames";
 import JuegosDeCartas from "../Articulos/Categorias/TraidingCardsGames";
