@@ -35,29 +35,10 @@ export default function Routes(props) {
   );
 
   return (
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <BrowserRouter >
-      <Switch >
-        <Route path="/" exact component={() => <Home fbData={productosToArray} categoriasProductos={categoriaProductos} fbSlider={fbSlider} />} />
-        <Route path="/Dashboard" component={() => <Dashboard fbSlider={fbSlider} />} />
-=======
-=======
->>>>>>> parent of 470d7d7... Se Restructuran los props, se agrega vista seleccitava para cada categoria y se sincroniza con modificaciones hechas por javier.
-=======
->>>>>>> parent of 470d7d7... Se Restructuran los props, se agrega vista seleccitava para cada categoria y se sincroniza con modificaciones hechas por javier.
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={() => <Home fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Dashboard" component={Dashboard} />
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of 470d7d7... Se Restructuran los props, se agrega vista seleccitava para cada categoria y se sincroniza con modificaciones hechas por javier.
-=======
->>>>>>> parent of 470d7d7... Se Restructuran los props, se agrega vista seleccitava para cada categoria y se sincroniza con modificaciones hechas por javier.
-=======
->>>>>>> parent of 470d7d7... Se Restructuran los props, se agrega vista seleccitava para cada categoria y se sincroniza con modificaciones hechas por javier.
         <Route path="/Preventa" component={() => <Preventa fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Ofertas" component={Ofertas} />
         <Route path="/Eventos" component={Eventos} />
