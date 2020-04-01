@@ -10,7 +10,11 @@ const EditarProducto = (props) => {
     }
     return (
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Modal {...props} style={{ background: 'none' }}>
+=======
+        <Modal {...props}>
+>>>>>>> parent of 470d7d7... Se Restructuran los props, se agrega vista seleccitava para cada categoria y se sincroniza con modificaciones hechas por javier.
 =======
         <Modal {...props}>
 >>>>>>> parent of 470d7d7... Se Restructuran los props, se agrega vista seleccitava para cada categoria y se sincroniza con modificaciones hechas por javier.
@@ -26,6 +30,7 @@ const EditarProducto = (props) => {
                     <Form.Group controlId="formDescriptionProducts">
                         <Form.Label>Descripción:</Form.Label>
 <<<<<<< HEAD
+<<<<<<< HEAD
                         <Form.Control name='descripcion' as="textarea" rows="4" defaultValue={producto.descripcion} required />
                     </Form.Group>
                     <Form.Group controlId="formCategory">
@@ -36,6 +41,9 @@ const EditarProducto = (props) => {
                                 return <option value={categoria} key={i}>{categoria}</option>
                             })*/}
                         </Form.Control>
+=======
+                        <Form.Control name='descripcion' as="textarea" rows="3" defaultValue={producto.descripcion} required/>
+>>>>>>> parent of 470d7d7... Se Restructuran los props, se agrega vista seleccitava para cada categoria y se sincroniza con modificaciones hechas por javier.
 =======
                         <Form.Control name='descripcion' as="textarea" rows="3" defaultValue={producto.descripcion} required/>
 >>>>>>> parent of 470d7d7... Se Restructuran los props, se agrega vista seleccitava para cada categoria y se sincroniza con modificaciones hechas por javier.
