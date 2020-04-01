@@ -6,7 +6,7 @@ import productosStyles from './Productos.module.scss'
 
 const AgregarProducto = (props) => {
     const [fbCategoria, setFbCategoria] = useState(null);
-    const [subCat, setSubCat] = useState(null);
+    const [subCat, setSubCat] = useState();
     const [image, setImage] = useState(null);
     const [files, setFiles] = useState([]);
     const [alertShow, setAlertShow] = useState(false);
@@ -46,16 +46,18 @@ const AgregarProducto = (props) => {
                 snapshot.forEach((child) => {
                     setSubCat(child.val().subCat)
                 })
-            });
+            }, [null]);
         }
     }
+
+    console.log(descripciones)
     //Función que borra un elemento del array que contiene las imagenes agregadas en el formulario.
     const deleteImage = (e, name) => {
         e.preventDefault();
         setImage(image.filter((image) => image !== name))
 
     }
-    const handleReset = () => {
+    const handleReset = (props) => {
         document.getElementById('myForm').reset();
         setImage(null);
         setSubCat(null);
@@ -156,7 +158,7 @@ const AgregarProducto = (props) => {
                                     <Form.Control name='subcategoria' as="select">
                                         {/* Transformamos el hook subCat a array, ya que firebase lo entrega como Objeto, y se procede a recorrerlo. */
                                             Object.entries(subCat).map(([abreviacion, nombre], i) => {
-                                                return <option value={nombre.description} key={i}>{nombre.description}</option>
+                                                return <option value={nombre} key={i}>{nombre}</option>
                                             })
                                         }
                                     </Form.Control>
