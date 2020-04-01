@@ -16,7 +16,6 @@ export default function Xwings(props) {
     return (
       <div>
         {categoriasProductos.map((categoriaProducto, i) => {
-          console.log(categoriaProducto);
           return categoriaProducto === 'X-Wings' ? (
             <div key={i}>
               {}

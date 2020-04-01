@@ -1,6 +1,7 @@
 import React from "react";
 import CarouselContainer from "../Carousel/Carousel";
 import Store from "../../Store/Store";
+import TableInfo from "../TableInfo/TableInfo";
 
 
 const Home = (props) => {
@@ -9,6 +10,7 @@ const Home = (props) => {
   return (
     <div>
       <CarouselContainer />
+      <TableInfo />
       <Store fbData={fbData} categoriasProductos={categoriasProductos} />
     </div>
   );

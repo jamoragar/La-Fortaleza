@@ -16,7 +16,6 @@ export default function Accesorios(props) {
     return (
       <div>
         {categoriasProductos.map((categoriaProducto, i) => {
-          console.log(categoriaProducto);
           return categoriaProducto === 'Accesorios' ? (
             <div key={i}>
               {}

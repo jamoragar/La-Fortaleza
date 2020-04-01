@@ -16,7 +16,6 @@ export default function Preventa(props) {
     return (
       <div>
         {categoriasProductos.map((categoriaProducto, i) => {
-          console.log(categoriaProducto);
           return categoriaProducto === 'Preventa' ? (
             <div key={i}>
               {}

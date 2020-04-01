@@ -16,7 +16,6 @@ export default function BoardingGames(props) {
     return (
       <div>
         {categoriasProductos.map((categoriaProducto, i) => {
-          console.log(categoriaProducto);
           return categoriaProducto === 'Juegos de Mesa' ? (
             <div key={i}>
               {}

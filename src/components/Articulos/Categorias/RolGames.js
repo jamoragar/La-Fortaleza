@@ -16,7 +16,6 @@ export default function RolGames(props) {
     return (
       <div>
         {categoriasProductos.map((categoriaProducto, i) => {
-          console.log(categoriaProducto);
           return categoriaProducto === 'Juegos De Rol' ? (
             <div key={i}>
               {}

@@ -16,7 +16,6 @@ export default function ModelosEscala(props) {
     return (
       <div>
         {categoriasProductos.map((categoriaProducto, i) => {
-          console.log(categoriaProducto);
           return categoriaProducto === 'Modelos a Escala' ? (
             <div key={i}>
               {}
