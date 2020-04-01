@@ -17,10 +17,10 @@ import Accesorios from "../Articulos/Categorias/Accesorios";
 import VistaProducto from "../Articulos/Vistas/VistaProducto";
 
 export default function Routes(props) {
-  const { fbData, fbSlider } = props;
+  const { fbData } = props;
   let productosToArray = [];
   let categoriaProductos = [];
-
+  let subCategoriaProductos = [];
   //Convertimos el objeto entregado por firebase de productos en un array
   Object.keys(fbData).map((key, i) => {
     productosToArray[i] = fbData[key]
@@ -34,12 +34,18 @@ export default function Routes(props) {
     unique.includes(item) ? unique : [...unique, item], []
   );
 
-
   return (
+<<<<<<< HEAD
     <BrowserRouter >
       <Switch >
         <Route path="/" exact component={() => <Home fbData={productosToArray} categoriasProductos={categoriaProductos} fbSlider={fbSlider} />} />
         <Route path="/Dashboard" component={() => <Dashboard fbSlider={fbSlider} />} />
+=======
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact component={() => <Home fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+        <Route path="/Dashboard" component={Dashboard} />
+>>>>>>> parent of 470d7d7... Se Restructuran los props, se agrega vista seleccitava para cada categoria y se sincroniza con modificaciones hechas por javier.
         <Route path="/Preventa" component={() => <Preventa fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Ofertas" component={Ofertas} />
         <Route path="/Eventos" component={Eventos} />

@@ -8,9 +8,12 @@ const EditarProducto = (props) => {
         e.preventDefault();
         console.log('updateing product...');
     }
-    console.log(props);
     return (
+<<<<<<< HEAD
         <Modal {...props} style={{ background: 'none' }}>
+=======
+        <Modal {...props}>
+>>>>>>> parent of 470d7d7... Se Restructuran los props, se agrega vista seleccitava para cada categoria y se sincroniza con modificaciones hechas por javier.
             <Modal.Header closeButton>
                 <Modal.Title>Editar Producto ID: {producto.id}</Modal.Title>
             </Modal.Header>
@@ -22,6 +25,7 @@ const EditarProducto = (props) => {
                     </Form.Group>
                     <Form.Group controlId="formDescriptionProducts">
                         <Form.Label>Descripción:</Form.Label>
+<<<<<<< HEAD
                         <Form.Control name='descripcion' as="textarea" rows="4" defaultValue={producto.descripcion} required />
                     </Form.Group>
                     <Form.Group controlId="formCategory">
@@ -32,6 +36,9 @@ const EditarProducto = (props) => {
                                 return <option value={categoria} key={i}>{categoria}</option>
                             })*/}
                         </Form.Control>
+=======
+                        <Form.Control name='descripcion' as="textarea" rows="3" defaultValue={producto.descripcion} required/>
+>>>>>>> parent of 470d7d7... Se Restructuran los props, se agrega vista seleccitava para cada categoria y se sincroniza con modificaciones hechas por javier.
                     </Form.Group>
                 </Form>
             </Modal.Body>

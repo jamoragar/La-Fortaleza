@@ -13,8 +13,7 @@ import VerProducto from './Components/Productos/VerProducto';
 import dashboardStyles from './Dashboard.module.scss'
 import mainStyles from './Main.module.scss';
 
-const Dashboard = (props) => {
-    const {fbSlider} = props;
+const Dashboard = () => {
     return (
         <div style={{ overflow: "hidden", height: "100vh", width: "100vw", position: "relative", marginTop: "5%" }} >
             <div className={dashboardStyles.container}>
@@ -26,7 +25,7 @@ const Dashboard = (props) => {
                                 <Switch>
                                     <Route exact path='/Dashboard/' component={Main} />
                                     <Route exact path='/Dashboard/Agenda' component={Agenda} />
-                                    <Route exact path='/Dashboard/Slider' component={() => <Slider fbSlider={fbSlider} /> } />    
+                                    <Route exact path='/Dashboard/Slider' component={Slider} />    
                                     <Route exact path='/Dashboard/Blog' component={Blog} />    
                                     <Route exact path='/Dashboard/Productos' component={Productos} />
                                     <Route exact path='/Dashboard/Categorias' component={Categorias} />
