@@ -24,8 +24,8 @@ const NavBar = () => {
             <NavDropdown.Item href="/TraidingCardsGames">
               Juegos De Cartas
             </NavDropdown.Item>
-            <NavDropdown.Item href="/ModelosEscala">
-              Modelos A Escala
+            <NavDropdown.Item href="/Armables">
+              Armables
             </NavDropdown.Item>
             <NavDropdown.Item href="/Comics">Comics</NavDropdown.Item>
             <NavDropdown.Item href="/X-Wings">X-Wing</NavDropdown.Item>

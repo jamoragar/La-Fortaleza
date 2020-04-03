@@ -8,13 +8,13 @@ import Preventa from "../Articulos/Categorias/Preventa";
 import Eventos from "../Eventos/Eventos";
 import BoardingGames from "../Articulos/Categorias/BoardingGames";
 import JuegosDeCartas from "../Articulos/Categorias/TraidingCardsGames";
-import ModelosEscala from "../Articulos/Categorias/ModelosEscala";
+import Armables from "../Articulos/Categorias/Armables";
 import Comics from "../Articulos/Categorias/Comics";
 import Login from "../Login/Login";
 import RolGames from "../Articulos/Categorias/RolGames";
 import Xwings from "../Articulos/Categorias/Xwings";
 import Accesorios from "../Articulos/Categorias/Accesorios";
-import VistaProducto from "../Articulos/Vistas/VistaProducto";
+import VistaProductos from "../Articulos/Vistas/VistaProductos";
 
 export default function Routes(props) {
   const { fbData } = props;
@@ -42,11 +42,11 @@ export default function Routes(props) {
         <Route path="/Preventa" component={() => <Preventa fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Ofertas" component={Ofertas} />
         <Route path="/Eventos" component={Eventos} />
-        <Route path="/ProductoView" component={() => <VistaProducto fbData={fbData} />} />
+        <Route path="/Producto" component={() => <VistaProductos fbData={fbData} />} />
         <Route path="/BoardingGames" component={() => <BoardingGames fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/RolGames" component={() => <RolGames fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/traidingCardsGames" component={() => <JuegosDeCartas fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-        <Route path="/ModelosEscala" component={() => <ModelosEscala fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+        <Route path="/Armables" component={() => <Armables fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Comics" component={() => <Comics fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/X-Wings" component={() => <Xwings fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Accesorios" component={() => <Accesorios fbData={productosToArray} categoriasProductos={categoriaProductos} />} />

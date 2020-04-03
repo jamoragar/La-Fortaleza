@@ -16,9 +16,9 @@ export default function JuegosDeCartas(props) {
     return (
       <div>
         {categoriasProductos.map((categoriaProducto, i) => {
+          console.log(categoriaProducto);
           return categoriaProducto === 'Juegos De Cartas' ? (
             <div key={i}>
-              {}
               {Object.entries(category).map(([abreviacion, contenido], i) => {
                 return categoriaProducto === contenido.description ? (
                   <a key={i} href={contenido.path}>

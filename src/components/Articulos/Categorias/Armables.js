@@ -3,7 +3,7 @@ import { CardDeck, Card, Image, Spinner, Button } from 'react-bootstrap';
 import firebase from "../../../config/firebase";
 import { formatPrice } from '../../Data/DataProductos';
 
-export default function ModelosEscala(props) {
+export default function Armables(props) {
   const [category, setCategory] = useState(null);
   const { fbData, categoriasProductos } = props;
   useEffect(() => {
@@ -16,7 +16,7 @@ export default function ModelosEscala(props) {
     return (
       <div>
         {categoriasProductos.map((categoriaProducto, i) => {
-          return categoriaProducto === 'Modelos a Escala' ? (
+          return categoriaProducto === 'Armables' ? (
             <div key={i}>
               {}
               {Object.entries(category).map(([abreviacion, contenido], i) => {

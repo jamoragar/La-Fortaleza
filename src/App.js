@@ -10,7 +10,6 @@ import NavBar from "../src/components/Layouts/Navbar/Navbar";
 import Footer from "./components/Layouts/Footer/Footer";
 import firebase from './config/firebase';
 
-
 function App() {
   const [fbData, setFbData] = useState(null)
   useEffect(() => {
@@ -19,7 +18,6 @@ function App() {
 
     });
   }, []);
-
 
   if (fbData) {
     return (
