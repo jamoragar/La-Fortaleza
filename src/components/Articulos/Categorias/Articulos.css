@@ -1,0 +1,14 @@
+p{
+    text-align: justify;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;  
+    font-size: 14px;
+}
+.card_container{
+    margin: 10px 10px 10px 10px;
+}
+.card{
+    margin-top: 20px;
+}
