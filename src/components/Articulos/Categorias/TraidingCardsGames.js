@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { CardDeck, Card, Image, Spinner, Button } from 'react-bootstrap';
+import { Image, Spinner } from 'react-bootstrap';
 import firebase from "../../../config/firebase";
 import { formatPrice } from '../../Data/DataProductos';
+import './Articulos.css';
 
-export default function JuegosDeCartas(props) {
+const TraidingCardsGames = (props) => {
   const [category, setCategory] = useState(null);
   const { fbData, categoriasProductos } = props;
+  // LLamado a firebase para obtener todo el nodo Category y poder trabajarlo
   useEffect(() => {
     firebase.database().ref('/Category').on('value', snapshot => {
       setCategory(snapshot.val());
@@ -16,49 +18,49 @@ export default function JuegosDeCartas(props) {
     return (
       <div>
         {categoriasProductos.map((categoriaProducto, i) => {
-          console.log(categoriaProducto);
           return categoriaProducto === 'Juegos De Cartas' ? (
             <div key={i}>
+              {/*Transformamos el nodo Category a array, y diferenciamos entre su valor (description) y el subnodo que contiene mas contenido, valga la redundancia...*/}
               {Object.entries(category).map(([abreviacion, contenido], i) => {
                 return categoriaProducto === contenido.description ? (
                   <a key={i} href={contenido.path}>
                     <Image
                       key={i}
                       className="p-3"
-                      title="Banner"
+                      title="Juegos De Cartas"
                       src={contenido.banner}
                       fluid
                     />
                   </a>
                 ) : null
               })}
-              <div className="p-3">
-                <CardDeck>
+              <div className="card_container">
+                <div className="row">
                   {fbData.map((producto, j) => {
                     return producto.categoria === categoriaProducto ? (
-                      <div key={j}>
-                        <Card border="light" style={{ width: '18rem' }}>
-                          <Card.Img src={producto.img} variant="top" />
-                          <Card.Body>
-                            <Card.Title>{producto.nombre}</Card.Title>
-                            <Card.Text>
-                              {producto.subcategoria}
-                            </Card.Text>
-                          </Card.Body>
-                          <Card.Footer>
-                            <small>{formatPrice(producto.precio)}</small>
-                            <br />
-                            <Button title="Comprar" variant="dark">
-                              Agregar
-                                                      </Button>
-                          </Card.Footer>
-                        </Card>
+                      <div key={j} className="col-lg-3">
+                        <div className="card">
+                          <img className="card-img" src={producto.img} alt={producto.nombre} width='300' height='350' />
+                          <div className="card-body">
+                            <h4 className="card-title">{producto.nombre}</h4>
+                            <h6 className="card-subtitle mb-2 text-muted">{producto.subcategoria}</h6>
+                            <p className="card-text">{producto.descripcion}</p>
+                            <div className="buy d-flex justify-content-between align-items-center">
+                              <div className="price text-success">
+                                <h5 className="mt-4">
+                                  {formatPrice(producto.precio)}
+                                </h5>
+                              </div>
+                              <a href="#" className="btn btn-danger mt-3"><i className="fas fa-shopping-cart"></i> Comprar</a>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     )
                       :
                       null
                   })}
-                </CardDeck>
+                </div>
               </div>
             </div>
           ) : null
@@ -83,3 +85,4 @@ export default function JuegosDeCartas(props) {
   }
 }
 
+export default TraidingCardsGames;

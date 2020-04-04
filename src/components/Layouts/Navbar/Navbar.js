@@ -8,21 +8,21 @@ const NavBar = () => {
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#"><i class="fab fa-fort-awesome fa-2x"></i></a>
+      <a class="navbar-brand" href="/"><i class="fab fa-fort-awesome fa-2x"></i></a>
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-home fa-fw"></i>Inicio <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/"><i class="fas fa-home fa-fw"></i>Inicio <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-bolt fa-fw"></i>Preventa</a>
+            <a class="nav-link" href="/"><i class="fas fa-bolt fa-fw"></i>Preventa</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-hand-holding-usd fa-fw"></i>Ofertas</a>
+            <a class="nav-link" href="/"><i class="fas fa-hand-holding-usd fa-fw"></i>Ofertas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-calendar-alt fa-fw"></i>Eventos</a>
+            <a class="nav-link" href="/"><i class="fas fa-calendar-alt fa-fw"></i>Eventos</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">

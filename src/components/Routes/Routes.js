@@ -12,7 +12,7 @@ import Armables from "../Articulos/Categorias/Armables";
 import Comics from "../Articulos/Categorias/Comics";
 import Login from "../Login/Login";
 import RolGames from "../Articulos/Categorias/RolGames";
-import Xwings from "../Articulos/Categorias/Xwings";
+import XWing from "../Articulos/Categorias/Xwing";
 import Accesorios from "../Articulos/Categorias/Accesorios";
 import VistaProductos from "../Articulos/Vistas/VistaProductos";
 
@@ -45,10 +45,10 @@ export default function Routes(props) {
         <Route path="/Producto" component={() => <VistaProductos fbData={fbData} />} />
         <Route path="/BoardingGames" component={() => <BoardingGames fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/RolGames" component={() => <RolGames fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-        <Route path="/traidingCardsGames" component={() => <JuegosDeCartas fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+        <Route path="/JuegosDeCartas" component={() => <JuegosDeCartas fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Armables" component={() => <Armables fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Comics" component={() => <Comics fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-        <Route path="/X-Wings" component={() => <Xwings fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+        <Route path="/X-Wing" component={() => <XWing fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Accesorios" component={() => <Accesorios fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Login" component={Login} />
       </Switch>
