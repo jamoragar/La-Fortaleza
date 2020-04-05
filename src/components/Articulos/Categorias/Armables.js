@@ -51,7 +51,7 @@ const Armables = (props) => {
                                   {formatPrice(producto.precio)}
                                 </h5>
                               </div>
-                              <a href="#" className="btn btn-danger mt-3"><i className="fas fa-shopping-cart"></i> Comprar</a>
+                              <a href="/" className="btn btn-danger mt-3"><i className="fas fa-shopping-cart"></i> Comprar</a>
                             </div>
                           </div>
                         </div>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button, ButtonToolbar } from 'react-bootstrap/';
 import { LogOut } from '../../../config/firebase';
 import Register from '../../Register/Register';
 import Login from '../../Login/Login';
@@ -46,7 +45,7 @@ const NavBar = (props) => {
               </button>
               <div className="dropdown-menu">
                 <a className="dropdown-item" href={`/dashboard/${props.uid}`}>Perfil</a>
-                <a className="dropdown-item" onClick={() => LogOut()}>Salir</a>
+                <a className="dropdown-item" href="/" onClick={() => LogOut()}>Salir</a>
               </div>
             </div>
           </nav>

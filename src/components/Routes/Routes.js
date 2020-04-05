@@ -16,8 +16,9 @@ import Login from "../Login/Login";
 import RolGames from "../Articulos/Categorias/RolGames";
 import XWing from "../Articulos/Categorias/Xwing";
 import Accesorios from "../Articulos/Categorias/Accesorios";
-import VistaProductos from "../Articulos/Vistas/VistaProductos";
+import ShoppingDialogs from "../Store/Shoppingdialog/ShoppingDialogs";
 import _404 from '../404/404';
+
 
 export const history = createBrowserHistory();
 
@@ -53,10 +54,10 @@ export default function Routes(props) {
       <Switch>
         <Route path="/" exact component={() => <Home fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Dashboard" component={Dashboard} />
+        <Route path="/Shopping" component={() => <ShoppingDialogs fbData={productosToArray} />} />
         <Route path="/Preventa" component={() => <Preventa fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/Ofertas" component={Ofertas} />
         <Route path="/Eventos" component={Eventos} />
-        <Route path="/Producto" component={() => <VistaProductos fbData={fbData} />} />
         <Route path="/BoardingGames" component={() => <BoardingGames fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/RolGames" component={() => <RolGames fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
         <Route path="/JuegosDeCartas" component={() => <JuegosDeCartas fbData={productosToArray} categoriasProductos={categoriaProductos} fbCategory={fbCategory} />} />
