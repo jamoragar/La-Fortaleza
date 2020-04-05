@@ -4,6 +4,7 @@ import "firebase/firestore";
 import "firebase/storage";
 import 'firebase/analytics';
 import 'firebase/database';
+import { history } from '../components/Routes/Routes';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB3RDp5bPyATXDkubYncRoby1uZkndZyM8",
@@ -17,6 +18,30 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics(); 
+firebase.analytics();
+
+export const LogOut = () => {
+  firebase.auth().signOut().then(() => {
+    history.push('/');
+  })
+}
+
+export const LogIn = (email, pswd) => {
+  firebase.auth()
+    .signInWithEmailAndPassword(email, pswd)
+    .then((user) => {
+      if (user) {
+        return true
+        // history.push('/Dashboard');
+      }
+      else {
+        return false
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
 
 export default firebase;

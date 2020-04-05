@@ -4,7 +4,7 @@ import firebase from "../../../config/firebase";
 import { formatPrice } from '../../Data/DataProductos';
 import './Articulos.css';
 
-const TraidingCardsGames = (props) => {
+const Preventa = (props) => {
   const [category, setCategory] = useState(null);
   const { fbData, categoriasProductos } = props;
   // LLamado a firebase para obtener todo el nodo Category y poder trabajarlo
@@ -85,4 +85,4 @@ const TraidingCardsGames = (props) => {
   }
 }
 
-export default TraidingCardsGames;
+export default Preventa;

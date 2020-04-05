@@ -10,8 +10,9 @@ import NavBar from "../src/components/Layouts/Navbar/Navbar";
 import Footer from "./components/Layouts/Footer/Footer";
 import firebase from './config/firebase';
 
-function App() {
+function App(props) {
   const [fbData, setFbData] = useState(null)
+
   useEffect(() => {
     firebase.database().ref('/Productos').on('value', snapshot => {
       setFbData(snapshot.val());
@@ -23,7 +24,7 @@ function App() {
     return (
       <div className="App">
         <Header />
-        <NavBar />
+        <NavBar authenticated={props.authenticated} user={props.user} name={props.name} uid={props.uid} />
         <Routes fbData={fbData} />
         <Footer />
       </div>
