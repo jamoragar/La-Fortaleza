@@ -22,7 +22,7 @@ const NavBar = (props) => {
             <a className="nav-link" href="/"><i className="fas fa-home fa-fw"></i>Inicio <span className="sr-only">(current)</span></a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/"><i className="fas fa-bolt fa-fw"></i>Preventa</a>
+            <a className="nav-link" href="/Preventa"><i className="fas fa-bolt fa-fw"></i>Preventa</a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="/"><i className="fas fa-hand-holding-usd fa-fw"></i>Ofertas</a>

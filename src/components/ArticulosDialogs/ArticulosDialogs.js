@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-export default function ShoppingDialogs(props) {
-    const { fbData } = props;
+export default function ArtciculosDialogs({ articulo }) {
 
+
+    console.log(articulo)
     return (
         <div className="container p-3">
             <div className="row">
@@ -13,7 +14,7 @@ export default function ShoppingDialogs(props) {
                     <div className="row">
                         <div className="col bg-warning" >
                             <div className='container-fluid p-3'>
-                                <h3>Nombre Del Producto</h3>
+                                <h3>Nombre del Articulo</h3>
                             </div>
                         </div>
                     </div>
@@ -60,7 +61,7 @@ export default function ShoppingDialogs(props) {
                 </nav>
                 <div className="tab-content" id="nav-tabContent">
                     <div className="tab-pane fade show active p-3" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <table class="table">
+                        <table className="table">
                             <thead>
                                 <tr>
                                     <th scope="col"></th>

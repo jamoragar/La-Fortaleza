@@ -4,9 +4,8 @@ import { Spinner, Image } from "react-bootstrap";
 import firebase from '../../config/firebase';
 import './Store.css';
 
-const Store = (props) => {
+const Store = ({ fbData, categoriasProductos, setArticulo, setAddCart }) => {
     const [category, setCategory] = useState(null);
-    const { fbData, categoriasProductos } = props;
     // LLamado a firebase para obtener todo el nodo Category y poder trabajarlo
     useEffect(() => {
         firebase.database().ref('/Category').on('value', snapshot => {
@@ -46,12 +45,39 @@ const Store = (props) => {
                                                         <h6 className="card-subtitle mb-2 text-muted">{producto.subcategoria}</h6>
                                                         <p className="card-text">{producto.descripcion}</p>
                                                         <div className="buy d-flex justify-content-between align-items-center">
-                                                            <div className="price text-success">
-                                                                <h5 className="mt-4">
-                                                                    {formatPrice(producto.precio)}
-                                                                </h5>
+                                                            <div className="container">
+                                                                <div className="row">
+                                                                    <div className="col ">
+                                                                        <div className="price text-success">
+                                                                            <h5 className="mt-4">
+                                                                                {formatPrice(producto.precio)}
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col ">
+                                                                        <a
+                                                                            href="/Articulo"
+                                                                            className="btn btn-success mt-3 "
+                                                                            onClick={() => {
+                                                                                setArticulo(producto.nombre)
+                                                                            }}
+                                                                        >
+                                                                            <i className="fas fa-eye"></i>
+                                                                        Ver
+                                                                    </a>
+                                                                    </div>
+                                                                    <div className="col ">
+                                                                        <div
+                                                                            className="btn btn-danger mt-3 "
+                                                                            onClick={() => {
+                                                                                setAddCart(producto.nombre)
+                                                                            }}>
+                                                                            <i className="fas fa-shopping-cart"></i>
+                                                                        Comprar
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <a href="#" className="btn btn-danger mt-3"><i className="fas fa-shopping-cart"></i> Comprar</a>
                                                         </div>
                                                     </div>
                                                 </div>

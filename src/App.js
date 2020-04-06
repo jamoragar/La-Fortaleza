@@ -6,12 +6,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Spinner } from 'react-bootstrap';
 //Componentes
 import Header from "./components/Layouts/Header/Header";
+import Order from "./components/ShoppingCart/ShoppingCart";
 import NavBar from "../src/components/Layouts/Navbar/Navbar";
 import Footer from "./components/Layouts/Footer/Footer";
 import firebase from './config/firebase';
 
 function App(props) {
   const [fbData, setFbData] = useState(null)
+  const [articulo, setArticulo] = useState();
+  const [addCart, setAddCart] = useState();
+
 
   useEffect(() => {
     firebase.database().ref('/Productos').on('value', snapshot => {
@@ -25,7 +29,8 @@ function App(props) {
       <div className="App">
         <Header />
         <NavBar authenticated={props.authenticated} user={props.user} name={props.name} uid={props.uid} />
-        <Routes fbData={fbData} />
+        <Order addCart={addCart} />
+        <Routes fbData={fbData} articulo={articulo} setArticulo={setArticulo} addCart={addCart} setAddCart={setAddCart} />
         <Footer />
       </div>
     );
