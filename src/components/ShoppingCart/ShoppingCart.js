@@ -59,7 +59,6 @@ export default function ShoppingCart(props) {
     const { addCart } = props;
     const [closeCart, setCloseCart] = useState(true);
 
-    console.log(addCart)
     return (
         <OrderStyled open={!closeCart} >
             <div onClick={() => { setCloseCart(!closeCart) }} className={`close_checkout ${!closeCart ? 'x' : 'cart'}`} >

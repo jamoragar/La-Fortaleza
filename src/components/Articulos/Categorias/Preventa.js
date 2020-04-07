@@ -38,7 +38,7 @@ const Preventa = (props) => {
                 <div className="row">
                   {fbData.map((producto, j) => {
                     return producto.categoria === categoriaProducto ? (
-                      <div key={j} className="col-lg-3">
+                      <div key={j} className="col-lg-3 col-md-4 col-sm-6 col-xs-12 p-3">
                         <div className="card">
                           <img className="card-img" src={producto.img} alt={producto.nombre} width='300' height='350' />
                           <div className="card-body">

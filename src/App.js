@@ -10,12 +10,12 @@ import Order from "./components/ShoppingCart/ShoppingCart";
 import NavBar from "../src/components/Layouts/Navbar/Navbar";
 import Footer from "./components/Layouts/Footer/Footer";
 import firebase from './config/firebase';
+import { useLocalState } from './components/Hooks/useLocalStorage';
 
 function App(props) {
   const [fbData, setFbData] = useState(null)
-  const [articulo, setArticulo] = useState();
+  const [articulo, setArticulo] = useLocalState('');
   const [addCart, setAddCart] = useState();
-
 
   useEffect(() => {
     firebase.database().ref('/Productos').on('value', snapshot => {
@@ -23,6 +23,8 @@ function App(props) {
 
     });
   }, []);
+
+  console.log(articulo)
 
   if (fbData) {
     return (

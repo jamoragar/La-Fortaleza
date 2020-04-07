@@ -2,8 +2,6 @@ import React from 'react';
 
 export default function ArtciculosDialogs({ articulo }) {
 
-
-    console.log(articulo)
     return (
         <div className="container p-3">
             <div className="row">
@@ -14,7 +12,7 @@ export default function ArtciculosDialogs({ articulo }) {
                     <div className="row">
                         <div className="col bg-warning" >
                             <div className='container-fluid p-3'>
-                                <h3>Nombre del Articulo</h3>
+                                <h3>{}</h3>
                             </div>
                         </div>
                     </div>
