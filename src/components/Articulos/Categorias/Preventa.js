@@ -26,7 +26,7 @@ const Preventa = (props) => {
                   <a key={i} href={contenido.path}>
                     <Image
                       key={i}
-                      className="p-3"
+                      className="img-banner"
                       title="Preventa"
                       src={contenido.banner}
                       fluid

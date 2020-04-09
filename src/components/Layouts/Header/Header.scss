@@ -1,0 +1,73 @@
+.container-fluid-header {  
+    border: 0;
+	border-radius: 0;
+    background: linear-gradient(to right, #171717, #535353);
+    
+    .nav li > a, .navbar-brand {
+		max-height: 50px;
+		width: auto;
+		background: transparent !important;
+		font-size: 18px;
+		transition: 0.2s ease-in-out;
+		&:hover{
+			background-color: rgba(255,255,255,0.2);
+			font-size: 14px;
+			.link {
+				width: 100%;
+				padding: 0 5px 0 5px;
+				visibility: visible;
+				font-size: 14px;
+			}
+		}
+    }
+    
+    .img-logo{
+        width: 20rem;
+    }
+
+    .searchbar{
+        margin-bottom: auto;
+        margin-top: auto;
+        height: 60px;
+        background-color: white;
+        border-radius: 30px;
+        padding: 10px;
+        }
+    
+        .search_input{
+        color: grey;
+        font-weight: bold;
+        border: 0;
+        outline: 0;
+        background: none;
+        width: 0;
+        caret-color:transparent;
+        line-height: 40px;
+        transition: width 0.4s linear;
+        }
+    
+        .searchbar:hover > .search_input{
+        padding: 0 10px;
+        width: 300px;
+        caret-color: #ffd200;
+        transition: width 0.4s linear;
+        }
+    
+        .searchbar:hover > .search_icon{
+        background: #ffd200;
+        color: grey;
+        }
+    
+        .search_icon{
+        height: 40px;
+        width: 40px;
+        float: right;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        color: grey;
+        text-decoration:none;
+        }
+}
+

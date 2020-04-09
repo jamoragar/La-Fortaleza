@@ -26,7 +26,7 @@ const Preventa = (props) => {
                   <a key={i} href={contenido.path}>
                     <Image
                       key={i}
-                      className="p-3"
+                      className="img-banner"
                       title="Juegos De Cartas"
                       src={contenido.banner}
                       fluid

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { formatPrice } from "../Data/DataProductos";
 import { Spinner, Image } from "react-bootstrap";
 import firebase from '../../config/firebase';
-import './Store.css';
+import './Store.scss';
 
 const Store = ({ fbData, categoriasProductos, setArticulo, setAddCart }) => {
     const [category, setCategory] = useState(null);
@@ -25,7 +25,7 @@ const Store = ({ fbData, categoriasProductos, setArticulo, setAddCart }) => {
                                     <a key={i} href={contenido.path}>
                                         <Image
                                             key={i}
-                                            className="p-3"
+                                            className="img-banner"
                                             title="Modelos a Escala"
                                             src={contenido.banner}
                                             fluid

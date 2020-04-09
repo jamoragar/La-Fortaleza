@@ -1,4 +1,4 @@
-p{
+.p{
     text-align: justify;
     overflow: hidden;
     display: -webkit-box;
@@ -6,9 +6,12 @@ p{
     -webkit-box-orient: vertical;  
     font-size: 14px;
 }
-.card_container{
-    margin: 10px 10px 10px 10px;
-}
+
 .card{
     margin-top: 20px;
+}
+
+.img-banner {
+    border-radius: 10px;
+   margin-top: 1rem;
 }

@@ -41,26 +41,28 @@ export default function Routes({ fbData, articulo, setArticulo, addCart, setAddC
   );
 
   return (
-    <Router history={history}>
-      <Switch>
-        <Route path="/" exact component={() => <Home addCart={addCart} setAddCart={setAddCart} setArticulo={setArticulo} articulo={articulo} fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-        <Route path="/Dashboard" component={Dashboard} />
-        <Route path="/Articulo" component={() => <ArticulosDialogs articulo={articulo} setArticulo={setArticulo} />} />
-        <Route path="/Preventa" component={() => <Preventa fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-        <Route path="/Ofertas" component={Ofertas} />
-        <Route path="/Eventos" component={Eventos} />
-        <Route path="/BoardingGames" component={() => <BoardingGames fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-        <Route path="/RolGames" component={() => <RolGames fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-        <Route path="/JuegosDeCartas" component={() => <JuegosDeCartas fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-        <Route path="/Armables" component={() => <Armables fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-        <Route path="/Comics" component={() => <Comics fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-        <Route path="/X-Wing" component={() => <XWing fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-        <Route path="/Accesorios" component={() => <Accesorios fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-        <Route path="/Login" component={Login} />
-        <Route path="/not-found" component={_404} />
-        <Route component={NotFoundRedirect} />
-      </Switch>
-    </Router>
+    <div className="container-fluid  px-5">
+      <Router history={history}>
+        <Switch>
+          <Route path="/" exact component={() => <Home addCart={addCart} setAddCart={setAddCart} setArticulo={setArticulo} articulo={articulo} fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+          <Route path="/Dashboard" component={Dashboard} />
+          <Route path="/Articulo" component={() => <ArticulosDialogs articulo={articulo} setArticulo={setArticulo} />} />
+          <Route path="/Preventa" component={() => <Preventa fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+          <Route path="/Ofertas" component={Ofertas} />
+          <Route path="/Eventos" component={Eventos} />
+          <Route path="/JuegosDeMesa" component={() => <BoardingGames fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+          <Route path="/JuegosDeRol" component={() => <RolGames fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+          <Route path="/JuegosDeCartas" component={() => <JuegosDeCartas fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+          <Route path="/Armables" component={() => <Armables fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+          <Route path="/Comics" component={() => <Comics fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+          <Route path="/X-Wing" component={() => <XWing fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+          <Route path="/Accesorios" component={() => <Accesorios fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+          <Route path="/Login" component={Login} />
+          <Route path="/not-found" component={_404} />
+          <Route component={NotFoundRedirect} />
+        </Switch>
+      </Router>
+    </div>
   );
 };
 

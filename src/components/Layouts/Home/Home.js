@@ -8,7 +8,7 @@ const Home = (props) => {
   const { fbData, categoriasProductos, setArticulo, setAddCart } = props;
 
   return (
-    <div>
+    <div className="container-fluid">
       <CarouselContainer />
       <TableInfo />
       <Store setAddCart={setAddCart} setArticulo={setArticulo} fbData={fbData} categoriasProductos={categoriasProductos} />
