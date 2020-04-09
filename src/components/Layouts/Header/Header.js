@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.scss';
 
-const Header2 = (props) => {
+const Header = (props) => {
     return (
         <div className="container-fluid-header">
             <div className="row">
@@ -9,7 +9,7 @@ const Header2 = (props) => {
                     <img className="img-logo pl-5" alt="Logo-La-Fortaleza" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Logos%2FLogoS.png?alt=media&token=e179109f-80b0-48cd-b8cd-750ab6396ec7" />
                 </div>
                 <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                    hola
+
                 </div>
                 <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div className="col" style={{ paddingTop: "2rem" }}>
@@ -38,4 +38,4 @@ const Header2 = (props) => {
     )
 }
 
-export default Header2;
+export default Header;
