@@ -30,22 +30,22 @@ const NavBar = (props) => {
           </li>
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-align-justify fa-fw"></i>
+              <i className="fas fa-align-justify fa-fw"></i>
               Categorias
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a className="dropdown-item" href="/JuegosDeMesa">Juegos De Mesa</a>
-              <div class="dropdown-divider"></div>
+              <div className="dropdown-divider"></div>
               <a className="dropdown-item" href="/JuegosDeCartas">Juegos De Cartas</a>
-              <div class="dropdown-divider"></div>
+              <div className="dropdown-divider"></div>
               <a className="dropdown-item" href="/Accesorios">Accesorios</a>
-              <div class="dropdown-divider"></div>
+              <div className="dropdown-divider"></div>
               <a className="dropdown-item" href="/Armables">Armables</a>
-              <div class="dropdown-divider"></div>
+              <div className="dropdown-divider"></div>
               <a className="dropdown-item" href="/Comics">Comics</a>
-              <div class="dropdown-divider"></div>
+              <div className="dropdown-divider"></div>
               <a className="dropdown-item" href="/JuegosDeRol">Juegos De Rol</a>
-              <div class="dropdown-divider"></div>
+              <div className="dropdown-divider"></div>
               <a className="dropdown-item" href="/X-Wing">X-Wing</a>
             </div>
           </li>

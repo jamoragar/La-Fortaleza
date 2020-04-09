@@ -4,7 +4,7 @@ import './ShoppingCart.scss';
 const ShoppingCart2 = (props) => {
     return (
         <div>
-
+            Pronto sere un carro
         </div>
     )
 }
