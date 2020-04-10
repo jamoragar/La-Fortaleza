@@ -24,8 +24,6 @@ function App(props) {
     });
   }, []);
 
-  console.log(articulo)
-
   if (fbData) {
     return (
       <div className="App">

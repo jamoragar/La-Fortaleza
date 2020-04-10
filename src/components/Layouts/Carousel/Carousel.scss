@@ -1,0 +1,92 @@
+.container-fluid-carousel {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.container-fluid-carousel .row  {
+    padding-bottom: 1rem;
+    }
+
+.img-fluid {
+    border-radius: 10px;
+}
+
+.img-fluid:hover {
+    filter: blur(2px);
+}
+
+.carousel-control-next-der, .carousel-control-prev-izq {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    color: #606060;
+    text-align: center;
+    opacity: 5.5;
+    transition: opacity .15s ease;
+}
+
+.carousel-control-next-der{
+    right: 0px;
+}
+
+.carousel-control-prev-izq {
+    left: 0px;
+}
+
+.carousel-control-next-der .carousel-control-next-icon {
+    background-image: none;
+    color: #f7991d;
+    font-size: 2em;
+    opacity: .5;
+}
+
+.carousel-control-next-der .carousel-control-next-icon:hover {
+    opacity: 1;
+    transition: opacity .15s ease;
+}
+
+.carousel-control-prev-izq .carousel-control-prev-icon {
+    background-image: none;
+    color: #f7991d;
+    font-size: 2em;
+    opacity: .5;
+}
+
+.carousel-control-prev-izq .carousel-control-prev-icon:hover {
+    opacity: 1;
+    transition: opacity .15s ease;
+}
+
+ol.carousel-indicators {
+    position: absolute;
+    bottom: 5px;
+    margin: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+ }
+ 
+ ol.carousel-indicators li,
+ ol.carousel-indicators li.active {
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    border-radius: 50%;
+    border: 0;
+    background: transparent;
+ }
+ 
+ ol.carousel-indicators li {
+    background: #818182;
+    margin-left: .5rem;
+    margin-right: .5rem;
+ }
+ 
+ ol.carousel-indicators li.active {
+    background: #f7991d;
+ }

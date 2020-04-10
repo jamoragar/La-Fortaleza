@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Image, Spinner } from 'react-bootstrap';
 import firebase from "../../../config/firebase";
 import { formatPrice } from '../../Data/DataProductos';
-import './Articulos.css';
+
 
 const Accesorios = (props) => {
   const [category, setCategory] = useState(null);
