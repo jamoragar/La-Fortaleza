@@ -7,7 +7,7 @@ const CarouselContainer = () => {
     <div>
       <div className="container-fluid-carousel">
         <div className="row">
-          <div className="col-12 col-md-8 ">
+          <div className="col-12 col-md-8 col-sm-12 col-xs-12">
             <div className="card border-0 rounded-0 text-light overflow zoom">
               <div className="position-relative">
                 <div className="ratio_left-cover-1 image-wrapper">
