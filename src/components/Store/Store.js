@@ -4,9 +4,11 @@ import { Spinner, Image, Button } from "react-bootstrap";
 import firebase from '../../config/firebase';
 import './Store.scss';
 
-const Store = ({ fbData, categoriasProductos, orders, openCart }) => {
-    console.log(orders.state)
+import {useOrders} from '../Hooks/useOrders';
+
+const Store = ({ fbData, categoriasProductos }) => {
     const [category, setCategory] = useState(null);
+    const orders = useOrders();
     // LLamado a firebase para obtener todo el nodo Category y poder trabajarlo
     useEffect(() => {
         firebase.database().ref('/Category').on('value', snapshot => {
@@ -14,17 +16,17 @@ const Store = ({ fbData, categoriasProductos, orders, openCart }) => {
         })
     }, []);
 
-    const addToOrder = (product) => {
+    const addNewProduct = (product) => {
+        console.log(product)
         const newOrder = {
-            id: product.id,
-            title: product.nombre,
-            price: product.precio,
-            description: product.categoria
+            title:product.nombre,
+            description:product.categoria,
+            price:product.precio
         }
         orders.dispatch({
             type: 'ADD_ORDER',
             payload: newOrder
-        });
+        })
     }
 
     if (fbData && category) {
@@ -102,6 +104,18 @@ const Store = ({ fbData, categoriasProductos, orders, openCart }) => {
                                                                         </button>
                                                                     </a>
                                                                 </div>
+<<<<<<< HEAD
+=======
+                                                                <div className="col-5">
+                                                                    <Button
+                                                                        className='mt-3'
+                                                                        variant='danger'
+                                                                        onClick={() => addNewProduct(producto)}>
+                                                                        <i className="fas fa-shopping-cart" />
+                                                                        Comprar
+                                                                    </Button>
+                                                                </div>
+>>>>>>> 29a6e8c0349ab5f376ef99888f74b6f16ab1994d
                                                             </div>
                                                         </li>
                                                     </ul>
