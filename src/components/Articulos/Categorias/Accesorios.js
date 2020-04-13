@@ -3,7 +3,6 @@ import { Image, Spinner } from 'react-bootstrap';
 import firebase from "../../../config/firebase";
 import { formatPrice } from '../../Data/DataProductos';
 
-
 const Accesorios = (props) => {
   const [category, setCategory] = useState(null);
   const { fbData, categoriasProductos } = props;

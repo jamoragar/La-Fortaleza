@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Switch, Route, Router, Redirect } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 
@@ -16,6 +16,9 @@ import RolGames from "../Articulos/Categorias/RolGames";
 import XWing from "../Articulos/Categorias/Xwing";
 import Accesorios from "../Articulos/Categorias/Accesorios";
 import ArticulosDialogs from "../ArticulosDialogs/ArticulosDialogs";
+import Contacto from '../Contacto/Contacto';
+import AvisoLegal from '../AvisoLegal/AvisoLegal';
+import Terms from '../terms/Terms';
 import _404 from '../404/404';
 
 
@@ -44,6 +47,9 @@ export default function Routes(props) {
           <Route path="/X-Wing" component={XWing}/>
           <Route path="/Accesorios" component={Accesorios}/>
           <Route path="/Login" component={Login} />
+          <Route path="/Contacto" component={Contacto} />
+          <Route path="/AvisoLegal" component={AvisoLegal} />
+          <Route path="/TerminosYCondiicones" component={Terms} />
           <Route path="/not-found" component={_404} />
           <Route component={NotFoundRedirect} />
         </Switch>

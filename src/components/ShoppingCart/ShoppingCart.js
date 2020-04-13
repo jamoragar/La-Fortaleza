@@ -1,12 +1,13 @@
 import React from 'react';
 import './ShoppingCart.scss';
 
-const ShoppingCart2 = (props) => {
+const ShoppingCart = () => {
+
     return (
         <div>
-            Pronto sere un carro
+            aca va el carrito de compras
         </div>
     )
 }
+export default ShoppingCart;
 
-export default ShoppingCart2;
