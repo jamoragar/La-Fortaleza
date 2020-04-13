@@ -64,11 +64,6 @@ const Store = ({ fbData, categoriasProductos }) => {
                                                     </div>
                                                     <ul className="list-group list-group-flush">
                                                         <li className="list-group-item">
-                                                            <h5>
-                                                                {producto.categoria}
-                                                            </h5>
-                                                        </li>
-                                                        <li className="list-group-item">
                                                             <h6 className="card-subtitle mb-2 text-muted">{producto.subcategoria}</h6>
                                                         </li>
                                                         <li className="list-group-item">
