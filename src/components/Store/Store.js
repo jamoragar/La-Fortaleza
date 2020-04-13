@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { formatPrice } from "../Data/DataProductos";
-import { Spinner, Image } from "react-bootstrap";
+import { Spinner, Image, Button } from "react-bootstrap";
 import firebase from '../../config/firebase';
 import './Store.scss';
 
-const Store = ({ fbData, categoriasProductos, setArticulo, setAddCart }) => {
+const Store = ({ fbData, categoriasProductos, orders, openCart }) => {
+    console.log(orders.state)
     const [category, setCategory] = useState(null);
     // LLamado a firebase para obtener todo el nodo Category y poder trabajarlo
     useEffect(() => {
@@ -12,6 +13,19 @@ const Store = ({ fbData, categoriasProductos, setArticulo, setAddCart }) => {
             setCategory(snapshot.val());
         })
     }, []);
+
+    const addToOrder = (product) =>{
+        const newOrder = {
+            id:product.id,
+            title:product.nombre,
+            price:product.precio,
+            description:product.categoria
+        }
+        orders.dispatch({
+            type: 'ADD_ORDER',
+            payload: newOrder
+        });
+    }
 
     if (fbData && category) {
         return (
@@ -37,7 +51,7 @@ const Store = ({ fbData, categoriasProductos, setArticulo, setAddCart }) => {
                                 <div className="row">
                                     {fbData.map((producto, j) => {
                                         return producto.categoria === categoriaProducto ? (
-                                            <div key={j} className="col-lg-3 col-md-4 col-sm-6 col-xs-12 p-3" >
+                                            <div key={j} className="col-12 col-sm-12 col-md-6 col-lg-3 p-3" >
                                                 <div className="card">
                                                     <img className="card-img" src={producto.img} alt={producto.nombre} width='300' height='350' />
                                                     <div className="card-body">
@@ -45,37 +59,32 @@ const Store = ({ fbData, categoriasProductos, setArticulo, setAddCart }) => {
                                                         <h6 className="card-subtitle mb-2 text-muted">{producto.subcategoria}</h6>
                                                         <p className="card-text">{producto.descripcion}</p>
                                                         <div className="buy d-flex justify-content-between align-items-center">
-                                                            <div className="container">
-                                                                <div className="row">
-                                                                    <div className="col ">
-                                                                        <div className="price text-success">
-                                                                            <h5 className="mt-4">
-                                                                                {formatPrice(producto.precio)}
-                                                                            </h5>
-                                                                        </div>
+                                                            <div className="row">
+                                                                <div className="col-4">
+                                                                    <div className="price text-success">
+                                                                        <h5 className="mt-4">
+                                                                            {formatPrice(producto.precio)}
+                                                                        </h5>
                                                                     </div>
-                                                                    <div className="col ">
-                                                                        <a
-                                                                            href="/Articulo"
+                                                                </div>
+                                                                <div className="col-3">
+                                                                    <a href={`/Articulo/${producto.id}`}>
+                                                                        <button
                                                                             className="btn btn-success mt-3 "
-                                                                            onClick={() => {
-                                                                                setArticulo(producto.nombre)
-                                                                            }}
                                                                         >
-                                                                            <i className="fas fa-eye"></i>
-                                                                        Ver
+                                                                            <i className="fas fa-eye" />
+                                                                            Ver
+                                                                        </button>
                                                                     </a>
-                                                                    </div>
-                                                                    <div className="col ">
-                                                                        <div
-                                                                            className="btn btn-danger mt-3 "
-                                                                            onClick={() => {
-                                                                                setAddCart(producto.nombre)
-                                                                            }}>
-                                                                            <i className="fas fa-shopping-cart"></i>
+                                                                </div>
+                                                                <div className="col-5">
+                                                                    <Button
+                                                                        className='mt-3'
+                                                                        variant='danger'
+                                                                        onClick={() => {addToOrder(producto)}}>
+                                                                        <i className="fas fa-shopping-cart" />
                                                                         Comprar
-                                                                    </div>
-                                                                    </div>
+                                                                    </Button>
                                                                 </div>
                                                             </div>
                                                         </div>

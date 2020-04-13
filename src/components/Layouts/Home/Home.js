@@ -5,13 +5,13 @@ import TableInfo from "../TableInfo/TableInfo";
 
 
 const Home = (props) => {
-  const { fbData, categoriasProductos, setArticulo, setAddCart } = props;
+  const { fbData, categoriasProductos, orders, openCart } = props;
 
   return (
     <div className="container-fluid">
       <CarouselContainer />
       <TableInfo />
-      <Store setAddCart={setAddCart} setArticulo={setArticulo} fbData={fbData} categoriasProductos={categoriasProductos} />
+      <Store openCart={openCart} orders={orders} fbData={fbData} categoriasProductos={categoriasProductos} />
     </div>
   );
 }

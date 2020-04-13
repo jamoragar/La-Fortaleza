@@ -9,12 +9,20 @@ import Header from "./components/Layouts/Header/Header";
 import NavBar from "../src/components/Layouts/Navbar/Navbar";
 import Footer from "./components/Layouts/Footer/Footer";
 import firebase from './config/firebase';
+<<<<<<< HEAD
 import { useLocalState } from './components/Hooks/useLocalStorage';
+=======
+//Hooks
+import {useCart} from "./components/Hooks/useCart";
+import {useOrders} from "./components/Hooks/useOrders";
+>>>>>>> 089dbd48ed4fc6799e7a83ebee4a3248dc53a69a
 
 function App(props) {
+  console.log('rendering...')
+
   const [fbData, setFbData] = useState(null)
-  const [articulo, setArticulo] = useLocalState('');
-  const [addCart, setAddCart] = useState();
+  const openCart = useCart();
+  const orders = useOrders();
 
   useEffect(() => {
     firebase.database().ref('/Productos').on('value', snapshot => {
@@ -28,7 +36,7 @@ function App(props) {
       <div className="App">
         <Header />
         <NavBar authenticated={props.authenticated} user={props.user} name={props.name} uid={props.uid} />
-        <Routes fbData={fbData} articulo={articulo} setArticulo={setArticulo} addCart={addCart} setAddCart={setAddCart} />
+        <Routes fbData={fbData} openCart={openCart} orders={orders}/>
         <Footer />
       </div>
     );

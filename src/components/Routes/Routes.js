@@ -26,12 +26,13 @@ export const history = createBrowserHistory();
 
 const NotFoundRedirect = () => <Redirect to='/not-found' />
 
-export default function Routes({ fbData, articulo, setArticulo, addCart, setAddCart }) {
+export default function Routes(props) {
+  const {fbData, openCart, orders} = props
   let productosToArray = [];
   let categoriaProductos = [];
 
   //Convertimos el objeto entregado por firebase de productos en un array
-  Object.keys(fbData).map((key, i) => {
+  Object.keys(fbData).forEach((key, i) => {
     productosToArray[i] = fbData[key]
   });
   // Del array generado, extraemos todas las categorias de los productos
@@ -41,15 +42,14 @@ export default function Routes({ fbData, articulo, setArticulo, addCart, setAddC
   // filtramos las categorias, para que no existan elementos repetidos dentro del array
   categoriaProductos = categoriaProductos.reduce((unique, item) =>
     unique.includes(item) ? unique : [...unique, item], []
-  );
-
+  );  
   return (
     <div className="container-fluid  px-5">
       <Router history={history}>
         <Switch>
-          <Route path="/" exact component={() => <Home addCart={addCart} setAddCart={setAddCart} setArticulo={setArticulo} articulo={articulo} fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+          <Route path="/" exact component={() => <Home fbData={productosToArray} orders={orders} openCart={openCart} categoriasProductos={categoriaProductos} />} />
           <Route path="/Dashboard" component={Dashboard} />
-          <Route path="/Articulo" component={() => <ArticulosDialogs articulo={articulo} setArticulo={setArticulo} />} />
+          <Route path="/Articulo/:id/" component={ArticulosDialogs} />
           <Route path="/Preventa" component={() => <Preventa fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
           <Route path="/Ofertas" component={Ofertas} />
           <Route path="/Eventos" component={Eventos} />

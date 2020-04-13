@@ -71,17 +71,17 @@ const NavBar = (props) => {
           :
           <nav className="basic-navbar-nav" >
             <div className="mr-auto" />
-            <button className="button-Toolbar" style={{ fontWeight: "bold" }} >
+            <div className="button-Toolbar" style={{ fontWeight: "bold" }} >
               <button style={{ fontWeight: "bold", color: "#606060" }} onClick={() => setModalRegisterShow(true)}>Registarse</button>
               <button style={{ fontWeight: "bold", color: "#606060" }} onClick={() => { setModalLoginShow(true) }}>Login</button>
-            </button>
+            </div>
 
           </nav>
         }
         <Register show={modalRegisterShow} onHide={() => setModalRegisterShow(false)} />
         <Login show={modalLoginShow} onHide={() => { setModalLoginShow(false) }} />
       </div>
-    </nav >
+    </nav>
   );
 };
 
