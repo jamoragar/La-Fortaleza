@@ -4,7 +4,7 @@ import { Spinner, Image, Button } from "react-bootstrap";
 import firebase from '../../config/firebase';
 import './Store.scss';
 
-import {useOrders} from '../Hooks/useOrders';
+import { useOrders } from '../Hooks/useOrders';
 
 const Store = ({ fbData, categoriasProductos }) => {
     const [category, setCategory] = useState(null);
@@ -19,9 +19,9 @@ const Store = ({ fbData, categoriasProductos }) => {
     const addNewProduct = (product) => {
         console.log(product)
         const newOrder = {
-            title:product.nombre,
-            description:product.categoria,
-            price:product.precio
+            title: product.nombre,
+            description: product.categoria,
+            price: product.precio
         }
         orders.dispatch({
             type: 'ADD_ORDER',
@@ -104,8 +104,6 @@ const Store = ({ fbData, categoriasProductos }) => {
                                                                         </button>
                                                                     </a>
                                                                 </div>
-<<<<<<< HEAD
-=======
                                                                 <div className="col-5">
                                                                     <Button
                                                                         className='mt-3'
@@ -115,7 +113,6 @@ const Store = ({ fbData, categoriasProductos }) => {
                                                                         Comprar
                                                                     </Button>
                                                                 </div>
->>>>>>> 29a6e8c0349ab5f376ef99888f74b6f16ab1994d
                                                             </div>
                                                         </li>
                                                     </ul>
