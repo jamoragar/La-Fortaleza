@@ -39,7 +39,7 @@ const CarouselContainer = () => {
           </div>
           <div className="col-12 col-md-4 ">
             <div className="row">
-              <div className="col-12 ">
+              <div className="col-12 pt-2">
                 <div className="card border-0 rounded-0 text-white overflow zoom">
                   <div className="position-relative">
                     <div className="ratio_right-cover-2 image-wrapper">
@@ -52,7 +52,7 @@ const CarouselContainer = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-12">
+              <div className="col-12 pt-2">
                 <div className="card border-0 rounded-0 text-white overflow zoom">
                   <div className="position-relative">
                     <div className="ratio_right-cover-2 image-wrapper">

@@ -27,7 +27,7 @@ export const history = createBrowserHistory();
 const NotFoundRedirect = () => <Redirect to='/not-found' />
 
 export default function Routes(props) {
-  const {fbData, openCart, orders} = props
+  const { fbData, openCart, orders } = props
   let productosToArray = [];
   let categoriaProductos = [];
 
@@ -42,7 +42,7 @@ export default function Routes(props) {
   // filtramos las categorias, para que no existan elementos repetidos dentro del array
   categoriaProductos = categoriaProductos.reduce((unique, item) =>
     unique.includes(item) ? unique : [...unique, item], []
-  );  
+  );
   return (
     <div className="container-fluid  px-5">
       <Router history={history}>

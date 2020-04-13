@@ -2,7 +2,7 @@ p{
     text-align: justify;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;  
     font-size: 14px;
 }
@@ -16,12 +16,50 @@ p{
     text-align: initial;
 }
 
-.card-store{
-background-color: white;
-}
-
-.card-body{
-    height: 300px;
+.card-title{
+    color: white;
+    font-weight: bold;
 }
 
 
+.card-header-store {
+    padding: 1rem 1rem;
+    margin-bottom: 0;
+    opacity: .5;
+    background-color: #606060;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.card-footer{
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.btn-ver{
+    width: 120px;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn-add{
+    width: 120px;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}

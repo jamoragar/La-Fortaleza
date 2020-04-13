@@ -14,12 +14,12 @@ const Store = ({ fbData, categoriasProductos, orders, openCart }) => {
         })
     }, []);
 
-    const addToOrder = (product) =>{
+    const addToOrder = (product) => {
         const newOrder = {
-            id:product.id,
-            title:product.nombre,
-            price:product.precio,
-            description:product.categoria
+            id: product.id,
+            title: product.nombre,
+            price: product.precio,
+            description: product.categoria
         }
         orders.dispatch({
             type: 'ADD_ORDER',
@@ -37,58 +37,74 @@ const Store = ({ fbData, categoriasProductos, orders, openCart }) => {
                             {Object.entries(category).map(([abreviacion, contenido], i) => {
                                 return categoriaProducto === contenido.description ? (
                                     <a key={i} href={contenido.path}>
-                                        <Image
+                                        <img
+                                            className="img-fluid"
                                             key={i}
-                                            className="img-banner"
                                             title="Modelos a Escala"
                                             src={contenido.banner}
-                                            fluid
                                         />
                                     </a>
                                 ) : null
                             })}
-                            <div className="card_container" >
+                            <div className="card-group" >
                                 <div className="row">
                                     {fbData.map((producto, j) => {
                                         return producto.categoria === categoriaProducto ? (
-                                            <div key={j} className="col-12 col-sm-12 col-md-6 col-lg-3 p-3" >
-                                                <div className="card">
-                                                    <img className="card-img" src={producto.img} alt={producto.nombre} width='300' height='350' />
-                                                    <div className="card-body">
-                                                        <h4 className="card-title">{producto.nombre}</h4>
-                                                        <h6 className="card-subtitle mb-2 text-muted">{producto.subcategoria}</h6>
-                                                        <p className="card-text">{producto.descripcion}</p>
-                                                        <div className="buy d-flex justify-content-between align-items-center">
-                                                            <div className="row">
-                                                                <div className="col-4">
-                                                                    <div className="price text-success">
-                                                                        <h5 className="mt-4">
-                                                                            {formatPrice(producto.precio)}
-                                                                        </h5>
-                                                                    </div>
+                                            <div key={j} className="col p-3" >
+                                                <div className="card" style={{ width: "285px" }}>
+                                                    <img className="card-img" src={producto.img} alt={producto.nombre} style={{ width: "283px", height: "283px" }} />
+                                                    <div className="card-header-store text-center">
+                                                        <h5 className="card-title">{producto.nombre}</h5>
+                                                    </div>
+                                                    <div className="card-body mt-2">
+                                                        <p className="card-text" >{producto.descripcion}</p>
+                                                    </div>
+                                                    <ul className="list-group list-group-flush">
+                                                        <li className="list-group-item">
+                                                            <h5>
+                                                                {producto.categoria}
+                                                            </h5>
+                                                        </li>
+                                                        <li className="list-group-item">
+                                                            <h6 className="card-subtitle mb-2 text-muted">{producto.subcategoria}</h6>
+                                                        </li>
+                                                        <li className="list-group-item">
+                                                            <div className="row mt-1">
+                                                                <div className="col-6 text-center">
+                                                                    <h5 className="text-success">
+                                                                        {formatPrice(producto.precio)}
+                                                                    </h5>
                                                                 </div>
-                                                                <div className="col-3">
+                                                                <div className="col-6 text-center">
+                                                                    <h5>
+                                                                        Stock: {producto.stock}
+                                                                    </h5>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li className="list-group-item">
+                                                            <div className="row mt-1">
+                                                                <div className="col-6">
+                                                                    <button
+                                                                        className='btn-add btn-danger'
+                                                                        onClick={() => { addToOrder(producto) }}>
+                                                                        <i className="fas fa-shopping-cart" />
+                                                                        Comprar
+                                                                    </button>
+                                                                </div>
+                                                                <div className="col-6 pl-1">
                                                                     <a href={`/Articulo/${producto.id}`}>
                                                                         <button
-                                                                            className="btn btn-success mt-3 "
+                                                                            className="btn-ver btn-success"
                                                                         >
                                                                             <i className="fas fa-eye" />
                                                                             Ver
                                                                         </button>
                                                                     </a>
                                                                 </div>
-                                                                <div className="col-5">
-                                                                    <Button
-                                                                        className='mt-3'
-                                                                        variant='danger'
-                                                                        onClick={() => {addToOrder(producto)}}>
-                                                                        <i className="fas fa-shopping-cart" />
-                                                                        Comprar
-                                                                    </Button>
-                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         )
