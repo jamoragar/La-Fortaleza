@@ -29,7 +29,7 @@
     "react-data-table-component": "^6.3.1",
     "react-dom": "^16.13.0",
     "react-image-gallery": "^1.0.7",
-    "react-multi-carousel": "^2.5.3",
+    "react-multi-carousel": "^2.5.5",
     "react-scripts": "^3.4.0",
     "react-slick": "^0.25.2",
     "react-swipeable-views": "^0.13.9",
@@ -62,7 +62,7 @@
     ]
   },
   "devDependencies": {
-    "firebase": "^7.13.1",
+    "firebase": "^7.14.0",
     "history": "^4.10.1",
     "react-router-dom": "^5.1.2"
   }

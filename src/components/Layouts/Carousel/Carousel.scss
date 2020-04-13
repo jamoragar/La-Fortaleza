@@ -7,19 +7,11 @@
     padding-bottom: 1rem;
     }
 
-.img-fluid {
-    border-radius: 10px;
-}
-
-.img-fluid:hover {
-    filter: blur(2px);
-}
-
 .carousel-control-next-der, .carousel-control-prev-izq {
     position: absolute;
     top: 0;
     bottom: 0;
-    z-index: 1;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,6 +61,7 @@ ol.carousel-indicators {
     left: 0;
     right: 0;
     width: auto;
+    z-index: 1;
  }
  
  ol.carousel-indicators li,

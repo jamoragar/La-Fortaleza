@@ -2,6 +2,7 @@
     border: 0;
 	border-radius: 0;
     background: linear-gradient(to right, #171717, #535353);
+    z-index: 2;
     
     .nav li > a, .navbar-brand {
 		max-height: 50px;

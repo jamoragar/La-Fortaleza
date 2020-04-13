@@ -11,7 +11,6 @@ import Footer from "./components/Layouts/Footer/Footer";
 import firebase from './config/firebase';
 import { useLocalState } from './components/Hooks/useLocalStorage';
 
-
 function App(props) {
   const [fbData, setFbData] = useState(null)
   const [articulo, setArticulo] = useLocalState('');

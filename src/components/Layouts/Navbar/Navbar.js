@@ -50,7 +50,10 @@ const NavBar = (props) => {
             </div>
           </li>
         </ul>
-        <span style={{ fontSize: "2rem", color: "#606060" }}><i className="fas fa-shopping-cart"></i></span>
+        <div className="shoppingcart">
+          <div className="btn"><span style={{ fontSize: "2rem", color: "#606060" }}><i className="fas fa-shopping-cart"></i></span></div>
+          <span className="shoppingcart-quantity"></span>
+        </div>
         {props.authenticated ?
           <nav className="basic-navbar-nav" >
             <div className="mr-auto" />

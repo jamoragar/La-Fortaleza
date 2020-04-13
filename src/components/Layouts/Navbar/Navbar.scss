@@ -1,4 +1,5 @@
 .navbar {
+	z-index: 100;
 	border: 0;
 	border-radius: 0;
 	background: linear-gradient(to right, #f7971e, #ffd200);
@@ -19,7 +20,7 @@
 			}
 		}
 	}
-	
+
 	.link {
 		width: 0;
 		font-family: 'Roboto', sans-serif;
@@ -158,3 +159,18 @@
 		background: transparent;
 
 }
+
+//carro de compras
+
+/*.shoppingcart-quantity{
+		display: inline-block;
+		width: 18px;
+		height: 18px;
+		font-weight: bold;
+		font-size: 0.7em;
+		text-align: center;
+		line-height: 18px;
+		border-radius: 50%;
+		background-color: #28a745;
+		position: inherit;
+}*/
