@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { formatPrice } from "../Data/DataProductos";
-import { Spinner, Image, Button } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import firebase from '../../config/firebase';
 import './Store.scss';
 
@@ -40,6 +40,7 @@ const Store = ({ fbData, categoriasProductos }) => {
                                 return categoriaProducto === contenido.description ? (
                                     <a key={i} href={contenido.path}>
                                         <img
+                                            alt="Banner"
                                             className="img-fluid"
                                             key={i}
                                             title="Modelos a Escala"
@@ -89,7 +90,7 @@ const Store = ({ fbData, categoriasProductos }) => {
                                                                 <div className="col-6">
                                                                     <button
                                                                         className='btn-add btn-danger'
-                                                                        onClick={() => { addToOrder(producto) }}>
+                                                                        onClick={() => addNewProduct(producto)}>
                                                                         <i className="fas fa-shopping-cart" />
                                                                         Comprar
                                                                     </button>
@@ -103,15 +104,6 @@ const Store = ({ fbData, categoriasProductos }) => {
                                                                             Ver
                                                                         </button>
                                                                     </a>
-                                                                </div>
-                                                                <div className="col-5">
-                                                                    <Button
-                                                                        className='mt-3'
-                                                                        variant='danger'
-                                                                        onClick={() => addNewProduct(producto)}>
-                                                                        <i className="fas fa-shopping-cart" />
-                                                                        Comprar
-                                                                    </Button>
                                                                 </div>
                                                             </div>
                                                         </li>

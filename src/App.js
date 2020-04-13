@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Routes from "./components/Routes/Routes";
 //Estilos
 import "./App.css";
@@ -14,10 +14,10 @@ function App(props) {
   if (props) {
     return (
       <div className="App">
-        <Header/>
+        <Header />
         <NavBar authenticated={props.authenticated} user={props.user} name={props.name} uid={props.uid} />
-        <Routes/>
-        <Footer/>
+        <Routes />
+        <Footer />
       </div>
     );
   } else {
