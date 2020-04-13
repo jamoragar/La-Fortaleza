@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { formatPrice } from "../Data/DataProductos";
-import { Spinner, Image } from "react-bootstrap";
+import { Spinner, Image, Button } from "react-bootstrap";
 import firebase from '../../config/firebase';
 import './Store.scss';
 
-const Store = ({ fbData, categoriasProductos, setArticulo, setAddCart }) => {
+const Store = ({ fbData, categoriasProductos, orders, openCart }) => {
+    console.log(orders.state)
     const [category, setCategory] = useState(null);
     // LLamado a firebase para obtener todo el nodo Category y poder trabajarlo
     useEffect(() => {
@@ -12,6 +13,19 @@ const Store = ({ fbData, categoriasProductos, setArticulo, setAddCart }) => {
             setCategory(snapshot.val());
         })
     }, []);
+
+    const addToOrder = (product) =>{
+        const newOrder = {
+            id:product.id,
+            title:product.nombre,
+            price:product.precio,
+            description:product.categoria
+        }
+        orders.dispatch({
+            type: 'ADD_ORDER',
+            payload: newOrder
+        });
+    }
 
     if (fbData && category) {
         return (
@@ -54,26 +68,23 @@ const Store = ({ fbData, categoriasProductos, setArticulo, setAddCart }) => {
                                                                     </div>
                                                                 </div>
                                                                 <div className="col-3">
-                                                                    <a
-                                                                        href="/Articulo"
-                                                                        className="btn btn-success mt-3 "
-                                                                        onClick={() => {
-                                                                            setArticulo(producto.nombre)
-                                                                        }}
-                                                                    >
-                                                                        <i className="fas fa-eye" />
-                                                                    Ver
-                                                                </a>
+                                                                    <a href={`/Articulo/${producto.id}`}>
+                                                                        <button
+                                                                            className="btn btn-success mt-3 "
+                                                                        >
+                                                                            <i className="fas fa-eye" />
+                                                                            Ver
+                                                                        </button>
+                                                                    </a>
                                                                 </div>
                                                                 <div className="col-5">
-                                                                    <div
-                                                                        className="btn btn-danger mt-3 "
-                                                                        onClick={() => {
-                                                                            setAddCart(producto.nombre)
-                                                                        }}>
+                                                                    <Button
+                                                                        className='mt-3'
+                                                                        variant='danger'
+                                                                        onClick={() => {addToOrder(producto)}}>
                                                                         <i className="fas fa-shopping-cart" />
                                                                         Comprar
-                                                                    </div>
+                                                                    </Button>
                                                                 </div>
                                                             </div>
                                                         </div>

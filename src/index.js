@@ -9,7 +9,6 @@ import firebase from './config/firebase';
 const root = document.getElementById('root');
 
 export const renderApp = (hasAuthenticated, user, name, uid) => {
-
     ReactDOM.render(
         (<div className="App">
             <App authenticated={hasAuthenticated} user={user} name={name} uid={uid} />
