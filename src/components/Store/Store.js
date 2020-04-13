@@ -140,4 +140,3 @@ const Store = ({ fbData, categoriasProductos }) => {
 }
 
 export default Store;
-

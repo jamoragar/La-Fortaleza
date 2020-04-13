@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ArtciculosDialogs({ articulo }) {
+export default function ArtciculosDialogs() {
 
     return (
         <div className="container p-3">
