@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import SideNav from './SideNav/SideNav';
 import Main from './Main/Main';
 import Agenda from './Components/Agenda/Agenda';
@@ -25,16 +25,16 @@ const Dashboard = () => {
                                 <Switch>
                                     <Route exact path='/Dashboard/' component={Main} />
                                     <Route exact path='/Dashboard/Agenda' component={Agenda} />
-                                    <Route exact path='/Dashboard/Slider' component={Slider} />    
-                                    <Route exact path='/Dashboard/Blog' component={Blog} />    
+                                    <Route exact path='/Dashboard/Slider' component={Slider} />
+                                    <Route exact path='/Dashboard/Blog' component={Blog} />
                                     <Route exact path='/Dashboard/Productos' component={Productos} />
                                     <Route exact path='/Dashboard/Categorias' component={Categorias} />
-                                    <Route exact path='/Dashboard/Ordenes' component={Ordenes} /> 
+                                    <Route exact path='/Dashboard/Ordenes' component={Ordenes} />
                                     <Route exact path="/Dashboard/Producto/:id" component={VerProducto} />
                                 </Switch>
                             </div>
                         </div>
-                     </div>
+                    </div>
                 </div>
             </div>
         </div>

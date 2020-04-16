@@ -1,4 +1,5 @@
 import React from 'react';
+import './ArticulosDialogs.css';
 
 export default function ArtciculosDialogs() {
 
@@ -50,70 +51,139 @@ export default function ArtciculosDialogs() {
                 </div>
             </div>
             <div className="row pt-5">
-                <nav>
-                    <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a className="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="/nav-home" role="tab" aria-controls="Ficha Técnica" aria-selected="true">Ficha Técnica</a>
-                        <a className="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="/nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">How To Play</a>
-                        <a className="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="/nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Todas Las Opiniones</a>
+                <div className="col-12">
+                    <ul className="nav nav-tabs" id="myTab" role="tablist">
+                        <li className="nav-item">
+                            <a className="nav-link active" id="Descripcion-tab" data-toggle="tab" href="#Descripcion" role="tab" aria-controls="home" aria-selected="true">Descripción</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" id="HowToPlay-tab" data-toggle="tab" href="#HowToPlay" role="tab" aria-controls="HowToPlay" aria-selected="false">How To Play</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div className="col-12 tabBoddy">
+                    <div className="tab-content" id="myTabContent">
+                        <div className="tab-pane fade show pt-5 active" id="Descripcion" role="tabpanel" aria-labelledby="Descripcion-tab">
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">Detalle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">Editorial</th>
+                                        <td>Matagot</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Jugadores</th>
+                                        <td>2 - 4</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Edad Mínima Sugerida</th>
+                                        <td>8 +</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Dependencia Del Idioma</th>
+                                        <td>Nula</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Idioma</th>
+                                        <td>Español</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Autor/Autores</th>
+                                        <td>Antoine Bauza</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Componentes</th>
+                                        <td>28 Losetas de parcela; 90 Secciones de bambú (verde, amarillo, rosado); 20 Fichas de canales de riego; 9 Fichas de mejoras; 46 Cartas objetivo; 4 Tableros; 8 Fichas de acción; 1 Dado de clima; 1 Panda; 1 Jardinero; Instrucciones.</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Duración En Minutos</th>
+                                        <td>45 min</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Dimensiones</th>
+                                        <td>23 x 8 x 33 cm</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Peso</th>
+                                        <td>1.2 kg</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div className="tab-pane fade pt-5" id="HowToPlay" role="tabpanel" aria-labelledby="HowToPlay-tab">
+                            <div className="container">
+                                <div className="row">
+                                    <div className="embed-responsive embed-responsive-16by9">
+                                        <iframe title="Takenoko" width="560" height="315" src="https://www.youtube.com/embed/P8O72qTsH3E" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
                     </div>
-                </nav>
-                <div className="tab-content" id="nav-tabContent">
-                    <div className="tab-pane fade show active p-3" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">Detalle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Editorial</th>
-                                    <td>Matagot</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Jugadores</th>
-                                    <td>2 - 4</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Edad Mínima Sugerida</th>
-                                    <td>8 +</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Dependencia Del Idioma</th>
-                                    <td>Nula</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Idioma</th>
-                                    <td>Español</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Autor/Autores</th>
-                                    <td>Antoine Bauza</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Componentes</th>
-                                    <td>28 Losetas de parcela; 90 Secciones de bambú (verde, amarillo, rosado); 20 Fichas de canales de riego; 9 Fichas de mejoras; 46 Cartas objetivo; 4 Tableros; 8 Fichas de acción; 1 Dado de clima; 1 Panda; 1 Jardinero; Instrucciones.</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Duración En Minutos</th>
-                                    <td>45 min</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Dimensiones</th>
-                                    <td>23 x 8 x 33 cm</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Peso</th>
-                                    <td>1.2 kg</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="tab-pane fade p-3" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
-                    <div className="tab-pane fade p-3" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
                 </div>
             </div>
         </div >
     )
 }
+
+/*
+<table className="table">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Detalle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">Editorial</th>
+            <td>Matagot</td>
+        </tr>
+        <tr>
+            <th scope="row">Jugadores</th>
+            <td>2 - 4</td>
+        </tr>
+        <tr>
+            <th scope="row">Edad Mínima Sugerida</th>
+            <td>8 +</td>
+        </tr>
+        <tr>
+            <th scope="row">Dependencia Del Idioma</th>
+            <td>Nula</td>
+        </tr>
+        <tr>
+            <th scope="row">Idioma</th>
+            <td>Español</td>
+        </tr>
+        <tr>
+            <th scope="row">Autor/Autores</th>
+            <td>Antoine Bauza</td>
+        </tr>
+        <tr>
+            <th scope="row">Componentes</th>
+            <td>28 Losetas de parcela; 90 Secciones de bambú (verde, amarillo, rosado); 20 Fichas de canales de riego; 9 Fichas de mejoras; 46 Cartas objetivo; 4 Tableros; 8 Fichas de acción; 1 Dado de clima; 1 Panda; 1 Jardinero; Instrucciones.</td>
+        </tr>
+        <tr>
+            <th scope="row">Duración En Minutos</th>
+            <td>45 min</td>
+        </tr>
+        <tr>
+            <th scope="row">Dimensiones</th>
+            <td>23 x 8 x 33 cm</td>
+        </tr>
+        <tr>
+            <th scope="row">Peso</th>
+            <td>1.2 kg</td>
+        </tr>
+    </tbody>
+</table>
+*/
