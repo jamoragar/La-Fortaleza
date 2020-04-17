@@ -1,5 +1,5 @@
 import React from 'react';
-import './ArticulosDialogs.css';
+import './ArticulosDialogs.scss';
 
 export default function ArtciculosDialogs() {
 
@@ -57,10 +57,10 @@ export default function ArtciculosDialogs() {
                             <a className="nav-link active" id="Descripcion-tab" data-toggle="tab" href="#Descripcion" role="tab" aria-controls="home" aria-selected="true">Descripción</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" id="HowToPlay-tab" data-toggle="tab" href="#HowToPlay" role="tab" aria-controls="HowToPlay" aria-selected="false">How To Play</a>
+                            <a className="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                            <a className="nav-link" id="HowToPlay-tab" data-toggle="tab" href="#HowToPlay" role="tab" aria-controls="HowToPlay" aria-selected="false">How To Play</a>
                         </li>
                     </ul>
                 </div>
