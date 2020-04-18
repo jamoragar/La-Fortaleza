@@ -4,11 +4,10 @@ import { Spinner } from "react-bootstrap";
 import firebase from '../../config/firebase';
 import './Store.scss';
 
-import { useOrders } from '../Hooks/useOrders';
 
-const Store = ({ fbData, categoriasProductos }) => {
+const Store = ({ fbData, categoriasProductos, orders, cart }) => {
     const [category, setCategory] = useState(null);
-    const orders = useOrders();
+    const order = orders;
     // LLamado a firebase para obtener todo el nodo Category y poder trabajarlo
     useEffect(() => {
         firebase.database().ref('/Category').on('value', snapshot => {
@@ -23,7 +22,7 @@ const Store = ({ fbData, categoriasProductos }) => {
             description: product.categoria,
             price: product.precio
         }
-        orders.dispatch({
+        order.dispatch({
             type: 'ADD_ORDER',
             payload: newOrder
         })
