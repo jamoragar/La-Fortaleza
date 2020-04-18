@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { formatPrice } from '../Data/DataProductos';
 import firebase from '../../config/firebase';
+import { useOrders } from '../Hooks/useOrders';
+import { Spinner } from 'react-bootstrap';
 import './ArticulosDialogs.scss';
 
 export default function ArtciculosDialogs(producto) {
     const [productView, setProductView] = useState();
+    const orders = useOrders();
     let productViewToArray = [];
     let selectToArray = [];
 
@@ -17,6 +20,19 @@ export default function ArtciculosDialogs(producto) {
     Object.keys(producto).forEach((key, i) => {
         selectToArray[i] = producto[key]
     });
+
+    const addNewProduct = (product) => {
+        console.log(product)
+        const newOrder = {
+            title: product.nombre,
+            description: product.categoria,
+            price: product.precio
+        }
+        orders.dispatch({
+            type: 'ADD_ORDER',
+            payload: newOrder
+        })
+    }
 
     const selectId = selectToArray[2].params.id;
 
@@ -35,15 +51,16 @@ export default function ArtciculosDialogs(producto) {
         return (
             <div>
                 {Object.entries(productosView).map(([abreviacion, contenido], i) => {
+                    console.log(contenido.video)
                     return selectId === contenido.id ? (
-                        <div key={i} className="container p-3 mt-5 mb-5"
-                            style={{
-                                borderColor: "#818182",
-                                boxShadow: "0 15px 25px 5px #818182",
-                                minWidth: "285px",
-                                color: "#606060"
-                            }}>
-                            <div className="row">
+                        <div key={i} className="container p-3 mt-5 mb-5">
+                            <div className="row"
+                                style={{
+                                    borderColor: "#818182",
+                                    boxShadow: "0 15px 25px 5px #818182",
+                                    minWidth: "285px",
+                                    color: "#606060",
+                                }}>
                                 <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 inline-block p-3 " >
                                     <img className="card-img px-1 py-3" alt="ProdcutoImg" src={contenido.img}></img></div>
                                 <div className="col ">
@@ -57,30 +74,40 @@ export default function ArtciculosDialogs(producto) {
                                     <div className="row">
                                         <div className="col ">
                                             <div className="col pt-3">
-                                                <h5>Categoria: </h5>{contenido.categoria}
-                                                <h5>Subcategoria: </h5>{contenido.subcategoria}
+                                                <h3>Categoria: </h3><h5>{contenido.categoria}</h5>
+                                                <h3>Subcategoria: </h3><h5>{contenido.subcategoria}</h5>
                                             </div>
                                         </div>
-                                        <div className="col p-0">
+                                        <div className="col pt-1">
                                             <ul className="list-group list-group-flush">
                                                 <li className="list-group-item ">
                                                     <h3>Precio:</h3>
                                                 </li>
                                                 <li className="list-group-item ">
-                                                    <h6 className="text-muted">
+                                                    <h5 className="text-muted">
                                                         Antes <s>{formatPrice(contenido.precio)}</s>
-                                                    </h6>
+                                                    </h5>
                                                 </li>
                                                 <li className="list-group-item ">
-                                                    <h6 className="text-success">
+                                                    <h5 className="text-success">
                                                         Ahora {formatPrice(contenido.precio - (contenido.precio * discountPrice))}
-                                                    </h6>
+                                                    </h5>
                                                 </li>
                                                 <li className="list-group-item ">
                                                     <div className="card-body">
                                                         <h5>Stock: </h5>
                                                         <h4>{contenido.stock}</h4>
                                                     </div>
+                                                </li>
+                                                <li className="list-group-item">
+                                                    <button
+                                                        style={{ outline: "none" }}
+                                                        className='btn-add btn-danger'
+                                                        onClick={() => addNewProduct(contenido)}
+                                                    >
+                                                        <i className="fas fa-shopping-cart" />
+                                                        Comprar
+                                                    </button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -167,7 +194,7 @@ export default function ArtciculosDialogs(producto) {
                                             <div className="container">
                                                 <div className="row">
                                                     <div className="embed-responsive embed-responsive-16by9">
-                                                        <iframe title="Takenoko" width="560" height="315" src="https://www.youtube.com/embed/P8O72qTsH3E" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                                                        <iframe title="Takenoko" width="560" height="315" src={contenido.video} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
                                                     </div>
                                                 </div>
                                             </div>
@@ -180,12 +207,19 @@ export default function ArtciculosDialogs(producto) {
                     ) : null
                 })
                 }
-            </div>
+            </div >
         )
     } else {
         return (
             <div>
-                Cargando...
+                <Spinner animation="grow" variant="primary" />
+                <Spinner animation="grow" variant="secondary" />
+                <Spinner animation="grow" variant="success" />
+                <Spinner animation="grow" variant="danger" />
+                <Spinner animation="grow" variant="warning" />
+                <Spinner animation="grow" variant="info" />
+                <Spinner animation="grow" variant="light" />
+                <Spinner animation="grow" variant="dark" />
             </div>
         )
     }

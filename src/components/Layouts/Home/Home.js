@@ -11,6 +11,8 @@ const Home = (props) => {
   let productosToArray = [];
   let categoriaProductos = [];
 
+  console.log(fbData);
+
   useEffect(() => {
     firebase.database().ref('/Productos').on('value', snapshot => {
       setFbData(snapshot.val());

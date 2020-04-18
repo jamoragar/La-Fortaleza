@@ -65,7 +65,7 @@ const AgregarProducto = (props) => {
         //Se previene que la página refresque.
         e.preventDefault();
         const promises = [];
-        const { nombre, descripcion, categoria, subcategoria, precio, stock } = e.target.elements;
+        const { nombre, descripcion, categoria, subcategoria, precio, stock, video } = e.target.elements;
         const FbDownloadURL = []
 
         if (files.length > 0 && categoria.value !== '0') {
@@ -96,6 +96,7 @@ const AgregarProducto = (props) => {
                                 subcategoria: subcategoria.value,
                                 precio: precio.value,
                                 stock: stock.value,
+                                video: video.value,
                                 img: FbDownloadURL.map((img) => {
                                     return img
                                 }),
@@ -174,6 +175,20 @@ const AgregarProducto = (props) => {
                                     <Form.Group controlId="formStockProducts">
                                         <Form.Label>Stock Web:</Form.Label>
                                         <Form.Control name='stock' type="number" placeholder='Stock online del producto.' required />
+                                    </Form.Group>
+                                </Col>
+                                <Col>
+                                    <Form.Group controlId="formVideoProducts">
+                                        <Form.Label>Video:</Form.Label>
+                                        <Form.Control name='video' type="string" placeholder='How To Play del producto.' required />
+                                    </Form.Group>
+                                </Col>
+                            </Form.Row>
+                            <Form.Row>
+                                <Col>
+                                    <Form.Group controlId="formVideoProducts">
+                                        <Form.Label>Video:</Form.Label>
+                                        <Form.Control name='video' type="string" placeholder='How To Play del producto.' required />
                                     </Form.Group>
                                 </Col>
                             </Form.Row>

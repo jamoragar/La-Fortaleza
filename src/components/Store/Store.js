@@ -93,6 +93,7 @@ const Store = ({ fbData, categoriasProductos }) => {
                                                             <div className="row mt-1">
                                                                 <div className="col-6">
                                                                     <button
+                                                                        style={{ outline: "none" }}
                                                                         className='btn-add btn-danger'
                                                                         onClick={() => addNewProduct(producto)}>
                                                                         <i className="fas fa-shopping-cart" />
@@ -102,6 +103,7 @@ const Store = ({ fbData, categoriasProductos }) => {
                                                                 <div className="col-6 pl-1">
                                                                     <a href={`/Articulo/${producto.id}`}>
                                                                         <button
+                                                                            style={{ outline: "none" }}
                                                                             className="btn-ver btn-success"
                                                                         >
                                                                             <i className="fas fa-eye" />

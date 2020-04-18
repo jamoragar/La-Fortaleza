@@ -46,7 +46,6 @@ const Footer = (props) => {
             <div className="container">
                 <ul className="foote_bottom_ul_amrc">
                     <li><a href="/">Inicio</a></li>
-                    <li><a href="/Informacion">Información</a></li>
                     <li><a href="/Servicios">Servicios</a></li>
                     <li><a href="/Blog">Blog</a></li>
                     <li><a href="/Contacto">Contacto</a></li>

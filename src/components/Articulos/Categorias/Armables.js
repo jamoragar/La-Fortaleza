@@ -1,18 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { Image, Spinner } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
 import firebase from "../../../config/firebase";
 import { formatPrice } from '../../Data/DataProductos';
 
+import { useOrders } from '../../Hooks/useOrders';
 
-const Armables = (props) => {
+const Accesorios = (props) => {
   const [category, setCategory] = useState(null);
   const { fbData, categoriasProductos } = props;
+  const orders = useOrders();
   // LLamado a firebase para obtener todo el nodo Category y poder trabajarlo
   useEffect(() => {
     firebase.database().ref('/Category').on('value', snapshot => {
       setCategory(snapshot.val());
     })
   }, []);
+
+  const addNewProduct = (product) => {
+    console.log(product)
+    const newOrder = {
+      title: product.nombre,
+      description: product.categoria,
+      price: product.precio
+    }
+    orders.dispatch({
+      type: 'ADD_ORDER',
+      payload: newOrder
+    })
+  }
+
+  const discountPrice = 0.10;
 
   if (fbData && category) {
     return (
@@ -24,12 +41,12 @@ const Armables = (props) => {
               {Object.entries(category).map(([abreviacion, contenido], i) => {
                 return categoriaProducto === contenido.description ? (
                   <a key={i} href={contenido.path}>
-                    <Image
+                    <img
+                      alt="Banner"
+                      className="img-fluid"
                       key={i}
-                      className="img-banner"
-                      title="Modelos a Escala"
+                      title="Armables"
                       src={contenido.banner}
-                      fluid
                     />
                   </a>
                 ) : null
@@ -40,19 +57,21 @@ const Armables = (props) => {
                     return producto.categoria === categoriaProducto ? (
                       <div key={j} className="col p-3" >
                         <div className="card" style={{ width: "285px" }}>
-                          <img className="card-img" src={producto.img} alt={producto.nombre} style={{ width: "283px", height: "283px" }} />
-                          <div className="card-header-store text-center">
-                            <h5 className="card-title">{producto.nombre}</h5>
+                          <div className="offer offer-success">
+                            <div className="shape">
+                              <div className="shape-text">
+                                -10%
+					                                        </div>
+                            </div>
+                            <img className="card-img" src={producto.img} alt={producto.nombre} style={{ width: "283px", height: "283px" }} />
                           </div>
-                          <div className="card-body mt-2">
+                          <div className="card-header-store text-center">
+                            <h5 className="card-title-style">{producto.nombre}</h5>
+                          </div>
+                          <div className="card-body-style">
                             <p className="card-text" >{producto.descripcion}</p>
                           </div>
                           <ul className="list-group list-group-flush">
-                            <li className="list-group-item">
-                              <h5>
-                                {producto.categoria}
-                              </h5>
-                            </li>
                             <li className="list-group-item">
                               <h6 className="card-subtitle mb-2 text-muted">{producto.subcategoria}</h6>
                             </li>
@@ -60,12 +79,12 @@ const Armables = (props) => {
                               <div className="row mt-1">
                                 <div className="col-6 text-center">
                                   <h5 className="text-success">
-                                    {formatPrice(producto.precio)}
+                                    {formatPrice(producto.precio - (producto.precio * discountPrice))}
                                   </h5>
                                 </div>
                                 <div className="col-6 text-center">
-                                  <h5>
-                                    Stock: {producto.stock}
+                                  <h5 className="text-muted">
+                                    <s>{formatPrice(producto.precio)}</s>
                                   </h5>
                                 </div>
                               </div>
@@ -73,14 +92,20 @@ const Armables = (props) => {
                             <li className="list-group-item">
                               <div className="row mt-1">
                                 <div className="col-6">
-                                  <button className='btn-add btn-danger' onClick={() => { }}>
+                                  <button
+                                    style={{ outline: "none" }}
+                                    className='btn-add btn-danger'
+                                    onClick={() => addNewProduct(producto)}>
                                     <i className="fas fa-shopping-cart" />
                                       Comprar
                                   </button>
                                 </div>
                                 <div className="col-6 pl-1">
-                                  <a href={`/Articulo/`}>
-                                    <button className="btn-ver btn-success">
+                                  <a href={`/Articulo/${producto.id}`}>
+                                    <button
+                                      style={{ outline: "none" }}
+                                      className="btn-ver btn-success"
+                                    >
                                       <i className="fas fa-eye" />
                                         Ver
                                     </button>
@@ -119,4 +144,4 @@ const Armables = (props) => {
   }
 }
 
-export default Armables;
+export default Accesorios;
