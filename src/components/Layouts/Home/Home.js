@@ -4,12 +4,19 @@ import Store from "../../Store/Store";
 import TableInfo from "../TableInfo/TableInfo";
 import firebase from '../../../config/firebase';
 import { Spinner } from 'react-bootstrap';
+import CarritoCompra from '../../CarritoCompra/CarritoCompra';
+//Hooks
+import { useOrders } from '../../Hooks/useOrders';
+import { useCart } from '../../Hooks/useCart';
 
 
 const Home = (props) => {
+  
   const [fbData, setFbData] = useState(null);
   let productosToArray = [];
   let categoriaProductos = [];
+  const orders = useOrders();
+  const cart = useCart();
 
   console.log(fbData);
 
@@ -34,9 +41,10 @@ const Home = (props) => {
     );
     return (
       <div className="container-fluid">
+        <CarritoCompra {...orders} {...cart}/>
         <CarouselContainer />
         <TableInfo />
-        <Store fbData={productosToArray} categoriasProductos={categoriaProductos} />
+        <Store fbData={productosToArray} categoriasProductos={categoriaProductos} orders={orders} cart={cart}/>
       </div>
     );
   }
