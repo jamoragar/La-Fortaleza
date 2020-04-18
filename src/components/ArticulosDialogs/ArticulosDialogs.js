@@ -57,10 +57,10 @@ export default function ArtciculosDialogs() {
                             <a className="nav-link active" id="Descripcion-tab" data-toggle="tab" href="#Descripcion" role="tab" aria-controls="home" aria-selected="true">Descripción</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                            <a className="nav-link" id="Detalles-tab" data-toggle="tab" href="#Detalles" role="tab" aria-controls="detalles" aria-selected="false">Detalles Del Producto</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" id="HowToPlay-tab" data-toggle="tab" href="#HowToPlay" role="tab" aria-controls="HowToPlay" aria-selected="false">How To Play</a>
+                            <a className="nav-link" id="HowToPlay-tab" data-toggle="tab" href="#HowToPlay" role="tab" aria-controls="howtoplay" aria-selected="false">How To Play</a>
                         </li>
                     </ul>
                 </div>
@@ -127,7 +127,7 @@ export default function ArtciculosDialogs() {
                                 </div>
                             </div>
                         </div>
-                        <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                        <div className="tab-pane fade" id="Detalles" role="tabpanel" aria-labelledby="detalles-tab">aca van los detalles</div>
                     </div>
                 </div>
             </div>
@@ -135,55 +135,3 @@ export default function ArtciculosDialogs() {
     )
 }
 
-/*
-<table className="table">
-    <thead>
-        <tr>
-            <th scope="col"></th>
-            <th scope="col">Detalle</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">Editorial</th>
-            <td>Matagot</td>
-        </tr>
-        <tr>
-            <th scope="row">Jugadores</th>
-            <td>2 - 4</td>
-        </tr>
-        <tr>
-            <th scope="row">Edad Mínima Sugerida</th>
-            <td>8 +</td>
-        </tr>
-        <tr>
-            <th scope="row">Dependencia Del Idioma</th>
-            <td>Nula</td>
-        </tr>
-        <tr>
-            <th scope="row">Idioma</th>
-            <td>Español</td>
-        </tr>
-        <tr>
-            <th scope="row">Autor/Autores</th>
-            <td>Antoine Bauza</td>
-        </tr>
-        <tr>
-            <th scope="row">Componentes</th>
-            <td>28 Losetas de parcela; 90 Secciones de bambú (verde, amarillo, rosado); 20 Fichas de canales de riego; 9 Fichas de mejoras; 46 Cartas objetivo; 4 Tableros; 8 Fichas de acción; 1 Dado de clima; 1 Panda; 1 Jardinero; Instrucciones.</td>
-        </tr>
-        <tr>
-            <th scope="row">Duración En Minutos</th>
-            <td>45 min</td>
-        </tr>
-        <tr>
-            <th scope="row">Dimensiones</th>
-            <td>23 x 8 x 33 cm</td>
-        </tr>
-        <tr>
-            <th scope="row">Peso</th>
-            <td>1.2 kg</td>
-        </tr>
-    </tbody>
-</table>
-*/
