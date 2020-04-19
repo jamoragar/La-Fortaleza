@@ -26,7 +26,7 @@ const CarritoCompra = (props) => {
             )
             :
             (
-                <div>
+                <div style={{overflowY:'scroll'}}>
                     <div className='title'>Su pedido: </div>
                     {
                         state.order.map((order, index) => (

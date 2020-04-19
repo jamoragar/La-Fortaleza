@@ -39,89 +39,97 @@ const Accesorios = (props) => {
             <div key={i}>
               {/*Transformamos el nodo Category a array, y diferenciamos entre su valor (description) y el subnodo que contiene mas contenido, valga la redundancia...*/}
               {Object.entries(category).map(([abreviacion, contenido], i) => {
-                return categoriaProducto === contenido.description ? (
-                  <a key={i} href={contenido.path}>
-                    <img
-                      alt="Banner"
-                      className="img-fluid mt-5"
-                      key={i}
-                      title="Juegos De Mesa"
-                      src={contenido.banner}
-                    />
-                  </a>
-                ) : null
-              })}
-              <div className="card-group" >
-                <div className="row">
-                  {fbData.map((producto, j) => {
-                    return producto.categoria === categoriaProducto ? (
-                      <div key={j} className="col p-3" >
-                        <div className="card" style={{ width: "285px" }}>
-                          <div className="offer offer-success">
-                            <div className="shape">
-                              <div className="shape-text">
-                                -10%
-					                                        </div>
+                if(categoriaProducto === contenido.description){
+                  return(
+                    Object.entries(contenido.subCat).map(([subcatAbreviacion, subcatContenido]) => {
+                      return(
+                        <div key={i+subcatContenido.path}>
+                          <img
+                            alt="Banner"
+                            className="img-fluid"
+                            key={i}
+                            title="Juegos De Cartas"
+                            src={subcatContenido.img}
+                          />
+                          <div className="card-group" >
+                            <div className="row">
+                              {fbData.map((producto, j) => {
+                                console.log(producto)
+                                return producto.categoria === categoriaProducto && producto.subcategoria === subcatContenido.description ? (
+                                  <div key={j} className="col p-3" >
+                                    <div className="card" style={{ width: "285px" }}>
+                                      <div className="offer offer-success">
+                                        <div className="shape">
+                                          <div className="shape-text">
+                                            -10%
+                                          </div>
+                                        </div>
+                                        <img className="card-img" src={producto.img} alt={producto.nombre} style={{ width: "283px", height: "283px" }} />
+                                      </div>
+                                      <div className="card-header-store text-center">
+                                        <h5 className="card-title-style">{producto.nombre}</h5>
+                                      </div>
+                                      <div className="card-body-style">
+                                        <p className="card-text" >{producto.descripcion}</p>
+                                      </div>
+                                      <ul className="list-group list-group-flush">
+                                        <li className="list-group-item">
+                                          <h6 className="card-subtitle mb-2 text-muted">{producto.subcategoria}</h6>
+                                        </li>
+                                        <li className="list-group-item">
+                                          <div className="row mt-1">
+                                            <div className="col-6 text-center">
+                                              <h5 className="text-success">
+                                                {formatPrice(producto.precio - (producto.precio * discountPrice))}
+                                              </h5>
+                                            </div>
+                                            <div className="col-6 text-center">
+                                              <h5 className="text-muted">
+                                                <s>{formatPrice(producto.precio)}</s>
+                                              </h5>
+                                            </div>
+                                          </div>
+                                        </li>
+                                        <li className="list-group-item">
+                                          <div className="row mt-1">
+                                            <div className="col-6">
+                                              <button
+                                                style={{ outline: "none" }}
+                                                className='btn-add btn-danger'
+                                                onClick={() => addNewProduct(producto)}>
+                                                <i className="fas fa-shopping-cart" />
+                                                  Comprar
+                                              </button>
+                                            </div>
+                                            <div className="col-6 pl-1">
+                                              <a href={`/Articulo/${producto.id}`}>
+                                                <button
+                                                  style={{ outline: "none" }}
+                                                  className="btn-ver btn-success"
+                                                >
+                                                  <i className="fas fa-eye" />
+                                                    Ver
+                                                </button>
+                                              </a>
+                                            </div>
+                                          </div>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                )
+                                  :
+                                  null
+                              })}
                             </div>
-                            <img className="card-img" src={producto.img} alt={producto.nombre} style={{ width: "283px", height: "283px" }} />
                           </div>
-                          <div className="card-header-store text-center">
-                            <h5 className="card-title-style">{producto.nombre}</h5>
-                          </div>
-                          <div className="card-body-style">
-                            <p className="card-text" >{producto.descripcion}</p>
-                          </div>
-                          <ul className="list-group list-group-flush">
-                            <li className="list-group-item">
-                              <h6 className="card-subtitle mb-2 text-muted">{producto.subcategoria}</h6>
-                            </li>
-                            <li className="list-group-item">
-                              <div className="row mt-1">
-                                <div className="col-6 text-center">
-                                  <h5 className="text-success">
-                                    {formatPrice(producto.precio - (producto.precio * discountPrice))}
-                                  </h5>
-                                </div>
-                                <div className="col-6 text-center">
-                                  <h5 className="text-muted">
-                                    <s>{formatPrice(producto.precio)}</s>
-                                  </h5>
-                                </div>
-                              </div>
-                            </li>
-                            <li className="list-group-item">
-                              <div className="row mt-1">
-                                <div className="col-6">
-                                  <button
-                                    style={{ outline: "none" }}
-                                    className='btn-add btn-danger'
-                                    onClick={() => addNewProduct(producto)}>
-                                    <i className="fas fa-shopping-cart" />
-                                      Comprar
-                                  </button>
-                                </div>
-                                <div className="col-6 pl-1">
-                                  <a href={`/Articulo/${producto.id}`}>
-                                    <button
-                                      style={{ outline: "none" }}
-                                      className="btn-ver btn-success"
-                                    >
-                                      <i className="fas fa-eye" />
-                                        Ver
-                                    </button>
-                                  </a>
-                                </div>
-                              </div>
-                            </li>
-                          </ul>
                         </div>
-                      </div>
-                    )
-                      :
-                      null
-                  })}
-                </div>
-              </div>
+                      )
+                    })
+
+                  )
+                }
+              })}
             </div>
           ) : null
         })
