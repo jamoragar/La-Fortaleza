@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { formatPrice } from '../Data/DataProductos';
 import firebase from '../../config/firebase';
 import { useOrders } from '../Hooks/useOrders';
+import { useCart } from '../Hooks/useCart';
 import { Spinner } from 'react-bootstrap';
+import CarritoCompra from '../CarritoCompra/CarritoCompra';
 import './ArticulosDialogs.scss';
 
 export default function ArtciculosDialogs(producto) {
     const [productView, setProductView] = useState();
     const orders = useOrders();
+    const cart = useCart();
     let productViewToArray = [];
     let selectToArray = [];
 
@@ -22,7 +25,6 @@ export default function ArtciculosDialogs(producto) {
     });
 
     const addNewProduct = (product) => {
-        console.log(product)
         const newOrder = {
             title: product.nombre,
             description: product.categoria,
@@ -50,6 +52,7 @@ export default function ArtciculosDialogs(producto) {
 
         return (
             <div>
+                <CarritoCompra {...cart} {...orders}/>
                 {Object.entries(productosView).map(([abreviacion, contenido], i) => {
                     console.log(contenido.video)
                     return selectId === contenido.id ? (
