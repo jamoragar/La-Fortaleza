@@ -29,7 +29,6 @@ export const history = createBrowserHistory();
 const NotFoundRedirect = () => <Redirect to='/not-found' />
 
 export default function Routes(props) {
-  console.log('router rendering...')
   const [fbData, setFbData] = useState(null);
   let productosToArray = [];
   let categoriaProductos = [];
