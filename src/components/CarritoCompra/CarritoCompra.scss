@@ -1,25 +1,76 @@
-.container_cart{
+.container_cart{    
     position: fixed;
     right: 0px;
     width: 340px;
     background-color: white;
     height:calc(100% - 48px);
-    z-index: 10;
+    z-index: 100;
     box-shadow: 4px 0px 5px 4px grey;
     display: flex;
     flex-direction: column;
     transition: 0.4s;
 }
+
 .container_opened{
     transform: translateX(100%);
 }
 .container_closed{
     transform: translateX(0);
 }
-.title{
+
+.order_content{
     padding: 20px;
-    height: auto;
+    height: 68%;
+    @media (max-width:480px){
+        padding: 45px;
+    }
 }
+
+.order_container{
+    padding: 10px 0px;
+    border-bottom: 1px solid grey;
+    &:hover {
+        cursor: pointer;
+        background-color: #e7e7e7;
+      }
+      @media (max-width:480px){
+        padding: 25px;
+    }
+
+}
+
+.order_item{
+    padding: 10px 0px;
+    display: grid;
+    grid-template-columns: 20px 150px 20px 60px;
+    justify-content: space-between;
+}
+
+.detail_item{
+    color: grey;
+    font-size: 10px;
+}
+
+.order_footer{
+    box-shadow: 0px -2px 20px 0px grey;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.btn_pago{
+    margin: 10px;
+    color: white;
+    height: 40px;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    width: 250px;
+    cursor: pointer;
+    background-color: #28a745;    
+}
+
 .checklist{
     background-color: #fbb614;
     width: 50px;
