@@ -39,16 +39,16 @@ const Accesorios = (props) => {
             <div key={i}>
               {/*Transformamos el nodo Category a array, y diferenciamos entre su valor (description) y el subnodo que contiene mas contenido, valga la redundancia...*/}
               {Object.entries(category).map(([abreviacion, contenido], i) => {
-                if(categoriaProducto === contenido.description){
-                  return(
+                if (categoriaProducto === contenido.description) {
+                  return (
                     Object.entries(contenido.subCat).map(([subcatAbreviacion, subcatContenido]) => {
-                      return(
-                        <div key={i+subcatContenido.path}>
+                      return (
+                        <div key={i + subcatContenido.path}>
                           <img
                             alt="Banner"
-                            className="img-fluid"
+                            className="img-fluid mt-3"
                             key={i}
-                            title="Juegos De Cartas"
+                            title="SubCategorias"
                             src={subcatContenido.img}
                           />
                           <div className="card-group" >

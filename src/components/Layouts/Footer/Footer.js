@@ -28,7 +28,7 @@ const Footer = (props) => {
                         <h5 className="headin5_amrc col_white_amrc pt2">Nuestra Empresa</h5>
                         <ul className="footer_ul_amrc">
                             <li><a href="/AvisoLegal">Aviso Legal</a></li>
-                            <li><a href="/TerminosYCondiicones">Terminos Y Condiciones</a></li>
+                            <li><a href="/TerminosYCondicicones">Terminos Y Condiciones De Uso</a></li>
                             <li><a href="/Contacto">Contacto</a></li>
                         </ul>
                     </div>
