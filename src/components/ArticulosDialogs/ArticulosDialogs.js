@@ -54,7 +54,6 @@ export default function ArtciculosDialogs(producto) {
             <div>
                 <CarritoCompra {...cart} {...orders}/>
                 {Object.entries(productosView).map(([abreviacion, contenido], i) => {
-                    console.log(contenido.video)
                     return selectId === contenido.id ? (
                         <div key={i} className="container p-3 mt-5 mb-5">
                             <div className="row"
@@ -77,14 +76,15 @@ export default function ArtciculosDialogs(producto) {
                                     <div className="row">
                                         <div className="col ">
                                             <div className="col pt-3">
-                                                <h3>Categoria: </h3><h5>{contenido.categoria}</h5>
-                                                <h3>Subcategoria: </h3><h5>{contenido.subcategoria}</h5>
+                                                <h4>Categoria: </h4><h5>{contenido.categoria}</h5>
+                                                <br/>
+                                                <h4>Subcategoria: </h4><h5>{contenido.subcategoria}</h5>
                                             </div>
                                         </div>
                                         <div className="col pt-1">
                                             <ul className="list-group list-group-flush">
                                                 <li className="list-group-item ">
-                                                    <h3>Precio:</h3>
+                                                    <h4>Precio:</h4>
                                                 </li>
                                                 <li className="list-group-item ">
                                                     <h5 className="text-muted">
@@ -117,11 +117,8 @@ export default function ArtciculosDialogs(producto) {
                                     </div>
                                     <div className="row">
                                         <div className="col p-3">
-                                            En Takenoko los jugadores tendrán que irrigar,
-                                            cultivar y gestionar parcelas de terreno para
-                                            hacer crecer la mayor cantidad de bambú posible
-                                            para alimentar a un oso panda sagrado.
-                        </div>
+                                            {contenido.descripcion}    
+                                        </div>
                                     </div>
                                 </div>
                             </div>

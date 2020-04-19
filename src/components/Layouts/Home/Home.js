@@ -18,8 +18,6 @@ const Home = (props) => {
   const orders = useOrders();
   const cart = useCart();
 
-  console.log(fbData);
-
   useEffect(() => {
     firebase.database().ref('/Productos').on('value', snapshot => {
       setFbData(snapshot.val());

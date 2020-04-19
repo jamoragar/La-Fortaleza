@@ -2,8 +2,6 @@ import React, {useEffect} from "react";
 import './CarritoCompra.scss';
 
 const CarritoCompra = (props) => {
-    console.log(props)
-
     const {openCart, setOpenCart, state } = props
     useEffect(() =>{
         state.order.length === 0 ? setOpenCart(true) : setOpenCart(false)

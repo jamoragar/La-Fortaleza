@@ -2,7 +2,7 @@ import React from 'react';
 
 const Slider = () => {
     return (
-        <h3>Slider...</h3>
+        <h3>En Desarrollo!</h3>
     );
 }
 

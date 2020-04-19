@@ -16,7 +16,6 @@ const Store = ({ fbData, categoriasProductos, orders, cart }) => {
     }, []);
 
     const addNewProduct = (product) => {
-        console.log(product)
         const newOrder = {
             title: product.nombre,
             description: product.categoria,
@@ -53,7 +52,6 @@ const Store = ({ fbData, categoriasProductos, orders, cart }) => {
                             <div className="card-group" >
                                 <div className="row">
                                     {fbData.map((producto, j) => {
-                                        console.log(producto)
                                         return producto.categoria === categoriaProducto ? (
                                             <div key={j} className="col p-3" >
                                                 <div className="card" style={{ width: "285px" }}>

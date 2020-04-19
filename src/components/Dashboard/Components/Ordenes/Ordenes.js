@@ -2,7 +2,7 @@ import React from 'react';
 
 const Ordenes = () => {
     return (
-        <h1>Ordenes...</h1>
+        <h1>En Desarrollo!</h1>
     )
 }
 
