@@ -8,8 +8,6 @@ const CarritoCompra = (props) => {
         state.order.length === 0 ? setOpenCart(true) : setOpenCart(false)
     }, [state.order.length]);
 
-    console.log(state.order.price);
-
     return (
         <div className={`container_cart ${openCart ? 'container_opened' : 'container_closed'}`} >
             <div onClick={() => { setOpenCart(!openCart) }} className={`checklist ${openCart ? 'cart' : 'x'}`}>

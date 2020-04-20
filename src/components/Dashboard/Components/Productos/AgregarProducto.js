@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Form, Button, Modal, Col, Alert, Spinner, ProgressBar } from 'react-bootstrap';
 import firebase from '../../../../config/firebase';
 import productosStyles from './Productos.module.scss'
+import InformacionAdicionalProductos from './InformacionAdicionalProductos'
+import moment from 'moment';
 
 
 const AgregarProducto = (props) => {
@@ -11,7 +13,10 @@ const AgregarProducto = (props) => {
     const [files, setFiles] = useState([]);
     const [alertShow, setAlertShow] = useState(false);
     const [buttonAceptarText, setButtonAceptarText] = useState(true);
+    const [checked, setChecked] = useState(false);
     const [progress, setProgress] = useState(0);
+    const [showModalInfoAdicional, setModalInfoAdicional] = useState(false);
+    const [dataForm, setDataForm] = useState({});
     const fbDbCategory = firebase.database().ref('/Category');
     let descripciones = [];
     let images = [];
@@ -60,6 +65,9 @@ const AgregarProducto = (props) => {
         setImage(null);
         setSubCat(null);
     }
+    const handleCheck = () => {
+        setChecked(!checked);
+      }
     //Función que toma el valor de cada input en el formulario para, posteriormente, validarlos y subirlos a la BD de firebase.
     const submitProduct = (e) => {
         //Se previene que la página refresque.
@@ -68,7 +76,7 @@ const AgregarProducto = (props) => {
         const { nombre, descripcion, categoria, subcategoria, precio, stock, video } = e.target.elements;
         const FbDownloadURL = []
 
-        if (files.length > 0 && categoria.value !== '0') {
+        if (files.length > 0 && categoria.value !== '0' && checked === false) {
             setButtonAceptarText(false)
             //Según la cantidad de archivos recorremos el hook files y subimos dichos archivos al bucket de firebase.
             for (let i = 0; i < files.length; i++) {
@@ -97,6 +105,8 @@ const AgregarProducto = (props) => {
                                 precio: precio.value,
                                 stock: stock.value,
                                 video: video.value,
+                                fecha_creacion: moment().format('DD-MM-YYYY h:mm:ss a'),
+                                incluye_pestanas: checked,
                                 img: FbDownloadURL.map((img) => {
                                     return img
                                 }),
@@ -117,7 +127,24 @@ const AgregarProducto = (props) => {
                 .catch(err => console.log(err.code));
 
 
-        } else {
+        } else if(checked){
+            const key = firebase.database().ref().push().key;
+            setDataForm({
+                id: key,
+                nombre: nombre.value.trim(),
+                descripcion: descripcion.value,
+                categoria: categoria.value,
+                subcategoria: subcategoria.value,
+                precio: precio.value,
+                stock: stock.value,
+                video: video.value,
+                fecha_creacion: moment().format('DD-MM-YYYY h:mm:ss a'),
+                incluye_pestanas: checked,
+                img: files
+            });
+            setModalInfoAdicional(true);
+        }
+        else {
             alert('Debe completar todos los campos y agregar al menos una imágen.');
         }
     }
@@ -217,10 +244,31 @@ const AgregarProducto = (props) => {
                                         :
                                         null}
                             </Form.Group>
-
-                            <Button type='submit' variant="success" block>
+                            <p>¿Agregar Descripción y Detalle?</p>
+                            <Form.Check 
+                                inline
+                                checked={checked}
+                                name={'control'}
+                                type={'radio'}
+                                id={`custom1`}
+                                label={`Si`}
+                                onChange={handleCheck}
+                            />
+                            <Form.Check 
+                                inline
+                                checked={!checked}
+                                name={'control'}
+                                type={'radio'}
+                                id={`custom2`}
+                                label={`No`}
+                                onChange={handleCheck}
+                            />
+                            <Button type='submit' variant="success" block style={{margin:'20px 0 0 0'}}>
                                 {buttonAceptarText ? (<><i className="far fa-save fa-fw" />Aceptar</>) : (<Spinner animation="border" />)}
                             </Button>
+                            {
+                                checked ? <InformacionAdicionalProductos onHide={() => setModalInfoAdicional(false)} show={showModalInfoAdicional} formulario_data={dataForm}/> : null
+                            }
                             {' '}
                             <Button variant="outline-secondary" onClick={handleReset} block>
                                 <i className="fas fa-undo fa-fw" />

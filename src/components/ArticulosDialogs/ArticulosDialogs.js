@@ -4,6 +4,7 @@ import firebase from '../../config/firebase';
 import { useOrders } from '../Hooks/useOrders';
 import { useCart } from '../Hooks/useCart';
 import { Spinner } from 'react-bootstrap';
+import ReactPlayer from 'react-player';
 import CarritoCompra from '../CarritoCompra/CarritoCompra';
 import './ArticulosDialogs.scss';
 
@@ -49,11 +50,11 @@ export default function ArtciculosDialogs(producto) {
 
         const productosView = productViewToArray;
         const discountPrice = 0.10;
-
         return (
             <div>
                 <CarritoCompra {...cart} {...orders}/>
                 {Object.entries(productosView).map(([abreviacion, contenido], i) => {
+                console.log(contenido.video)
                     return selectId === contenido.id ? (
                         <div key={i} className="container p-3 mt-5 mb-5">
                             <div className="row"
@@ -194,7 +195,9 @@ export default function ArtciculosDialogs(producto) {
                                             <div className="container">
                                                 <div className="row">
                                                     <div className="embed-responsive embed-responsive-16by9">
-                                                        <iframe title="Takenoko" width="560" height="315" src={contenido.video} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+                                                        <ReactPlayer
+                                                            url={contenido.video}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
