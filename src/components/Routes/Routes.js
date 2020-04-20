@@ -20,7 +20,6 @@ import Accesorios from "../Articulos/Categorias/Accesorios";
 import ArticulosDialogs from "../ArticulosDialogs/ArticulosDialogs";
 import Contacto from '../Contacto/Contacto';
 import AvisoLegal from '../AvisoLegal/AvisoLegal';
-import TerminosYCon from '../TerminosYCon/TerminosYCon';
 import _404 from '../404/404';
 
 
@@ -71,7 +70,6 @@ export default function Routes(props) {
             <Route path="/Login" component={Login} />
             <Route path="/Contacto" component={Contacto} />
             <Route path="/AvisoLegal" component={AvisoLegal} />
-            <Route path="/TerminosYCondicicones" component={TerminosYCon} />
             <Route path="/not-found" component={_404} />
             <Route component={NotFoundRedirect} />
           </Switch>

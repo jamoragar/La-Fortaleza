@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { formatPrice } from "../Data/DataProductos";
 import { Spinner } from "react-bootstrap";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 import firebase from '../../config/firebase';
 import './Store.scss';
 
@@ -29,6 +31,24 @@ const Store = ({ fbData, categoriasProductos, orders, cart }) => {
 
     const discountPrice = 0.10;
 
+    const responsive = {
+        desktop: {
+          breakpoint: { max: 3000, min: 1150 },
+          items: 4,
+          slidesToSlide: 1, // optional, default to 1.
+        },
+        tablet: {
+          breakpoint: { max: 1150, min: 580 },
+          items: 3,
+          slidesToSlide: 1 // optional, default to 1.
+        },
+        mobile: {
+          breakpoint: { max: 580, min: 0 },
+          items: 1,
+          slidesToSlide: 1, // optional, default to 1.
+        },
+      };
+
     if (fbData && category) {
         return (
             <div>
@@ -49,12 +69,30 @@ const Store = ({ fbData, categoriasProductos, orders, cart }) => {
                                     </a>
                                 ) : null
                             })}
-                            <div className="card-group" >
-                                <div className="row">
+
+                                    <Carousel
+                                        additionalTransfrom={0}
+                                        arrows
+                                        autoPlaySpeed={3000}
+                                        centerMode={false}
+                                        containerClass="container-with-dots"
+                                        autoPlay={3000}
+                                        draggable
+                                        focusOnSelect={false}
+                                        infinite={true}
+                                        keyBoardControl
+                                        minimumTouchDrag={80}
+                                        renderDotsOutside={false}
+                                        responsive={responsive}
+                                        showDots={false}
+                                        sliderClass="CarouselProduct"
+                                        slidesToSlide={1}
+                                        swipeable
+                                    >
                                     {fbData.map((producto, j) => {
                                         return producto.categoria === categoriaProducto ? (
-                                            <div key={j} className="col p-3" >
-                                                <div className="card" style={{ width: "285px" }}>
+                                            <div key={j} className="card_product" >
+                                                <div className="card" style={{ width: "285px", margin: '0 25px' }}>
                                                     <div className="offer offer-success">
                                                         <div className="shape">
                                                             <div className="shape-text">
@@ -118,9 +156,9 @@ const Store = ({ fbData, categoriasProductos, orders, cart }) => {
                                             :
                                             null
                                     })}
+                                </Carousel>
                                 </div>
-                            </div>
-                        </div>
+
                     )
                 })
                 }
