@@ -1,10 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import firebase from '../../../../config/firebase';
 import { OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import AgregarProducto from './AgregarProducto';
 import EditarProducto from './EditarProducto';
+import productosStyles from './Productos.module.scss'
+ 
+const FilterComponent = ({ filterText, onFilter, onClear }) => (
+    <>
+      <input className={productosStyles.TextField} id="search" type="text" placeholder="Buscar por nombre" value={filterText} onChange={onFilter} />
+      <button className={productosStyles.ClearButton} type="button" onClick={onClear}>X</button>
+    </>
+  );
+
 const Productos = () => {
     const columns = [
         {
@@ -81,9 +90,25 @@ const Productos = () => {
 
         }
     ];
+
+    
     const [showModal, setShowModal] = useState(false);
     const [showEditarProductos, setShowEditarProductos] = useState(false)
     const [productos, setProductos] = useState([])
+    //Buscador
+   
+    const [filterText, setFilterText] = useState('');
+    const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
+    const subHeaderComponentMemo = useMemo(() => {
+        const handleClear = () => {
+          if (filterText) {
+            setResetPaginationToggle(!resetPaginationToggle);
+            setFilterText('');
+          }
+        };
+        return <FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />;
+    }, [filterText, resetPaginationToggle]);
+    //Fin buscador...
     const handleShow = () => setShowModal(true);
     const handleShowEditarProductos = (data) => setShowEditarProductos(true);
     let productosToArray = [];
@@ -113,6 +138,7 @@ const Productos = () => {
         Object.keys(productos).forEach((key, i) => {
             productosToArray[i] = productos[key]
         });
+        const filteredItems = productosToArray.filter(item => item.nombre && item.nombre.includes(filterText));
         return (
             <div>
                 <Button style={{float:'right'}} onClick={handleShow} variant="primary">
@@ -123,8 +149,10 @@ const Productos = () => {
                 <DataTable
                     title="Productos"
                     columns={columns}
-                    data={productosToArray}
-
+                    data={filteredItems}
+                    subHeader
+                    subHeaderComponent={subHeaderComponentMemo}
+                    persistTableHead
                 />
             </div>
 
