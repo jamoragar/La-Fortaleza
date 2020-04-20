@@ -1,0 +1,18 @@
+.container-terminos {
+    padding: 1rem 2rem 1rem 2rem;
+    margin: 50px 15px 50px 15px;
+    box-shadow: 0 15px 25px 5px #818182;
+    border-radius: 1rem;
+    min-width: 285px;
+    text-align: center;
+}
+
+.terminos{
+    color: #818182;
+    -webkit-line-clamp: 50;
+}
+
+.terminos-h3{
+    color: #606060;
+    font-weight: bold;
+}
