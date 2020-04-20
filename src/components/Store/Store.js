@@ -33,21 +33,21 @@ const Store = ({ fbData, categoriasProductos, orders, cart }) => {
 
     const responsive = {
         desktop: {
-          breakpoint: { max: 3000, min: 1150 },
-          items: 4,
-          slidesToSlide: 1, // optional, default to 1.
+            breakpoint: { max: 3000, min: 1150 },
+            items: 4,
+            slidesToSlide: 1, // optional, default to 1.
         },
         tablet: {
-          breakpoint: { max: 1150, min: 580 },
-          items: 3,
-          slidesToSlide: 1 // optional, default to 1.
+            breakpoint: { max: 1150, min: 580 },
+            items: 3,
+            slidesToSlide: 1 // optional, default to 1.
         },
         mobile: {
-          breakpoint: { max: 580, min: 0 },
-          items: 1,
-          slidesToSlide: 1, // optional, default to 1.
+            breakpoint: { max: 580, min: 0 },
+            items: 1,
+            slidesToSlide: 1, // optional, default to 1.
         },
-      };
+    };
 
     if (fbData && category) {
         return (
@@ -63,101 +63,101 @@ const Store = ({ fbData, categoriasProductos, orders, cart }) => {
                                             alt="Banner"
                                             className="img-fluid"
                                             key={i}
-                                            title="Modelos a Escala"
+                                            title="Benner Categoria"
                                             src={contenido.banner}
                                         />
                                     </a>
                                 ) : null
                             })}
 
-                                    <Carousel
-                                        additionalTransfrom={0}
-                                        arrows
-                                        autoPlaySpeed={3000}
-                                        centerMode={false}
-                                        containerClass="container-with-dots"
-                                        autoPlay={3000}
-                                        draggable
-                                        focusOnSelect={false}
-                                        infinite={true}
-                                        keyBoardControl
-                                        minimumTouchDrag={80}
-                                        renderDotsOutside={false}
-                                        responsive={responsive}
-                                        showDots={false}
-                                        sliderClass="CarouselProduct"
-                                        slidesToSlide={1}
-                                        swipeable
-                                    >
-                                    {fbData.map((producto, j) => {
-                                        return producto.categoria === categoriaProducto ? (
-                                            <div key={j} className="card_product" >
-                                                <div className="card" style={{ width: "285px", margin: '0 25px' }}>
-                                                    <div className="offer offer-success">
-                                                        <div className="shape">
-                                                            <div className="shape-text">
-                                                                -10%
+                            <Carousel
+                                additionalTransfrom={0}
+                                arrows
+                                autoPlaySpeed={3000}
+                                centerMode={false}
+                                containerClass="container-with-dots"
+                                autoPlay={3000}
+                                draggable
+                                focusOnSelect={false}
+                                infinite={true}
+                                keyBoardControl
+                                minimumTouchDrag={80}
+                                renderDotsOutside={false}
+                                responsive={responsive}
+                                showDots={false}
+                                sliderClass="CarouselProduct"
+                                slidesToSlide={1}
+                                swipeable
+                            >
+                                {fbData.map((producto, j) => {
+                                    return producto.categoria === categoriaProducto ? (
+                                        <div key={j} className="card_product" >
+                                            <div className="card" style={{ width: "285px", margin: '0 25px' }}>
+                                                <div className="offer offer-success">
+                                                    <div className="shape">
+                                                        <div className="shape-text">
+                                                            -10%
 					                                        </div>
-                                                        </div>
-                                                        <img className="card-img" src={producto.img} alt={producto.nombre} style={{ width: "283px", height: "283px" }} />
                                                     </div>
-                                                    <div className="card-header-store text-center">
-                                                        <h5 className="card-title-style">{producto.nombre}</h5>
-                                                    </div>
-                                                    <div className="card-body-style">
-                                                        <p className="card-text" >{producto.descripcion}</p>
-                                                    </div>
-                                                    <ul className="list-group list-group-flush">
-                                                        <li className="list-group-item">
-                                                            <h6 className="card-subtitle mb-2 text-muted">{producto.subcategoria}</h6>
-                                                        </li>
-                                                        <li className="list-group-item">
-                                                            <div className="row mt-1">
-                                                                <div className="col-6 text-center">
-                                                                    <h5 className="text-success">
-                                                                        {formatPrice(producto.precio - (producto.precio * discountPrice))}
-                                                                    </h5>
-                                                                </div>
-                                                                <div className="col-6 text-center">
-                                                                    <h5 className="text-muted">
-                                                                        <s>{formatPrice(producto.precio)}</s>
-                                                                    </h5>
-                                                                </div>
+                                                    <img className="card-img" src={producto.img} alt={producto.nombre} style={{ width: "283px", height: "283px" }} />
+                                                </div>
+                                                <div className="card-header-store text-center">
+                                                    <h5 className="card-title-style">{producto.nombre}</h5>
+                                                </div>
+                                                <div className="card-body-style">
+                                                    <p className="card-text" >{producto.descripcion}</p>
+                                                </div>
+                                                <ul className="list-group list-group-flush">
+                                                    <li className="list-group-item">
+                                                        <h6 className="card-subtitle mb-2 text-muted">{producto.subcategoria}</h6>
+                                                    </li>
+                                                    <li className="list-group-item">
+                                                        <div className="row mt-1">
+                                                            <div className="col-6 text-center">
+                                                                <h5 className="text-success">
+                                                                    {formatPrice(producto.precio - (producto.precio * discountPrice))}
+                                                                </h5>
                                                             </div>
-                                                        </li>
-                                                        <li className="list-group-item">
-                                                            <div className="row mt-1">
-                                                                <div className="col-6">
-                                                                    <button
-                                                                        style={{ outline: "none" }}
-                                                                        className='btn-add btn-danger'
-                                                                        onClick={() => addNewProduct(producto)}>
-                                                                        <i className="fas fa-shopping-cart" />
+                                                            <div className="col-6 text-center">
+                                                                <h5 className="text-muted">
+                                                                    <s>{formatPrice(producto.precio)}</s>
+                                                                </h5>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li className="list-group-item">
+                                                        <div className="row mt-1">
+                                                            <div className="col-6">
+                                                                <button
+                                                                    style={{ outline: "none" }}
+                                                                    className='btn-add btn-danger'
+                                                                    onClick={() => addNewProduct(producto)}>
+                                                                    <i className="fas fa-shopping-cart" />
                                                                         Comprar
                                                                     </button>
-                                                                </div>
-                                                                <div className="col-6 pl-1">
-                                                                    <a href={`/Articulo/${producto.id}`}>
-                                                                        <button
-                                                                            style={{ outline: "none" }}
-                                                                            className="btn-ver btn-success"
-                                                                        >
-                                                                            <i className="fas fa-eye" />
+                                                            </div>
+                                                            <div className="col-6 pl-1">
+                                                                <a href={`/Articulo/${producto.id}`}>
+                                                                    <button
+                                                                        style={{ outline: "none" }}
+                                                                        className="btn-ver btn-success"
+                                                                    >
+                                                                        <i className="fas fa-eye" />
                                                                             Ver
                                                                         </button>
-                                                                    </a>
-                                                                </div>
+                                                                </a>
                                                             </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                        )
-                                            :
-                                            null
-                                    })}
-                                </Carousel>
-                                </div>
+                                        </div>
+                                    )
+                                        :
+                                        null
+                                })}
+                            </Carousel>
+                        </div>
 
                     )
                 })

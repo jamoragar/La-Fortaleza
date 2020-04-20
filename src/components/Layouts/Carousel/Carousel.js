@@ -18,10 +18,10 @@ const CarouselContainer = () => {
                     </ol>
                     <div className="carousel-inner">
                       <div className="carousel-item active">
-                        <img className="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2Fslider1.png?alt=media&token=555174f2-d80c-4b2e-b72c-ab7cb697f710" alt="Pandemic" />
+                        <img className="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2Fslider1.png?alt=media&token=555174f2-d80c-4b2e-b72c-ab7cb697f710" alt="slide1" />
                       </div>
                       <div className="carousel-item">
-                        <img className="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2Fslider2.png?alt=media&token=746713e5-72c9-474e-bdc6-3d12632cf816" alt="Ugears" />
+                        <img className="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2Fslider2.png?alt=media&token=746713e5-72c9-474e-bdc6-3d12632cf816" alt="slide2" />
                       </div>
                     </div>
                     <a className="carousel-control-prev-izq" href="#carousel" role="button" data-slide="prev">
@@ -43,7 +43,7 @@ const CarouselContainer = () => {
                 <div className="card border-0 rounded-0 text-white overflow zoom">
                   <div className="position-relative">
                     <div className="ratio_right-cover-2 image-wrapper">
-                      <a href="/">
+                      <a href="/Preventa">
                         <img className="img-fluid"
                           src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2Fgrid1.png?alt=media&token=284c98da-0f09-4756-b5eb-bb73d6bc39d5"
                           alt="info-Grid" />
@@ -56,7 +56,7 @@ const CarouselContainer = () => {
                 <div className="card border-0 rounded-0 text-white overflow zoom">
                   <div className="position-relative">
                     <div className="ratio_right-cover-2 image-wrapper">
-                      <a href="/">
+                      <a href="https://www.instagram.com/p/B-k5sdCFSuB/?utm_source=ig_web_copy_link" target="blank">
                         <img className="img-fluid"
                           src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2Fgrid2.png?alt=media&token=f78c89ed-1ec5-405e-bf71-eef8f3ad593f"
                           alt="info-Grid" />
