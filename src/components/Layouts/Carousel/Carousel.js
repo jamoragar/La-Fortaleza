@@ -11,10 +11,10 @@ const CarouselContainer = () => {
             <div className="card border-0 rounded-0 text-light overflow zoom">
               <div className="position-relative">
                 <div className="ratio_left-cover-1 image-wrapper">
-                  <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+                  <div id="carousel" className="carousel slide" data-ride="carousel">
                     <ol className="carousel-indicators">
                       <li data-target="#carousel" data-slide-to="0" className="active"></li>
-                      <li data-target="##carousel" data-slide-to="1"></li>
+                      <li data-target="#carousel" data-slide-to="1"></li>
                     </ol>
                     <div className="carousel-inner">
                       <div className="carousel-item active">
@@ -24,11 +24,11 @@ const CarouselContainer = () => {
                         <img className="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2Fslider2.png?alt=media&token=746713e5-72c9-474e-bdc6-3d12632cf816" alt="Ugears" />
                       </div>
                     </div>
-                    <a className="carousel-control-prev-izq" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <a className="carousel-control-prev-izq" href="#carousel" role="button" data-slide="prev">
                       <span className="carousel-control-prev-icon" aria-hidden="true"><i className="fas fa-chevron-circle-left"></i></span>
                       <span className="sr-only">Previous</span>
                     </a>
-                    <a className="carousel-control-next-der" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <a className="carousel-control-next-der" href="#carousel" role="button" data-slide="next">
                       <span className="carousel-control-next-icon" aria-hidden="true"><i className="fas fa-chevron-circle-right"></i></span>
                       <span className="sr-only">Next</span>
                     </a>
