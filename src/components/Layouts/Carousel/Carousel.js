@@ -18,10 +18,10 @@ const CarouselContainer = () => {
                     </ol>
                     <div className="carousel-inner">
                       <div className="carousel-item active">
-                        <img className="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2FSlider-Pandemic.png?alt=media&token=eee67878-f4a2-4351-987b-12843a18a496" alt="Pandemic" />
+                        <img className="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2Fslider1.png?alt=media&token=555174f2-d80c-4b2e-b72c-ab7cb697f710" alt="Pandemic" />
                       </div>
                       <div className="carousel-item">
-                        <img className="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2FSliderUgears.png?alt=media&token=28db6855-cf02-4fa9-b1af-050bc4d28f58" alt="Ugears" />
+                        <img className="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2Fslider2.png?alt=media&token=746713e5-72c9-474e-bdc6-3d12632cf816" alt="Ugears" />
                       </div>
                     </div>
                     <a className="carousel-control-prev-izq" href="#carouselExampleIndicators" role="button" data-slide="prev">
