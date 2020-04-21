@@ -15,8 +15,7 @@ const AgregarProducto = (props) => {
     const [buttonAceptarText, setButtonAceptarText] = useState(true);
     const [checked, setChecked] = useState(false);
     const [progress, setProgress] = useState(0);
-    const [showModalInfoAdicional, setModalInfoAdicional] = useState(false);
-    const [dataForm, setDataForm] = useState({});
+
     const fbDbCategory = firebase.database().ref('/Category');
     let descripciones = [];
     let images = [];
@@ -64,6 +63,7 @@ const AgregarProducto = (props) => {
         document.getElementById('myForm').reset();
         setImage(null);
         setSubCat(null);
+        setChecked(false);
     }
     const handleCheck = () => {
         setChecked(!checked);
@@ -73,10 +73,13 @@ const AgregarProducto = (props) => {
         //Se previene que la página refresque.
         e.preventDefault();
         const promises = [];
+        //Campos de Formulario SIN Ficha Tecnica
         const { nombre, descripcion, categoria, subcategoria, precio, stock, video } = e.target.elements;
+        //Campos de formulario CON Ficha Tecnica
+        const { editorial, jugadores, edad, idioma_dependiente, idioma, autores, duracion, dimensiones, peso, componentes } = e.target.elements;
         const FbDownloadURL = []
 
-        if (files.length > 0 && categoria.value !== '0' && checked === false) {
+        if (files.length > 0 && categoria.value !== '0') {
             setButtonAceptarText(false)
             //Según la cantidad de archivos recorremos el hook files y subimos dichos archivos al bucket de firebase.
             for (let i = 0; i < files.length; i++) {
@@ -107,6 +110,19 @@ const AgregarProducto = (props) => {
                                 video: video.value,
                                 fecha_creacion: moment().format('DD-MM-YYYY h:mm:ss a'),
                                 incluye_pestanas: checked,
+                                ficha_tecnica: checked ? {
+                                    editorial: editorial.value,
+                                    jugadores: jugadores.value, 
+                                    edad: edad.value, 
+                                    idioma_dependiente: idioma_dependiente.value, 
+                                    idioma: idioma.value, 
+                                    autores: autores.value, 
+                                    duracion: duracion.value, 
+                                    dimensiones: dimensiones.value,
+                                    peso: peso.value, 
+                                    componentes: componentes.value,
+
+                                } : null,
                                 img: FbDownloadURL.map((img) => {
                                     return img
                                 }),
@@ -127,29 +143,13 @@ const AgregarProducto = (props) => {
                 .catch(err => console.log(err.code));
 
 
-        } else if(checked){
-            const key = firebase.database().ref().push().key;
-            setDataForm({
-                id: key,
-                nombre: nombre.value.trim(),
-                descripcion: descripcion.value,
-                categoria: categoria.value,
-                subcategoria: subcategoria.value,
-                precio: precio.value,
-                stock: stock.value,
-                video: video.value,
-                fecha_creacion: moment().format('DD-MM-YYYY h:mm:ss a'),
-                incluye_pestanas: checked,
-                img: files
-            });
-            setModalInfoAdicional(true);
         }
         else {
             alert('Debe completar todos los campos y agregar al menos una imágen.');
         }
     }
     return (
-        <Modal {...props} style={{ background: 'none' }} >
+        <Modal {...props} style={{ background: 'none' }} size='lg'>
             <Modal.Header closeButton>
                 <Modal.Title>
                     Agregar Nuevo Producto
@@ -167,30 +167,36 @@ const AgregarProducto = (props) => {
                                 <Form.Label>Descripción:</Form.Label>
                                 <Form.Control name='descripcion' as="textarea" rows="3" placeholder='Ingrese la descripción del producto.' required />
                             </Form.Group>
-                            <Form.Group controlId="formCategory">
-                                <Form.Label>Categoría:</Form.Label>
-                                <Form.Control name='categoria' as="select"
-                                    onChange={(categoria) => handleSubCategory(categoria.target.value)}
-                                >
-                                    <option value='0' key='alfa'>Seleccione una categoría</option>
-                                    {fbCategoria.map((categoria, i) => {
-                                        return <option value={categoria} key={i}>{categoria}</option>
-                                    })}
-                                </Form.Control>
-                            </Form.Group>
-                            {subCat ?
-                                <Form.Group controlId="formCategory">
-                                    <Form.Label>Sub-Categoría:</Form.Label>
-                                    <Form.Control name='subcategoria' as="select">
-                                        {/* Transformamos el hook subCat a array, ya que firebase lo entrega como Objeto, y se procede a recorrerlo. */
-                                            Object.entries(subCat).map(([abreviacion, nombre], i) => {
-                                                return <option value={nombre.description} key={i}>{nombre.description}</option>
-                                            })
-                                        }
-                                    </Form.Control>
-                                </Form.Group>
-                                :
-                                null}
+                            <Form.Row>
+                                <Col>
+                                    <Form.Group controlId="formCategory">
+                                        <Form.Label>Categoría:</Form.Label>
+                                        <Form.Control name='categoria' as="select"
+                                            onChange={(categoria) => handleSubCategory(categoria.target.value)}
+                                        >
+                                            <option value='0' key='alfa'>Seleccione una categoría</option>
+                                            {fbCategoria.map((categoria, i) => {
+                                                return <option value={categoria} key={i}>{categoria}</option>
+                                            })}
+                                        </Form.Control>
+                                    </Form.Group>
+                                </Col>
+                                <Col>
+                                {subCat ?
+                                    <Form.Group controlId="formCategory">
+                                        <Form.Label>Sub-Categoría:</Form.Label>
+                                        <Form.Control name='subcategoria' as="select">
+                                            {/* Transformamos el hook subCat a array, ya que firebase lo entrega como Objeto, y se procede a recorrerlo. */
+                                                Object.entries(subCat).map(([abreviacion, nombre], i) => {
+                                                    return <option value={nombre.description} key={i}>{nombre.description}</option>
+                                                })
+                                            }
+                                        </Form.Control>
+                                    </Form.Group>
+                                    :
+                                    null}
+                                </Col>
+                            </Form.Row>
                             <Form.Row>
                                 <Col>
                                     <Form.Group controlId="formPriceProducts">
@@ -263,12 +269,15 @@ const AgregarProducto = (props) => {
                                 label={`No`}
                                 onChange={handleCheck}
                             />
+                            {
+                                checked ? 
+                                <InformacionAdicionalProductos/>
+                                :
+                                null
+                            }
                             <Button type='submit' variant="success" block style={{margin:'20px 0 0 0'}}>
                                 {buttonAceptarText ? (<><i className="far fa-save fa-fw" />Aceptar</>) : (<Spinner animation="border" />)}
                             </Button>
-                            {
-                                checked ? <InformacionAdicionalProductos onHide={() => setModalInfoAdicional(false)} show={showModalInfoAdicional} formulario_data={dataForm}/> : null
-                            }
                             {' '}
                             <Button variant="outline-secondary" onClick={handleReset} block>
                                 <i className="fas fa-undo fa-fw" />
