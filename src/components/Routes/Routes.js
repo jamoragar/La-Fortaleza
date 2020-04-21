@@ -54,8 +54,8 @@ export default function Routes(props) {
       <div className="container-fluid  px-5">
         <Router history={history}>
           <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/Dashboard" component={Dashboard} />
+            <Route path="/" exact component={() => <Home isAuthed={props.authenticated} uid={props.uid} user={props.user} name={props.name} />} />
+            <Route path="/Dashboard/:uid" component={() => <Dashboard isAuthed={props.authenticated} uid={props.uid} />} />
             <Route path="/Articulo/:id/" component={ArticulosDialogs} />
             <Route path="/Preventa" component={() => <Preventa fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
             <Route path="/Ofertas" component={() => <Ofertas fbData={productosToArray} categoriasProductos={categoriaProductos} />} />

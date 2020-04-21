@@ -1,11 +1,11 @@
 .container_cart{
-    border-radius:12px;
+    top: 64px;
     position: fixed;
     right: 0px;
     width: 340px;
     background-color: white;
     height:calc(100% - 48px);
-    z-index: 100;
+    z-index: 1019;
     box-shadow: 4px 0px 5px 4px grey;
     display: flex;
     flex-direction: column;
@@ -21,7 +21,7 @@
 
 .order_content{
     padding: 20px;
-    height: 68%;
+    height: 90%;
     @media (max-width:480px){
         padding: 45px;
     }

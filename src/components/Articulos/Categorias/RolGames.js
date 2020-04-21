@@ -17,7 +17,6 @@ const Accesorios = (props) => {
   }, []);
 
   const addNewProduct = (product) => {
-    console.log(product)
     const newOrder = {
       title: product.nombre,
       description: product.categoria,
@@ -54,7 +53,6 @@ const Accesorios = (props) => {
                           <div className="card-group" >
                             <div className="row">
                               {fbData.map((producto, j) => {
-                                console.log(producto)
                                 return producto.categoria === categoriaProducto && producto.subcategoria === subcatContenido.description ? (
                                   <div key={j} className="col p-3" >
                                     <div className="card" style={{ width: "285px" }}>

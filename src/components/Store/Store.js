@@ -63,7 +63,7 @@ const Store = ({ fbData, categoriasProductos, orders, cart }) => {
                                             alt="Banner"
                                             className="img-fluid"
                                             key={i}
-                                            title="Benner Categoria"
+                                            title="Banner Categoria"
                                             src={contenido.banner}
                                         />
                                     </a>

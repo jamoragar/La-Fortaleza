@@ -1,15 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { formatPrice } from '../Data/DataProductos';
+import Register from '../Register/Register';
 import './CarritoCompra.scss';
 
 const CarritoCompra = (props) => {
-    const { openCart, setOpenCart, state } = props
+    const { authenticated, uid, openCart, setOpenCart, state } = props
+    const [modalRegisterShow, setModalRegisterShow] = useState(false);
+
     useEffect(() => {
         state.order.length === 0 ? setOpenCart(true) : setOpenCart(false)
     }, [state.order.length]);
 
+
     return (
         <div className={`container_cart ${openCart ? 'container_opened' : 'container_closed'}`} >
+            <Register show={modalRegisterShow} onHide={() => setModalRegisterShow(false)} />
             <div onClick={() => { setOpenCart(!openCart) }} className={`checklist ${openCart ? 'cart' : 'x'}`}>
                 {openCart ? (
                     <div>
@@ -63,7 +68,12 @@ const CarritoCompra = (props) => {
                     </div>
                 )}
             <div className={`order_footer`}>
-                <div className={`btn_pago`}>
+                <div className={`btn_pago`} onClick={() => {
+                    if (state.order.length >= 0 && !authenticated) setModalRegisterShow(true)
+                    else {
+                        //setModalPago(true);
+                    }
+                }}>
                     Pagar!
                 </div>
             </div>
