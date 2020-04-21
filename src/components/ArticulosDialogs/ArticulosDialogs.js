@@ -48,13 +48,14 @@ export default function ArtciculosDialogs(producto) {
             unique.includes(item) ? unique : [...unique, item], []
         );
 
+        
         const productosView = productViewToArray;
         const discountPrice = 0.10;
         return (
             <div>
                 <CarritoCompra {...cart} {...orders}/>
                 {Object.entries(productosView).map(([abreviacion, contenido], i) => {
-                console.log(contenido.video)
+                        console.log(selectId === contenido.id ? contenido : '')
                     return selectId === contenido.id ? (
                         <div key={i} className="container p-3 mt-5 mb-5">
                             <div className="row"
@@ -123,94 +124,95 @@ export default function ArtciculosDialogs(producto) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="row pt-5">
-                                <div className="col-12">
-                                    <ul className="nav nav-tabs" id="myTab" role="tablist">
-                                        <li className="nav-item">
-                                            <a className="nav-link active" id="Descripcion-tab" data-toggle="tab" href="#Descripcion" role="tab" aria-controls="home" aria-selected="true">Descripción</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" id="Detalles-tab" data-toggle="tab" href="#Detalles" role="tab" aria-controls="detalles" aria-selected="false">Detalles Del Producto</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" id="HowToPlay-tab" data-toggle="tab" href="#HowToPlay" role="tab" aria-controls="howtoplay" aria-selected="false">How To Play</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="col-12 tabBoddy">
-                                    <div className="tab-content" id="myTabContent">
-                                        <div className="tab-pane fade show pt-5 active" id="Descripcion" role="tabpanel" aria-labelledby="Descripcion-tab">
-                                            <table className="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col"></th>
-                                                        <th scope="col">Detalle</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">Editorial</th>
-                                                        <td>Matagot</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Jugadores</th>
-                                                        <td>2 - 4</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Edad Mínima Sugerida</th>
-                                                        <td>8 +</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Dependencia Del Idioma</th>
-                                                        <td>Nula</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Idioma</th>
-                                                        <td>Español</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Autor/Autores</th>
-                                                        <td>Antoine Bauza</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Componentes</th>
-                                                        <td>28 Losetas de parcela; 90 Secciones de bambú (verde, amarillo, rosado); 20 Fichas de canales de riego; 9 Fichas de mejoras; 46 Cartas objetivo; 4 Tableros; 8 Fichas de acción; 1 Dado de clima; 1 Panda; 1 Jardinero; Instrucciones.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Duración En Minutos</th>
-                                                        <td>45 min</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Dimensiones</th>
-                                                        <td>23 x 8 x 33 cm</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">Peso</th>
-                                                        <td>1.2 kg</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div className="tab-pane fade pt-5" id="HowToPlay" role="tabpanel" aria-labelledby="HowToPlay-tab">
-                                            <div className="container">
-                                                <div className="row">
-                                                    <div className="embed-responsive embed-responsive-16by9">
-                                                        <ReactPlayer
-                                                            url={contenido.video}
-                                                        />
+                            {
+                                contenido.ficha_tecnica ? 
+                                <div className="row pt-5">
+                                    <div className="col-12">
+                                        <ul className="nav nav-tabs" id="myTab" role="tablist">
+                                            <li className="nav-item">
+                                                <a className="nav-link active" id="Descripcion-tab" data-toggle="tab" href="#Descripcion" role="tab" aria-controls="home" aria-selected="true">Descripción</a>
+                                            </li>
+                                            <li className="nav-item">
+                                                <a className="nav-link" id="HowToPlay-tab" data-toggle="tab" href="#HowToPlay" role="tab" aria-controls="howtoplay" aria-selected="false">How To Play</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div className="col-12 tabBoddy">
+                                        <div className="tab-content" id="myTabContent">
+                                            <div className="tab-pane fade show pt-5 active" id="Descripcion" role="tabpanel" aria-labelledby="Descripcion-tab">
+                                                <table className="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col"></th>
+                                                            <th scope="col">Detalle</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <th scope="row">Editorial</th>
+                                                            <td>Matagot</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Jugadores</th>
+                                                            <td>2 - 4</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Edad Mínima Sugerida</th>
+                                                            <td>8 +</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Dependencia Del Idioma</th>
+                                                            <td>Nula</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Idioma</th>
+                                                            <td>Español</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Autor/Autores</th>
+                                                            <td>Antoine Bauza</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Componentes</th>
+                                                            <td>28 Losetas de parcela; 90 Secciones de bambú (verde, amarillo, rosado); 20 Fichas de canales de riego; 9 Fichas de mejoras; 46 Cartas objetivo; 4 Tableros; 8 Fichas de acción; 1 Dado de clima; 1 Panda; 1 Jardinero; Instrucciones.</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Duración En Minutos</th>
+                                                            <td>45 min</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Dimensiones</th>
+                                                            <td>23 x 8 x 33 cm</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row">Peso</th>
+                                                            <td>1.2 kg</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div className="tab-pane fade pt-5" id="HowToPlay" role="tabpanel" aria-labelledby="HowToPlay-tab">
+                                                <div className="container">
+                                                    <div className="row">
+                                                        <div className="embed-responsive embed-responsive-16by9">
+                                                            <ReactPlayer
+                                                                url={contenido.video}
+                                                            />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="tab-pane fade" id="Detalles" role="tabpanel" aria-labelledby="detalles-tab">aca van los detalles</div>
                                     </div>
                                 </div>
-                            </div>
-                        </div >
+                                :
+                                null
+                            }
+                        </div>
                     ) : null
                 })
                 }
-            </div >
+            </div>
         )
     } else {
         return (
