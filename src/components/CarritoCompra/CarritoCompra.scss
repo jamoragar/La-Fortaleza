@@ -47,6 +47,13 @@
     justify-content: space-between;
 }
 
+.order_total{
+    padding: 10px 0px;
+    display: grid;
+    grid-template-columns: 20px 150px 5px 75px;
+    justify-content: space-between;
+}
+
 .detail_item{
     color: grey;
     font-size: 10px;

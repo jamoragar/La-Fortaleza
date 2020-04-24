@@ -4,13 +4,14 @@ import Register from '../Register/Register';
 import './CarritoCompra.scss';
 
 const CarritoCompra = (props) => {
-    const { authenticated, uid, openCart, setOpenCart, state } = props
+    const { authenticated, openCart, setOpenCart, state } = props
     const [modalRegisterShow, setModalRegisterShow] = useState(false);
 
     useEffect(() => {
         state.order.length === 0 ? setOpenCart(true) : setOpenCart(false)
     }, [state.order.length]);
 
+    const discountPrice = 0.10;
 
     return (
         <div className={`container_cart ${openCart ? 'container_opened' : 'container_closed'}`} >
@@ -25,7 +26,7 @@ const CarritoCompra = (props) => {
                 }
             </div>
             {state.order.length === 0 ? (
-                <div className='title'>Su carro esta vacío</div>
+                <div className={`order_content`}>Su carro esta vacío</div>
             ) : (
                     <div className={`order_content`} style={{ overflowY: "scroll" }} >
                         {" "}
@@ -51,19 +52,18 @@ const CarritoCompra = (props) => {
                                                 🗑️
                                     </span>
                                         </div>
-                                        <div>{formatPrice(order.price)}</div>
+                                        <div>{formatPrice(order.price - (order.price * discountPrice))}</div>
                                     </div>
                                     <div className={`detail_item`}>
                                         {order.description}
                                     </div>
                                 </div>
                             ))}
-                        <div className={`order_container`}>
-                            <div className={`order_item`}>
-                                <div />
-                                <div>Total: </div>
-                                <div>aca va el total</div>
-                            </div>
+                        <div className={`order_total`}>
+                            <div />
+                            <div>Total: </div>
+                            <div />
+                            <div>aca va el total</div>
                         </div>
                     </div>
                 )}

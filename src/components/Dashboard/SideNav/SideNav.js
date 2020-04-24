@@ -17,7 +17,7 @@ const SideNav = (props) => {
     return (
         <nav className={sideNavStyles.navWrapper}>
             <div className={sideNavStyles.logo}>
-                <Link to='/Dashboard'>
+                <Link to='/'>
                     <img className={sideNavStyles.logo} alt="logoweb" href="/" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Logos%2FLogoweb.png?alt=media&token=55c61595-d099-4356-9fae-9c9bae89737c" />
                 </Link>
             </div>
