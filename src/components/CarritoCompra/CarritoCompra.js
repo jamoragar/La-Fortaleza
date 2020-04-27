@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { formatPrice } from '../Data/DataProductos';
 import Register from '../Register/Register';
 import './CarritoCompra.scss';
+import { keyframes } from "styled-components";
 
 const CarritoCompra = (props) => {
     const { authenticated, openCart, setOpenCart, state } = props
@@ -12,6 +13,17 @@ const CarritoCompra = (props) => {
     }, [state.order.length]);
 
     const discountPrice = 0.10;
+
+    const orders = state.order;
+    let precios = [];
+
+    Object.keys(orders).forEach((key, i) => {
+        precios[i] = parseInt(orders[key].price);
+    });
+
+    const subTotal = (precios != 0) ? (precios.reduce((a, b) => a + b)) : 0;
+    const total = subTotal - (subTotal * discountPrice);
+    console.log(total);
 
     return (
         <div className={`container_cart ${openCart ? 'container_opened' : 'container_closed'}`} >
@@ -63,7 +75,7 @@ const CarritoCompra = (props) => {
                             <div />
                             <div>Total: </div>
                             <div />
-                            <div>aca va el total</div>
+                            <div >{formatPrice(total)}</div>
                         </div>
                     </div>
                 )}

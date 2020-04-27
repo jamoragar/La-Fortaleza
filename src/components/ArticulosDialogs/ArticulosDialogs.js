@@ -39,6 +39,7 @@ export default function ArtciculosDialogs(producto) {
 
     const selectId = selectToArray[2].params.id;
 
+
     if (selectId && productView) {
         Object.keys(productView).forEach((key, i) => {
             productViewToArray[i] = productView[key]

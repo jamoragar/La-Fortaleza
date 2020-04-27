@@ -25,7 +25,7 @@ const SideNav = (props) => {
                 <MenuBtn isOpen={menuBtn.isOpen} />
             </span>
             <ul className={sideNavStyles.nav}>
-                <NavLink to={`/dashboard/${uid}/profile`}>
+                <NavLink to={`/Dashboard/${uid}/profile/`}>
                     <li>
                         <i className="fas fa-user fa-fw"></i>
                         Perfil
@@ -33,7 +33,7 @@ const SideNav = (props) => {
                 </NavLink>
                 {
                     user_type === 'client' ? (
-                        <NavLink to={`/dashboard/${uid}/pedidos`}>
+                        <NavLink to={`/Dashboard/${uid}/pedidos`}>
                             <li>
                                 <i class="fas fa-shopping-bag fa-fw"></i>
                                 Pedidos
@@ -93,44 +93,3 @@ const SideNav = (props) => {
 }
 
 export default SideNav;
-
-/*
-
-                <Link to='/Dashboard/Slider'>
-                    <li>
-                        <i className="far fa-image fa-fw" />
-                        Slider
-                    </li>
-                </Link>
-                <Link to='/Dashboard/Blog'>
-                    <li>
-                        <i className="fas fa-pencil-alt fa-fw" />
-                        Blog
-                    </li>
-                </Link>
-                <Link to='/Dashboard/Agenda'>
-                    <li>
-                        <i className="fas fa-calendar-alt fa-fw"></i>
-                        Agenda
-                    </li>
-                </Link>
-                <Link to='/Dashboard/Productos'>
-                    <li>
-                        <i className="fas fa-shopping-cart fa-fw"></i>
-                        Productos
-                    </li>
-                </Link>
-                <Link to='/Dashboard/Categorias'>
-                    <li>
-                        <i className="fas fa-project-diagram fa-fw"></i>
-                        Categorías
-                    </li>
-                </Link>
-                <Link to='/Dashboard/Ordenes'>
-                    <li>
-                        <i className="fas fa-box-open fa-fw"></i>
-                        Ordenes
-                    </li>
-                </Link>
-
-                */

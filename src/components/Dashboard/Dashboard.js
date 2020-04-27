@@ -11,6 +11,7 @@ import Productos from './Components/Productos/Productos';
 import Categorias from './Components/Categorias/Categorias';
 import Ordenes from './Components/Ordenes/Ordenes';
 import VerProducto from './Components/Productos/VerProducto';
+import Profile from './userComponents/Profile';
 
 import dashboardStyles from './Dashboard.module.scss'
 import mainStyles from './Main.module.scss';
@@ -37,6 +38,7 @@ const DashboardRoute = (props) => {
                                         <Route exact path='/Dashboard/Categorias' component={Categorias} />
                                         <Route exact path='/Dashboard/Ordenes' component={Ordenes} />
                                         <Route exact path="/Dashboard/Producto/:id" component={VerProducto} />
+                                        <Route exact path='/Dashboard/:id/Profile' component={() => <Profile props={props.userData} />} />
                                     </Switch>
                                 </div>
                             </div>

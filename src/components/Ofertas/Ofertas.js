@@ -17,5 +17,5 @@ const Ofertas = () => {
     )
 }
 
-export default Ofertas
+export default Ofertas;
 
