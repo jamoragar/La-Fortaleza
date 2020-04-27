@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { formatPrice } from '../Data/DataProductos';
 import Register from '../Register/Register';
 import './CarritoCompra.scss';
-import { keyframes } from "styled-components";
 
 const CarritoCompra = (props) => {
-    const { authenticated, openCart, setOpenCart, state } = props
+    const { authenticated, openCart, setOpenCart, state, useOrder } = props
     const [modalRegisterShow, setModalRegisterShow] = useState(false);
 
     useEffect(() => {
@@ -23,7 +22,14 @@ const CarritoCompra = (props) => {
 
     const subTotal = (precios != 0) ? (precios.reduce((a, b) => a + b)) : 0;
     const total = subTotal - (subTotal * discountPrice);
-    console.log(total);
+
+    const [newOrders, setNewOrders] = useState([...orders]);
+
+    const deleteOrder = (order) => {
+        const newOrders = [...orders]
+        newOrders.splice(order, 1);
+        setNewOrders(newOrders);
+    }
 
     return (
         <div className={`container_cart ${openCart ? 'container_opened' : 'container_closed'}`} >
@@ -44,7 +50,7 @@ const CarritoCompra = (props) => {
                         {" "}
                         <div className={`order_cont`}> Tu Pedido: </div>
                         {
-                            state.order.map((order, index) => (
+                            newOrders.map((order, index) => (
                                 <div className={`order_container`} key={index} >
                                     <div
                                         className={`order_item`}
@@ -56,9 +62,12 @@ const CarritoCompra = (props) => {
                                         <div>1</div>
                                         <div>{order.title}</div>
                                         <div
+                                            key={index + order}
                                             style={{ cursor: 'pointer' }}
                                             onClick={e => {
                                                 e.stopPropagation();
+                                                deleteOrder(order);
+                                                setOpenCart(false);
                                             }}>
                                             <span role="img" aria-label="Delete">
                                                 🗑️
