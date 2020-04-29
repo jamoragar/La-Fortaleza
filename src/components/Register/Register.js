@@ -15,7 +15,7 @@ const Register = (props) => {
   const onRegisterSubmit = (e) => {
     e.preventDefault();
     setBtnText(true)
-    const { name, last_name, email, number, password, address, comentario } = e.target.elements;
+    const { name, last_name, email, number, password } = e.target.elements;
 
     firebase.auth()
       .createUserWithEmailAndPassword(email.value, password.value)
@@ -34,8 +34,8 @@ const Register = (props) => {
           numero: `+56 ${number.value}`,
           email: email.value,
           password: password.value,
-          direccion: address.value,
-          comentario: comentario.value,
+          direccion: '',
+          comentario: '',
         })
         props.onHide();
       })
@@ -77,29 +77,22 @@ const Register = (props) => {
         <Modal.Body>
           <Form onSubmit={onRegisterSubmit}>
             <Form.Group>
-              <Form.Label>Nombre(s):</Form.Label>
+              <Form.Label>Nombre(s)</Form.Label>
               <Form.Control type='text' placeholder='Ingrese su nombre' name='name' required />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Apellido(s):</Form.Label>
+              <Form.Label>Apellido(s)</Form.Label>
               <Form.Control type='text' placeholder='Ingrese su Apellido' name='last_name' required />
             </Form.Group>
             <Form.Group>
-              <Form.Label>E-mail:</Form.Label>
+              <Form.Label>E-mail</Form.Label>
               <Form.Control type="email" placeholder="Ingrese su e-mail" name='email' required />
               <Form.Text className="text-muted">
                 Nunca compartiremos su e-mail con nadie más.
-              </Form.Text>
+                      </Form.Text>
             </Form.Group>
             <Form.Group>
-              <Form.Label>Dirección:</Form.Label>
-              <Form.Control type="address" placeholder="Ingrese su Dirección" name='address' required />
-              <Form.Text className="text-muted">
-                Nunca compartiremos su Dirección con nadie más.
-              </Form.Text>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Celular:</Form.Label>
+              <Form.Label>Celular</Form.Label>
               <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text>+56</InputGroup.Text>
@@ -108,11 +101,7 @@ const Register = (props) => {
               </InputGroup>
             </Form.Group>
             <Form.Group>
-              <Form.Label>Comentario:</Form.Label>
-              <Form.Control as='textarea' placeholder='Ingrese Comentario' rows='3' name='comentario' />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Contraseña:</Form.Label>
+              <Form.Label>Contraseña</Form.Label>
               <Form.Control type="password" placeholder="Contraseña" name='password' required />
             </Form.Group>
             <Button variant="success" ref={target} type='submit'>

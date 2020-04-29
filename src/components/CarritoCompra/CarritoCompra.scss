@@ -1,11 +1,11 @@
 .container_cart{
-    top: 64px;
+    border-radius:12px;
     position: fixed;
     right: 0px;
     width: 340px;
     background-color: white;
     height:calc(100% - 48px);
-    z-index: 1019;
+    z-index: 100;
     box-shadow: 4px 0px 5px 4px grey;
     display: flex;
     flex-direction: column;
@@ -21,7 +21,7 @@
 
 .order_content{
     padding: 20px;
-    height: 90%;
+    height: 68%;
     @media (max-width:480px){
         padding: 45px;
     }
@@ -44,13 +44,6 @@
     padding: 10px 0px;
     display: grid;
     grid-template-columns: 20px 150px 20px 60px;
-    justify-content: space-between;
-}
-
-.order_total{
-    padding: 10px 0px;
-    display: grid;
-    grid-template-columns: 20px 150px 5px 75px;
     justify-content: space-between;
 }
 

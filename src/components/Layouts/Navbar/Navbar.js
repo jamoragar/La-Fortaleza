@@ -28,9 +28,6 @@ const NavBar = (props) => {
           <li className="nav-item">
             <a className="nav-link" href="/Eventos"><i className="fas fa-calendar-alt fa-fw"></i>Eventos</a>
           </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/Blog"><i className="fas fa-pencil-alt fa-fw"></i>Blog</a>
-          </li>
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="/" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i className="fas fa-align-justify fa-fw"></i>
@@ -53,6 +50,10 @@ const NavBar = (props) => {
             </div>
           </li>
         </ul>
+        <div className="shoppingcart">
+          <div className="btn"><span style={{ fontSize: "2rem", color: "#606060" }}><i className="fas fa-shopping-cart"></i></span></div>
+          <span className="shoppingcart-quantity"></span>
+        </div>
         {props.authenticated ?
           <nav className="basic-navbar-nav" >
             <div className="mr-auto" />

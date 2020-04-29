@@ -20,7 +20,6 @@ import Accesorios from "../Articulos/Categorias/Accesorios";
 import ArticulosDialogs from "../ArticulosDialogs/ArticulosDialogs";
 import Contacto from '../Contacto/Contacto';
 import AvisoLegal from '../AvisoLegal/AvisoLegal';
-import Blog from '../Blog/Blog';
 import _404 from '../404/404';
 
 
@@ -55,8 +54,8 @@ export default function Routes(props) {
       <div className="container-fluid  px-5">
         <Router history={history}>
           <Switch>
-            <Route path="/" exact component={() => <Home isAuthed={props.authenticated} uid={props.uid} user={props.user} name={props.name} />} />
-            <Route path="/Dashboard/:uid" component={() => <Dashboard isAuthed={props.authenticated} user={props.user} name={props.name} uid={props.uid} />} />
+            <Route path="/" exact component={Home} />
+            <Route path="/Dashboard" component={Dashboard} />
             <Route path="/Articulo/:id/" component={ArticulosDialogs} />
             <Route path="/Preventa" component={() => <Preventa fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
             <Route path="/Ofertas" component={() => <Ofertas fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
@@ -71,7 +70,6 @@ export default function Routes(props) {
             <Route path="/Login" component={Login} />
             <Route path="/Contacto" component={Contacto} />
             <Route path="/AvisoLegal" component={AvisoLegal} />
-            <Route path="/Blog" component={Blog} />
             <Route path="/not-found" component={_404} />
             <Route component={NotFoundRedirect} />
           </Switch>

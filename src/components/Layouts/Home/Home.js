@@ -11,7 +11,7 @@ import { useCart } from '../../Hooks/useCart';
 
 
 const Home = (props) => {
-
+  
   const [fbData, setFbData] = useState(null);
   let productosToArray = [];
   let categoriaProductos = [];
@@ -39,10 +39,10 @@ const Home = (props) => {
     );
     return (
       <div className="container-fluid">
-        <CarritoCompra {...orders} {...cart} authenticated={props.isAuthed} uid={props.uid} />
+        <CarritoCompra {...orders} {...cart}/>
         <CarouselContainer />
         <TableInfo />
-        <Store fbData={productosToArray} categoriasProductos={categoriaProductos} orders={orders} cart={cart} />
+        <Store fbData={productosToArray} categoriasProductos={categoriaProductos} orders={orders} cart={cart}/>
       </div>
     );
   }

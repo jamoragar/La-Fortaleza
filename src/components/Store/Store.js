@@ -10,7 +10,6 @@ import './Store.scss';
 const Store = ({ fbData, categoriasProductos, orders, cart }) => {
     const [category, setCategory] = useState(null);
     const order = orders;
-
     // LLamado a firebase para obtener todo el nodo Category y poder trabajarlo
     useEffect(() => {
         firebase.database().ref('/Category').on('value', snapshot => {
@@ -64,12 +63,13 @@ const Store = ({ fbData, categoriasProductos, orders, cart }) => {
                                             alt="Banner"
                                             className="img-fluid"
                                             key={i}
-                                            title="Banner Categoria"
+                                            title="Benner Categoria"
                                             src={contenido.banner}
                                         />
                                     </a>
                                 ) : null
                             })}
+
                             <Carousel
                                 additionalTransfrom={0}
                                 arrows

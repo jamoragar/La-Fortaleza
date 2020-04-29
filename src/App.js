@@ -14,9 +14,9 @@ function App(props) {
   if (props) {
     return (
       <div className="App">
-        <NavBar authenticated={props.authenticated} user={props.user} name={props.name} uid={props.uid} />
         <Header />
-        <Routes authenticated={props.authenticated} uid={props.uid} />
+        <NavBar authenticated={props.authenticated} user={props.user} name={props.name} uid={props.uid} />
+        <Routes />
         <Footer />
       </div>
     );

@@ -1,39 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { formatPrice } from '../Data/DataProductos';
-import Register from '../Register/Register';
 import './CarritoCompra.scss';
 
 const CarritoCompra = (props) => {
-    const { authenticated, openCart, setOpenCart, state, useOrder } = props
-    const [modalRegisterShow, setModalRegisterShow] = useState(false);
-
+    const { openCart, setOpenCart, state } = props
     useEffect(() => {
         state.order.length === 0 ? setOpenCart(true) : setOpenCart(false)
     }, [state.order.length]);
 
-    const discountPrice = 0.10;
-
-    const orders = state.order;
-    let precios = [];
-
-    Object.keys(orders).forEach((key, i) => {
-        precios[i] = parseInt(orders[key].price);
-    });
-
-    const subTotal = (precios != 0) ? (precios.reduce((a, b) => a + b)) : 0;
-    const total = subTotal - (subTotal * discountPrice);
-
-    const [newOrders, setNewOrders] = useState([...orders]);
-
-    const deleteOrder = (order) => {
-        const newOrders = [...orders]
-        newOrders.splice(order, 1);
-        setNewOrders(newOrders);
-    }
-
     return (
         <div className={`container_cart ${openCart ? 'container_opened' : 'container_closed'}`} >
-            <Register show={modalRegisterShow} onHide={() => setModalRegisterShow(false)} />
             <div onClick={() => { setOpenCart(!openCart) }} className={`checklist ${openCart ? 'cart' : 'x'}`}>
                 {openCart ? (
                     <div>
@@ -44,13 +20,13 @@ const CarritoCompra = (props) => {
                 }
             </div>
             {state.order.length === 0 ? (
-                <div className={`order_content`}>Su carro esta vacío</div>
+                <div className='title'>Su carro esta vacío</div>
             ) : (
                     <div className={`order_content`} style={{ overflowY: "scroll" }} >
                         {" "}
                         <div className={`order_cont`}> Tu Pedido: </div>
                         {
-                            newOrders.map((order, index) => (
+                            state.order.map((order, index) => (
                                 <div className={`order_container`} key={index} >
                                     <div
                                         className={`order_item`}
@@ -62,39 +38,32 @@ const CarritoCompra = (props) => {
                                         <div>1</div>
                                         <div>{order.title}</div>
                                         <div
-                                            key={index + order}
                                             style={{ cursor: 'pointer' }}
                                             onClick={e => {
                                                 e.stopPropagation();
-                                                deleteOrder(order);
-                                                setOpenCart(false);
                                             }}>
                                             <span role="img" aria-label="Delete">
                                                 🗑️
                                     </span>
                                         </div>
-                                        <div>{formatPrice(order.price - (order.price * discountPrice))}</div>
+                                        <div>{formatPrice(order.price)}</div>
                                     </div>
                                     <div className={`detail_item`}>
                                         {order.description}
                                     </div>
                                 </div>
                             ))}
-                        <div className={`order_total`}>
-                            <div />
-                            <div>Total: </div>
-                            <div />
-                            <div >{formatPrice(total)}</div>
+                        <div className={`order_container`}>
+                            <div className={`order_item`}>
+                                <div />
+                                <div>Total: </div>
+                                <div>aca va el total</div>
+                            </div>
                         </div>
                     </div>
                 )}
             <div className={`order_footer`}>
-                <div className={`btn_pago`} onClick={() => {
-                    if (state.order.length >= 0 && !authenticated) setModalRegisterShow(true)
-                    else {
-                        //setModalPago(true);
-                    }
-                }}>
+                <div className={`btn_pago`}>
                     Pagar!
                 </div>
             </div>
