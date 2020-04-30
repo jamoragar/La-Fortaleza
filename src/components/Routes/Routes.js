@@ -32,6 +32,7 @@ export default function Routes(props) {
   const [fbData, setFbData] = useState(null);
   let productosToArray = [];
   let categoriaProductos = [];
+
   useEffect(() => {
     firebase.database().ref('/Productos').on('value', snapshot => {
       setFbData(snapshot.val());

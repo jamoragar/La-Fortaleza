@@ -20,10 +20,9 @@ import { createBrowserHistory } from 'history';
 export const history = createBrowserHistory();
 
 const DashboardRoute = (props) => {
-    console.log(props)
     return (
-        <div style={{ overflow: "hidden", height: "100vh", width: "100vw", position: "relative", margin: "none", marginTop: "5%"}} >
-        <Router history={history}>
+        <div style={{ overflow: "hidden", height: "100vh", width: "100vw", position: "relative", margin: "none" }} >
+            <Router history={history}>
                 <div className={dashboardStyles.container}>
                     <div className={dashboardStyles.section}>
                         <SideNav props={props.userData} />
@@ -38,9 +37,7 @@ const DashboardRoute = (props) => {
                                         <Route exact path='/Dashboard/:uid/Productos' component={Productos} />
                                         <Route exact path='/Dashboard/:uid/Categorias' component={Categorias} />
                                         <Route exact path='/Dashboard/:uid/Ordenes' component={Ordenes} />
-                                        <Route exact path="/Dashboard/P
-                                        
-                                        roducto/:id" component={VerProducto} />
+                                        <Route exact path="/Dashboard/:uid/Producto/:id" component={VerProducto} />
                                         <Route exact path='/Dashboard/:uid/Profile' component={() => <Profile props={props.userData} />} />
                                     </Switch>
                                 </div>
@@ -48,7 +45,7 @@ const DashboardRoute = (props) => {
                         </div>
                     </div>
                 </div>
-        </Router>
+            </Router>
         </div>
     )
 }

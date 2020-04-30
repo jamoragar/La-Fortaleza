@@ -4,7 +4,7 @@ import Register from '../Register/Register';
 import './CarritoCompra.scss';
 
 const CarritoCompra = (props) => {
-    const { authenticated, openCart, setOpenCart, state, useOrder } = props
+    const { authenticated, openCart, setOpenCart, state } = props;
     const [modalRegisterShow, setModalRegisterShow] = useState(false);
 
     useEffect(() => {
@@ -23,6 +23,7 @@ const CarritoCompra = (props) => {
     const subTotal = (precios != 0) ? (precios.reduce((a, b) => a + b)) : 0;
     const total = subTotal - (subTotal * discountPrice);
 
+    /*
     const [newOrders, setNewOrders] = useState([...orders]);
 
     const deleteOrder = (order) => {
@@ -30,6 +31,7 @@ const CarritoCompra = (props) => {
         newOrders.splice(order, 1);
         setNewOrders(newOrders);
     }
+    */
 
     return (
         <div className={`container_cart ${openCart ? 'container_opened' : 'container_closed'}`} >
@@ -50,7 +52,7 @@ const CarritoCompra = (props) => {
                         {" "}
                         <div className={`order_cont`}> Tu Pedido: </div>
                         {
-                            newOrders.map((order, index) => (
+                            state.order.map((order, index) => (
                                 <div className={`order_container`} key={index} >
                                     <div
                                         className={`order_item`}
@@ -66,7 +68,7 @@ const CarritoCompra = (props) => {
                                             style={{ cursor: 'pointer' }}
                                             onClick={e => {
                                                 e.stopPropagation();
-                                                deleteOrder(order);
+                                                //deleteOrder(order);
                                                 setOpenCart(false);
                                             }}>
                                             <span role="img" aria-label="Delete">
@@ -90,15 +92,18 @@ const CarritoCompra = (props) => {
                 )}
             <div className={`order_footer`}>
                 <div className={`btn_pago`} onClick={() => {
-                    if (state.order.length >= 0 && !authenticated) setModalRegisterShow(true)
+                    if (state.order.length >= 0 && !authenticated) {
+                        setModalRegisterShow(true);
+
+                    }
                     else {
-                        //setModalPago(true);
+                        console.log("pagando")
                     }
                 }}>
                     Pagar!
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

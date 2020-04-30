@@ -16,7 +16,7 @@ const App = (props) => {
       <div className="App">
         <NavBar authenticated={props.authenticated} user={props.user} name={props.name} uid={props.uid} />
         <Header />
-        <Routes />
+        <Routes authenticated={props.authenticated} user={props.user} name={props.name} uid={props.uid} />
         <Footer />
       </div>
     );

@@ -8,7 +8,7 @@ import ReactPlayer from 'react-player';
 import CarritoCompra from '../CarritoCompra/CarritoCompra';
 import './ArticulosDialogs.scss';
 
-export default function ArtciculosDialogs(producto) {
+const ArtciculosDialogs = (producto) => {
     const [productView, setProductView] = useState();
     const orders = useOrders();
     const cart = useCart();
@@ -252,3 +252,5 @@ export default function ArtciculosDialogs(producto) {
 
 }
 
+
+export default ArtciculosDialogs;
