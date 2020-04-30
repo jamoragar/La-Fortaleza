@@ -20,7 +20,7 @@ const CarritoCompra = (props) => {
         precios[i] = parseInt(orders[key].price);
     });
 
-    const subTotal = (precios != 0) ? (precios.reduce((a, b) => a + b)) : 0;
+    const subTotal = (precios !== 0) ? (precios.reduce((a, b) => a + b)) : 0;
 
     const total = subTotal - (subTotal * discountPrice);
 
