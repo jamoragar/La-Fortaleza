@@ -39,6 +39,7 @@ export default function ArtciculosDialogs(producto) {
 
     const selectId = selectToArray[2].params.id;
 
+
     if (selectId && productView) {
         Object.keys(productView).forEach((key, i) => {
             productViewToArray[i] = productView[key]
@@ -48,14 +49,14 @@ export default function ArtciculosDialogs(producto) {
             unique.includes(item) ? unique : [...unique, item], []
         );
 
-        
+
         const productosView = productViewToArray;
         const discountPrice = 0.10;
         return (
             <div>
-                <CarritoCompra {...cart} {...orders}/>
+                <CarritoCompra {...cart} {...orders} />
                 {Object.entries(productosView).map(([abreviacion, contenido], i) => {
-                        console.log(selectId === contenido.id ? contenido : '')
+                    console.log(selectId === contenido.id ? contenido : '')
                     return selectId === contenido.id ? (
                         <div key={i} className="container p-3 mt-5 mb-5">
                             <div className="row"
@@ -79,7 +80,7 @@ export default function ArtciculosDialogs(producto) {
                                         <div className="col ">
                                             <div className="col pt-3">
                                                 <h4>Categoria: </h4><h5>{contenido.categoria}</h5>
-                                                <br/>
+                                                <br />
                                                 <h4>Subcategoria: </h4><h5>{contenido.subcategoria}</h5>
                                             </div>
                                         </div>
@@ -119,114 +120,114 @@ export default function ArtciculosDialogs(producto) {
                                     </div>
                                     <div className="row">
                                         <div className="col p-3">
-                                            {contenido.descripcion}    
+                                            {contenido.descripcion}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             {
-                                contenido.ficha_tecnica || contenido.video ? 
-                                <div className="row pt-5">
-                                    <div className="col-12">
-                                        <ul className="nav nav-tabs" id="myTab" role="tablist">
-                                            {contenido.ficha_tecnica ?
-                                                <li className="nav-item">
-                                                    <a className="nav-link active" id="Descripcion-tab" data-toggle="tab" href="#Descripcion" role="tab" aria-controls="home" aria-selected="true">Descripción</a>
-                                                </li>
-                                                :
-                                                null
-                                            }
-                                            {contenido.video ? 
-                                                <li className="nav-item">
-                                                    <a className="nav-link" id="HowToPlay-tab" data-toggle="tab" href="#HowToPlay" role="tab" aria-controls="howtoplay" aria-selected="false">¿Como jugar?</a>
-                                                </li> 
-                                                : 
-                                                null
-                                            }
-                                        </ul>
-                                    </div>
-                                    <div className="col-12 tabBoddy">
-                                        <div className="tab-content" id="myTabContent">
-                                            {
-                                                contenido.ficha_tecnica ?
-                                                    <div className={`tab-pane fade show pt-5 active`} id="Descripcion" role="tabpanel" aria-labelledby="Descripcion-tab">
-                                                        <table className="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th scope="col"></th>
-                                                                    <th scope="col">Detalle</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <th scope="row">Editorial</th>
-                                                                    <td>{contenido.ficha_tecnica.editorial}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Jugadores</th>
-                                                                    <td>{contenido.ficha_tecnica.jugadores}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Edad Mínima Sugerida</th>
-                                                                    <td>{contenido.ficha_tecnica.edad}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Dependencia Del Idioma</th>
-                                                                    <td>{contenido.ficha_tecnica.idioma_dependiente}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Idioma</th>
-                                                                    <td>{contenido.ficha_tecnica.idioma}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Autor/Autores</th>
-                                                                    <td>{contenido.ficha_tecnica.autores}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Componentes</th>
-                                                                    <td>{contenido.ficha_tecnica.componentes}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Duración En Minutos</th>
-                                                                    <td>{contenido.ficha_tecnica.duracion}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Dimensiones</th>
-                                                                    <td>{contenido.ficha_tecnica.dimensiones}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th scope="row">Peso</th>
-                                                                    <td>{contenido.ficha_tecnica.peso}</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
+                                contenido.ficha_tecnica || contenido.video ?
+                                    <div className="row pt-5">
+                                        <div className="col-12">
+                                            <ul className="nav nav-tabs" id="myTab" role="tablist">
+                                                {contenido.ficha_tecnica ?
+                                                    <li className="nav-item">
+                                                        <a className="nav-link active" id="Descripcion-tab" data-toggle="tab" href="#Descripcion" role="tab" aria-controls="home" aria-selected="true">Descripción</a>
+                                                    </li>
                                                     :
                                                     null
-                                            }
-                                            {
-                                                contenido.video ?
-                                                    <div className={`tab-pane fade pt-5`} id="HowToPlay" role="tabpanel" aria-labelledby="HowToPlay-tab">
-                                                        <div className="container">
-                                                            <div className="row">
-                                                                <div className="embed-responsive embed-responsive-16by9">
-                                                                    <ReactPlayer
-                                                                        width='420'
-                                                                        height='300'
-                                                                        url={contenido.video}
-                                                                    />
+                                                }
+                                                {contenido.video ?
+                                                    <li className="nav-item">
+                                                        <a className="nav-link" id="HowToPlay-tab" data-toggle="tab" href="#HowToPlay" role="tab" aria-controls="howtoplay" aria-selected="false">¿Como jugar?</a>
+                                                    </li>
+                                                    :
+                                                    null
+                                                }
+                                            </ul>
+                                        </div>
+                                        <div className="col-12 tabBoddy">
+                                            <div className="tab-content" id="myTabContent">
+                                                {
+                                                    contenido.ficha_tecnica ?
+                                                        <div className={`tab-pane fade show pt-5 active`} id="Descripcion" role="tabpanel" aria-labelledby="Descripcion-tab">
+                                                            <table className="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col"></th>
+                                                                        <th scope="col">Detalle</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row">Editorial</th>
+                                                                        <td>{contenido.ficha_tecnica.editorial}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Jugadores</th>
+                                                                        <td>{contenido.ficha_tecnica.jugadores}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Edad Mínima Sugerida</th>
+                                                                        <td>{contenido.ficha_tecnica.edad}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Dependencia Del Idioma</th>
+                                                                        <td>{contenido.ficha_tecnica.idioma_dependiente}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Idioma</th>
+                                                                        <td>{contenido.ficha_tecnica.idioma}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Autor/Autores</th>
+                                                                        <td>{contenido.ficha_tecnica.autores}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Componentes</th>
+                                                                        <td>{contenido.ficha_tecnica.componentes}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Duración En Minutos</th>
+                                                                        <td>{contenido.ficha_tecnica.duracion}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Dimensiones</th>
+                                                                        <td>{contenido.ficha_tecnica.dimensiones}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th scope="row">Peso</th>
+                                                                        <td>{contenido.ficha_tecnica.peso}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        :
+                                                        null
+                                                }
+                                                {
+                                                    contenido.video ?
+                                                        <div className={`tab-pane fade pt-5`} id="HowToPlay" role="tabpanel" aria-labelledby="HowToPlay-tab">
+                                                            <div className="container">
+                                                                <div className="row">
+                                                                    <div className="embed-responsive embed-responsive-16by9">
+                                                                        <ReactPlayer
+                                                                            width='420'
+                                                                            height='300'
+                                                                            url={contenido.video}
+                                                                        />
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    :
-                                                    null
-                                            }
+                                                        :
+                                                        null
+                                                }
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                :
-                                null
+                                    :
+                                    null
                             }
                         </div>
                     ) : null

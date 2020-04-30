@@ -9,7 +9,7 @@ import Header from "./components/Layouts/Header/Header";
 import NavBar from "../src/components/Layouts/Navbar/Navbar";
 import Footer from "./components/Layouts/Footer/Footer";
 
-function App(props) {
+const App = (props) => {
 
   if (props) {
     return (

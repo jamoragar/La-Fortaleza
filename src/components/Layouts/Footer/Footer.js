@@ -19,8 +19,8 @@ const Footer = (props) => {
                     <div className=" col-sm-4 col-md  col-6 col">
                         <h5 className="headin5_amrc col_white_amrc pt2">Productos</h5>
                         <ul className="footer_ul_amrc">
-                            <li><a href="/Novedades">Novedades</a></li>
-                            <li><a href="/Ofertas">Ofertas</a></li>
+                            <li><a href="/">Novedades</a></li>
+                            <li><a href="/">Ofertas</a></li>
                             <li><a href="/Preventa">Preventa</a></li>
                         </ul>
                     </div>
