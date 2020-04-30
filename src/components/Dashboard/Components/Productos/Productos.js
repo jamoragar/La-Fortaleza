@@ -67,7 +67,9 @@ const Productos = () => {
                                 <Tooltip id={`tooltip-bottom`}><strong>Editar</strong></Tooltip>
                                 }
                             >
-                            <div style={{ cursor: 'pointer' }} className="text-primary"><i className="fa fa-fw fa-edit fa-lg" style={{ width: '35px', height: '20px' }} onClick={handleShowEditarProductos} /></div>
+                            <Link to={{pathname: `/Dashboard/Producto/Editar/${data.id}`, data: data }}>
+                                <div style={{ cursor: 'pointer' }} className="text-primary"><i className="fa fa-fw fa-edit fa-lg" style={{ width: '35px', height: '20px' }} /></div>
+                            </Link>
                         </OverlayTrigger>
                         <OverlayTrigger key={'eliminar'} placement={'left'}
                             overlay={
@@ -77,13 +79,6 @@ const Productos = () => {
                                 <div style={{cursor:'pointer'}} onClick={()=>deleteProduct(data)} className="text-danger"><i className="fa fa-fw fa-trash fa-lg" style={{height:'20px'}}/></div>
                             </OverlayTrigger>
                         </div>
-                        {
-                            showEditarProductos ? (
-                                <EditarProducto style={{background:'none'}} show={showEditarProductos} onHide={() => setShowEditarProductos(false)} product={data} />
-                            )
-                            :
-                            null
-                        }
                     </div>
                         )
                     },
@@ -93,7 +88,6 @@ const Productos = () => {
 
     
     const [showModal, setShowModal] = useState(false);
-    const [showEditarProductos, setShowEditarProductos] = useState(false)
     const [productos, setProductos] = useState([])
     //Buscador
    
@@ -110,7 +104,6 @@ const Productos = () => {
     }, [filterText, resetPaginationToggle]);
     //Fin buscador...
     const handleShow = () => setShowModal(true);
-    const handleShowEditarProductos = (data) => setShowEditarProductos(true);
     let productosToArray = [];
     useEffect(() => {
         firebase.database().ref('/Productos').on('value', snapshot => {
