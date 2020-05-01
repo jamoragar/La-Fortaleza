@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from'react';
 import {Form, Col, Button} from 'react-bootstrap';
-import {useParams, Link} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import firebase from '../../../../config/firebase';
 
-const ProductoModal = (id, nombre, descripcion, categoria, subcategoria, precio, stock, images) => {
+const ProductoModal = (id, nombre, descripcion, categoria, subcategoria, precio, stock, images, history) => {
+
     return(
         <div>
             <h3>Producto ID: {id}</h3>
@@ -42,12 +43,10 @@ const ProductoModal = (id, nombre, descripcion, categoria, subcategoria, precio,
                         </Form.Group>
                     </Col>
                 </Form.Row>
-                <Link to='/Dashboard/Productos'>
-                    <Button variant="outline-primary" block>
-                        <i className="fas fa-undo fa-fw" />
-                        Volver
-                    </Button>
-                </Link>
+                <Button variant="outline-primary" block onClick={() => history.goBack()}>
+                    <i className="fas fa-undo fa-fw" />
+                    Volver
+                </Button>
             </Form>
         </div>
     )
@@ -72,7 +71,7 @@ const VerProducto = (props) =>{
     }else if(id && fbProducto){
         const {id, nombre, descripcion, categoria, subcategoria, precio, stock} = fbProducto;
         return(
-            ProductoModal(id, nombre, descripcion, categoria, subcategoria, precio, stock)
+            ProductoModal(id, nombre, descripcion, categoria, subcategoria, precio, stock, null, props.history)
         );
     }else{
         return(

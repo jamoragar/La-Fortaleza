@@ -11,6 +11,7 @@ import Productos from './Components/Productos/Productos';
 import Categorias from './Components/Categorias/Categorias';
 import Ordenes from './Components/Ordenes/Ordenes';
 import VerProducto from './Components/Productos/VerProducto';
+import EditarProductos from './Components/Productos/EditarProducto';
 import Profile from './userComponents/Profile';
 
 import dashboardStyles from './Dashboard.module.scss'
@@ -38,6 +39,7 @@ const DashboardRoute = (props) => {
                                         <Route exact path='/Dashboard/:uid/Categorias' component={Categorias} />
                                         <Route exact path='/Dashboard/:uid/Ordenes' component={Ordenes} />
                                         <Route exact path="/Dashboard/:uid/Producto/:id" component={VerProducto} />
+                                        <Route exact path="/Dashboard/:uid/Producto/Editar/:id" component={EditarProductos} />
                                         <Route exact path='/Dashboard/:uid/Profile' component={() => <Profile props={props.userData} />} />
                                     </Switch>
                                 </div>
@@ -71,7 +73,6 @@ const Dashboard = (props) => {
                     margin: '5% 0 0 0',
                     overflow: "hidden",
                     height: "100vh",
-                    width: "100vw",
                     position: "relative"
                 }}
             >
