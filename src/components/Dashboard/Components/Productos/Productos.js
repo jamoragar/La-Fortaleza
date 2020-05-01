@@ -1,12 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import firebase from '../../../../config/firebase';
-<<<<<<< HEAD
-import { OverlayTrigger, Tooltip, Button, Spinner } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-=======
 import { OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
-import {Link, useParams} from 'react-router-dom';
->>>>>>> 794081ee2215bc6a46592c22dc3c7bb6ceca4ee3
+import { Link, useParams } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import AgregarProducto from './AgregarProducto';
 import EditarProducto from './EditarProducto';
@@ -20,7 +15,7 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
 );
 
 const Productos = () => {
-    let {uid} = useParams();
+    let { uid } = useParams();
     const columns = [
         {
             name: 'Foto',
@@ -65,8 +60,7 @@ const Productos = () => {
                                     <Tooltip id={`tooltip-bottom`}><strong>Ver</strong></Tooltip>
                                 }
                             >
-<<<<<<< HEAD
-                                <Link to={{ pathname: `/Dashboard/:uid/Producto/${data.id}`, data: data }}>
+                                <Link to={{ pathname: `/Dashboard/${uid}/Producto/${data.id}`, data: data }}>
                                     <div style={{ cursor: 'pointer' }} className="text-success"><i className="fas fa-fw fa-search fa-lg" style={{ width: '35px', height: '20px' }} /></div>
                                 </Link>
                             </OverlayTrigger>
@@ -75,31 +69,13 @@ const Productos = () => {
                                     <Tooltip id={`tooltip-bottom`}><strong>Editar</strong></Tooltip>
                                 }
                             >
-                                <Link to={{ pathname: `/Dashboard/:uid/Producto/Editar/${data.id}`, data: data }}>
+                                <Link to={{ pathname: `/Dashboard/${uid}/Producto/Editar/${data.id}`, data: data }}>
                                     <div style={{ cursor: 'pointer' }} className="text-primary"><i className="fa fa-fw fa-edit fa-lg" style={{ width: '35px', height: '20px' }} /></div>
                                 </Link>
                             </OverlayTrigger>
                             <OverlayTrigger key={'eliminar'} placement={'left'}
                                 overlay={
                                     <Tooltip id={`tooltip-bottom`}><strong>Eliminar</strong></Tooltip>
-=======
-                            <Link to={{pathname: `/Dashboard/${uid}/Producto/${data.id}`, data: data }}>
-                                <div style={{ cursor: 'pointer' }} className="text-success"><i className="fas fa-fw fa-search fa-lg" style={{ width: '35px', height: '20px' }} /></div>
-                            </Link>
-                        </OverlayTrigger>
-                        <OverlayTrigger key={'editar'} placement={'left'}
-                            overlay={
-                                <Tooltip id={`tooltip-bottom`}><strong>Editar</strong></Tooltip>
-                                }
-                            >
-                            <Link to={{pathname: `/Dashboard/${uid}/Producto/Editar/${data.id}`, data: data }}>
-                                <div style={{ cursor: 'pointer' }} className="text-primary"><i className="fa fa-fw fa-edit fa-lg" style={{ width: '35px', height: '20px' }} /></div>
-                            </Link>
-                        </OverlayTrigger>
-                        <OverlayTrigger key={'eliminar'} placement={'left'}
-                            overlay={
-                                <Tooltip id={`tooltip-bottom`}><strong>Eliminar</strong></Tooltip>
->>>>>>> 794081ee2215bc6a46592c22dc3c7bb6ceca4ee3
                                 }
                             >
                                 <div style={{ cursor: 'pointer' }} onClick={() => deleteProduct(data)} className="text-danger"><i className="fa fa-fw fa-trash fa-lg" style={{ height: '20px' }} /></div>
