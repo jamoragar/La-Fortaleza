@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { Form, Col, Button } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
@@ -5,6 +6,16 @@ import firebase from '../../../../config/firebase';
 
 const ProductoModal = (id, nombre, descripcion, categoria, subcategoria, precio, stock, images) => {
     return (
+=======
+import React, {useState, useEffect} from'react';
+import {Form, Col, Button} from 'react-bootstrap';
+import {useParams} from 'react-router-dom';
+import firebase from '../../../../config/firebase';
+
+const ProductoModal = (id, nombre, descripcion, categoria, subcategoria, precio, stock, images, history) => {
+
+    return(
+>>>>>>> 794081ee2215bc6a46592c22dc3c7bb6ceca4ee3
         <div>
             <h3>Producto ID: {id}</h3>
             <Form>
@@ -42,12 +53,10 @@ const ProductoModal = (id, nombre, descripcion, categoria, subcategoria, precio,
                         </Form.Group>
                     </Col>
                 </Form.Row>
-                <Link to='/Dashboard/Productos'>
-                    <Button variant="outline-primary" block>
-                        <i className="fas fa-undo fa-fw" />
-                        Volver
-                    </Button>
-                </Link>
+                <Button variant="outline-primary" block onClick={() => history.goBack()}>
+                    <i className="fas fa-undo fa-fw" />
+                    Volver
+                </Button>
             </Form>
         </div>
     )
@@ -69,10 +78,17 @@ const VerProducto = (props) => {
         return (
             ProductoModal(id, nombre, descripcion, categoria, subcategoria, precio, stock)
         );
+<<<<<<< HEAD
     } else if (id && fbProducto) {
         const { id, nombre, descripcion, categoria, subcategoria, precio, stock } = fbProducto;
         return (
             ProductoModal(id, nombre, descripcion, categoria, subcategoria, precio, stock)
+=======
+    }else if(id && fbProducto){
+        const {id, nombre, descripcion, categoria, subcategoria, precio, stock} = fbProducto;
+        return(
+            ProductoModal(id, nombre, descripcion, categoria, subcategoria, precio, stock, null, props.history)
+>>>>>>> 794081ee2215bc6a46592c22dc3c7bb6ceca4ee3
         );
     } else {
         return (
