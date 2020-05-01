@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import firebase from '../../../../config/firebase';
-import { OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip, Button, Spinner } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import AgregarProducto from './AgregarProducto';
