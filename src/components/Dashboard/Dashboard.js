@@ -13,10 +13,13 @@ import Ordenes from './Components/Ordenes/Ordenes';
 import VerProducto from './Components/Productos/VerProducto';
 import EditarProductos from './Components/Productos/EditarProducto';
 import Profile from './userComponents/Profile';
+import EditarSlider from './Components/Slider/EditarSlider';
+import EditarButtons from './Components/Slider/EditarButtons';
 
 import dashboardStyles from './Dashboard.module.scss'
 import mainStyles from './Main.module.scss';
 import { createBrowserHistory } from 'history';
+
 
 export const history = createBrowserHistory();
 
@@ -40,6 +43,8 @@ const DashboardRoute = (props) => {
                                         <Route exact path='/Dashboard/:uid/Ordenes' component={Ordenes} />
                                         <Route exact path="/Dashboard/:uid/Producto/:id" component={VerProducto} />
                                         <Route exact path="/Dashboard/:uid/Producto/Editar/:id" component={EditarProductos} />
+                                        <Route exact path="/Dashboard/:uid/Slider/EditarSlider/:id" component={EditarSlider} />
+                                        <Route exact path="/Dashboard/:uid/Slider/EditarButtons/:id" component={EditarButtons} />
                                         <Route exact path='/Dashboard/:uid/Profile' component={() => <Profile props={props.userData} />} />
                                     </Switch>
                                 </div>

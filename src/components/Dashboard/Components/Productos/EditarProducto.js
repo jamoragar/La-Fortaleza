@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from'react';
-import {Form, Col, Button} from 'react-bootstrap';
-import {useParams, Link} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Form, Col, Button, Spinner } from 'react-bootstrap';
+import { useParams, Link } from 'react-router-dom';
 import firebase from '../../../../config/firebase';
 
-const EditarProducto = (props) =>{
+const EditarProducto = (props) => {
     const [fbProducto, setFbProducto] = useState(null);
     const [fbCategoria, setFbCategoria] = useState(null);
     const [subCat, setSubCat] = useState(null);
@@ -11,7 +11,7 @@ const EditarProducto = (props) =>{
     let {id} = useParams();
     let descripciones = [];
 
-    useEffect(() =>{
+    useEffect(() => {
         firebase.database().ref(`/Productos/${id}`).on('value', (snapshot) => {
             setFbProducto(snapshot.val());
         })
@@ -55,7 +55,7 @@ const EditarProducto = (props) =>{
                     </Form.Group>
                     <Form.Group controlId="formCategory">
                         <Form.Label>Categoría:</Form.Label>
-                        <Form.Control name='categoria' as="select" 
+                        <Form.Control name='categoria' as="select"
                             onChange={(categoria) => handleSubCategory(categoria.target.value)}>
                             {fbCategoria.map((categoria_arr, i) => {
                                 return <option key={i} selected={categoria_arr === categoria ? true : false} >{categoria_arr}</option>
@@ -64,18 +64,18 @@ const EditarProducto = (props) =>{
                     </Form.Group>
                     {
                         subCat ?
-                        <Form.Group controlId="formSubCategory">
-                            <Form.Label>Sub-Categoría:</Form.Label>
-                            <Form.Control name='subcategoria' as="select" >
-                                {/* Transformamos el hook subCat a array, ya que firebase lo entrega como Objeto, y se procede a recorrerlo. */
-                                    Object.entries(subCat).map(([abreviacion, nombre], i) => {
-                                        return <option key={i} selected={nombre.description === subcategoria ? true : false}>{nombre.description}</option>
-                                    })
-                                }
-                            </Form.Control>
-                        </Form.Group>
-                        :
-                        handleSubCategory(categoria)
+                            <Form.Group controlId="formSubCategory">
+                                <Form.Label>Sub-Categoría:</Form.Label>
+                                <Form.Control name='subcategoria' as="select" >
+                                    {/* Transformamos el hook subCat a array, ya que firebase lo entrega como Objeto, y se procede a recorrerlo. */
+                                        Object.entries(subCat).map(([abreviacion, nombre], i) => {
+                                            return <option key={i} selected={nombre.description === subcategoria ? true : false}>{nombre.description}</option>
+                                        })
+                                    }
+                                </Form.Control>
+                            </Form.Group>
+                            :
+                            handleSubCategory(categoria)
                     }
                     <Form.Row>
                         <Col>
@@ -91,24 +91,33 @@ const EditarProducto = (props) =>{
                             </Form.Group>
                         </Col>
                     </Form.Row>
-                    <br/>
+                    <br />
                     <Button variant='success' block>
                         <i className="fas fa-undo fa-fw" />
                         Actualizar
                     </Button>
-                    <br/>
-                    <Button variant="outline-primary" block onClick={() => history.goBack()}>
-                        <i className="fas fa-undo fa-fw" />
-                        Volver
-                    </Button>
+                    <br />
+                    <Link to='/Dashboard/:uid/Productos'>
+                        <Button variant="outline-primary" block>
+                            <i className="fas fa-undo fa-fw" />
+                            Volver
+                        </Button>
+                    </Link>
                 </Form>
             </div>
         );
-    }else{
-        return(
-            <div>
-                <h2>Cargando...</h2>
-            </div>
+    } else {
+        return (
+            <>
+                <Spinner animation="grow" variant="primary" />
+                <Spinner animation="grow" variant="secondary" />
+                <Spinner animation="grow" variant="success" />
+                <Spinner animation="grow" variant="danger" />
+                <Spinner animation="grow" variant="warning" />
+                <Spinner animation="grow" variant="info" />
+                <Spinner animation="grow" variant="light" />
+                <Spinner animation="grow" variant="dark" />
+            </>
         )
     }
 }
