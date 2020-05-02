@@ -78,7 +78,7 @@ const VerProducto = (props) => {
             <div>
                 <h3>Error 404</h3>
                 <br />
-                <h6>El producto no ha sido encontrado en nuestra base de dato. Por favor, contactarse con el administrador.</h6>
+                <h6>El proucto no ha sido encontrado en nuestra base de dato. Por favor, contactarse con el administrador.</h6>
                 <br />
                 <p><strong>TIP</strong>: Corrovore que el id del producto este bien escrito.</p>
             </div>
