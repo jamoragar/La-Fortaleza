@@ -7,6 +7,7 @@ const EditarProducto = (props) =>{
     const [fbProducto, setFbProducto] = useState(null);
     const [fbCategoria, setFbCategoria] = useState(null);
     const [subCat, setSubCat] = useState(null);
+    const history = props.history;
     let {id} = useParams();
     let descripciones = [];
 
@@ -38,6 +39,7 @@ const EditarProducto = (props) =>{
     }
 
     if(id && fbProducto && fbCategoria){
+        console.log(fbProducto)
         const {id, nombre, descripcion, categoria, subcategoria, precio, stock} = fbProducto;
         return(
             <div>
@@ -95,12 +97,10 @@ const EditarProducto = (props) =>{
                         Actualizar
                     </Button>
                     <br/>
-                    <Link to='/Dashboard/Productos'>
-                        <Button variant="outline-primary" block>
-                            <i className="fas fa-undo fa-fw" />
-                            Volver
-                        </Button>
-                    </Link>
+                    <Button variant="outline-primary" block onClick={() => history.goBack()}>
+                        <i className="fas fa-undo fa-fw" />
+                        Volver
+                    </Button>
                 </Form>
             </div>
         );
