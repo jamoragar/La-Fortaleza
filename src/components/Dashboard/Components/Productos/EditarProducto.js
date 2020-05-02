@@ -7,7 +7,8 @@ const EditarProducto = (props) => {
     const [fbProducto, setFbProducto] = useState(null);
     const [fbCategoria, setFbCategoria] = useState(null);
     const [subCat, setSubCat] = useState(null);
-    let { id } = useParams();
+    const history = props.history;
+    let {id} = useParams();
     let descripciones = [];
 
     useEffect(() => {
@@ -37,9 +38,10 @@ const EditarProducto = (props) => {
         }
     }
 
-    if (id && fbProducto && fbCategoria) {
-        const { id, nombre, descripcion, categoria, subcategoria, precio, stock } = fbProducto;
-        return (
+    if(id && fbProducto && fbCategoria){
+        console.log(fbProducto)
+        const {id, nombre, descripcion, categoria, subcategoria, precio, stock} = fbProducto;
+        return(
             <div>
                 <h3>Producto ID: {id}</h3>
                 <Form>

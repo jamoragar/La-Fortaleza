@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import firebase from '../../../../config/firebase';
 
 const ProductoModal = (id, nombre, descripcion, categoria, subcategoria, precio, stock, images, history) => {
-
+    console.log(history)
     return (
         <div>
             <h3>Producto ID: {id}</h3>
@@ -63,12 +63,7 @@ const VerProducto = (props) => {
         })
     }, []);
 
-    if (productData) {
-        const { id, nombre, descripcion, categoria, subcategoria, precio, stock } = productData;
-        return (
-            ProductoModal(id, nombre, descripcion, categoria, subcategoria, precio, stock)
-        );
-    } else if (id && fbProducto) {
+    if (id && fbProducto) {
         const { id, nombre, descripcion, categoria, subcategoria, precio, stock } = fbProducto;
         return (
             ProductoModal(id, nombre, descripcion, categoria, subcategoria, precio, stock, null, props.history)
@@ -76,11 +71,7 @@ const VerProducto = (props) => {
     } else {
         return (
             <div>
-                <h3>Error 404</h3>
-                <br />
-                <h6>El proucto no ha sido encontrado en nuestra base de dato. Por favor, contactarse con el administrador.</h6>
-                <br />
-                <p><strong>TIP</strong>: Corrovore que el id del producto este bien escrito.</p>
+                <h3>Cargando producto...</h3>
             </div>
         )
     }
