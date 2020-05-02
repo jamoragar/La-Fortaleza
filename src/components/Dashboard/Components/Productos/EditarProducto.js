@@ -56,7 +56,7 @@ const EditarProducto = (props) => {
                         <Form.Control name='categoria' as="select"
                             onChange={(categoria) => handleSubCategory(categoria.target.value)}>
                             {fbCategoria.map((categoria_arr, i) => {
-                                return <option key={i} selected={categoria_arr === categoria ? true : false} >{categoria_arr}</option>
+                                return <option key={i} value={categoria_arr === categoria ? true : false} >{categoria_arr}</option>
                             })}
                         </Form.Control>
                     </Form.Group>
@@ -67,7 +67,7 @@ const EditarProducto = (props) => {
                                 <Form.Control name='subcategoria' as="select" >
                                     {/* Transformamos el hook subCat a array, ya que firebase lo entrega como Objeto, y se procede a recorrerlo. */
                                         Object.entries(subCat).map(([abreviacion, nombre], i) => {
-                                            return <option key={i} selected={nombre.description === subcategoria ? true : false}>{nombre.description}</option>
+                                            return <option key={i} value={nombre.description === subcategoria ? true : false}>{nombre.description}</option>
                                         })
                                     }
                                 </Form.Control>

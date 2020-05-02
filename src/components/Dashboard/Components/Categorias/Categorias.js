@@ -21,8 +21,8 @@ const Categorias = () => {
 
         },
         {
-            name: 'Nombre',
-            selector: 'description',
+            name: 'Path',
+            selector: 'path',
             sortable: true,
             grow: 2,
 
