@@ -97,7 +97,7 @@ const EditarProducto = (props) => {
                         Actualizar
                     </Button>
                     <br />
-                    <Link to='/Dashboard/:uid/Productos'>
+                    <Link to={`/Dashboard/${id}/Productos`}>
                         <Button variant="outline-primary" block>
                             <i className="fas fa-undo fa-fw" />
                             Volver
