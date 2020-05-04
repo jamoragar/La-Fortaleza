@@ -10,12 +10,18 @@ const Categorias = (props) => {
             name: 'Foto',
             cell: row => <a href={row.img} target="blank"><img src={row.img} width='75' alt="..." /></a>,
             grow: 1,
+            style: {
+                backgroundColor: 'rgba(187, 204, 221, 1)',
+            },
         },
         {
             name: 'Id',
             selector: 'id',
             sortable: true,
             grow: 2,
+            style: {
+                backgroundColor: 'rgba(187, 204, 221, 1)',
+            },
 
         },
         {
@@ -23,6 +29,9 @@ const Categorias = (props) => {
             selector: 'description',
             sortable: true,
             grow: 2,
+            style: {
+                backgroundColor: 'rgba(187, 204, 221, 1)',
+            },
 
         },
         {
@@ -30,6 +39,9 @@ const Categorias = (props) => {
             selector: 'path',
             sortable: true,
             grow: 2,
+            style: {
+                backgroundColor: 'rgba(187, 204, 221, 1)',
+            },
 
         },
         {
@@ -49,6 +61,9 @@ const Categorias = (props) => {
                         </div>
                     </div>
                 )
+            },
+            style: {
+                backgroundColor: 'rgba(187, 204, 221, 1)',
             },
 
         }
@@ -101,7 +116,7 @@ const Categorias = (props) => {
         return (
             <div>
                 <div className="row">
-                    <div className="col">
+                    <div className="col" style={{ marginBottom: "3rem" }}>
                         <DataTable
                             title='Subcategorias'
                             columns={columns}

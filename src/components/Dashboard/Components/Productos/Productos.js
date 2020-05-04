@@ -132,6 +132,7 @@ const Productos = () => {
         Object.keys(productos).forEach((key, i) => {
             productosToArray[i] = productos[key]
         });
+
         const filteredItems = productosToArray.filter(item => item.nombre.toLowerCase() && item.nombre.toLowerCase().includes(filterText.toLowerCase()));
 
         return (
