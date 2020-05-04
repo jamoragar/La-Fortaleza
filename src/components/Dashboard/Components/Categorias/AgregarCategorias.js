@@ -11,9 +11,7 @@ const AgregarCategorias = (props) => {
     const [buttonAceptarText, setButtonAceptarText] = useState(true);
     const [progress, setProgress] = useState(0);
     let images = [];
-    let fileArray = []
-
-    //Función que recorre los archivos subidos y los transforma en blob para, posteriormente crear un array de estos y previsualizarlos dentro del formulario.
+    let fileArray = [];
     const orientImage = async ({ target }) => {
         images.push(target.files)
         setFiles(target.files)
@@ -22,8 +20,6 @@ const AgregarCategorias = (props) => {
         }
         setImage(await fileArray);
     }
-
-    //Función que borra un elemento del array que contiene las imagenes agregadas en el formulario.
     const deleteImage = (e, name) => {
         e.preventDefault();
         setImage(image.filter((image) => image !== name))
@@ -33,16 +29,14 @@ const AgregarCategorias = (props) => {
         document.getElementById('myForm').reset();
         setImage(null);
     }
-
     const submitCategory = (e) => {
         e.preventDefault();
         const promises = [];
-        const { description, path } = e.target.elements;
-        const FbDownloadURL = []
+        const { description, path, id } = e.target.elements;
+        const FbDownloadURL = [];
 
         if (files.length > 0) {
             setButtonAceptarText(false)
-            //Según la cantidad de archivos recorremos el hook files y subimos dichos archivos al bucket de firebase.
             for (let i = 0; i < files.length; i++) {
                 const uploadTask = firebase.storage().ref().child(`IMG/Categorias/categorias/${description.value.trim()}/img_${description.value.trim()}_${i}`).put(files[i])
                 promises.push(uploadTask);
@@ -59,9 +53,10 @@ const AgregarCategorias = (props) => {
                         const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
                         FbDownloadURL.push(downloadURL);
                         if (FbDownloadURL.length === files.length) {
-                            const key = firebase.database().ref().push().key;
+                            //const key = firebase.database().ref().push().key;
+                            const key = id.value;
                             firebase.database().ref().child(`/Category/${key}`).set({
-                                id: key,
+                                id: id.value,
                                 description: description.value.trim(),
                                 path: path.value,
                                 fecha_creacion: moment().format('DD-MM-YYYY h:mm:ss a'),
@@ -100,6 +95,10 @@ const AgregarCategorias = (props) => {
             <Modal.Body>
                 <Form onSubmit={submitCategory} id='myForm'>
                     <Form.Group controlId='formNameProducts'>
+                        <Form.Label>Id:</Form.Label>
+                        <Form.Control name='id' type='text' placeholder='Ingrese el nombre del producto.' required />
+                    </Form.Group>
+                    <Form.Group controlId='formNameProducts'>
                         <Form.Label>Nombre:</Form.Label>
                         <Form.Control name='description' type='text' placeholder='Ingrese el nombre del producto.' required />
                     </Form.Group>
@@ -113,7 +112,7 @@ const AgregarCategorias = (props) => {
                             <input type="file" className={'custom-file-input'} id="customFile" onChange={orientImage} accept="image/*" multiple />
                             <label className="custom-file-label" htmlFor="customFile">Buscar Imágen(es)</label>
                         </div>
-                        { /* Consultamos que existan elementos en el hook image, y despues recorremos este */
+                        {
                             image ? (
                                 <div>
                                     <div className={categoriasStyles.containerImg}>

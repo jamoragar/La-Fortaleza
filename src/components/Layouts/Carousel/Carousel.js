@@ -18,10 +18,10 @@ const CarouselContainer = () => {
                     </ol>
                     <div className="carousel-inner">
                       <div className="carousel-item active">
-                        <img className="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2Fslider1.png?alt=media&token=555174f2-d80c-4b2e-b72c-ab7cb697f710" alt="slide1" />
+                        <img className="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2FSliders%2F1%2Fslider1?alt=media&token=5bb00267-e77f-4ea7-b154-838b84d63aa9" alt="slide1" />
                       </div>
                       <div className="carousel-item">
-                        <img className="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2Fslider2.png?alt=media&token=746713e5-72c9-474e-bdc6-3d12632cf816" alt="slide2" />
+                        <img className="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2FSliders%2F2%2Fslider2?alt=media&token=032b65ce-5dfe-4f96-a9cc-6d602451dae1" alt="slide2" />
                       </div>
                     </div>
                     <a className="carousel-control-prev-izq" href="#carousel" role="button" data-slide="prev">
@@ -45,8 +45,8 @@ const CarouselContainer = () => {
                     <div className="ratio_right-cover-2 image-wrapper">
                       <a href="/Preventa">
                         <img className="img-fluid"
-                          src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2Fgrid1.png?alt=media&token=284c98da-0f09-4756-b5eb-bb73d6bc39d5"
-                          alt="info-Grid" />
+                          src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2FButtons%2F1%2FButton1?alt=media&token=4e3aab92-1923-450e-95d6-344cf922fb47"
+                          alt="Button1" />
                       </a>
                     </div>
                   </div>
@@ -58,8 +58,8 @@ const CarouselContainer = () => {
                     <div className="ratio_right-cover-2 image-wrapper">
                       <a href="https://www.instagram.com/p/B-k5sdCFSuB/?utm_source=ig_web_copy_link" target="blank">
                         <img className="img-fluid"
-                          src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2Fgrid2.png?alt=media&token=f78c89ed-1ec5-405e-bf71-eef8f3ad593f"
-                          alt="info-Grid" />
+                          src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2FButtons%2F2%2FButton2?alt=media&token=95c5dd19-16bb-4939-bcc6-508e977b00c6"
+                          alt="Button2" />
                       </a>
                     </div>
                   </div>
