@@ -4,7 +4,6 @@ import firebase from '../../../../config/firebase';
 import DataTable from 'react-data-table-component';
 import { OverlayTrigger, Tooltip, Card, Accordion, Row, Col } from 'react-bootstrap';
 import AgregarCategorias from './AgregarCategorias';
-import AgregarSubCategorias from './AgregarSubCategorias';
 import SubCategorias from './SubCategorias';
 
 const Categorias = () => {
@@ -57,12 +56,11 @@ const Categorias = () => {
         }
     ];
 
-    const [showModal1, setShowModal1] = useState(false);
-    const [showModal2, setShowModal2] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const handleShow = () => setShowModal(true);
     const [categorias, setCategorias] = useState([])
     let categoriasToArray = [];
-    const handleShow1 = () => setShowModal1(true);
-    const handleShow2 = () => setShowModal2(true);
+
     const opcion = () => window.confirm('Esta seguro que desea eliminar esta categoria?');
 
     useEffect(() => {
@@ -105,16 +103,11 @@ const Categorias = () => {
                 </div>
                 <div className="row">
                     <div className="col text-center">
-                        <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', marginBottom: '2rem', width: '100' }} onClick={handleShow2} variant="primary">
+                        <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', marginBottom: '2rem', width: '100' }} onClick={handleShow} variant="primary">
                             <i className="fas fa-tag fa-fw" />
                                 Agregar Categoria
                         </Button>
-                        <AgregarCategorias show={showModal2} onHide={() => setShowModal2(false)} />
-                        <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', marginBottom: '2rem', marginLeft: '2rem' }} onClick={handleShow1} variant="primary">
-                            <i className="fas fa-tag fa-fw" />
-                                Agregar Subcategoria
-                        </Button>
-                        <AgregarSubCategorias show={showModal1} onHide={() => setShowModal1(false)} />
+                        <AgregarCategorias show={showModal} onHide={() => setShowModal(false)} />
                     </div>
                 </div>
                 <div className="row">
@@ -124,12 +117,12 @@ const Categorias = () => {
                             data={categoriasToArray}
                             persistTableHead
                             fixedHeader
-                            fixedHeaderScrollHeight="500px"
+                            fixedHeaderScrollHeight="600px"
                             noHeader
                             pagination
                             paginationComponentOptions={paginationOptions}
                             expandableRows
-                            expandableRowsComponent={<SubCategorias catData={categoriasToArray.id} />}
+                            expandableRowsComponent={<SubCategorias catdata={categoriasToArray.id} />}
                         />
                     </div>
                 </div>
