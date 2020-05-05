@@ -1,21 +1,27 @@
-import React from 'react';
-import { Spinner } from 'react-bootstrap';
+import React, { useState } from 'react';
 import firebase from '../../../../config/firebase';
 import DataTable from 'react-data-table-component';
-import { OverlayTrigger, Tooltip, Card, Accordion, Row, Col } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
+import AgregarSubCategorias from './AgregarSubCategorias';
 
 const Categorias = (props) => {
     const columns = [
         {
             name: 'Foto',
-            cell: row => <a href={row.img} target="blank"><img src={row.img} width='75' alt="..." /></a>,
+            cell: row => <a href={row.img} target="blank"><img src={row.img} width='100' alt="..." /></a>,
             grow: 1,
+            style: {
+                backgroundColor: 'rgba(187, 204, 221, 1)',
+            },
         },
         {
             name: 'Id',
             selector: 'id',
             sortable: true,
             grow: 2,
+            style: {
+                backgroundColor: 'rgba(187, 204, 221, 1)',
+            },
 
         },
         {
@@ -23,6 +29,9 @@ const Categorias = (props) => {
             selector: 'description',
             sortable: true,
             grow: 2,
+            style: {
+                backgroundColor: 'rgba(187, 204, 221, 1)',
+            },
 
         },
         {
@@ -30,6 +39,9 @@ const Categorias = (props) => {
             selector: 'path',
             sortable: true,
             grow: 2,
+            style: {
+                backgroundColor: 'rgba(187, 204, 221, 1)',
+            },
 
         },
         {
@@ -50,34 +62,41 @@ const Categorias = (props) => {
                     </div>
                 )
             },
+            style: {
+                backgroundColor: 'rgba(187, 204, 221, 1)',
+            },
 
         }
     ];
-    const catData = props;
+
+    const [showModal, setShowModal] = useState(false);
+    const handleShow = () => setShowModal(true);
+
+    const catdata = props;
     let catDataToArray = [];
     let subCat = [];
     const opcion = () => window.confirm('Esta seguro que desea eliminar esta subcategoria?');
 
     const deletesubCategory = (subcategory) => {
-        const catData = props;
+        const catdata = props;
         let category = [];
 
-        Object.keys(catData).forEach((key, i) => {
-            category[i] = catData[key]
+        Object.keys(catdata).forEach((key, i) => {
+            category[i] = catdata[key]
         });
 
         let categoryId = category[1].id;
-        console.log(subcategory);
-        console.log(categoryId);
+
         const ref = firebase.storage().ref(`/IMG/Categorias/subcategorias/${subcategory.description}`);
+
         firebase.database().ref(`/Category/${categoryId}/subCat/${subcategory.id}`).remove().then(() => {
-            console.log(category);
             ref.listAll().then((dir) => {
                 dir.items.forEach(fileRef => {
                     deleteFile(ref.fullPath, fileRef.name)
                 });
             })
         });
+
         const deleteFile = (pathToFile, fileName) => {
             const ref = firebase.storage().ref(pathToFile);
             const childRef = ref.child(fileName);
@@ -85,10 +104,10 @@ const Categorias = (props) => {
         }
     }
 
-    if (catData && catData.data.subCat) {
+    if (catdata && catdata.data.subCat) {
 
-        Object.keys(catData).forEach((key, i) => {
-            catDataToArray[i] = catData[key]
+        Object.keys(catdata).forEach((key, i) => {
+            catDataToArray[i] = catdata[key]
         });
         let subCaData = catDataToArray[1].subCat;
 
@@ -96,17 +115,24 @@ const Categorias = (props) => {
             subCat[i] = subCaData[key]
         });
 
-        console.log(subCaData === null ? false : true)
-
         return (
             <div>
                 <div className="row">
-                    <div className="col">
+                    <div className="col text-center">
+                        <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', width: '100' }} onClick={handleShow} variant="primary">
+                            <i className="fas fa-tag fa-fw" />
+                                Agregar SubCategoria
+                        </Button>
+                        <AgregarSubCategorias show={showModal} onHide={() => setShowModal(false)} catinfo={catdata.data} />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col" style={{ marginBottom: "5rem" }}>
                         <DataTable
                             title='Subcategorias'
                             columns={columns}
                             data={subCat}
-                            persistTableHead
+                            fixedHeader
                         />
                     </div>
                 </div>
@@ -115,8 +141,19 @@ const Categorias = (props) => {
     }
     else {
         return (
-            <div className="col text-center">
-                <h4 style={{ margin: "3rem" }}>No Hay subCategorias para mostrar.</h4>
+            <div>
+                <div className="row">
+                    <div className="col text-center">
+                        <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', width: '100' }} onClick={handleShow} variant="primary">
+                            <i className="fas fa-tag fa-fw" />
+                                Agregar SubCategoria
+                        </Button>
+                        <AgregarSubCategorias show={showModal} onHide={() => setShowModal(false)} catinfo={catdata.data} />
+                    </div>
+                </div>
+                <div className="col text-center">
+                    <h4 style={{ marginBottom: "3rem", marginTop: "2rem" }}>No Hay subCategorias para mostrar.</h4>
+                </div>
             </div>
         )
     }

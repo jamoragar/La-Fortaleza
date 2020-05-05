@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Spinner, Button, ProgressBar, Alert, Form } from 'react-bootstrap';
+import { Spinner, Button, ProgressBar, Alert, Form, Row, Col } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
 import firebase from '../../../../config/firebase';
 import sliderStyles from './Slider.module.scss';
@@ -19,14 +19,15 @@ const EditarSlider = () => {
         images.push(target.files)
         setFiles(target.files)
         for (let i = 0; i < images[0].length; i++) {
+            console.log(i);
             fileArray.push(URL.createObjectURL(images[0][i]));
         }
         setImage(await fileArray);
     }
     const deleteImage = (e, name) => {
         e.preventDefault();
-        setImage(image.filter((image) => image !== name))
-
+        setImage(image.filter((image) => image !== name));
+        handleReset();
     }
 
     const handleReset = () => {
@@ -86,7 +87,13 @@ const EditarSlider = () => {
             <Form onSubmit={submitSlider} id='myForm'>
                 <Form.Group controlId='formUploadImages'>
                     <Form.Label className={sliderStyles.fltext}>
-                        Selecciona una imagen para reemplazar la imagen {id} del Slider:
+                        <div className="row">
+                            <div className="col text-center">
+                                <h2 style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }}>
+                                    Selecciona una imagen para reemplazar la imagen del Slider :  {id}
+                                </h2>
+                            </div>
+                        </div>
                     </Form.Label>
                     <div className={'custom-file'} style={{ marginBottom: '12px' }}>
                         <input type="file" className={'custom-file-input'} id="customFile" onChange={orientImage} accept="image/*" multiple />
@@ -117,26 +124,34 @@ const EditarSlider = () => {
                             :
                             null}
                 </Form.Group>
-
-                <Button type='submit' variant="success" block style={{ margin: '20px 0 0 0' }}>
-                    {buttonAceptarText ? (<><i className="far fa-save fa-fw" />Aceptar</>) : (<Spinner animation="border" />)}
-                </Button>
-                {' '}
-                <Button variant="outline-secondary" onClick={handleReset} block>
-                    <i className="fas fa-undo fa-fw" />
+                <Row>
+                    <Col>
+                        <Button type='submit' variant="success" block style={{ fontWeight: "bold" }}>
+                            {buttonAceptarText ? (<><i className="far fa-save fa-fw" />Aceptar</>) : (<Spinner animation="border" />)}
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button variant="secondary" onClick={handleReset} style={{ fontWeight: 'bold' }} block>
+                            <i className="fas fa-undo fa-fw" />
                             Reiniciar
                         </Button>
+                    </Col>
+                    <Col>
+                        <Link to={`/Dashboard/${uid}/Slider`} >
+                            <Button variant="primary" block style={{ fontWeight: 'bold' }}>
+                                <i className="fas fa-undo fa-fw" />
+                            Volver
+                    </Button>
+                        </Link>
+                    </Col>
+                </Row>
+
                 <br />
-                <Alert show={alertShow} variant={'success'} onClose={() => setAlertShow(false)} dismissible>
+                <Alert show={alertShow} variant={'success'} onClose={() => setAlertShow(false)} style={{ fontWeight: 'bold' }} dismissible>
                     Imagen Subida con éxito!
                         </Alert>
 
-                <Link to={`/Dashboard/${uid}/Slider`} >
-                    <Button variant="outline-primary" block>
-                        <i className="fas fa-undo fa-fw" />
-                            Volver
-                    </Button>
-                </Link>
+
             </Form>
         </div >
     )
