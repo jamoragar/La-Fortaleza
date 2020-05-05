@@ -4,7 +4,7 @@ import Register from '../Register/Register';
 import './CarritoCompra.scss';
 
 const CarritoCompra = (props) => {
-    const { authenticated, openCart, setOpenCart, state } = props;
+    const { authenticated, openCart, setOpenCart, state, dispatch } = props;
     const [modalRegisterShow, setModalRegisterShow] = useState(false);
 
     useEffect(() => {
@@ -23,6 +23,14 @@ const CarritoCompra = (props) => {
     const subTotal = (precios != 0) ? (precios.reduce((a, b) => a + b)) : 0;
     const total = subTotal - (subTotal * discountPrice);
 
+    const removeProduct = productIndex => {
+        console.log(productIndex)
+        dispatch({
+            type:'REMOVE_ORDER',
+            payload:productIndex
+        })
+
+    }
     /*
     const [newOrders, setNewOrders] = useState([...orders]);
 
@@ -57,23 +65,21 @@ const CarritoCompra = (props) => {
                                     <div
                                         className={`order_item`}
                                         key={index + order}
-                                        onClick={() => {
-                                            setOpenCart({ ...order, index })
-                                        }}
                                     >
                                         <div>1</div>
                                         <div>{order.title}</div>
                                         <div
+                                            title='Eliminar'
                                             key={index + order}
                                             style={{ cursor: 'pointer' }}
                                             onClick={e => {
                                                 e.stopPropagation();
-                                                //deleteOrder(order);
-                                                setOpenCart(false);
+                                                removeProduct(index);
+                                                {/* setOpenCart(false); */}
                                             }}>
                                             <span role="img" aria-label="Delete">
                                                 🗑️
-                                    </span>
+                                            </span>
                                         </div>
                                         <div>{formatPrice(order.price - (order.price * discountPrice))}</div>
                                     </div>

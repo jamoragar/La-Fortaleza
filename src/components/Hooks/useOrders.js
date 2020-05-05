@@ -6,6 +6,13 @@ const appReducer = (state, action) => {
             return {
                 order: [...state.order, action.payload]
             };
+        case 'REMOVE_ORDER':
+            const newOrder = [...state.order];
+            newOrder.splice(action.payload, 1);
+            console.log(newOrder);
+            return{
+                order: newOrder
+            }
         default:
             break;
     }
