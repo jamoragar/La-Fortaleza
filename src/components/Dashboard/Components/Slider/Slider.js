@@ -91,7 +91,7 @@ const Slider = () => {
         return (
             <div>
                 <div className="row" >
-                    <div className="col text-center">
+                    <div className="col text-center" style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }}>
                         <h1>Mantenedor Slider</h1>
                     </div>
                 </div>

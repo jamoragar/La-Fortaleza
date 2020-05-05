@@ -137,6 +137,11 @@ const Productos = () => {
 
         return (
             <div>
+                <div className="row" >
+                    <div className="col text-center" style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }}>
+                        <h1>Mantenedor De Productos</h1>
+                    </div>
+                </div>
                 <Button style={{ float: 'right' }} onClick={handleShow} variant="primary">
                     <i className="fas fa-tag fa-fw" />
                     Agregar Producto

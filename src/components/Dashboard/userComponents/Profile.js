@@ -12,6 +12,11 @@ const Profile = (props) => {
 
     return (
         <div>
+            <div className="row" >
+                <div className="col text-center" style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }}>
+                    <h1>Perfil de usuario</h1>
+                </div>
+            </div>
             <Container fluid>
                 <Form >
                     <Form.Row>

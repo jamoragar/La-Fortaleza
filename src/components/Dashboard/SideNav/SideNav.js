@@ -35,7 +35,7 @@ const SideNav = (props) => {
                     user_type === 'client' ? (
                         <NavLink to={`/Dashboard/${uid}/pedidos`}>
                             <li>
-                                <i class="fas fa-shopping-bag fa-fw"></i>
+                                <i className="fas fa-shopping-bag fa-fw"></i>
                                 Pedidos
                             </li>
                         </NavLink>

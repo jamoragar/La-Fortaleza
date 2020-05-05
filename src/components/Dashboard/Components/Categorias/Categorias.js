@@ -97,7 +97,7 @@ const Categorias = () => {
         return (
             <div>
                 <div className="row" >
-                    <div className="col text-center">
+                    <div className="col text-center" style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }}>
                         <h1>Mantenedor De Categorias</h1>
                     </div>
                 </div>
