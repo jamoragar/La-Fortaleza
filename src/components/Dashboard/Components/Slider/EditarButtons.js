@@ -23,6 +23,7 @@ const EditarButtons = () => {
         }
         setImage(await fileArray);
     }
+
     const deleteImage = (e, name) => {
         e.preventDefault();
         setImage(image.filter((image) => image !== name))
@@ -86,7 +87,9 @@ const EditarButtons = () => {
             <Form onSubmit={submitSlider} id='myForm'>
                 <Form.Group controlId='formUploadImages'>
                     <Form.Label className={sliderStyles.fltext}>
-                        Selecciona una imagen para reemplazar la imagen {id} del Boton:
+                        <h2 style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }}>
+                            Selecciona una imagen para reemplazar la imagen del Boton :  {id}
+                        </h2>
                     </Form.Label>
                     <div className={'custom-file'} style={{ marginBottom: '12px' }}>
                         <input type="file" className={'custom-file-input'} id="customFile" onChange={orientImage} accept="image/*" multiple />

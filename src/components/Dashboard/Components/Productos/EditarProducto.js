@@ -16,14 +16,11 @@ const EditarProducto = (props) => {
             setFbProducto(snapshot.val());
         })
         firebase.database().ref('/Category').orderByChild('description').on('value', (snapshot) => {
-            // console.log('nombre del nodo: ' + snapshot.key + ' description: ' + snapshot.val().description);
             snapshot.forEach(child => {
-                // console.log(child.val().description)
                 descripciones.push(child.val().description);
             });
             setFbCategoria(descripciones);
         });
-
     }, []);
 
     const handleSubCategory = (categoria) => {
@@ -97,7 +94,7 @@ const EditarProducto = (props) => {
                         Actualizar
                     </Button>
                     <br />
-                    <Link to={`/Dashboard/${id}/Productos`}>
+                    <Link to={`/Dashboard/${uid}/Productos/`}>
                         <Button variant="outline-primary" block>
                             <i className="fas fa-undo fa-fw" />
                             Volver

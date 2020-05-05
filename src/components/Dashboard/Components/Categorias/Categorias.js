@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Spinner, Button } from 'react-bootstrap';
 import firebase from '../../../../config/firebase';
 import DataTable from 'react-data-table-component';
-import { OverlayTrigger, Tooltip, Card, Accordion, Row, Col } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import AgregarCategorias from './AgregarCategorias';
 import SubCategorias from './SubCategorias';
 
@@ -10,14 +10,14 @@ const Categorias = () => {
     const columns = [
         {
             name: 'Foto',
-            cell: row => <a href={row.banner} target="blank"><img src={row.banner} width='75' alt="..." /></a>,
+            cell: row => <a href={row.banner} target="blank"><img src={row.banner} width='100' alt="..." /></a>,
             grow: 1,
         },
         {
             name: 'Id',
             selector: 'id',
             sortable: true,
-            grow: 2,
+            grow: 1,
 
         },
         {
@@ -97,8 +97,8 @@ const Categorias = () => {
         return (
             <div>
                 <div className="row" >
-                    <div className="col text-center" style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }}>
-                        <h1>Mantenedor De Categorias</h1>
+                    <div className="col text-center" >
+                        <h1 style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }}>Mantenedor De Categorias</h1>
                     </div>
                 </div>
                 <div className="row">

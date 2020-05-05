@@ -2,23 +2,19 @@ import React, { useState, useRef } from 'react';
 import { Modal, Button, Form, InputGroup, Spinner, Overlay, Tooltip } from 'react-bootstrap';
 import firebase from '../../../config/firebase';
 
-
 const EditarPerfil = (props) => {
     const user = props.usuario;
     const [btnText, setBtnText] = useState(false);
     const [show, setShow] = useState(false);
     const [message, setMessage] = useState('');
     const target = useRef(null);
-    console.log(user.uid);
+
 
     const handleUpdate = (e) => {
         e.preventDefault();
         setBtnText(true);
         const { name, last_name, email, number, password, address, comentario } = e.target.elements;
-        console.log('updateing User DAta...');
-
         let uid = user.uid;
-        console.log(uid)
         firebase.database().ref().child('Users/' + uid).update({
             uid: uid,
             nombre: name.value,
@@ -31,11 +27,12 @@ const EditarPerfil = (props) => {
         })
 
     }
+
     return (
         <div>
             <Modal {...props}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Editar Datos de Usuario: {`${user.nombre} ${user.apellido}`}</Modal.Title>
+                    <Modal.Title><h2 style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }}>Editar Datos de Usuario: {`${user.nombre} ${user.apellido}`}</h2></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleUpdate}>

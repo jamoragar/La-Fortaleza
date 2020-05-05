@@ -53,7 +53,6 @@ const AgregarCategorias = (props) => {
                         const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
                         FbDownloadURL.push(downloadURL);
                         if (FbDownloadURL.length === files.length) {
-                            //const key = firebase.database().ref().push().key;
                             const key = id.value;
                             firebase.database().ref().child(`/Category/${key}`).set({
                                 id: id.value,
@@ -75,7 +74,7 @@ const AgregarCategorias = (props) => {
                     setTimeout(() => {
                         setAlertShow(false);
                         handleReset();
-                    }, 2173);
+                    }, 1505);
                 })
                 .catch(err => console.log(err.code));
 

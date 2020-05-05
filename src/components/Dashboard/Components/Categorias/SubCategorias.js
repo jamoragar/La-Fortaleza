@@ -8,7 +8,7 @@ const Categorias = (props) => {
     const columns = [
         {
             name: 'Foto',
-            cell: row => <a href={row.img} target="blank"><img src={row.img} width='75' alt="..." /></a>,
+            cell: row => <a href={row.img} target="blank"><img src={row.img} width='100' alt="..." /></a>,
             grow: 1,
             style: {
                 backgroundColor: 'rgba(187, 204, 221, 1)',
@@ -86,17 +86,17 @@ const Categorias = (props) => {
         });
 
         let categoryId = category[1].id;
-        //console.log(subcategory);
-        //console.log(categoryId);
+
         const ref = firebase.storage().ref(`/IMG/Categorias/subcategorias/${subcategory.description}`);
+
         firebase.database().ref(`/Category/${categoryId}/subCat/${subcategory.id}`).remove().then(() => {
-            //console.log(category);
             ref.listAll().then((dir) => {
                 dir.items.forEach(fileRef => {
                     deleteFile(ref.fullPath, fileRef.name)
                 });
             })
         });
+
         const deleteFile = (pathToFile, fileName) => {
             const ref = firebase.storage().ref(pathToFile);
             const childRef = ref.child(fileName);
@@ -127,7 +127,7 @@ const Categorias = (props) => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col" style={{ marginBottom: "3rem" }}>
+                    <div className="col" style={{ marginBottom: "5rem" }}>
                         <DataTable
                             title='Subcategorias'
                             columns={columns}
@@ -144,7 +144,7 @@ const Categorias = (props) => {
             <div>
                 <div className="row">
                     <div className="col text-center">
-                        <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', marginBottom: '2rem', width: '100' }} onClick={handleShow} variant="primary">
+                        <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', width: '100' }} onClick={handleShow} variant="primary">
                             <i className="fas fa-tag fa-fw" />
                                 Agregar SubCategoria
                         </Button>
@@ -152,7 +152,7 @@ const Categorias = (props) => {
                     </div>
                 </div>
                 <div className="col text-center">
-                    <h4 style={{ margin: "3rem" }}>No Hay subCategorias para mostrar.</h4>
+                    <h4 style={{ marginBottom: "3rem", marginTop: "2rem" }}>No Hay subCategorias para mostrar.</h4>
                 </div>
             </div>
         )
