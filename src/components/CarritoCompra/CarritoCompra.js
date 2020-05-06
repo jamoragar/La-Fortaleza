@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {Link} from 'react-router-dom';
 import { formatPrice } from '../Data/DataProductos';
 import Register from '../Register/Register';
 import './CarritoCompra.scss';
@@ -6,7 +7,8 @@ import './CarritoCompra.scss';
 const CarritoCompra = (props) => {
     const { authenticated, openCart, setOpenCart, state, dispatch } = props;
     const [modalRegisterShow, setModalRegisterShow] = useState(false);
-
+    
+    console.log(state.order)
     useEffect(() => {
         state.order.length === 0 ? setOpenCart(true) : setOpenCart(false)
     }, [state.order.length]);
@@ -24,12 +26,14 @@ const CarritoCompra = (props) => {
     const total = subTotal - (subTotal * discountPrice);
 
     const removeProduct = productIndex => {
-        console.log(productIndex)
         dispatch({
             type: 'REMOVE_ORDER',
             payload: productIndex
         })
+    }
 
+    const redirectToCheckOut = () => {
+        
     }
 
     return (
@@ -90,13 +94,9 @@ const CarritoCompra = (props) => {
                 <div className={`btn_pago`} onClick={() => {
                     if (state.order.length >= 0 && !authenticated) {
                         setModalRegisterShow(true);
-
-                    }
-                    else {
-                        console.log("pagando")
                     }
                 }}>
-                    Pagar!
+                    {state.order.length >= 0 && !authenticated ? 'Un moneto...' : (<Link style={{pointer:'cursor', decoration:'none', color:'white'}} to='/CheckOut'>Ver Carrito!</Link>)}
                 </div>
             </div>
         </div >

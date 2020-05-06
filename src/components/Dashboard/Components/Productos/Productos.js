@@ -138,23 +138,23 @@ const Productos = (props) => {
 
         return (
             <div>
-                <div className="row" >
-                    <div className="col text-center" >
-                        <h1 style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }}>Mantenedor De Productos</h1>
-                    </div>
+                <div className="col text-center" >
+                    <h1 style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }}>Mantenedor De Productos</h1>
                 </div>
                 <Button style={{ float: 'right' }} onClick={handleShow} variant="primary">
                     <i className="fas fa-tag fa-fw" />
                     Agregar Producto
                 </Button>
-                <AgregarProducto show={showModal} onHide={() => setShowModal(false)} />
-                <DataTable
-                    title="Productos"
-                    columns={columns}
-                    data={filteredItems}
-                    subHeader
-                    subHeaderComponent={subHeaderComponentMemo}
-                />
+                <div className='col'>
+                    <AgregarProducto show={showModal} onHide={() => setShowModal(false)} />
+                    <DataTable
+                        title="Productos"
+                        columns={columns}
+                        data={filteredItems}
+                        subHeader
+                        subHeaderComponent={subHeaderComponentMemo}
+                    />
+                </div>
             </div>
         )
     } else {
