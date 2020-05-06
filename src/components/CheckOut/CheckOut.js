@@ -15,10 +15,16 @@ const CheckOut = () => {
         orders.state.order[index].cuantity = cantidadAux[index]; 
     })
     const [cantidad, setCantidad] = useState(cantidadAux);
+
     const handleCantidad = (index,value) => {
         let auxArray = [...cantidad];
         auxArray[index] = auxArray[index] + value;
-        setCantidad(auxArray);
+        if(auxArray[index] >= 0){
+            setCantidad(auxArray);
+        }else{
+            auxArray[index] = 0;
+            setCantidad(auxArray);
+        }
     }
     const removeProduct = index => {
         orders.dispatch({
@@ -58,7 +64,7 @@ const CheckOut = () => {
                         pedidoFinal[index] = {
                             nombre: producto.title,
                             tipo: producto.description,
-                            cantidad: cantidad[index],
+                            cantidad: cantidad[index] > 0 ? cantidad[index] : 0,
                             precio_unitario: producto.price,
                             precio_total_producto: producto.price * cantidad[index]
                         }
@@ -73,7 +79,7 @@ const CheckOut = () => {
                                 <td>
                                     <div style={{textAlign:'center', display:'flex'}}>
                                         <h6><Button onClick={() => handleCantidad(index, 1)} style={{marginRight:'5px'}} variant='success'>+</Button></h6>
-                                        <input style={{width:'30px'}} type='number' name='producto_cantidad' value={cantidad[index]} readOnly/>
+                                        <input style={{width:'30px'}} type='number' name='producto_cantidad' value={cantidad[index]} min='1' readOnly/>
                                         <h6><Button onClick={() => handleCantidad(index, -1)} style={{marginLeft:'5px'}} variant='danger'>-</Button></h6>
                                     </div>
                                 </td>
