@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Modal, Col, Alert, Spinner, ProgressBar } from 'react-bootstrap';
 import firebase from '../../../../config/firebase';
-import productosStyles from './Productos.module.scss'
-import InformacionAdicionalProductos from './InformacionAdicionalProductos'
+import productosStyles from './Productos.module.scss';
+import InformacionAdicionalProductos from './InformacionAdicionalProductos';
 import moment from 'moment';
 
 
@@ -19,7 +19,7 @@ const AgregarProducto = (props) => {
     const fbDbCategory = firebase.database().ref('/Category');
     let descripciones = [];
     let images = [];
-    let fileArray = []
+    let fileArray = [];
 
     //Función que recorre los archivos subidos y los transforma en blob para, posteriormente crear un array de estos y previsualizarlos dentro del formulario.
     const orientImage = async ({ target }) => {
@@ -67,7 +67,7 @@ const AgregarProducto = (props) => {
     }
     const handleCheck = () => {
         setChecked(!checked);
-      }
+    }
     //Función que toma el valor de cada input en el formulario para, posteriormente, validarlos y subirlos a la BD de firebase.
     const submitProduct = (e) => {
         //Se previene que la página refresque.
@@ -112,14 +112,14 @@ const AgregarProducto = (props) => {
                                 incluye_pestanas: checked,
                                 ficha_tecnica: checked ? {
                                     editorial: editorial.value,
-                                    jugadores: jugadores.value, 
-                                    edad: edad.value, 
-                                    idioma_dependiente: idioma_dependiente.value, 
-                                    idioma: idioma.value, 
-                                    autores: autores.value, 
-                                    duracion: duracion.value, 
+                                    jugadores: jugadores.value,
+                                    edad: edad.value,
+                                    idioma_dependiente: idioma_dependiente.value,
+                                    idioma: idioma.value,
+                                    autores: autores.value,
+                                    duracion: duracion.value,
                                     dimensiones: dimensiones.value,
-                                    peso: peso.value, 
+                                    peso: peso.value,
                                     componentes: componentes.value,
 
                                 } : null,
@@ -151,8 +151,8 @@ const AgregarProducto = (props) => {
     return (
         <Modal {...props} style={{ background: 'none' }} size='lg'>
             <Modal.Header closeButton>
-                <Modal.Title>
-                    Agregar Nuevo Producto
+                <Modal.Title style={{ fontWeight: 'bolder', color: '#606060' }}>
+                    <h1 > Agregar Nuevo Producto</h1>
                 </Modal.Title>
             </Modal.Header>
             {
@@ -182,19 +182,25 @@ const AgregarProducto = (props) => {
                                     </Form.Group>
                                 </Col>
                                 <Col>
-                                {subCat ?
-                                    <Form.Group controlId="formCategory">
-                                        <Form.Label>Sub-Categoría:</Form.Label>
-                                        <Form.Control name='subcategoria' as="select">
-                                            {/* Transformamos el hook subCat a array, ya que firebase lo entrega como Objeto, y se procede a recorrerlo. */
-                                                Object.entries(subCat).map(([abreviacion, nombre], i) => {
-                                                    return <option value={nombre.description} key={i}>{nombre.description}</option>
-                                                })
-                                            }
-                                        </Form.Control>
-                                    </Form.Group>
-                                    :
-                                    null}
+                                    {subCat ?
+                                        <Form.Group controlId="formSubCategory">
+                                            <Form.Label>Sub-Categoría:</Form.Label>
+                                            <Form.Control name='subcategoria' as="select">
+                                                {/* Transformamos el hook subCat a array, ya que firebase lo entrega como Objeto, y se procede a recorrerlo. */
+                                                    Object.entries(subCat).map(([abreviacion, nombre], i) => {
+                                                        return <option value={nombre.description} key={i}>{nombre.description}</option>
+                                                    })
+                                                }
+                                            </Form.Control>
+                                        </Form.Group>
+                                        :
+                                        <Form.Group controlId="formSubCategory" style={{ display: 'none' }}>
+                                            <Form.Label>Sub-Categoría:</Form.Label>
+                                            <Form.Control name='subcategoria' as="select">
+                                                <option value={0} ></option>
+                                            </Form.Control>
+                                        </Form.Group>
+                                    }
                                 </Col>
                             </Form.Row>
                             <Form.Row>
@@ -251,7 +257,7 @@ const AgregarProducto = (props) => {
                                         null}
                             </Form.Group>
                             <p>¿Agregar Descripción y Detalle?</p>
-                            <Form.Check 
+                            <Form.Check
                                 inline
                                 checked={checked}
                                 name={'control'}
@@ -260,7 +266,7 @@ const AgregarProducto = (props) => {
                                 label={`Si`}
                                 onChange={handleCheck}
                             />
-                            <Form.Check 
+                            <Form.Check
                                 inline
                                 checked={!checked}
                                 name={'control'}
@@ -270,12 +276,12 @@ const AgregarProducto = (props) => {
                                 onChange={handleCheck}
                             />
                             {
-                                checked ? 
-                                <InformacionAdicionalProductos/>
-                                :
-                                null
+                                checked ?
+                                    <InformacionAdicionalProductos />
+                                    :
+                                    null
                             }
-                            <Button type='submit' variant="success" block style={{margin:'20px 0 0 0'}}>
+                            <Button type='submit' variant="success" block style={{ margin: '20px 0 0 0' }}>
                                 {buttonAceptarText ? (<><i className="far fa-save fa-fw" />Aceptar</>) : (<Spinner animation="border" />)}
                             </Button>
                             {' '}

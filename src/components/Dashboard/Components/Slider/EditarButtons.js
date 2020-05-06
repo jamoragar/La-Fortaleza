@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Spinner, Button, ProgressBar, Alert, Form } from 'react-bootstrap';
+import { Spinner, Button, ProgressBar, Alert, Form, Col, Row } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
 import firebase from '../../../../config/firebase';
 import sliderStyles from './Slider.module.scss';
@@ -120,26 +120,31 @@ const EditarButtons = () => {
                             :
                             null}
                 </Form.Group>
-
-                <Button type='submit' variant="success" block style={{ margin: '20px 0 0 0' }}>
-                    {buttonAceptarText ? (<><i className="far fa-save fa-fw" />Aceptar</>) : (<Spinner animation="border" />)}
-                </Button>
-                {' '}
-                <Button variant="outline-secondary" onClick={handleReset} block>
-                    <i className="fas fa-undo fa-fw" />
+                <Row>
+                    <Col>
+                        <Button type='submit' variant="success" block style={{ fontWeight: "bold" }}>
+                            {buttonAceptarText ? (<><i className="far fa-save fa-fw" />Aceptar</>) : (<Spinner animation="border" />)}
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button variant="secondary" onClick={handleReset} style={{ fontWeight: 'bold' }} block>
+                            <i className="fas fa-undo fa-fw" />
                             Reiniciar
                         </Button>
-                <br />
-                <Alert show={alertShow} variant={'success'} onClose={() => setAlertShow(false)} dismissible>
-                    Imagen Subida con éxito!
-                        </Alert>
-
-                <Link to={`/Dashboard/${uid}/Slider`} >
-                    <Button variant="outline-primary" block>
-                        <i className="fas fa-undo fa-fw" />
+                    </Col>
+                    <Col>
+                        <Link to={`/Dashboard/${uid}/Slider`} >
+                            <Button variant="primary" block style={{ fontWeight: 'bold' }}>
+                                <i className="fas fa-undo fa-fw" />
                             Volver
                     </Button>
-                </Link>
+                        </Link>
+                    </Col>
+                </Row>
+                <br />
+                <Alert show={alertShow} variant={'success'} onClose={() => setAlertShow(false)} style={{ fontWeight: 'bold' }} dismissible>
+                    Imagen Subida con éxito!
+                </Alert>
             </Form>
         </div>
     )

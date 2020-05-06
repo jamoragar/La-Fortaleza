@@ -20,8 +20,6 @@ const AgregarSubCategorias = (props) => {
         catInfoToArray[i] = catinfo[key]
     });
 
-    console.log(catInfoToArray[2].id);
-
     const orientImage = async ({ target }) => {
         images.push(target.files)
         setFiles(target.files)
@@ -98,7 +96,7 @@ const AgregarSubCategorias = (props) => {
         <Modal {...props} style={{ background: 'none' }} size='lg'>
             <Modal.Header closeButton>
                 <Modal.Title>
-                    Agregar Nueva SubCategoria en:  {catInfoToArray[2].description}
+                    <h1 style={{ fontWeight: 'bolder', color: '#606060' }}>Agregar Nueva SubCategoria en:  {catInfoToArray[2].description}</h1>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>

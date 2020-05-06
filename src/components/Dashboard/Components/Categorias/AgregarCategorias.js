@@ -32,7 +32,7 @@ const AgregarCategorias = (props) => {
     const submitCategory = (e) => {
         e.preventDefault();
         const promises = [];
-        const { description, path, id } = e.target.elements;
+        const { description, path, id, subCat } = e.target.elements;
         const FbDownloadURL = [];
 
         if (files.length > 0) {
@@ -58,6 +58,7 @@ const AgregarCategorias = (props) => {
                                 id: id.value,
                                 description: description.value.trim(),
                                 path: path.value,
+                                subCat: 0,
                                 fecha_creacion: moment().format('DD-MM-YYYY h:mm:ss a'),
                                 banner: FbDownloadURL.map((img) => {
                                     return img
@@ -88,20 +89,20 @@ const AgregarCategorias = (props) => {
         <Modal {...props} style={{ background: 'none' }} size='lg'>
             <Modal.Header closeButton>
                 <Modal.Title>
-                    Agregar Nueva Categoria
+                    <h1 style={{ fontWeight: 'bolder', color: '#606060' }}>Agregar Nueva Categoria</h1>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={submitCategory} id='myForm'>
-                    <Form.Group controlId='formNameProducts'>
+                    <Form.Group controlId='formIdCategory'>
                         <Form.Label>Id:</Form.Label>
-                        <Form.Control name='id' type='text' placeholder='Ingrese el nombre del producto.' required />
+                        <Form.Control name='id' type='text' placeholder='Ingrese el identificador.' required />
                     </Form.Group>
-                    <Form.Group controlId='formNameProducts'>
+                    <Form.Group controlId='formNameCategory'>
                         <Form.Label>Nombre:</Form.Label>
-                        <Form.Control name='description' type='text' placeholder='Ingrese el nombre del producto.' required />
+                        <Form.Control name='description' type='text' placeholder='Ingrese el nombre de la Categoria.' required />
                     </Form.Group>
-                    <Form.Group controlId="formDescriptionProducts">
+                    <Form.Group controlId="formPathCategory">
                         <Form.Label>Path:</Form.Label>
                         <Form.Control name='path' type='text' placeholder='Ingrese path.' required />
                     </Form.Group>

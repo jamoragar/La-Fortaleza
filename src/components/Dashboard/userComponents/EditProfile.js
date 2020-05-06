@@ -32,7 +32,7 @@ const EditarPerfil = (props) => {
         <div>
             <Modal {...props}>
                 <Modal.Header closeButton>
-                    <Modal.Title><h2 style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }}>Editar Datos de Usuario: {`${user.nombre} ${user.apellido}`}</h2></Modal.Title>
+                    <Modal.Title><h2 style={{ fontWeight: 'bolder', color: '#606060' }}>Editar Datos de Usuario: {`${user.nombre} ${user.apellido}`}</h2></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleUpdate}>

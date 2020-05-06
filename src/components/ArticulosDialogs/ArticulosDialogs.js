@@ -137,12 +137,14 @@ const ArtciculosDialogs = (producto) => {
                                                     :
                                                     null
                                                 }
-                                                {contenido.video ?
+                                                {contenido.video && contenido.ficha_tecnica ?
                                                     <li className="nav-item">
                                                         <a className="nav-link" id="HowToPlay-tab" data-toggle="tab" href="#HowToPlay" role="tab" aria-controls="howtoplay" aria-selected="false">¿Como jugar?</a>
                                                     </li>
                                                     :
-                                                    null
+                                                    <li className="nav-item">
+                                                        <a className="nav-link active" id="HowToPlay-tab" data-toggle="tab" href="#HowToPlay" role="tab" aria-controls="howtoplay" aria-selected="true">¿Como jugar?</a>
+                                                    </li>
                                                 }
                                             </ul>
                                         </div>
@@ -206,7 +208,7 @@ const ArtciculosDialogs = (producto) => {
                                                         null
                                                 }
                                                 {
-                                                    contenido.video ?
+                                                    contenido.video && contenido.ficha_tecnica ?
                                                         <div className={`tab-pane fade pt-5`} id="HowToPlay" role="tabpanel" aria-labelledby="HowToPlay-tab">
                                                             <div className="container">
                                                                 <div className="row">
@@ -221,7 +223,19 @@ const ArtciculosDialogs = (producto) => {
                                                             </div>
                                                         </div>
                                                         :
-                                                        null
+                                                        <div className={`tab-pane fade show pt-5 active`} id="HowToPlay" role="tabpanel" aria-labelledby="HowToPlay-tab">
+                                                            <div className="container">
+                                                                <div className="row">
+                                                                    <div className="embed-responsive embed-responsive-16by9">
+                                                                        <ReactPlayer
+                                                                            width='420'
+                                                                            height='300'
+                                                                            url={contenido.video}
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                 }
                                             </div>
                                         </div>
@@ -233,7 +247,7 @@ const ArtciculosDialogs = (producto) => {
                     ) : null
                 })
                 }
-            </div>
+            </div >
         )
     } else {
         return (

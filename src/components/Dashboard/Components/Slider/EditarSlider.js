@@ -145,13 +145,10 @@ const EditarSlider = () => {
                         </Link>
                     </Col>
                 </Row>
-
                 <br />
                 <Alert show={alertShow} variant={'success'} onClose={() => setAlertShow(false)} style={{ fontWeight: 'bold' }} dismissible>
                     Imagen Subida con éxito!
-                        </Alert>
-
-
+                </Alert>
             </Form>
         </div >
     )

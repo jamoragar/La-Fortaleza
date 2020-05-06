@@ -70,6 +70,7 @@ const Categorias = () => {
     }, []);
 
     const deleteCategory = (category) => {
+        console.log(` categorias delete ${category.subCat}`)
         const ref = firebase.storage().ref(`/IMG/Categorias/categorias/${category.description}`);
         firebase.database().ref(`/Category/${category.id}`).remove().then(() => {
             ref.listAll().then((dir) => {
@@ -101,31 +102,23 @@ const Categorias = () => {
                         <h1 style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }}>Mantenedor De Categorias</h1>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col text-center">
-                        <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', marginBottom: '2rem', width: '100' }} onClick={handleShow} variant="primary">
-                            <i className="fas fa-tag fa-fw" />
+                <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', marginBottom: '2rem', width: '100' }} onClick={handleShow} variant="primary">
+                    <i className="fas fa-tag fa-fw" />
                                 Agregar Categoria
                         </Button>
-                        <AgregarCategorias show={showModal} onHide={() => setShowModal(false)} />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col">
-                        < DataTable
-                            columns={columns}
-                            data={categoriasToArray}
-                            persistTableHead
-                            fixedHeader
-                            fixedHeaderScrollHeight="600px"
-                            noHeader
-                            pagination
-                            paginationComponentOptions={paginationOptions}
-                            expandableRows
-                            expandableRowsComponent={<SubCategorias catdata={categoriasToArray.id} />}
-                        />
-                    </div>
-                </div>
+                <AgregarCategorias show={showModal} onHide={() => setShowModal(false)} />
+                < DataTable
+                    columns={columns}
+                    data={categoriasToArray}
+                    persistTableHead
+                    fixedHeader
+                    fixedHeaderScrollHeight="600px"
+                    noHeader
+                    pagination
+                    paginationComponentOptions={paginationOptions}
+                    expandableRows
+                    expandableRowsComponent={<SubCategorias catdata={categoriasToArray.id} />}
+                />
             </div>
         );
     }

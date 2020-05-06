@@ -26,20 +26,11 @@ const CarritoCompra = (props) => {
     const removeProduct = productIndex => {
         console.log(productIndex)
         dispatch({
-            type:'REMOVE_ORDER',
-            payload:productIndex
+            type: 'REMOVE_ORDER',
+            payload: productIndex
         })
 
     }
-    /*
-    const [newOrders, setNewOrders] = useState([...orders]);
-
-    const deleteOrder = (order) => {
-        const newOrders = [...orders]
-        newOrders.splice(order, 1);
-        setNewOrders(newOrders);
-    }
-    */
 
     return (
         <div className={`container_cart ${openCart ? 'container_opened' : 'container_closed'}`} >
@@ -75,7 +66,6 @@ const CarritoCompra = (props) => {
                                             onClick={e => {
                                                 e.stopPropagation();
                                                 removeProduct(index);
-                                                {/* setOpenCart(false); */}
                                             }}>
                                             <span role="img" aria-label="Delete">
                                                 🗑️

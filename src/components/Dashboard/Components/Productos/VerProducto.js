@@ -7,7 +7,13 @@ const ProductoModal = (id, nombre, descripcion, categoria, subcategoria, precio,
     console.log(history)
     return (
         <div>
-            <h3>Producto ID: {id}</h3>
+            <div className="row" style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }} >
+                <div className="col text-center" >
+                    <h1>Ver Detalle de Producto</h1>
+                    <h2>{nombre}</h2>
+                    <h4>Id Del Producto: {id}</h4>
+                </div>
+            </div>
             <Form>
                 <Form.Group controlId='formNameProducts'>
                     <Form.Label>Nombre:</Form.Label>

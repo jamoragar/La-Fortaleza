@@ -14,7 +14,7 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
 );
 
 const Productos = (props) => {
-    let { uid } = useParams;
+    let { uid } = useParams();
     const columns = [
         {
             name: 'Foto',
@@ -77,7 +77,7 @@ const Productos = (props) => {
                                     <Tooltip id={`tooltip-bottom`}><strong>Eliminar</strong></Tooltip>
                                 }
                             >
-                                <div style={{ cursor: 'pointer' }} onClick={() => deleteProduct(data)} className="text-danger"><i className="fa fa-fw fa-trash fa-lg" style={{ height: '20px' }} /></div>
+                                <div style={{ cursor: 'pointer' }} onClick={() => (opcion(true)) ? deleteProduct(data) : null} className="text-danger"><i className="fa fa-fw fa-trash fa-lg" style={{ height: '20px' }} /></div>
                             </OverlayTrigger>
                         </div>
                     </div>
@@ -90,6 +90,7 @@ const Productos = (props) => {
 
     const [showModal, setShowModal] = useState(false);
     const [productos, setProductos] = useState([])
+    const opcion = () => window.confirm('Esta seguro que desea eliminar este producto?');
     //Buscador
 
     const [filterText, setFilterText] = useState('');
@@ -147,17 +148,13 @@ const Productos = (props) => {
                     Agregar Producto
                 </Button>
                 <AgregarProducto show={showModal} onHide={() => setShowModal(false)} />
-                <div className='row'>
-                    <div className='col'>
-                        <DataTable
-                            title="Productos"
-                            columns={columns}
-                            data={filteredItems}
-                            subHeader
-                            subHeaderComponent={subHeaderComponentMemo}
-                        />
-                    </div>
-                </div>
+                <DataTable
+                    title="Productos"
+                    columns={columns}
+                    data={filteredItems}
+                    subHeader
+                    subHeaderComponent={subHeaderComponentMemo}
+                />
             </div>
         )
     } else {
