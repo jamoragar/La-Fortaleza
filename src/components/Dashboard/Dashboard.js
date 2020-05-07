@@ -57,7 +57,7 @@ const DashboardRoute = (props) => {
     )
 }
 
-const Dashboard = (props) => {
+export const Dashboard = (props) => {
 
     let { uid } = useParams();
     const [userData, setUserData] = useState(null)

@@ -16,13 +16,16 @@ const CheckOut = () => {
     })
     const [cantidad, setCantidad] = useState(cantidadAux);
 
-    const handleCantidad = (index,value) => {
+    const handleCantidad = (index,value, max) => {
         let auxArray = [...cantidad];
         auxArray[index] = auxArray[index] + value;
-        if(auxArray[index] >= 0){
+        if(auxArray[index] >= 0 && auxArray[index] <= max){
             setCantidad(auxArray);
-        }else{
+        }else if(auxArray[index] < 0){
             auxArray[index] = 0;
+            setCantidad(auxArray);
+        }else if(auxArray[index] >= max){
+            auxArray[index] = max;
             setCantidad(auxArray);
         }
     }
@@ -78,9 +81,9 @@ const CheckOut = () => {
                                 <td>{producto.description}</td>
                                 <td>
                                     <div style={{textAlign:'center', display:'flex'}}>
-                                        <h6><Button onClick={() => handleCantidad(index, 1)} style={{marginRight:'5px'}} variant='success'>+</Button></h6>
-                                        <input style={{width:'30px'}} type='number' name='producto_cantidad' value={cantidad[index]} min='1' readOnly/>
-                                        <h6><Button onClick={() => handleCantidad(index, -1)} style={{marginLeft:'5px'}} variant='danger'>-</Button></h6>
+                                        <h6><Button onClick={() => handleCantidad(index, 1, producto.stock)} style={{marginRight:'5px'}} variant='success'>+</Button></h6>
+                                        <input style={{width:'30px'}} type='number' name='producto_cantidad' value={cantidad[index]} readOnly/>
+                                        <h6><Button onClick={() => handleCantidad(index, -1, producto.stock)} style={{marginLeft:'5px'}} variant='danger'>-</Button></h6>
                                     </div>
                                 </td>
                                 <td>{formatPrice(producto.price * cantidad[index])}</td>

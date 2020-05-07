@@ -23,7 +23,9 @@ const Store = ({ fbData, categoriasProductos, orders }) => {
         const newOrder = {
             title: product.nombre,
             description: product.categoria,
-            price: product.precio
+            price: product.precio,
+            stock: parseInt(product.stock),
+            id: product.id
         }
         order.dispatch({
             type: 'ADD_ORDER',
