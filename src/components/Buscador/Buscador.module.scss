@@ -1,7 +1,6 @@
 
 .inputFile{
     margin-bottom: 12px;
-    display: none;
 }
 .TextField{
     height: 32px;
@@ -13,7 +12,7 @@
     border-bottom-right-radius: 0;
     border: 1px solid #e5e5e5;
     padding: 0 32px 0 16px;
-    display: none;
+
     &:hover{
         cursor: pointer;
     }

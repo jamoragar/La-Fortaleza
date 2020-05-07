@@ -5,9 +5,6 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Spinner } from 'react-bootstrap';
 //Componentes
-import Header from "./components/Layouts/Header/Header";
-import NavBar from "../src/components/Layouts/Navbar/Navbar";
-import Footer from "./components/Layouts/Footer/Footer";
 import { useSearch } from "./components/Hooks/useSearch";
 
 const App = (props) => {
@@ -16,10 +13,7 @@ const App = (props) => {
   if (props) {
     return (
       <div className="App">
-        <NavBar authenticated={props.authenticated} user={props.user} name={props.name} uid={props.uid} />
-        <Header {...Search} />
         <Routes {...Search} authenticated={props.authenticated} user={props.user} name={props.name} uid={props.uid} />
-        <Footer />
       </div>
     );
   } else {

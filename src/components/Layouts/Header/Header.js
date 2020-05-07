@@ -1,20 +1,20 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import './Header.scss';
-import styleHeader from './Header.scss'
+import { useSearch } from "../../Hooks/useSearch";
 
-const Header = ({ ...Search }) => {
-    const { keySearch, setKeySearch } = Search;
+
+const Header = () => {
+    const Search = useSearch();
+    const Buscar = { ...Search };
+    const { keySearch, setKeySearch } = Buscar;
 
     const submitSearch = (e) => {
         e.preventDefault();
         const { search } = e.target.elements;
-        setKeySearch(search.value)
-        console.log(keySearch)
+        setKeySearch(search.value);
+        console.log(`log de buscador ${keySearch}`);
     }
-
-
-    console.log(keySearch);
 
     return (
         <div className="container-fluid-header">
@@ -27,10 +27,10 @@ const Header = ({ ...Search }) => {
                 <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div className="col" style={{ paddingTop: "2rem" }}>
                         <div className="container h-100">
-                            <Form className="d-flex justify-content-center h-100" onSubmit={submitSearch} id='myForm'>
+                            <Form className="d-flex justify-content-center h-100" id='myForm' onSubmit={submitSearch}>
                                 <Form.Group className="searchbar">
-                                    <Form.Control className="search_input" name='search' type='text' placeholder="¿Qué estas buscando?" required />
-                                    <Button className="search_icon" type='submit' href={`/Busqueda/${keySearch}`}>
+                                    <Form.Control className="search_input" name='search' type='text' autoComplete="off" placeholder="¿Qué estas buscando?" required />
+                                    <Button className="search_icon" type='submit'>
                                         <i className="fas fa-search"></i>
                                     </Button>
                                 </Form.Group>
