@@ -3,13 +3,13 @@ import { Spinner, Button } from 'react-bootstrap';
 import firebase from '../../config/firebase';
 import DataTable from 'react-data-table-component';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import buscadorStyles from './Buscador.module.scss'
+import BuscadorStyles from './Buscador.module.scss'
 import { Link, useParams } from 'react-router-dom';
 
-const FilterComponent = ({ filterText, onFilter, onClear }) => (
+const FilterComponent = ({ filterText, onFilter, onClear, keySearch }) => (
     <>
-        <input className={buscadorStyles.TextField} id="search" type="text" placeholder="Buscar por nombre" value={filterText} onChange={onFilter} />
-        <button className={buscadorStyles.ClearButton} type="button" onClick={onClear}>X</button>
+        <input className={BuscadorStyles.TextField} id="search" type="text" placeholder="Buscar por nombre" value={keySearch} onChange={onFilter} />
+        <button className={BuscadorStyles.ClearButton} type="button" onClick={onClear}>X</button>
     </>
 );
 
@@ -70,7 +70,7 @@ const Buscador = (props) => {
         }
     ];
 
-    const { keySearch, setKeySearch } = props;
+    const { keySearch } = props;
     console.log(`log de buscador ${keySearch}`)
 
     const [productos, setProductos] = useState([]);
@@ -86,14 +86,13 @@ const Buscador = (props) => {
         productosToArray[i] = productos[key]
     });
 
-    const [filterText, setFilterText] = useState(keySearch);
+    const [filterText, setFilterText] = useState('');
     const filteredItems = productosToArray.filter(item => item.nombre && item.nombre.toLowerCase().includes(filterText.toLowerCase()));
 
     const subHeaderComponentMemo = useMemo(() => {
         const handleClear = () => {
             if (filterText) {
-                setFilterText('');
-                setKeySearch('.');
+                setFilterText("keySearch");
             }
         };
 
