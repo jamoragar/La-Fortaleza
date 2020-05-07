@@ -32,7 +32,7 @@ const AgregarCategorias = (props) => {
     const submitCategory = (e) => {
         e.preventDefault();
         const promises = [];
-        const { description, path, id, subCat } = e.target.elements;
+        const { description, path, id } = e.target.elements;
         const FbDownloadURL = [];
 
         if (files.length > 0) {

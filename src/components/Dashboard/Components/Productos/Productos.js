@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import firebase from '../../../../config/firebase';
-import { OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip, Button, Spinner } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import AgregarProducto from './AgregarProducto';
@@ -18,7 +18,7 @@ const Productos = (props) => {
     const columns = [
         {
             name: 'Foto',
-            cell: row => <img src={row.img[0]} width='75' alt="..." />,
+            cell: row => <a href={row.img} target='blank'><img src={row.img[0]} width='75' alt="..." /></a>,
             grow: 1,
         },
         {
@@ -87,31 +87,19 @@ const Productos = (props) => {
         }
     ];
 
-
     const [showModal, setShowModal] = useState(false);
-    const [productos, setProductos] = useState([])
-    const opcion = () => window.confirm('Esta seguro que desea eliminar este producto?');
-    //Buscador
-
-    const [filterText, setFilterText] = useState('');
-    const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
-    const subHeaderComponentMemo = useMemo(() => {
-        const handleClear = () => {
-            if (filterText) {
-                setResetPaginationToggle(!resetPaginationToggle);
-                setFilterText('');
-            }
-        };
-        return <FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />;
-    }, [filterText, resetPaginationToggle]);
-    //Fin buscador...
     const handleShow = () => setShowModal(true);
+    const [productos, setProductos] = useState([]);
     let productosToArray = [];
+
+    const opcion = () => window.confirm('Esta seguro que desea eliminar este producto?');
+
     useEffect(() => {
         firebase.database().ref('/Productos').on('value', snapshot => {
             if (snapshot.val()) { setProductos(snapshot.val()); }
         });
     }, []);
+
     const deleteProduct = (product) => {
         const ref = firebase.storage().ref(`/IMG/Productos/${product.nombre}`);
         firebase.database().ref(`/Productos/${product.id}`).remove().then(() => {
@@ -128,6 +116,18 @@ const Productos = (props) => {
         }
     }
 
+    //Buscador
+    const [filterText, setFilterText] = useState('');
+    const subHeaderComponentMemo = useMemo(() => {
+        const handleClear = () => {
+            if (filterText) {
+                setFilterText('');
+            }
+        };
+        return <FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />;
+    }, [filterText]);
+    //Fin buscador...        
+
     if (productos || productos.length >= 0) {
 
         Object.keys(productos).forEach((key, i) => {
@@ -138,28 +138,38 @@ const Productos = (props) => {
 
         return (
             <div>
-                <div className="col text-center" >
-                    <h1 style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }}>Mantenedor De Productos</h1>
+                <div className="row" >
+                    <div className="col text-center" >
+                        <h1 style={{ ontWeight: 'bolder', color: '#606060' }}>Mantenedor De Productos</h1>
+                    </div>
                 </div>
                 <Button style={{ float: 'right' }} onClick={handleShow} variant="primary">
                     <i className="fas fa-tag fa-fw" />
-                    Agregar Producto
+                        Agregar Producto
                 </Button>
-                <div className='col'>
-                    <AgregarProducto show={showModal} onHide={() => setShowModal(false)} />
-                    <DataTable
-                        title="Productos"
-                        columns={columns}
-                        data={filteredItems}
-                        subHeader
-                        subHeaderComponent={subHeaderComponentMemo}
-                    />
-                </div>
+                <AgregarProducto show={showModal} onHide={() => setShowModal(false)} />
+                <DataTable
+                    title="Productos"
+                    columns={columns}
+                    data={filteredItems}
+                    subHeader
+                    subHeaderComponent={subHeaderComponentMemo}
+                    persistTableHead
+                />
             </div>
         )
     } else {
         return (
-            <h3>Cargando...</h3>
+            <>
+                <Spinner animation="grow" variant="primary" />
+                <Spinner animation="grow" variant="secondary" />
+                <Spinner animation="grow" variant="success" />
+                <Spinner animation="grow" variant="danger" />
+                <Spinner animation="grow" variant="warning" />
+                <Spinner animation="grow" variant="info" />
+                <Spinner animation="grow" variant="light" />
+                <Spinner animation="grow" variant="dark" />
+            </>
         )
     }
 }

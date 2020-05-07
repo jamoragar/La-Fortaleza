@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function TableInfo() {
     return (
-        <div className="container-fluid">
-            <div className="row ">
+        <div >
+            <div className="row my-3">
                 <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <table className="table table-borderless">
                         <tbody>

@@ -38,6 +38,7 @@ const ArtciculosDialogs = (producto) => {
     }
 
     const selectId = selectToArray[2].params.id;
+    console.log(selectId);
 
 
     if (selectId && productView) {
@@ -71,7 +72,7 @@ const ArtciculosDialogs = (producto) => {
                                 <div className="col ">
                                     <div className="row">
                                         <div className="col " >
-                                            <div className='container-fluid p-3' style={{ fontWeight: "bold", fontSize: "20px" }}>
+                                            <div className='fluid p-3' style={{ fontWeight: "bold", fontSize: "20px" }}>
                                                 {contenido.nombre}
                                             </div>
                                         </div>

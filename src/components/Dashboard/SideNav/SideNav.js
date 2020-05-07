@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { LogOut } from '../../../config/firebase';
 import sideNavStyles from './SideNav.module.scss';
 import MenuBtn from './MenuBtn';

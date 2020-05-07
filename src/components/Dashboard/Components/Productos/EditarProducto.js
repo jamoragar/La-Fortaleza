@@ -35,7 +35,6 @@ const EditarProducto = (props) => {
         });
     }, []);
 
-    //Función que recorre los archivos subidos y los transforma en blob para, posteriormente crear un array de estos y previsualizarlos dentro del formulario.
     const orientImage = async ({ target }) => {
         images.push(target.files)
         setFiles(target.files)
@@ -44,18 +43,16 @@ const EditarProducto = (props) => {
         }
         setImage(await fileArray);
     }
-    //Al renderisar el componente, se hace un llamado a firebase consultando por las descripciones de cada categoría.
+
     useEffect(() => {
         fbDbCategory.orderByChild('description').on('value', (snapshot) => {
-            // console.log('nombre del nodo: ' + snapshot.key + ' description: ' + snapshot.val().description);
             snapshot.forEach(child => {
-                // console.log(child.val().description)
                 descripciones.push(child.val().description);
             });
             setFbCategoria(descripciones);
         })
     }, []);
-    //Función que llama las subcategorías según corresponda en firebase.
+
     const handleSubCategory = (categoria) => {
         if (categoria === '0') {
             setSubCat(null);
@@ -67,7 +64,7 @@ const EditarProducto = (props) => {
             });
         }
     }
-    //Función que borra un elemento del array que contiene las imagenes agregadas en el formulario.
+
     const deleteImage = (e, name) => {
         e.preventDefault();
         setImage(image.filter((image) => image !== name))
@@ -83,20 +80,16 @@ const EditarProducto = (props) => {
     const handleCheck = () => {
         setChecked(!checked);
     }
-    //Función que toma el valor de cada input en el formulario para, posteriormente, validarlos y subirlos a la BD de firebase.
+
     const submitEditProduct = (e) => {
-        //Se previene que la página refresque.
         e.preventDefault();
         const promises = [];
-        //Campos de Formulario SIN Ficha Tecnica
         const { nombre, descripcion, categoria, subcategoria, precio, stock, video } = e.target.elements;
-        //Campos de formulario CON Ficha Tecnica
         const { editorial, jugadores, edad, idioma_dependiente, idioma, autores, duracion, dimensiones, peso, componentes } = e.target.elements;
         const FbDownloadURL = []
 
         if (files.length > 0 && categoria.value !== '0' && fbProducto) {
             setButtonAceptarText(false)
-            //Según la cantidad de archivos recorremos el hook files y subimos dichos archivos al bucket de firebase.
             for (let i = 0; i < files.length; i++) {
                 const uploadTask = firebase.storage().ref().child(`IMG/Productos/${nombre.value.trim()}/img_${nombre.value.trim()}_${i}`).put(files[i])
                 promises.push(uploadTask);
@@ -174,6 +167,7 @@ const EditarProducto = (props) => {
                 <div className="row" style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }} >
                     <div className="col text-center" >
                         <h1>Editar Producto</h1>
+                        <h2>{nombre}</h2>
                         <h4>Id Del Producto: {id}</h4>
                     </div>
                 </div>
@@ -251,7 +245,7 @@ const EditarProducto = (props) => {
                                     <input type="file" className={'custom-file-input'} id="customFile" onChange={orientImage} accept="image/*" multiple />
                                     <label className="custom-file-label" htmlFor="customFile">Buscar Imágen(es)</label>
                                 </div>
-                                { /* Consultamos que existan elementos en el hook image, y despues recorremos este */
+                                {
                                     image ? (
                                         <div>
                                             <div className={productosStyles.containerImg}>
@@ -303,8 +297,7 @@ const EditarProducto = (props) => {
                             }
                             <br />
                             <Button type='submit' variant='success' block>
-                                <i className="fas fa-undo fa-fw" />
-                                 Actualizar
+                                {buttonAceptarText ? (<><i className="far fa-save fa-fw" />Actualizar</>) : (<Spinner animation="border" />)}
                             </Button>
                             <br />
                             <Link to={`/Dashboard/${uid}/Productos/`}>

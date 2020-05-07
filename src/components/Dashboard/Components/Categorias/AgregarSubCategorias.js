@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Modal, Alert, Spinner, ProgressBar, Col } from 'react-bootstrap';
+import { Form, Button, Modal, Alert, Spinner, ProgressBar } from 'react-bootstrap';
 import firebase from '../../../../config/firebase';
 import categoriasStyles from './Categorias.module.scss'
 import moment from 'moment';

@@ -5,9 +5,10 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import firebase from '../../config/firebase';
 import './Store.scss';
+import { Link } from 'react-router-dom';
 
 
-const Store = ({ fbData, categoriasProductos, orders, cart }) => {
+const Store = ({ fbData, categoriasProductos, orders }) => {
     const [category, setCategory] = useState(null);
     const order = orders;
 
@@ -59,7 +60,7 @@ const Store = ({ fbData, categoriasProductos, orders, cart }) => {
                             {/*Transformamos el nodo Category a array, y diferenciamos entre su valor (description) y el subnodo que contiene mas contenido, valga la redundancia...*/}
                             {Object.entries(category).map(([abreviacion, contenido], i) => {
                                 return categoriaProducto === contenido.description ? (
-                                    <a key={i} href={contenido.path}>
+                                    <Link key={i} to={`/Categoria/${contenido.description}`}>
                                         <img
                                             alt="Banner"
                                             className="img-fluid"
@@ -67,7 +68,7 @@ const Store = ({ fbData, categoriasProductos, orders, cart }) => {
                                             title="Banner Categoria"
                                             src={contenido.banner}
                                         />
-                                    </a>
+                                    </Link>
                                 ) : null
                             })}
                             <Carousel

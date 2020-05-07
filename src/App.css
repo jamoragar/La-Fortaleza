@@ -9,10 +9,16 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 .img-fluid {
   border-radius: 10px;
 }
 
 .img-fluid:hover {
   filter: blur(2px);
+}
+
+.container-fluid {
+  min-height: 400px;
+  padding: 0 15px;
 }

@@ -6,17 +6,11 @@ import { Spinner } from 'react-bootstrap';
 
 import Home from "../Layouts/Home/Home";
 import Dashboard from "../Dashboard/Dashboard";
+import Buscador from '../Buscador/Buscador';
 import Ofertas from "../Ofertas/Ofertas";
-import Preventa from "../Articulos/Categorias/Preventa";
 import Eventos from "../Eventos/Eventos";
-import BoardingGames from "../Articulos/Categorias/BoardingGames";
-import JuegosDeCartas from "../Articulos/Categorias/TraidingCardsGames";
-import Armables from "../Articulos/Categorias/Armables";
-import Comics from "../Articulos/Categorias/Comics";
+import ArticulosXCategoria from '../ArticulosXCategoria/ArticulosXCategorias';
 import Login from "../Login/Login";
-import RolGames from "../Articulos/Categorias/RolGames";
-import XWing from "../Articulos/Categorias/Xwing";
-import Accesorios from "../Articulos/Categorias/Accesorios";
 import ArticulosDialogs from "../ArticulosDialogs/ArticulosDialogs";
 import Contacto from '../Contacto/Contacto';
 import AvisoLegal from '../AvisoLegal/AvisoLegal';
@@ -33,6 +27,7 @@ export default function Routes(props) {
   const [fbData, setFbData] = useState(null);
   let productosToArray = [];
   let categoriaProductos = [];
+  const { keySearch, setKeySearch } = props;
 
   useEffect(() => {
     firebase.database().ref('/Productos').on('value', snapshot => {
@@ -60,16 +55,10 @@ export default function Routes(props) {
             <Route path="/" exact component={() => <Home isAuthed={props.authenticated} uid={props.uid} user={props.user} name={props.name} />} />
             <Route path="/Dashboard/:uid" component={Dashboard} />
             <Route path="/Articulo/:id/" component={ArticulosDialogs} />
-            <Route path="/Preventa" component={() => <Preventa fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+            <Route path="/Categoria/:description/" component={() => <ArticulosXCategoria fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+            <Route path="/Busqueda" component={() => <Buscador keySearch={keySearch} setKeySearch={setKeySearch} />} />
             <Route path="/Ofertas" component={() => <Ofertas fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
             <Route path="/Eventos" component={Eventos} />
-            <Route path="/JuegosDeMesa" component={() => <BoardingGames fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-            <Route path="/JuegosDeRol" component={() => <RolGames fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-            <Route path="/JuegosDeCartas" component={() => <JuegosDeCartas fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-            <Route path="/Armables" component={() => <Armables fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-            <Route path="/Comics" component={() => <Comics fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-            <Route path="/X-Wing" component={() => <XWing fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
-            <Route path="/Accesorios" component={() => <Accesorios fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
             <Route path="/Login" component={Login} />
             <Route path="/Contacto" component={Contacto} />
             <Route path="/AvisoLegal" component={AvisoLegal} />
@@ -83,7 +72,7 @@ export default function Routes(props) {
     )
   } else {
     return (
-      <>
+      <div className="container-fluid  px-5">
         <Spinner animation="grow" variant="primary" />
         <Spinner animation="grow" variant="secondary" />
         <Spinner animation="grow" variant="success" />
@@ -92,7 +81,7 @@ export default function Routes(props) {
         <Spinner animation="grow" variant="info" />
         <Spinner animation="grow" variant="light" />
         <Spinner animation="grow" variant="dark" />
-      </>
+      </div>
     )
   }
 };

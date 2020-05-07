@@ -58,7 +58,7 @@ const Categorias = () => {
 
     const [showModal, setShowModal] = useState(false);
     const handleShow = () => setShowModal(true);
-    const [categorias, setCategorias] = useState([])
+    const [categorias, setCategorias] = useState([]);
     let categoriasToArray = [];
 
     const opcion = () => window.confirm('Esta seguro que desea eliminar esta categoria?');
@@ -70,7 +70,6 @@ const Categorias = () => {
     }, []);
 
     const deleteCategory = (category) => {
-        console.log(` categorias delete ${category.subCat}`)
         const ref = firebase.storage().ref(`/IMG/Categorias/categorias/${category.description}`);
         firebase.database().ref(`/Category/${category.id}`).remove().then(() => {
             ref.listAll().then((dir) => {
@@ -86,7 +85,6 @@ const Categorias = () => {
         }
     }
 
-
     if (categorias || categorias.length >= 0) {
 
         Object.keys(categorias).forEach((key, i) => {
@@ -99,7 +97,7 @@ const Categorias = () => {
             <div>
                 <div className="row" >
                     <div className="col text-center" >
-                        <h1 style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }}>Mantenedor De Categorias</h1>
+                        <h1 style={{ fontWeight: 'bolder', color: '#606060' }}>Mantenedor De Categorias</h1>
                     </div>
                 </div>
                 <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', marginBottom: '2rem', width: '100' }} onClick={handleShow} variant="primary">
