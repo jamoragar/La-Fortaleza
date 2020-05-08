@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { formatPrice } from '../Data/DataProductos';
-import firebase from '../../config/firebase';
-import { useOrders } from '../Hooks/useOrders';
-import { useCart } from '../Hooks/useCart';
+import { useParams } from 'react-router-dom';
+//Apis
 import { Spinner } from 'react-bootstrap';
 import ReactPlayer from 'react-player';
+//componentes
+import firebase from '../../config/firebase';
 import CarritoCompra from '../CarritoCompra/CarritoCompra';
+//Hooks
+import { formatPrice } from '../Data/DataProductos';
+import { useOrders } from '../Hooks/useOrders';
+import { useCart } from '../Hooks/useCart';
+//styles
 import './ArticulosDialogs.scss';
-import { useParams } from 'react-router-dom';
 
 const ArtciculosDialogs = (props) => {
     const [productView, setProductView] = useState();
@@ -36,8 +40,6 @@ const ArtciculosDialogs = (props) => {
     }
 
     const selectId = id;
-    console.log(selectId);
-
 
     if (selectId && productView) {
         Object.keys(productView).forEach((key, i) => {
@@ -55,7 +57,6 @@ const ArtciculosDialogs = (props) => {
             <div>
                 <CarritoCompra {...cart} {...orders} authenticated={props.isAuthed} uid={props.uid} />
                 {Object.entries(productosView).map(([abreviacion, contenido], i) => {
-                    console.log(selectId === contenido.id ? contenido : '')
                     return selectId === contenido.id ? (
                         <div key={i} className="container p-3 mt-5 mb-5">
                             <div className="row"

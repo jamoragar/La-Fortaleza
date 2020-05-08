@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+//Apis
 import { Spinner } from 'react-bootstrap';
+//Componentes
 import firebase from "../../config/firebase";
-import { formatPrice } from '../Data/DataProductos';
 import CarritoCompra from '../CarritoCompra/CarritoCompra';
+//Hooks
 import { useOrders } from '../Hooks/useOrders';
 import { useCart } from '../Hooks/useCart';
-import { useParams } from "react-router-dom";
+import { formatPrice } from '../Data/DataProductos';
 
 const ArticulosXCategoria = (props) => {
     const [category, setCategory] = useState(null);

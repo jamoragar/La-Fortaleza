@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { formatPrice } from "../Data/DataProductos";
-import { Spinner } from "react-bootstrap";
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
-import firebase from '../../config/firebase';
-import './Store.scss';
 import { Link } from 'react-router-dom';
-
+//Api
+import { Spinner } from "react-bootstrap";
+import 'react-multi-carousel/lib/styles.css';
+//Componentes
+import firebase from '../../config/firebase';
+import Carousel from 'react-multi-carousel';
+//Hooks
+import { formatPrice } from "../Data/DataProductos";
+//Styles
+import './Store.scss';
 
 const Store = ({ fbData, categoriasProductos, orders }) => {
     const [category, setCategory] = useState(null);

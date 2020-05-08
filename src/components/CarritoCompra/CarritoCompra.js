@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import { formatPrice } from '../Data/DataProductos';
+//Componetes
 import Register from '../Register/Register';
+//Hooks
+import { formatPrice } from '../Data/DataProductos';
+//Styles
 import './CarritoCompra.scss';
 
 const CarritoCompra = (props) => {
     const { authenticated, openCart, setOpenCart, state, dispatch } = props;
     const [modalRegisterShow, setModalRegisterShow] = useState(false);
-    console.log(props)
-    console.log(state.order)
+
     useEffect(() => {
         state.order.length === 0 ? setOpenCart(true) : setOpenCart(false)
     }, [state.order.length]);

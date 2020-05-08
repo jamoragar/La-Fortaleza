@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
+//Api
 import CarouselContainer from "../Carousel/Carousel";
+import { Spinner } from 'react-bootstrap';
+//Componentes
 import Store from "../../Store/Store";
 import TableInfo from "../TableInfo/TableInfo";
 import firebase from '../../../config/firebase';
-import { Spinner } from 'react-bootstrap';
 import CarritoCompra from '../../CarritoCompra/CarritoCompra';
 //Hooks
 import { useOrders } from '../../Hooks/useOrders';
 import { useCart } from '../../Hooks/useCart';
-
 
 const Home = (props) => {
 

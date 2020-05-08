@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, Router, Redirect } from "react-router-dom";
 import { createBrowserHistory } from 'history';
-import firebase from '../../config/firebase';
+//Apis
 import { Spinner } from 'react-bootstrap';
-
+//Componentes
+import firebase from '../../config/firebase';
 import Home from "../Layouts/Home/Home";
 import Dashboard from "../Dashboard/Dashboard";
 import Buscador from '../Buscador/Buscador';
@@ -27,7 +28,6 @@ export default function Routes(props) {
   const [fbData, setFbData] = useState(null);
   let productosToArray = [];
   let categoriaProductos = [];
-  const { keySearch, setKeySearch } = props;
 
   useEffect(() => {
     firebase.database().ref('/Productos').on('value', snapshot => {
@@ -56,7 +56,7 @@ export default function Routes(props) {
             <Route path="/Dashboard/:uid" component={Dashboard} />
             <Route path="/Articulo/:id/" component={() => <ArticulosDialogs fbData={productosToArray} isAuthed={props.authenticated} uid={props.uid} />} />
             <Route path="/Categoria/:description/" component={() => <ArticulosXCategoria fbData={productosToArray} categoriasProductos={categoriaProductos} isAuthed={props.authenticated} uid={props.uid} />} />
-            <Route path="/Busqueda" component={() => <Buscador keySearch={keySearch} setKeySearch={setKeySearch} />} />
+            <Route path="/Busqueda/:Search" component={() => <Buscador fbData={productosToArray} />} />
             <Route path="/Ofertas" component={() => <Ofertas fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
             <Route path="/Eventos" component={Eventos} />
             <Route path="/Login" component={Login} />
