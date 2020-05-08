@@ -60,13 +60,13 @@ const ProductoModal = (id, nombre, descripcion, categoria, subcategoria, precio,
 
 const VerProducto = (props) => {
     const [fbProducto, setFbProducto] = useState(null);
-    const productData = props.location.data;
     let { id } = useParams();
 
     useEffect(() => {
         firebase.database().ref(`/Productos/${id}`).on('value', (snapshot) => {
             setFbProducto(snapshot.val());
-        })
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (id && fbProducto) {

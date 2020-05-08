@@ -13,6 +13,7 @@ const CarritoCompra = (props) => {
 
     useEffect(() => {
         state.order.length === 0 ? setOpenCart(true) : setOpenCart(false)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state.order.length]);
 
     const discountPrice = 0.10;
@@ -32,10 +33,6 @@ const CarritoCompra = (props) => {
             type: 'REMOVE_ORDER',
             payload: productIndex
         })
-    }
-
-    const redirectToCheckOut = () => {
-
     }
 
     return (

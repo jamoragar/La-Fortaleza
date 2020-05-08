@@ -10,7 +10,7 @@ const CheckOut = () => {
     let pedidoFinal = []
     let subTotal = []
     //Agregamos la propiedad "Cantidad" a las ordenes
-    orders.state.order.map((order, index) => {
+    orders.state.order.forEach((order, index) => {
         cantidadAux[index] = 1
         orders.state.order[index].cuantity = cantidadAux[index]; 
     })
@@ -38,7 +38,7 @@ const CheckOut = () => {
     const generarPedido = () => {
         console.log(pedidoFinal)
     }
-    if(orders.state.order.length == 0){
+    if(orders.state.order.length === 0){
         return(
             <div style={{margin:'5% 0 5% 0'}}>
                 <h3>Si quieres hacer checkout, debes tener al menos un producto en tu carro de compras...</h3>

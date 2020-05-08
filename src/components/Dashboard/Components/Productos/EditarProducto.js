@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import moment from 'moment';
 //Api
@@ -36,6 +36,7 @@ const EditarProducto = (props) => {
             });
             setFbCategoria(descripciones);
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const orientImage = async ({ target }) => {
@@ -54,6 +55,7 @@ const EditarProducto = (props) => {
             });
             setFbCategoria(descripciones);
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleSubCategory = (categoria) => {
@@ -318,7 +320,7 @@ const EditarProducto = (props) => {
                         </Form>
                         : null
                 }
-            </div >
+            </div>
         );
     } else {
         return (
