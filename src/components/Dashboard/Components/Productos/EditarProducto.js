@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { Form, Col, Button, Spinner, Alert, ProgressBar } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
 import firebase from '../../../../config/firebase';
@@ -161,7 +161,6 @@ const EditarProducto = (props) => {
     if (id && fbProducto && fbCategoria) {
         console.log(fbProducto)
         const { id, nombre, descripcion, categoria, subcategoria, precio, stock, video, img } = fbProducto;
-        console.log(fbProducto.id)
         return (
             < div >
                 <div className="row" style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }} >
@@ -268,7 +267,10 @@ const EditarProducto = (props) => {
                                         </div>
                                     )
                                         :
-                                        null}
+                                        <>
+                                        {(() => setImage(img))()}
+                                        </>
+                                        }
                             </Form.Group>
                             <p>¿Agregar Descripción y Detalle?</p>
                             <Form.Check
