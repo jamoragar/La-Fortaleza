@@ -65,8 +65,8 @@ export const Dashboard = (props) => {
     useEffect(() => {
         firebase.database().ref(`/Users/${uid}`).on('value', (snapshot) => {
             setUserData(snapshot.val());
-        })
-
+        });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (userData) {

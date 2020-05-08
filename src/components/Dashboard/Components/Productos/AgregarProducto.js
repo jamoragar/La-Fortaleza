@@ -39,7 +39,8 @@ const AgregarProducto = (props) => {
                 descripciones.push(child.val().description);
             });
             setFbCategoria(descripciones);
-        })
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     //Función que llama las subcategorías según corresponda en firebase.
     const handleSubCategory = (categoria) => {

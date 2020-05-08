@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Col, Button, Spinner, Alert, ProgressBar } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
 import firebase from '../../../../config/firebase';
@@ -33,6 +33,7 @@ const EditarProducto = (props) => {
             });
             setFbCategoria(descripciones);
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const orientImage = async ({ target }) => {
@@ -51,6 +52,7 @@ const EditarProducto = (props) => {
             });
             setFbCategoria(descripciones);
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleSubCategory = (categoria) => {
@@ -268,9 +270,9 @@ const EditarProducto = (props) => {
                                     )
                                         :
                                         <>
-                                        {(() => setImage(img))()}
+                                            {(() => setImage(img))()}
                                         </>
-                                        }
+                                }
                             </Form.Group>
                             <p>¿Agregar Descripción y Detalle?</p>
                             <Form.Check
@@ -315,7 +317,7 @@ const EditarProducto = (props) => {
                         </Form>
                         : null
                 }
-            </div >
+            </div>
         );
     } else {
         return (

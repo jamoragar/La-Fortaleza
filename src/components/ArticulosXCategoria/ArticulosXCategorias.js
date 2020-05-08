@@ -66,7 +66,7 @@ const ArticulosXCategoria = (props) => {
                                                                                 <div className="shape">
                                                                                     <div className="shape-text">
                                                                                         -10%
-                                              </div>
+                                                                                    </div>
                                                                                 </div>
                                                                                 <img className="card-img" src={producto.img} alt={producto.nombre} style={{ width: "283px", height: "283px" }} />
                                                                             </div>
