@@ -54,8 +54,8 @@ export default function Routes(props) {
           <Switch>
             <Route path="/" exact component={() => <Home isAuthed={props.authenticated} uid={props.uid} user={props.user} name={props.name} />} />
             <Route path="/Dashboard/:uid" component={Dashboard} />
-            <Route path="/Articulo/:id/" component={ArticulosDialogs} />
-            <Route path="/Categoria/:description/" component={() => <ArticulosXCategoria fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
+            <Route path="/Articulo/:id/" component={() => <ArticulosDialogs fbData={productosToArray} isAuthed={props.authenticated} uid={props.uid} />} />
+            <Route path="/Categoria/:description/" component={() => <ArticulosXCategoria fbData={productosToArray} categoriasProductos={categoriaProductos} isAuthed={props.authenticated} uid={props.uid} />} />
             <Route path="/Busqueda" component={() => <Buscador keySearch={keySearch} setKeySearch={setKeySearch} />} />
             <Route path="/Ofertas" component={() => <Ofertas fbData={productosToArray} categoriasProductos={categoriaProductos} />} />
             <Route path="/Eventos" component={Eventos} />

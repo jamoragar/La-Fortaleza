@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { formatPrice } from '../Data/DataProductos';
 import Register from '../Register/Register';
 import './CarritoCompra.scss';
@@ -7,7 +7,7 @@ import './CarritoCompra.scss';
 const CarritoCompra = (props) => {
     const { authenticated, openCart, setOpenCart, state, dispatch } = props;
     const [modalRegisterShow, setModalRegisterShow] = useState(false);
-    
+    console.log(props)
     console.log(state.order)
     useEffect(() => {
         state.order.length === 0 ? setOpenCart(true) : setOpenCart(false)
@@ -33,7 +33,7 @@ const CarritoCompra = (props) => {
     }
 
     const redirectToCheckOut = () => {
-        
+
     }
 
     return (
@@ -96,7 +96,7 @@ const CarritoCompra = (props) => {
                         setModalRegisterShow(true);
                     }
                 }}>
-                    {state.order.length >= 0 && !authenticated ? 'Un moneto...' : (<Link style={{pointer:'cursor', decoration:'none', color:'white'}} to='/CheckOut'>Ver Carrito!</Link>)}
+                    {state.order.length >= 0 && !authenticated ? 'Un moneto...' : (<Link style={{ pointer: 'cursor', decoration: 'none', color: 'white' }} to='/CheckOut'>Ver Carrito!</Link>)}
                 </div>
             </div>
         </div>

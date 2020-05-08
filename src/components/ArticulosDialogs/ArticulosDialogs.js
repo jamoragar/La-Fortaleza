@@ -7,23 +7,21 @@ import { Spinner } from 'react-bootstrap';
 import ReactPlayer from 'react-player';
 import CarritoCompra from '../CarritoCompra/CarritoCompra';
 import './ArticulosDialogs.scss';
+import { useParams } from 'react-router-dom';
 
-const ArtciculosDialogs = (producto) => {
+const ArtciculosDialogs = (props) => {
     const [productView, setProductView] = useState();
     const orders = useOrders();
     const cart = useCart();
     let productViewToArray = [];
-    let selectToArray = [];
+
+    let { id } = useParams();
 
     useEffect(() => {
         firebase.database().ref('/Productos').on('value', snapshot => {
             setProductView(snapshot.val());
         });
     }, []);
-
-    Object.keys(producto).forEach((key, i) => {
-        selectToArray[i] = producto[key]
-    });
 
     const addNewProduct = (product) => {
         const newOrder = {
@@ -37,7 +35,7 @@ const ArtciculosDialogs = (producto) => {
         })
     }
 
-    const selectId = selectToArray[2].params.id;
+    const selectId = id;
     console.log(selectId);
 
 
@@ -55,7 +53,7 @@ const ArtciculosDialogs = (producto) => {
         const discountPrice = 0.10;
         return (
             <div>
-                <CarritoCompra {...cart} {...orders} />
+                <CarritoCompra {...cart} {...orders} authenticated={props.isAuthed} uid={props.uid} />
                 {Object.entries(productosView).map(([abreviacion, contenido], i) => {
                     console.log(selectId === contenido.id ? contenido : '')
                     return selectId === contenido.id ? (
