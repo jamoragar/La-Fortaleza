@@ -38,7 +38,7 @@ const ArticulosXCategoria = (props) => {
     if (fbData && category && description) {
         return (
             <div>
-                <CarritoCompra {...cart} {...orders} />
+                <CarritoCompra {...cart} {...orders} authenticated={props.isAuthed} uid={props.uid} />
                 {categoriasProductos.map((categoriaProducto, i) => {
                     return categoriaProducto === description ? (
                         <div key={i}>
