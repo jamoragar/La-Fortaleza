@@ -93,7 +93,7 @@ const EditarProducto = (props) => {
         const { editorial, jugadores, edad, idioma_dependiente, idioma, autores, duracion, dimensiones, peso, componentes } = e.target.elements;
         const FbDownloadURL = []
 
-        if (files.length > 0 && categoria.value !== '0' && fbProducto) {
+        if ((files.length > 0 || image.length > 0) && categoria.value !== '0' && fbProducto) {
             setButtonAceptarText(false)
             for (let i = 0; i < files.length; i++) {
                 const uploadTask = firebase.storage().ref().child(`IMG/Productos/${nombre.value.trim()}/img_${nombre.value.trim()}_${i}`).put(files[i])
@@ -137,9 +137,7 @@ const EditarProducto = (props) => {
                                     componentes: componentes.value,
 
                                 } : null,
-                                img: FbDownloadURL.map((img) => {
-                                    return img
-                                }),
+                                img: files ? FbDownloadURL.map((img) => { return img }) : image.map((img) => { return img }),
                             })
                         }
                     }
