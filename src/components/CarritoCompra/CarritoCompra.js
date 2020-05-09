@@ -93,7 +93,7 @@ const CarritoCompra = (props) => {
                         setModalRegisterShow(true);
                     }
                 }}>
-                    {state.order.length >= 0 && !authenticated ? 'Un moneto...' : (<Link style={{ pointer: 'cursor', decoration: 'none', color: 'white' }} to='/CheckOut'>Ver Carrito!</Link>)}
+                    {state.order.length >= 0 && !authenticated ? 'Registrate para continuar!' : (<Link style={{ pointer: 'cursor', decoration: 'none', color: 'white' }} to='/CheckOut'>Ver Carrito!</Link>)}
                 </div>
             </div>
         </div>
