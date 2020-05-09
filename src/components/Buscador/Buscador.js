@@ -1,16 +1,15 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { Spinner, Button } from 'react-bootstrap';
-import firebase from '../../config/firebase';
 import DataTable from 'react-data-table-component';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import BuscadorStyles from './Buscador.module.scss'
 import { Link, useParams } from 'react-router-dom';
 
-const FilterComponent = ({ filterText, onFilter, onClear, keySearch }) => (
-    <>
-        <input className={BuscadorStyles.TextField} id="search" type="text" placeholder="Buscar por nombre" value={keySearch} onChange={onFilter} />
-        <button className={BuscadorStyles.ClearButton} type="button" onClick={onClear}>X</button>
-    </>
+const FilterComponent = ({ filterText, onFilter, onClear }) => (
+    <div style={{ display: 'none' }}>
+        <input className={BuscadorStyles.TextField} id="search" type="text" placeholder="Buscar por nombre" value={filterText} onChange={onFilter} />
+        <Button type="button" style={{ display: 'none' }} onClick={onClear}>Borrar busqueda</Button>
+    </div>
 );
 
 const Buscador = (props) => {
@@ -70,46 +69,56 @@ const Buscador = (props) => {
         }
     ];
 
-    const { keySearch } = props;
-    console.log(`log de buscador ${keySearch}`)
+    let { Search } = useParams();
 
-    const [productos, setProductos] = useState([]);
-    let productosToArray = [];
+    const { fbData } = props;
+    const productosToArray = fbData;
 
-    useEffect(() => {
-        firebase.database().ref('/Productos').on('value', snapshot => {
-            if (snapshot.val()) { setProductos(snapshot.val()); }
-        });
-    }, []);
-
-    Object.keys(productos).forEach((key, i) => {
-        productosToArray[i] = productos[key]
-    });
-
-    const [filterText, setFilterText] = useState('');
-    const filteredItems = productosToArray.filter(item => item.nombre && item.nombre.toLowerCase().includes(filterText.toLowerCase()));
+    const [filterText, setFilterText] = useState(Search);
+    const filteredItems = productosToArray.filter(item => item.categoria && item.nombre && item.nombre.toLowerCase().includes(filterText.toLowerCase()));
 
     const subHeaderComponentMemo = useMemo(() => {
         const handleClear = () => {
             if (filterText) {
-                setFilterText("keySearch");
+                setFilterText('');
             }
         };
 
         return <FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />;
     }, [filterText]);
 
-    return (
-        <div>
-            <DataTable
-                columns={columns}
-                data={filteredItems}
-                subHeader
-                subHeaderComponent={subHeaderComponentMemo}
-                persistTableHead
-            />
-        </div>
-    );
+    if (filteredItems) {
+        return (
+            <div>
+                <div className="row" style={{ marginTop: '3rem', fontWeight: 'bolder', color: '#606060' }} >
+                    <div className="col text-center" >
+                        <h3>Resultados de la búsqueda de "{Search}"</h3>
+                    </div>
+                </div>
+                <DataTable
+                    style={{ marginBottom: '5rem' }}
+                    columns={columns}
+                    data={filteredItems}
+                    subHeader
+                    subHeaderComponent={subHeaderComponentMemo}
+                    persistTableHead
+                />
+            </div>
+        )
+    } else {
+        return (
+            <div className="container-fluid  px-5">
+                <Spinner animation="grow" variant="primary" />
+                <Spinner animation="grow" variant="secondary" />
+                <Spinner animation="grow" variant="success" />
+                <Spinner animation="grow" variant="danger" />
+                <Spinner animation="grow" variant="warning" />
+                <Spinner animation="grow" variant="info" />
+                <Spinner animation="grow" variant="light" />
+                <Spinner animation="grow" variant="dark" />
+            </div>
+        )
+    }
 };
 
 

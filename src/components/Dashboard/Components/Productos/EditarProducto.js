@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Col, Button, Spinner, Alert, ProgressBar } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
+import moment from 'moment';
+//Api
+import { Form, Col, Button, Spinner, Alert, ProgressBar } from 'react-bootstrap';
+//Componentes
 import firebase from '../../../../config/firebase';
 import InformacionAdicionalProductos from './InformacionAdicionalProductos';
-import moment from 'moment';
+//Styles
 import productosStyles from './Productos.module.scss'
 
 const EditarProducto = (props) => {

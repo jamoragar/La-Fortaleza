@@ -5,15 +5,20 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Spinner } from 'react-bootstrap';
 //Componentes
-import { useSearch } from "./components/Hooks/useSearch";
+import NavBar from "../src/components/Layouts/Navbar/Navbar";
+import Header from "./components/Layouts/Header/Header";
+import Footer from "./components/Layouts/Footer/Footer";
+
 
 const App = (props) => {
-  const Search = useSearch();
 
   if (props) {
     return (
       <div className="App">
-        <Routes {...Search} authenticated={props.authenticated} user={props.user} name={props.name} uid={props.uid} />
+        <NavBar authenticated={props.authenticated} user={props.user} name={props.name} uid={props.uid} />
+        <Header />
+        <Routes authenticated={props.authenticated} user={props.user} name={props.name} uid={props.uid} />
+        <Footer />
       </div>
     );
   } else {

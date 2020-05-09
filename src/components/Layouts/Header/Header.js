@@ -1,19 +1,17 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import './Header.scss';
-import { useSearch } from "../../Hooks/useSearch";
 
-
-const Header = () => {
-    const Search = useSearch();
-    const Buscar = { ...Search };
-    const { keySearch, setKeySearch } = Buscar;
+const Header = ({ ...Search }) => {
 
     const submitSearch = (e) => {
         e.preventDefault();
-        const { search } = e.target.elements;
-        setKeySearch(search.value);
-        console.log(`log de buscador ${keySearch}`);
+        const search = e.target.elements;
+        if (search[0].value !== '') {
+            window.location.href = `/Busqueda/${search[0].value}`;
+        } else {
+            console.error('error');
+        }
     }
 
     return (
@@ -26,14 +24,12 @@ const Header = () => {
                 </div>
                 <div className="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                     <div className="col" style={{ paddingTop: "2rem" }}>
-                        <div className="container h-100">
-                            <Form className="d-flex justify-content-center h-100" id='myForm' onSubmit={submitSearch}>
-                                <Form.Group className="searchbar">
-                                    <Form.Control className="search_input" name='search' type='text' autoComplete="off" placeholder="¿Qué estas buscando?" required />
-                                    <Button className="search_icon" type='submit'>
-                                        <i className="fas fa-search"></i>
-                                    </Button>
-                                </Form.Group>
+                        <div className="d-flex justify-content-center h-100">
+                            <Form className="searchbar" id='myForm' onSubmit={submitSearch} >
+                                <Form.Control className="search_input" name='search' type='text' autoComplete="off" defaultValue="" placeholder="¿Qué estas buscando?" required />
+                                <Button className="search_icon" type='submit'>
+                                    <i className="fas fa-search"></i>
+                                </Button>
                             </Form>
                         </div>
                     </div>
@@ -48,7 +44,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
 
     )
 }
