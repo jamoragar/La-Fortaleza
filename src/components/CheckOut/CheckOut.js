@@ -5,11 +5,16 @@ import {formatPrice} from '../Data/DataProductos'
 import { useOrders } from '../Hooks/useOrders';
 import firebase from '../../config/firebase';
 const CheckOut = () => {
-    const orders = useOrders();
+    let total = 0;
     let cantidadAux = []
     let pedidoFinal = []
     let subTotal = []
+    const orders = useOrders();
+    const [precio_envio, setPrecio_envio] = useState(0);
+    const [precio_regalo, setPrecio_regalo] = useState(0);
     const [userAuth, setUserAuth] = useState();
+    const [regalo, setRegalo] = useState(false);
+    const [envioGratuito, setEnvioGratuito] = useState(false);
     const user = firebase.auth().currentUser;
     useEffect(() => {
         if(user) {
@@ -30,10 +35,10 @@ const CheckOut = () => {
     const handleCantidad = (index,value, max) => {
         let auxArray = [...cantidad];
         auxArray[index] = auxArray[index] + value;
-        if(auxArray[index] >= 0 && auxArray[index] <= max){
+        if(auxArray[index] >= 1 && auxArray[index] <= max){
             setCantidad(auxArray);
         }else if(auxArray[index] < 0){
-            auxArray[index] = 0;
+            auxArray[index] = 1;
             setCantidad(auxArray);
         }else if(auxArray[index] >= max){
             auxArray[index] = max;
@@ -52,6 +57,27 @@ const CheckOut = () => {
     const formularioInfoComprador = (info) => {
 
     }
+    const handleRegalo = () => {
+        setRegalo(!regalo);
+        if(!regalo){
+            setPrecio_regalo(3000)
+        }
+        else{
+            setPrecio_regalo(0)
+        }
+    }
+    const handleEnvio = () => {
+        setEnvioGratuito(!envioGratuito);
+        if(!envioGratuito) {
+            setPrecio_envio(5000)
+        }
+        else{
+            setPrecio_envio(0)
+        }
+
+    }
+    
+
     if(orders.state.order.length === 0){
         return(
             <div style={{margin:'5% 0 5% 0'}}>
@@ -63,7 +89,10 @@ const CheckOut = () => {
         )
     }
     else{
-        console.log(userAuth);
+        if(total >= 30001){
+            console.log('entramos');
+            setPrecio_envio(0)
+        }
         return(
             <div style={{margin:'5% 2% 5% 2%'}}>
                 {
@@ -127,6 +156,28 @@ const CheckOut = () => {
                         ) 
                  }
                 <h2>Su Pedido</h2>
+                <br/>
+                ¿Desea envolver su pedido para regalo?<br/>
+                (Tiene un costo adicional de $3.000)<br/>
+                <Form.Check
+                    inline
+                    checked={regalo}
+                    name={'control'}
+                    type={'radio'}
+                    id={`custom1`}
+                    label={`Si`}
+                    onChange={handleRegalo}
+                />
+                <Form.Check
+                    inline
+                    checked={!regalo}
+                    name={'control'}
+                    type={'radio'}
+                    id={`custom2`}
+                    label={`No`}
+                    onChange={handleRegalo}
+                />
+                <br/><br/>
                 <Table responsive>
                     <thead>
                         <tr>
@@ -169,10 +220,48 @@ const CheckOut = () => {
                     <tfoot>
                         <tr>
                             <td><h4>Total: </h4></td>
-                            <td><h5>{formatPrice(subTotal.reduce((a,b) => a+b))}</h5></td>
+                            <td>
+                                <h5>
+                                    {(() => {   
+                                            total = subTotal.reduce((a,b) => a+b) + precio_envio + precio_regalo
+                                            if(total >= 30001) {
+                                                total = total - precio_envio
+                                            }
+                                            return(
+                                                formatPrice(total)
+                                            )
+                                        }
+                                    )()}
+                                </h5>
+                            </td>
                         </tr>
                     </tfoot>
                 </Table>
+                {
+                    total >= 30001 ? <h3>Tiene envio gratuito a su dirección!</h3> : (
+                        <>
+                        <h3>¿Desea servicio de reparto?</h3>
+                        <Form.Check
+                            inline
+                            checked={envioGratuito}
+                            name={'envio'}
+                            type={'radio'}
+                            id={`custom3`}
+                            label={`Si`}
+                            onChange={handleEnvio}
+                        />
+                        <Form.Check
+                            inline
+                            checked={!envioGratuito}
+                            name={'envio'}
+                            type={'radio'}
+                            id={`custom4`}
+                            label={`No`}
+                            onChange={handleEnvio}
+                        />
+                        </>
+                    )
+                }
                 <Button variant="primary" style={{float:'right'}} onClick={generarPedido}><i className="fas fa-dollar-sign fa-fw" />Ir a Pagar!</Button>
             </div>
         )

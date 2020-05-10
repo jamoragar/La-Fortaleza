@@ -14,6 +14,7 @@ import './Store.scss';
 const Store = ({ fbData, categoriasProductos, orders }) => {
     const [category, setCategory] = useState(null);
     const order = orders;
+    const discountPrice = 0.10;
 
     // LLamado a firebase para obtener todo el nodo Category y poder trabajarlo
     useEffect(() => {
@@ -23,10 +24,11 @@ const Store = ({ fbData, categoriasProductos, orders }) => {
     }, []);
 
     const addNewProduct = (product) => {
+        
         const newOrder = {
             title: product.nombre,
             description: product.categoria,
-            price: product.precio,
+            price: (product.precio - (product.precio * discountPrice)),
             stock: parseInt(product.stock),
             id: product.id
         }
@@ -36,7 +38,6 @@ const Store = ({ fbData, categoriasProductos, orders }) => {
         })
     }
 
-    const discountPrice = 0.10;
 
     const responsive = {
         desktop: {

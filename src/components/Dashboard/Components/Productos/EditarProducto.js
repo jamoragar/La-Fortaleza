@@ -92,8 +92,8 @@ const EditarProducto = (props) => {
         const { nombre, descripcion, categoria, subcategoria, precio, stock, video } = e.target.elements;
         const { editorial, jugadores, edad, idioma_dependiente, idioma, autores, duracion, dimensiones, peso, componentes } = e.target.elements;
         const FbDownloadURL = []
-
-        if ((files.length > 0 || image.length > 0) && categoria.value !== '0' && fbProducto) {
+        
+        if (files.length > 0 && categoria.value !== '0' && fbProducto) {
             setButtonAceptarText(false)
             for (let i = 0; i < files.length; i++) {
                 const uploadTask = firebase.storage().ref().child(`IMG/Productos/${nombre.value.trim()}/img_${nombre.value.trim()}_${i}`).put(files[i])
@@ -157,15 +157,51 @@ const EditarProducto = (props) => {
 
         }
         else {
-            alert('Debe completar todos los campos y agregar al menos una imágen.');
+            setButtonAceptarText(false)
+            const key = fbProducto.id;
+            console.log(key);
+            firebase.database().ref().child(`/Productos/${key}`).update({
+                id: key,
+                nombre: nombre.value.trim(),
+                descripcion: descripcion.value,
+                categoria: categoria.value,
+                subcategoria: subcategoria.value,
+                precio: precio.value,
+                stock: stock.value,
+                video: video.value,
+                fecha_creacion: moment().format('DD-MM-YYYY h:mm:ss a'),
+                incluye_pestanas: checked,
+                ficha_tecnica: checked ? {
+                    editorial: editorial.value,
+                    jugadores: jugadores.value,
+                    edad: edad.value,
+                    idioma_dependiente: idioma_dependiente.value,
+                    idioma: idioma.value,
+                    autores: autores.value,
+                    duracion: duracion.value,
+                    dimensiones: dimensiones.value,
+                    peso: peso.value,
+                    componentes: componentes.value,
+
+                } : null,
+                img: image.map((img) => { return img }),
+            })
+            Promise.all(promises)
+                .then(() => {
+                    setButtonAceptarText(true);
+                    setAlertShow(true);
+                    setTimeout(() => {
+                        setAlertShow(false);
+                    }, 2173);
+                })
+                .catch(err => console.log(err.code));
         }
     }
 
     if (id && fbProducto && fbCategoria) {
-        console.log(fbProducto)
         const { id, nombre, descripcion, categoria, subcategoria, precio, stock, video, img } = fbProducto;
         return (
-            < div >
+            <div>
                 <div className="row" style={{ marginTop: '3rem', marginBottom: '3rem', fontWeight: 'bolder', color: '#606060' }} >
                     <div className="col text-center" >
                         <h1>Editar Producto</h1>

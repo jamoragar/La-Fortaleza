@@ -26,7 +26,7 @@ const CarritoCompra = (props) => {
     });
 
     const subTotal = (precios != 0) ? (precios.reduce((a, b) => a + b)) : 0;
-    const total = subTotal - (subTotal * discountPrice);
+    const total = subTotal;
 
     const removeProduct = productIndex => {
         dispatch({
@@ -74,7 +74,7 @@ const CarritoCompra = (props) => {
                                                 🗑️
                                             </span>
                                         </div>
-                                        <div>{formatPrice(order.price - (order.price * discountPrice))}</div>
+                                        <div>{formatPrice(order.price)}</div>
                                     </div>
                                     <div className={`detail_item`}>
                                         {order.description}
