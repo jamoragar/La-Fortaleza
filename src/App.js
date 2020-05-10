@@ -18,7 +18,7 @@ const App = (props) => {
         <NavBar authenticated={props.authenticated} user={props.user} name={props.name} uid={props.uid} />
         <Header />
         <Routes authenticated={props.authenticated} user={props.user} name={props.name} uid={props.uid} />
-        <Footer />
+        <Footer uid={props.uid} />
       </div>
     );
   } else {

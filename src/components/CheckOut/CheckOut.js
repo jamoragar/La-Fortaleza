@@ -238,9 +238,9 @@ const CheckOut = () => {
                     </tfoot>
                 </Table>
                 {
-                    total >= 30001 ? <h3>Tiene envio gratuito a su dirección!</h3> : (
+                    total >= 30001 ? <h4>Tiene envio gratuito a su dirección!</h4> : (
                         <>
-                        <h3>¿Desea servicio de reparto?</h3>
+                        <h4>¿Desea servicio de reparto?</h4>
                         <Form.Check
                             inline
                             checked={envioGratuito}
