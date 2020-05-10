@@ -1,8 +1,8 @@
 import React from 'react';
 import './Footer.scss';
 
-
 const Footer = (props) => {
+    const { uid } = props;
     return (
         <footer className="footer">
             <div className="container bottom_border">
@@ -35,7 +35,7 @@ const Footer = (props) => {
                     <div className=" col-sm-4 col-md  col-12 col">
                         <h5 className="headin5_amrc col_white_amrc pt2">Mi Cuenta</h5>
                         <ul className="footer_ul_amrc">
-                            <li><a href="/">Informacion Personal</a></li>
+                            <li><a href={`/Dashboard/${uid}/Profile`}>Informacion Personal</a></li>
                             <li><a href="/">Pedidos</a></li>
                             <li><a href="/">Mis Alertas</a></li>
                             <li><a href="/">Whishlist</a></li>

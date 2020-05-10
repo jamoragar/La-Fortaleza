@@ -4,7 +4,6 @@ import { createBrowserHistory } from 'history';
 //Apis
 import { Spinner } from 'react-bootstrap';
 //Componentes
-import firebase from '../../config/firebase';
 import Home from "../Layouts/Home/Home";
 import Dashboard from "../Dashboard/Dashboard";
 import Buscador from '../Buscador/Buscador';
@@ -18,22 +17,21 @@ import AvisoLegal from '../AvisoLegal/AvisoLegal';
 import Blog from '../Blog/Blog';
 import CheckOut from '../CheckOut/CheckOut';
 import _404 from '../404/404';
-
+//Hooks
+import { useProducts } from '../Hooks/useProducts';
+import { useCategory } from '../Hooks/useCategory';
 
 export const history = createBrowserHistory();
 
 const NotFoundRedirect = () => <Redirect to='/not-found' />
 
 export default function Routes(props) {
-  const [fbData, setFbData] = useState(null);
+  const Productos = useProducts();
+  const Category = useCategory();
+  const { fbData } = Productos;
+  const { category } = Category
   let productosToArray = [];
   let categoriaProductos = [];
-
-  useEffect(() => {
-    firebase.database().ref('/Productos').on('value', snapshot => {
-      setFbData(snapshot.val());
-    });
-  }, []);
 
   if (fbData) {
     //Convertimos el objeto entregado por firebase de productos en un array
@@ -52,7 +50,7 @@ export default function Routes(props) {
       <div className="container-fluid  px-5">
         <Router history={history}>
           <Switch>
-            <Route path="/" exact component={() => <Home isAuthed={props.authenticated} uid={props.uid} user={props.user} name={props.name} />} />
+            <Route path="/" exact component={() => <Home isAuthed={props.authenticated} uid={props.uid} user={props.user} name={props.name} fbData={productosToArray} category={category} categoriaProductos={categoriaProductos} />} />
             <Route path="/Dashboard/:uid" component={Dashboard} />
             <Route path="/Articulo/:id/" component={() => <ArticulosDialogs fbData={productosToArray} isAuthed={props.authenticated} uid={props.uid} />} />
             <Route path="/Categoria/:description/" component={() => <ArticulosXCategoria fbData={productosToArray} categoriasProductos={categoriaProductos} isAuthed={props.authenticated} uid={props.uid} />} />

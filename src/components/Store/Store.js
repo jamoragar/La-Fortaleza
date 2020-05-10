@@ -11,16 +11,10 @@ import { formatPrice } from "../Data/DataProductos";
 //Styles
 import './Store.scss';
 
-const Store = ({ fbData, categoriasProductos, orders }) => {
-    const [category, setCategory] = useState(null);
-    const order = orders;
+const Store = (props) => {
 
-    // LLamado a firebase para obtener todo el nodo Category y poder trabajarlo
-    useEffect(() => {
-        firebase.database().ref('/Category').on('value', snapshot => {
-            setCategory(snapshot.val());
-        })
-    }, []);
+    const { fbData, categoriaProductos, orders, category } = props;
+    const order = orders;
 
     const addNewProduct = (product) => {
         const newOrder = {
@@ -59,7 +53,7 @@ const Store = ({ fbData, categoriasProductos, orders }) => {
     if (fbData && category) {
         return (
             <div>
-                {categoriasProductos.map((categoriaProducto, i) => {
+                {categoriaProductos.map((categoriaProducto, i) => {
                     return (
                         <div key={i}>
                             {/*Transformamos el nodo Category a array, y diferenciamos entre su valor (description) y el subnodo que contiene mas contenido, valga la redundancia...*/}
