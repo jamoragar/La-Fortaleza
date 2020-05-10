@@ -17,7 +17,6 @@ const EditarProducto = (props) => {
     const [files, setFiles] = useState([]);
     const [alertShow, setAlertShow] = useState(false);
     const [buttonAceptarText, setButtonAceptarText] = useState(true);
-    const [checked, setChecked] = useState(false);
     const [progress, setProgress] = useState(0);
     const fbDbCategory = firebase.database().ref('/Category');
     let descripciones = [];
@@ -82,15 +81,10 @@ const EditarProducto = (props) => {
         setImage(null);
     }
 
-    const handleCheck = () => {
-        setChecked(!checked);
-    }
-
     const submitEditProduct = (e) => {
         e.preventDefault();
         const promises = [];
         const { nombre, descripcion, categoria, subcategoria, precio, stock, video } = e.target.elements;
-        const { editorial, jugadores, edad, idioma_dependiente, idioma, autores, duracion, dimensiones, peso, componentes } = e.target.elements;
         const FbDownloadURL = []
 
         if (files.length > 0 && categoria.value !== '0' && fbProducto) {
@@ -123,20 +117,6 @@ const EditarProducto = (props) => {
                                 stock: stock.value,
                                 video: video.value,
                                 fecha_creacion: moment().format('DD-MM-YYYY h:mm:ss a'),
-                                incluye_pestanas: checked,
-                                ficha_tecnica: checked ? {
-                                    editorial: editorial.value,
-                                    jugadores: jugadores.value,
-                                    edad: edad.value,
-                                    idioma_dependiente: idioma_dependiente.value,
-                                    idioma: idioma.value,
-                                    autores: autores.value,
-                                    duracion: duracion.value,
-                                    dimensiones: dimensiones.value,
-                                    peso: peso.value,
-                                    componentes: componentes.value,
-
-                                } : null,
                                 img: files ? FbDownloadURL.map((img) => { return img }) : image.map((img) => { return img }),
                             })
                         }
@@ -170,20 +150,6 @@ const EditarProducto = (props) => {
                 stock: stock.value,
                 video: video.value,
                 fecha_creacion: moment().format('DD-MM-YYYY h:mm:ss a'),
-                incluye_pestanas: checked,
-                ficha_tecnica: checked ? {
-                    editorial: editorial.value,
-                    jugadores: jugadores.value,
-                    edad: edad.value,
-                    idioma_dependiente: idioma_dependiente.value,
-                    idioma: idioma.value,
-                    autores: autores.value,
-                    duracion: duracion.value,
-                    dimensiones: dimensiones.value,
-                    peso: peso.value,
-                    componentes: componentes.value,
-
-                } : null,
                 img: image.map((img) => { return img }),
             })
             Promise.all(promises)
@@ -311,31 +277,7 @@ const EditarProducto = (props) => {
                                         </>
                                 }
                             </Form.Group>
-                            <p>¿Agregar Descripción y Detalle?</p>
-                            <Form.Check
-                                inline
-                                checked={checked}
-                                name={'control'}
-                                type={'radio'}
-                                id={`custom1`}
-                                label={`Si`}
-                                onChange={handleCheck}
-                            />
-                            <Form.Check
-                                inline
-                                checked={!checked}
-                                name={'control'}
-                                type={'radio'}
-                                id={`custom2`}
-                                label={`No`}
-                                onChange={handleCheck}
-                            />
-                            {
-                                checked ?
-                                    <InformacionAdicionalProductos />
-                                    :
-                                    null
-                            }
+
                             <br />
                             <Button type='submit' variant='success' block>
                                 {buttonAceptarText ? (<><i className="far fa-save fa-fw" />Actualizar</>) : (<Spinner animation="border" />)}
