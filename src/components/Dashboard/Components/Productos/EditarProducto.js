@@ -92,7 +92,7 @@ const EditarProducto = (props) => {
         const { nombre, descripcion, categoria, subcategoria, precio, stock, video } = e.target.elements;
         const { editorial, jugadores, edad, idioma_dependiente, idioma, autores, duracion, dimensiones, peso, componentes } = e.target.elements;
         const FbDownloadURL = []
-        
+
         if (files.length > 0 && categoria.value !== '0' && fbProducto) {
             setButtonAceptarText(false)
             for (let i = 0; i < files.length; i++) {
