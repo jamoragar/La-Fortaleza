@@ -11,7 +11,7 @@ const Categorias = () => {
         {
             name: 'Foto',
             cell: row => <a href={row.banner} target="blank"><img src={row.banner} width='100' alt="..." /></a>,
-            grow: 1,
+            grow: 3,
         },
         {
             name: 'Id',

@@ -13,43 +13,45 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
     </>
 );
 
+
 const Productos = (props) => {
     let { uid } = useParams();
     const columns = [
         {
             name: 'Foto',
-            cell: row => <a href={row.img} target='blank'><img src={row.img[0]} width='75' alt="..." /></a>,
+            cell: row => <a href={row.img} target='blank'><img src={row.img[0]} width='25' alt="..." /></a>,
             grow: 1,
+            width: '10%',
         },
         {
             name: 'Nombre',
             selector: 'nombre',
             sortable: true,
-            grow: 2,
-
+            width: '20%',
         },
         {
             name: 'Categoría',
             selector: 'categoria',
             sortable: true,
-            width: '20%'
+            width: '20%',
         },
         {
             name: 'Precio',
             sortable: true,
-            cell: row => `$ ${row.precio}`,
-            width: '10%'
+            cell: row => <div width='100'>$ {row.precio}</div>,
+            width: '20%',
         },
         {
             name: 'Stock',
             selector: 'stock',
             sortable: true,
-            width: '50px',
+            width: '10%',
 
         },
         {
             name: 'Control',
             button: true,
+            width: '20%',
             cell: (data) => {
                 return (
                     <div>
@@ -152,6 +154,9 @@ const Productos = (props) => {
                     title="Productos"
                     columns={columns}
                     data={filteredItems}
+                    fixedHeader
+                    fixedHeaderScrollHeight="450px"
+                    pagination
                     subHeader
                     subHeaderComponent={subHeaderComponentMemo}
                     persistTableHead
