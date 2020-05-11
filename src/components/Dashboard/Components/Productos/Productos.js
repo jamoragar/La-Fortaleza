@@ -137,7 +137,7 @@ const Productos = (props) => {
         });
 
         const filteredItems = productosToArray.filter(item => item.nombre.toLowerCase() && item.nombre.toLowerCase().includes(filterText.toLowerCase()));
-
+        const paginationOptions = { rowsPerPageText: 'Filas por página', rangeSeparatorText: 'de', selectAllRowsItem: true, selectAllRowsItemText: 'Todos' };
         return (
             <div>
                 <div className="row" >
@@ -151,12 +151,12 @@ const Productos = (props) => {
                 </Button>
                 <AgregarProducto show={showModal} onHide={() => setShowModal(false)} />
                 <DataTable
-                    title="Productos"
                     columns={columns}
                     data={filteredItems}
                     fixedHeader
                     fixedHeaderScrollHeight="500px"
                     pagination
+                    paginationComponentOptions={paginationOptions}
                     subHeader
                     subHeaderComponent={subHeaderComponentMemo}
                     persistTableHead
