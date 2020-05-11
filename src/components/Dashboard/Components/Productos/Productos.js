@@ -155,7 +155,7 @@ const Productos = (props) => {
                     columns={columns}
                     data={filteredItems}
                     fixedHeader
-                    fixedHeaderScrollHeight="450px"
+                    fixedHeaderScrollHeight="500px"
                     pagination
                     subHeader
                     subHeaderComponent={subHeaderComponentMemo}
