@@ -74,7 +74,7 @@ export const Dashboard = (props) => {
             <div
                 style={{
                     backgroundColor: '#ffffff',
-                    margin: '5% 0 0 0',
+                    margin: '0 0 0 0',
                     overflow: "hidden",
                     height: "100vh",
                     position: "relative"
