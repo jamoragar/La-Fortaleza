@@ -4,12 +4,15 @@ import {Table, Button, Form, Col} from 'react-bootstrap';
 import {formatPrice} from '../Data/DataProductos'
 import { useOrders } from '../Hooks/useOrders';
 import firebase from '../../config/firebase';
+import PagoEnLinea from '../PagoEnLinea/PagoEnLinea';
+
 const CheckOut = () => {
     let total = 0;
     let cantidadAux = []
     let pedidoFinal = []
     let subTotal = []
     const orders = useOrders();
+    const [preference, setPreference] = useState(null);
     const [precio_envio, setPrecio_envio] = useState(0);
     const [precio_regalo, setPrecio_regalo] = useState(0);
     const [userAuth, setUserAuth] = useState();
@@ -51,16 +54,39 @@ const CheckOut = () => {
             payload:index
         })
     }
-    const generarPedido = () => {
-        console.log(pedidoFinal)
+    const generarPedido = (e) => {
+        e.preventDefault();
+
+        if(regalo){
+            pedidoFinal[pedidoFinal.length] = {
+                nombre: 'Envuelto para Regalo',
+                tipo: 'Extras',
+                cantidad: 1,
+                precio_unitario: precio_regalo,
+                precio_total_producto: precio_regalo
+            };
+        }
+        if(envioGratuito){
+            pedidoFinal[pedidoFinal.length] = {
+                nombre: 'Envio',
+                tipo: 'Extras',
+                cantidad: 1,
+                precio_unitario: precio_envio,
+                precio_total_producto: precio_envio
+            };
+        }
+
+        PagoEnLinea(pedidoFinal, userAuth);
     }
+
+
     const formularioInfoComprador = (info) => {
 
     }
-    const handleRegalo = () => {
+    const handleRegalo = () => {        
         setRegalo(!regalo);
         if(!regalo){
-            setPrecio_regalo(3000)
+            setPrecio_regalo(2000)
         }
         else{
             setPrecio_regalo(0)
@@ -69,7 +95,7 @@ const CheckOut = () => {
     const handleEnvio = () => {
         setEnvioGratuito(!envioGratuito);
         if(!envioGratuito) {
-            setPrecio_envio(5000)
+            setPrecio_envio(2500)
         }
         else{
             setPrecio_envio(0)
@@ -95,23 +121,23 @@ const CheckOut = () => {
         }
         return(
             <div style={{margin:'5% 2% 5% 2%'}}>
+                <Form onSubmit={generarPedido}>
                 {
                     userAuth ? 
                         (
                             <>
                             <h2>Información del Cliente</h2>
-                            <Form>
                                 <Form.Row>
                                     <Col>
                                         <Form.Group controlId="formName">
                                             <Form.Label>Nombre:</Form.Label>
-                                            <Form.Control name='name' type="text" placeholder='Ingrese su nombre' defaultValue={userAuth.nombre} />
+                                            <Form.Control name='name' type="text" placeholder='Ingrese su nombre' defaultValue={userAuth.nombre}  required/>
                                         </Form.Group>
                                     </Col>
                                     <Col>
                                         <Form.Group controlId="formLastName">
                                             <Form.Label>Apellido:</Form.Label>
-                                            <Form.Control name='last_name' type="text" placeholder='Ingrese su apellido' defaultValue={userAuth.apellido} />
+                                            <Form.Control name='last_name' type="text" placeholder='Ingrese su apellido' defaultValue={userAuth.apellido}  required/>
                                         </Form.Group>
                                     </Col>
                                 </Form.Row>
@@ -125,7 +151,7 @@ const CheckOut = () => {
                                     <Col>
                                         <Form.Group controlId="formEmail">
                                             <Form.Label>E-mail:</Form.Label>
-                                            <Form.Control name='email' type="text" placeholder='Ingrese su email' defaultValue={userAuth.email} />
+                                            <Form.Control name='email' type="text" placeholder='Ingrese su email' defaultValue={userAuth.email}  required/>
                                         </Form.Group>
                                     </Col>
                                 </Form.Row>
@@ -133,17 +159,20 @@ const CheckOut = () => {
                                     <Col>
                                         <Form.Group controlId="formAddress">
                                             <Form.Label>Dirección:</Form.Label>
-                                            <Form.Control name='direccion' type="text" placeholder='Ingrese su dirección' defaultValue={userAuth.direccion} />
+                                            <Form.Control name='direccion' type="text" placeholder='Ingrese su dirección' defaultValue={userAuth.direccion}  required/>
                                         </Form.Group>
                                     </Col>
                                     <Col>
-                                        <Form.Group controlId="formComment">
-                                            <Form.Label>Comentario:</Form.Label>
-                                            <Form.Control name='coment' as="textarea" rows='3' placeholder='Ingrese sus comentarios' defaultValue={userAuth.comentario} />
+                                        <Form.Group controlId='formAdressNumber'>
+                                            <Form.Label>Número Dirección:</Form.Label>
+                                            <Form.Control name='numero_direccion' type='text' placeholder='Ingrese el número de su dirección'  required/>
                                         </Form.Group>
                                     </Col>
                                 </Form.Row>
-                            </Form>
+                                <Form.Group controlId="formComment">
+                                    <Form.Label>Comentario:</Form.Label>
+                                    <Form.Control name='coment' as="textarea" rows='3' placeholder='Ingrese sus comentarios' defaultValue={userAuth.comentario} />
+                                </Form.Group>
                             <br/>
                             </>
                         )
@@ -158,7 +187,8 @@ const CheckOut = () => {
                 <h2>Su Pedido</h2>
                 <br/>
                 ¿Desea envolver su pedido para regalo?<br/>
-                (Tiene un costo adicional de $3.000)<br/>
+                (Tiene un costo adicional de $2.000)<br/>
+                <i className="fas fa-gifts mr-3 fa-2x" />
                 <Form.Check
                     inline
                     checked={regalo}
@@ -207,9 +237,9 @@ const CheckOut = () => {
                                     <td>{producto.description}</td>
                                     <td>
                                         <div style={{textAlign:'center', display:'flex'}}>
-                                            <h6><Button onClick={() => handleCantidad(index, 1, producto.stock)} style={{marginRight:'5px'}} variant='success'>+</Button></h6>
+                                            <h6><Button onClick={() => handleCantidad(index, -1, producto.stock)} style={{marginRight:'8px'}} variant='danger'>-</Button></h6>
                                             <input style={{width:'30px'}} type='number' name='producto_cantidad' value={cantidad[index]} readOnly/>
-                                            <h6><Button onClick={() => handleCantidad(index, -1, producto.stock)} style={{marginLeft:'5px'}} variant='danger'>-</Button></h6>
+                                            <h6><Button onClick={() => handleCantidad(index, 1, producto.stock)} style={{marginLeft:'8px'}} variant='success'>+</Button></h6>
                                         </div>
                                     </td>
                                     <td>{formatPrice(producto.price * cantidad[index])}</td>
@@ -241,6 +271,9 @@ const CheckOut = () => {
                     total >= 30001 ? <h4>Tiene envio gratuito a su dirección!</h4> : (
                         <>
                         <h4>¿Desea servicio de reparto?</h4>
+                        El valor del envio es de $2.500 en <b>area urbana.</b><br/>
+                        En <b>area rural</b> le recomendamos comunicarse al número de contacto La Fortaleza para confirmar el valor de este.<br/>
+                        <i className="fas fa-shipping-fast mr-3 fa-2x" />
                         <Form.Check
                             inline
                             checked={envioGratuito}
@@ -262,7 +295,8 @@ const CheckOut = () => {
                         </>
                     )
                 }
-                <Button variant="primary" style={{float:'right'}} onClick={generarPedido}><i className="fas fa-dollar-sign fa-fw" />Ir a Pagar!</Button>
+                    <Button variant="primary" style={{float:'right'}} type='submit'><i className="fas fa-dollar-sign fa-fw" />Ir a Pagar!</Button>
+                </Form>
             </div>
         )
     }
