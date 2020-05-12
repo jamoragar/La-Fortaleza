@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import DataTable from 'react-data-table-component';
 import AgregarProducto from './AgregarProducto';
 import productosStyles from './Productos.module.scss'
+import Descripcion from './Descripcion';
 
 const FilterComponent = ({ filterText, onFilter, onClear }) => (
     <>
@@ -138,6 +139,7 @@ const Productos = (props) => {
 
         const filteredItems = productosToArray.filter(item => item.nombre.toLowerCase() && item.nombre.toLowerCase().includes(filterText.toLowerCase()));
         const paginationOptions = { rowsPerPageText: 'Filas por página', rangeSeparatorText: 'de', selectAllRowsItem: true, selectAllRowsItemText: 'Todos' };
+
         return (
             <div>
                 <div className="row" >
@@ -160,6 +162,8 @@ const Productos = (props) => {
                     subHeader
                     subHeaderComponent={subHeaderComponentMemo}
                     persistTableHead
+                    expandableRows
+                    expandableRowsComponent={<Descripcion descTab={productosToArray.ficha_tecnica} />}
                 />
             </div>
         )

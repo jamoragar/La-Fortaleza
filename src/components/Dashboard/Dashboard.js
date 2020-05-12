@@ -19,6 +19,7 @@ import EditarButtons from './Components/Slider/EditarButtons';
 import dashboardStyles from './Dashboard.module.scss'
 import mainStyles from './Main.module.scss';
 import { createBrowserHistory } from 'history';
+import Pedidos from './userComponents/Pedidos';
 
 
 export const history = createBrowserHistory();
@@ -41,6 +42,7 @@ const DashboardRoute = (props) => {
                                         <Route exact path='/Dashboard/:uid/Productos' component={Productos} />
                                         <Route exact path='/Dashboard/:uid/Categorias' component={Categorias} />
                                         <Route exact path='/Dashboard/:uid/Ordenes' component={Ordenes} />
+                                        <Route exact path='/Dashboard/:uid/pedidos' component={Pedidos} />
                                         <Route exact path="/Dashboard/:uid/Producto/:id" component={VerProducto} />
                                         <Route exact path="/Dashboard/:uid/Producto/Editar/:id" component={EditarProductos} />
                                         <Route exact path="/Dashboard/:uid/Slider/EditarSlider/:id" component={EditarSlider} />
@@ -66,7 +68,7 @@ export const Dashboard = (props) => {
         firebase.database().ref(`/Users/${uid}`).on('value', (snapshot) => {
             setUserData(snapshot.val());
         });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (userData) {

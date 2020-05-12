@@ -1,22 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import * as mp from 'mercadopago';
 import credentials from './credentials.json';
-import moment from 'moment-timezone/moment-timezone';
+import moment from 'moment-timezone';
 
 const PagoEnLinea = (pedido, usuario) => {
     let mpData;
 
-    const config = () =>{
+    const config = () => {
         mp.configure({
-            sandbod:true,
+            sandbod: true,
             access_token: credentials.access_token
         });
         mp.configurations.setAccessToken(credentials.access_token);
     };
 
     const ProductosLaFortaleza = (order) => {
-        const productosPreference = order.map((producto) =>{
-            return(
+        const productosPreference = order.map((producto) => {
+            return (
                 {
                     title: producto.nombre,
                     description: producto.tipo,
@@ -26,7 +26,7 @@ const PagoEnLinea = (pedido, usuario) => {
                 }
             )
         });
-        
+
         return productosPreference;
     };
 
@@ -39,13 +39,13 @@ const PagoEnLinea = (pedido, usuario) => {
                 name: usuario.nombre,
                 surname: usuario.apellido,
                 email: usuario.email,
-                address:{
+                address: {
                     street_name: usuario.direccion,
                     stree_number: parseInt(usuario.numero_direccion)
                 },
                 date_created: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm'),
             },
-            payment_methods:{
+            payment_methods: {
                 excluded_payment_types: [
                     {
                         id: 'ticket'
@@ -59,15 +59,15 @@ const PagoEnLinea = (pedido, usuario) => {
     let preferences = creatingPreferences(pedido, usuario);
     mpData = async () => {
         config();
-        await mp.preferences.create(preferences).then((data) =>{
+        await mp.preferences.create(preferences).then((data) => {
             console.log(data.body.init_point)
-            window.location.replace(data.body.init_point); 
-        }).catch((err)=> {
+            window.location.replace(data.body.init_point);
+        }).catch((err) => {
             console.log(err);
         });
     }
     mpData();
-    
+
 }
 
 export default PagoEnLinea;
