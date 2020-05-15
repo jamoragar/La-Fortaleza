@@ -17,9 +17,12 @@ import AvisoLegal from '../AvisoLegal/AvisoLegal';
 import Blog from '../Blog/Blog';
 import CheckOut from '../CheckOut/CheckOut';
 import _404 from '../404/404';
+import { Exito } from "../PagoEnLinea/Exito";
+import { Error } from "../PagoEnLinea/Error";
 //Hooks
 import { useProducts } from '../Hooks/useProducts';
 import { useCategory } from '../Hooks/useCategory';
+
 
 export const history = createBrowserHistory();
 
@@ -63,6 +66,8 @@ export default function Routes(props) {
             <Route path="/Blog" component={Blog} />
             <Route path='/CheckOut' component={CheckOut} />
             <Route path="/not-found" component={_404} />
+            <Route path="/Pago/Exito" component={Exito} />
+            <Route path="/Pago/Error" component={Error} />
             <Route component={NotFoundRedirect} />
           </Switch>
         </Router>
