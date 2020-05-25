@@ -1,41 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import './Carousel.scss';
+import { Carousel } from 'react-bootstrap';
 
 const CarouselContainer = () => {
+
+  const [index, setIndex] = useState(0);
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
 
   return (
     <div>
       <div className="container-carousel mt-5">
         <div className="row">
           <div className="col-12 col-md-8 col-sm-12 col-xs-12">
-            <div className="card border-0 rounded-0 text-light overflow zoom">
-              <div className="position-relative">
-                <div className="ratio_left-cover-1 image-wrapper">
-                  <div id="carousel" className="carousel slide" data-ride="carousel">
-                    <ol className="carousel-indicators">
-                      <li data-target="#carousel" data-slide-to="0" className="active"></li>
-                      <li data-target="#carousel" data-slide-to="1"></li>
-                    </ol>
-                    <div className="carousel-inner">
-                      <div className="carousel-item active">
-                        <img className="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2FSliders%2F1%2Fslider1?alt=media&token=5bb00267-e77f-4ea7-b154-838b84d63aa9" alt="slide1" />
-                      </div>
-                      <div className="carousel-item">
-                        <img className="img-fluid w-100" src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2FSliders%2F2%2Fslider2?alt=media&token=032b65ce-5dfe-4f96-a9cc-6d602451dae1" alt="slide2" />
-                      </div>
-                    </div>
-                    <a className="carousel-control-prev-izq" href="#carousel" role="button" data-slide="prev">
-                      <span className="carousel-control-prev-icon" aria-hidden="true"><i className="fas fa-chevron-circle-left"></i></span>
-                      <span className="sr-only">Previous</span>
-                    </a>
-                    <a className="carousel-control-next-der" href="#carousel" role="button" data-slide="next">
-                      <span className="carousel-control-next-icon" aria-hidden="true"><i className="fas fa-chevron-circle-right"></i></span>
-                      <span className="sr-only">Next</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Carousel>
+              <Carousel.Item>
+                <img
+                  className="img-fluid d-block w-100"
+                  src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2FSliders%2F1%2Fslider1?alt=media&token=5bb00267-e77f-4ea7-b154-838b84d63aa9" alt="slide1"
+                  alt="First slide"
+                />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  className="img-fluid d-block w-100"
+                  src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2FSliders%2F2%2Fslider2?alt=media&token=032b65ce-5dfe-4f96-a9cc-6d602451dae1"
+                  alt="Third slide"
+                />
+              </Carousel.Item>
+            </Carousel>
           </div>
           <div className="col-12 col-md-4 ">
             <div className="row">
