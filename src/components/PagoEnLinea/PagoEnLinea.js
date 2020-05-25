@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as mp from 'mercadopago';
 import credentials from './credentials.json';
+import timezone from './timezone.json';
 import moment from 'moment-timezone';
 
 const PagoEnLinea = (pedido, usuario) => {
@@ -31,7 +32,7 @@ const PagoEnLinea = (pedido, usuario) => {
     };
 
     const creatingPreferences = (pedido, usuario) => {
-        moment.tz.add("America/Punta_Arenas|SMT -05 -04 -03|4G.K 50 40 30|0102021212121212121232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323232323|-2q2jh.e fJAh.e 5knG.K 1Vzh.e jRAG.K 1pbh.e 11d0 1oL0 11d0 1oL0 11d0 1oL0 11d0 1pb0 11d0 nHX0 op0 blz0 ko0 Qeo0 WL0 1zd0 On0 1ip0 11z0 1o10 11z0 1qN0 WL0 1ld0 14n0 1qN0 WL0 1qN0 11z0 1o10 11z0 1o10 11z0 1qN0 WL0 1qN0 WL0 1qN0 11z0 1o10 11z0 1o10 11z0 1o10 11z0 1qN0 WL0 1qN0 WL0 1qN0 1cL0 1cN0 11z0 1o10 11z0 1qN0 WL0 1fB0 19X0 1qN0 11z0 1o10 11z0 1o10 11z0 1o10 11z0 1qN0 WL0 1qN0 17b0 1ip0 11z0 1ip0 1fz0 1fB0 11z0 1qN0 WL0 1qN0 WL0 1qN0 WL0 1qN0 11z0 1o10 11z0 1o10 11z0 1qN0 WL0 1qN0 17b0 1ip0 11z0 1o10 19X0 1fB0 1nX0 G10 1EL0 Op0 1zb0 Rd0 1wn0 Rd0 46n0 Ap0|");
+        moment.tz.add(timezone.Punta_Arenas);
         let productos = ProductosLaFortaleza(pedido);
         const preferences = {
             items: productos,
