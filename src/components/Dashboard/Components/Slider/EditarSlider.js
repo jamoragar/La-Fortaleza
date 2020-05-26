@@ -97,7 +97,7 @@ const EditarSlider = () => {
                     </Form.Label>
                     <div className={'custom-file'} style={{ marginBottom: '12px' }}>
                         <input type="file" className={'custom-file-input'} id="customFile" onChange={orientImage} accept="image/*" multiple />
-                        <label className="custom-file-label" htmlFor="customFile">Buscar Imágen</label>
+                        <label className="custom-file-label" htmlFor="customFile">Buscar Imágen(es), Dimension Sugerida 1200x475 pixeles</label>
                     </div>
                     {
                         image ? (
