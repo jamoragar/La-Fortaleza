@@ -4,7 +4,10 @@ import {Table, Button, Form, Col} from 'react-bootstrap';
 import {formatPrice} from '../Data/DataProductos'
 import { useOrders } from '../Hooks/useOrders';
 import firebase from '../../config/firebase';
-import PagoEnLinea from '../PagoEnLinea/PagoEnLinea';
+import PagoEnLinea, {ProductosLaFortaleza} from '../PagoEnLinea/PagoEnLinea';
+import moment from 'moment-timezone';
+import timezone from '../PagoEnLinea/timezone.json';
+
 
 const CheckOut = () => {
     let total = 0;
@@ -54,11 +57,10 @@ const CheckOut = () => {
             payload:index
         })
     }
-    const generarPedido = (e) => {
-        e.preventDefault();
-
+    const checkeaExtras = () => {
         if(regalo){
             pedidoFinal[pedidoFinal.length] = {
+                id: 'envueltoRegalo',
                 nombre: 'Envuelto para Regalo',
                 tipo: 'Extras',
                 cantidad: 1,
@@ -68,20 +70,34 @@ const CheckOut = () => {
         }
         if(envioGratuito){
             pedidoFinal[pedidoFinal.length] = {
+                id: 'envioGratuito',
                 nombre: 'Envio',
                 tipo: 'Extras',
                 cantidad: 1,
                 precio_unitario: precio_envio,
                 precio_total_producto: precio_envio
             };
-        }
-
-        PagoEnLinea(pedidoFinal, userAuth);
+        }     
     }
 
+    const generarPedido = (e) => {
+        e.preventDefault();
 
-    const formularioInfoComprador = (info) => {
+        moment.tz.add(timezone.Punta_Arenas);// Establecemos zona horaria
+        checkeaExtras();// Verificamos si hay o no envio gratuito y envoltorio de regalo
+        const tokenPedido = firebase.database().ref(`/Users/${user.uid}`).child('pedidos').push().key; //generamos una id unica para nuestro nodo, que a la vez usaremos como control interno
+        //Generamos el pedido del usuario
+        const pedidoUsuario = {
+            id_interno: tokenPedido,
+            items: ProductosLaFortaleza(pedidoFinal),
+            estado_pago: 'pendiente...',
+            fecha_creacion_pedido: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm')
+        }
+        //Escribimos en la BD el pedido y hacemos una promesa una vez escrito que mande a pagar por mercadopago
+        let updates = {};
+        updates['/pedidos/' + tokenPedido] = pedidoUsuario;
 
+        return firebase.database().ref(`/Users/${user.uid}`).update(updates).then(PagoEnLinea(pedidoFinal, userAuth, tokenPedido));
     }
     const handleRegalo = () => {        
         setRegalo(!regalo);
@@ -221,6 +237,7 @@ const CheckOut = () => {
                     <tbody>
                         {orders.state.order.map((producto, index) =>{
                             pedidoFinal[index] = {
+                                id: producto.id,
                                 nombre: producto.title,
                                 tipo: producto.description,
                                 cantidad: cantidad[index] > 0 ? cantidad[index] : 0,

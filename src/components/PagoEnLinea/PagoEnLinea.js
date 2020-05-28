@@ -4,8 +4,26 @@ import credentials from './credentials.json';
 import timezone from './timezone.json';
 import moment from 'moment-timezone';
 
-const PagoEnLinea = (pedido, usuario) => {
-    let mpData;
+export const ProductosLaFortaleza = (order) => {
+    const productosPreference = order.map((producto) => {
+        return (
+            {
+                id: producto.id,
+                title: producto.nombre,
+                description: producto.tipo,
+                quantity: producto.cantidad,
+                currency_id: 'CLP',
+                unit_price: producto.precio_unitario,
+            }
+        )
+    });
+
+    return productosPreference;
+};
+
+const PagoEnLinea = (pedido, usuario, tokenPedido) => {
+    let mpData; 
+    const urlLocal = 'localhost:3000/Pago/';
 
     const config = () => {
         mp.configure({
@@ -15,27 +33,13 @@ const PagoEnLinea = (pedido, usuario) => {
         mp.configurations.setAccessToken(credentials.access_token);
     };
 
-    const ProductosLaFortaleza = (order) => {
-        const productosPreference = order.map((producto) => {
-            return (
-                {
-                    title: producto.nombre,
-                    description: producto.tipo,
-                    quantity: producto.cantidad,
-                    currency_id: 'CLP',
-                    unit_price: producto.precio_unitario,
-                }
-            )
-        });
-
-        return productosPreference;
-    };
 
     const creatingPreferences = (pedido, usuario) => {
         moment.tz.add(timezone.Punta_Arenas);
         let productos = ProductosLaFortaleza(pedido);
         const preferences = {
             items: productos,
+            auto_return: 'all',
             payer: {
                 name: usuario.nombre,
                 surname: usuario.apellido,
@@ -46,13 +50,18 @@ const PagoEnLinea = (pedido, usuario) => {
                 },
                 date_created: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm'),
             },
+            back_urls:{
+                success: urlLocal + 'Exito',
+                failure: urlLocal + 'Error'
+            },
             payment_methods: {
                 excluded_payment_types: [
                     {
                         id: 'ticket'
                     },
                 ]
-            }
+            },
+            adiditional_info: tokenPedido
         }
         return preferences;
     };
