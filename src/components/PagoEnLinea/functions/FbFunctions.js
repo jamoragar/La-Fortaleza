@@ -5,3 +5,8 @@ export const checkProduct = (product_id) => {
         return snapshot.val();
     })
 }
+export const updateProductStock = (product_id, new_stock) => {
+    return firebase.database().ref(`/Productos/${product_id}`).update({
+        stock: new_stock
+    });
+} 
