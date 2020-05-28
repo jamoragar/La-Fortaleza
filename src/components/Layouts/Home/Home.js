@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 //Api
 import CarouselContainer from "../Carousel/Carousel";
 import { Spinner } from 'react-bootstrap';

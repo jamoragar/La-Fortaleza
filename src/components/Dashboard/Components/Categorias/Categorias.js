@@ -100,7 +100,7 @@ const Categorias = () => {
                         <h1 style={{ fontWeight: 'bolder', color: '#606060' }}>Mantenedor De Categorias</h1>
                     </div>
                 </div>
-                <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', marginBottom: '2rem', width: '100' }} onClick={handleShow} variant="primary">
+                <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', marginBottom: '2rem', width: '100' }} onClick={handleShow} variant="success">
                     <i className="fas fa-tag fa-fw" />
                                 Agregar Categoria
                         </Button>

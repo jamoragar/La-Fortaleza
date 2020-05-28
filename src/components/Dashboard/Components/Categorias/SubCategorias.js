@@ -119,7 +119,7 @@ const Categorias = (props) => {
             <div>
                 <div className="row">
                     <div className="col text-center">
-                        <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', width: '100' }} onClick={handleShow} variant="primary">
+                        <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', width: '100' }} onClick={handleShow} variant="success">
                             <i className="fas fa-tag fa-fw" />
                                 Agregar SubCategoria
                         </Button>

@@ -1,37 +1,38 @@
 import React, { useState } from 'react';
-import firebase from '../../../../config/firebase';
-import DataTable from 'react-data-table-component';
-import { OverlayTrigger, Tooltip, Button, Form, Col } from 'react-bootstrap';
+import { Button, Form, Col } from 'react-bootstrap';
+import AgregarDescripcion from './AgregarDescripcion';
+import EditarDescripcion from './EditarDescripcion';
 
 const Descripcion = (props) => {
 
     const [showModal, setShowModal] = useState(false);
     const handleShow = () => setShowModal(true);
-
     const descTab = props;
+    const prodid = descTab.data.id;
     let descTabToArray = [];
-    let descripcion = [];
-    const opcion = () => window.confirm('Esta seguro que desea eliminar esta subcategoria?');
 
-    console.log(descTabToArray.ficha_tecnica)
-
-    if (descTab && descTab.data.ficha_tecnica) {
+    if (descTab && descTab.data.ficha_tecnica && prodid) {
 
         Object.keys(descTab).forEach((key, i) => {
             descTabToArray[i] = descTab[key]
         });
-
-        console.log(descTabToArray[1].ficha_tecnica)
+        //console.log(descTabToArray[1].ficha_tecnica)
 
         let description = descTabToArray[1].ficha_tecnica;
 
-        console.log(description.autores)
         return (
             <div>
                 <div className="row" >
                     <div className="col text-center" >
                         <h3 style={{ marginTop: "3rem", marginBottom: "3rem", fontWeight: 'bolder', color: '#606060' }}>Tabla de Descripción</h3>
                     </div>
+                </div>
+                <div className="col text-center" >
+                    <Button style={{ float: 'center', marginRight: '1rem', marginTop: '3rem', marginBottom: '2rem', width: '100' }} onClick={handleShow} variant="success">
+                        <i className="fas fa-info-circle fa-fw" />
+                                Editar Descripción
+                        </Button>
+                    <EditarDescripcion show={showModal} onHide={() => setShowModal(false)} prodid={prodid} description={description} />
                 </div>
                 <div className="row">
                     <div className="col" style={{ marginLeft: "6rem", marginRight: "6rem", marginBottom: "4rem" }}>
@@ -110,12 +111,16 @@ const Descripcion = (props) => {
         return (
             <div>
                 <div className="row">
-                    <div className="col text-center">
-
+                    <div className="col text-center" >
+                        <Button style={{ float: 'center', marginRight: '1rem', marginTop: '3rem', marginBottom: '2rem', width: '100' }} onClick={handleShow} variant="success">
+                            <i className="fas fa-info-circle fa-fw" />
+                                Agregar Descripción
+                        </Button>
+                        <AgregarDescripcion show={showModal} onHide={() => setShowModal(false)} prodid={prodid} />
                     </div>
                 </div>
                 <div className="col text-center">
-                    <h4 style={{ marginBottom: "3rem", marginTop: "3rem", fontWeight: 'bolder', color: '#606060' }}>No Hay Descripción para mostrar.</h4>
+                    <h4 style={{ marginBottom: "3rem", marginTop: "1rem", fontWeight: 'bolder', color: '#606060' }}>No Hay Descripción para mostrar.</h4>
                 </div>
             </div>
         )

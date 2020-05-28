@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Spinner, Button } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
