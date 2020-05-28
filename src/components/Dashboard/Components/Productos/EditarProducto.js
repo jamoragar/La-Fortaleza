@@ -5,7 +5,6 @@ import moment from 'moment';
 import { Form, Col, Button, Spinner, Alert, ProgressBar } from 'react-bootstrap';
 //Componentes
 import firebase from '../../../../config/firebase';
-import InformacionAdicionalProductos from './InformacionAdicionalProductos';
 //Styles
 import productosStyles from './Productos.module.scss'
 

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 //Api
 import { Spinner } from "react-bootstrap";
 import 'react-multi-carousel/lib/styles.css';
 //Componentes
-import firebase from '../../config/firebase';
 import Carousel from 'react-multi-carousel';
 //Hooks
 import { formatPrice } from "../Data/DataProductos";
@@ -18,7 +17,7 @@ const Store = (props) => {
     const discountPrice = 0.10;
 
     const addNewProduct = (product) => {
-        
+
         const newOrder = {
             title: product.nombre,
             description: product.categoria,
@@ -98,7 +97,7 @@ const Store = (props) => {
                                                     <div className="shape">
                                                         <div className="shape-text">
                                                             -10%
-					                                        </div>
+					                                    </div>
                                                     </div>
                                                     <img className="card-img" src={producto.img} alt={producto.nombre} style={{ width: "283px", height: "283px" }} />
                                                 </div>

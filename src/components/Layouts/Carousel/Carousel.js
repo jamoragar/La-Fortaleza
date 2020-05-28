@@ -1,14 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import './Carousel.scss';
 import { Carousel } from 'react-bootstrap';
 
 const CarouselContainer = () => {
-
-  const [index, setIndex] = useState(0);
-
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
 
   return (
     <div>
@@ -19,15 +13,15 @@ const CarouselContainer = () => {
               <Carousel.Item>
                 <img
                   className="img-fluid d-block w-100"
-                  src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2FSliders%2F1%2Fslider1?alt=media&token=5bb00267-e77f-4ea7-b154-838b84d63aa9" alt="slide1"
-                  alt="First slide"
+                  src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2FSliders%2F1%2Fslider1?alt=media&token=5bb00267-e77f-4ea7-b154-838b84d63aa9"
+                  alt="slide1"
                 />
               </Carousel.Item>
               <Carousel.Item>
                 <img
                   className="img-fluid d-block w-100"
-                  src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2FSliders%2F2%2Fslider2?alt=media&token=032b65ce-5dfe-4f96-a9cc-6d602451dae1"
-                  alt="Third slide"
+                  src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2FSliders%2F2%2Fslider2?alt=media&token=032b65ce-5dfe-4f96-a9cc-6d602451dae1 "
+                  alt="slide2"
                 />
               </Carousel.Item>
             </Carousel>
