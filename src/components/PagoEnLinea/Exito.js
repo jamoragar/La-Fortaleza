@@ -4,7 +4,7 @@ import { Container, Row, Col, Table, Button } from 'react-bootstrap';
 import credentials from './credentials.json'
 import firebase from '../../config/firebase';
 import moment from 'moment';
-import {checkProduct} from './functions/FbFunctions';
+import {checkProduct, updateProductStock} from './functions/FbFunctions';
 
 const tableError = (tipo, orden_id, pedido_id) => {
     return(
@@ -95,6 +95,7 @@ export const Exito = () => {
                 validatingCollection(collection_id);
                 validatingPreference(preference_id);
             }else{
+                alert('No tiene una sesión activa');
                 console.log('usuario sin sesión...');
             }
         })
@@ -104,15 +105,15 @@ export const Exito = () => {
         if(preference){
             console.log('Preference',preference);
             if(collection){
+                // preference.items.map((item, i) => {
+                //     let productoFb = checkProduct(item.id);
+                //     productoFb.then(data => {
+                //         let stock = data.stock;
+                //         let nuevo_stock = stock - item.quantity;
+                //         updateProductStock(item.id, nuevo_stock);
+                //     })
+                // })
                 console.log('Collection',collection);
-                //Cabezeandome respecto al como y cuando consultar y actualizar la BD
-                const testing = () => {
-                    const producto_id = preference.items[0].id;
-                    const producto = checkProduct(producto_id);
-                    producto.then(data => {
-                        console.log(data)
-                    })
-                }
                 return (
                     <Container>
                         <Row style={{ backgroundColor: '#28a745', marginTop: '3rem', padding: '2rem' }}>
@@ -204,7 +205,7 @@ export const Exito = () => {
                         <Link to='/'>
                             <Button style={{marginBottom:'2em'}} variant="success" block><i className="fab fa-fort-awesome fa-fw" />Volver al Inicio</Button>
                         </Link>
-                        <Button onClick={testing}>Testing functions</Button>
+                        {/* <Button onClick={testing}>Testing functions</Button> */}
                     </Container>
                 )
 
