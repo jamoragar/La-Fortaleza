@@ -21,7 +21,7 @@ const Store = (props) => {
         const newOrder = {
             title: product.nombre,
             description: product.categoria,
-            price: (product.precio - (product.precio * discountPrice)),
+            price: Math.ceil((product.precio - (product.precio * discountPrice))),
             stock: parseInt(product.stock),
             id: product.id
         }
@@ -115,7 +115,7 @@ const Store = (props) => {
                                                         <div className="row mt-1">
                                                             <div className="col-6 text-center">
                                                                 <h5 className="text-success">
-                                                                    {formatPrice(producto.precio - (producto.precio * discountPrice))}
+                                                                    {formatPrice(parseInt(Math.ceil((producto.precio) - (producto.precio * discountPrice))))}
                                                                 </h5>
                                                             </div>
                                                             <div className="col-6 text-center">

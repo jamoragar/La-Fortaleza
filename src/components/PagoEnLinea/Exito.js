@@ -4,7 +4,8 @@ import { Container, Row, Col, Table, Button } from 'react-bootstrap';
 import credentials from './credentials.json'
 import firebase from '../../config/firebase';
 import moment from 'moment';
-import {checkProduct, updateProductStock} from './functions/FbFunctions';
+import timezone from './timezone.json';
+import {checkProduct, updateProductStock, checkClientOrder} from './functions/FbFunctions';
 
 const tableError = (tipo, orden_id, pedido_id) => {
     return(
@@ -55,7 +56,9 @@ export const Exito = () => {
     const [user, setUser] = useState(null);
     const [preference, setPreference] = useState(null);
     const [collection, setCollection] = useState(null);
-    const [productoFromFb, setProductoFromFb] = useState(null);
+    const [pedidoCliente, setPedidoCliente] = useState(null);
+
+    moment.tz.add(timezone.Punta_Arenas);// Establecemos zona horaria
 
     const validatingPreference = (id) => {
         fetch(`https://api.mercadopago.com/checkout/preferences/${id}?access_token=${credentials.access_token}`)
@@ -105,6 +108,22 @@ export const Exito = () => {
         if(preference){
             console.log('Preference',preference);
             if(collection){
+                const id_pedido = preference.additional_info;
+                const clientOrderFb = checkClientOrder(user.uid, id_pedido);
+                clientOrderFb.then(data => {
+                    //Cuando el cliente sea redireccionado a esta página por primera vez, se actualizará el estado de su pago en su pedido.
+                    if(data.estado_pago === 'PENDIENTE'){
+                        firebase.database().ref(`/Users/${user.uid}/pedidos/${id_pedido}`).update({
+                            estado_pago: 'APROVADO',
+                            fecha_validacion_pago: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm')
+                        })
+                    }
+                })
+
+
+                //TO DO -> FALTA ACTUALIZAR STOCK!!
+                //RECORRER LOS PRODUCTOS DE LA ORDEN Y CON EL ID Y CANTIDAD DE ESTOS IR A BUSCAR A LA TABLA PRODUCTOS Y ACTUALIZAR EL STOCK AL NUEVO
+                
                 // preference.items.map((item, i) => {
                 //     let productoFb = checkProduct(item.id);
                 //     productoFb.then(data => {

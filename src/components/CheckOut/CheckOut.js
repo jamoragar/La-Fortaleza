@@ -90,7 +90,10 @@ const CheckOut = () => {
         const pedidoUsuario = {
             id_interno: tokenPedido,
             items: ProductosLaFortaleza(pedidoFinal),
-            estado_pago: 'pendiente...',
+            estado_pago: 'PENDIENTE',
+            fecha_validacion_pago: '',
+            regalo: regalo,
+            delivery: envioGratuito,
             fecha_creacion_pedido: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm')
         }
         //Escribimos en la BD el pedido y hacemos una promesa una vez escrito que mande a pagar por mercadopago

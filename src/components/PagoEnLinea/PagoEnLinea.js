@@ -61,7 +61,7 @@ const PagoEnLinea = (pedido, usuario, tokenPedido) => {
                     },
                 ]
             },
-            adiditional_info: tokenPedido
+            additional_info: tokenPedido
         }
         console.log(preferences);
         return preferences;
