@@ -115,7 +115,7 @@ const Store = (props) => {
                                                         <div className="row mt-1">
                                                             <div className="col-6 text-center">
                                                                 <h5 className="text-success">
-                                                                    {formatPrice(producto.precio - (producto.precio * discountPrice))}
+                                                                    {formatPrice(Math.ceil(parseInt(producto.precio)) - (producto.precio * discountPrice))}
                                                                 </h5>
                                                             </div>
                                                             <div className="col-6 text-center">

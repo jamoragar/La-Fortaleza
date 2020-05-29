@@ -23,7 +23,6 @@ import { Error } from "../PagoEnLinea/Error";
 import { useProducts } from '../Hooks/useProducts';
 import { useCategory } from '../Hooks/useCategory';
 
-
 export const history = createBrowserHistory();
 
 const NotFoundRedirect = () => <Redirect to='/not-found' />
