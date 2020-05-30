@@ -1,18 +1,68 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
+import firebase from '../../../config/firebase';
+import { useParams } from 'react-router-dom';
+import DetallePedidos from './DetallePedidos';
 
 const Pedidos = () => {
     const columns = [
 
+        {
+            name: 'N° de pedido',
+            selector: 'id_interno',
+            sortable: true,
+            grow: 1,
+        },
+        {
+            name: 'Estado De Pago',
+            selector: 'estado_pago',
+            sortable: true,
+            grow: 1,
+        },
+        {
+            name: 'Creacion de Pedido',
+            selector: 'fecha_creacion_pedido',
+            sortable: true,
+            grow: 1,
+        },
+        {
+            name: 'fecha de Pago',
+            selector: 'fecha_validacion_pago',
+            sortable: true,
+            grow: 1,
+        },
+        {
+            name: 'Delivery',
+            selector: 'delivery',
+            sortable: true,
+            grow: 1,
+
+        },
+        {
+            name: 'Envuelto para Regalo?',
+            selector: 'regalo',
+            sortable: true,
+            grow: 1,
+
+        },
     ];
 
+    let { uid } = useParams();
+    const [fbUserData, setFbUserData] = useState(null);
+    let pedidosToArray = [];
 
-    const opcion = () => window.confirm('Esta seguro que desea eliminar esta categoria?');
+    useEffect(() => {
+        firebase.database().ref(`/Users/${uid}/pedidos`).on('value', snapshot => {
+            setFbUserData(snapshot.val());
+        })
+    }, [])
 
+    if (fbUserData) {
 
-
-    if (columns) {
+        Object.keys(fbUserData).forEach((key, i) => {
+            pedidosToArray[i] = fbUserData[key];
+        });
 
         const paginationOptions = { rowsPerPageText: 'Filas por página', rangeSeparatorText: 'de', selectAllRowsItem: true, selectAllRowsItemText: 'Todos' };
 
@@ -20,21 +70,24 @@ const Pedidos = () => {
             <div>
                 <div className="row" >
                     <div className="col text-center" >
-                        <h1 style={{ fontWeight: 'bolder', color: '#606060' }}>Listado de Pedidos</h1>
+                        <h1 style={{ fontWeight: 'bolder', color: '#606060', marginTop: '2rem', marginBottom: '2rem' }}>Listado de Pedidos</h1>
                     </div>
                 </div>
-                < DataTable
-                    columns={columns}
-                    data={columns}
-                    persistTableHead
-                    fixedHeader
-                    fixedHeaderScrollHeight="600px"
-                    noHeader
-                    pagination
-                    paginationComponentOptions={paginationOptions}
-                    expandableRows
-                />
-            </div>
+                <div>
+                    < DataTable
+                        columns={columns}
+                        data={pedidosToArray}
+                        persistTableHead
+                        fixedHeader
+                        fixedHeaderScrollHeight="600px"
+                        noHeader
+                        pagination
+                        paginationComponentOptions={paginationOptions}
+                        expandableRows
+                        expandableRowsComponent={<DetallePedidos fbUserData={fbUserData} uid={uid} />}
+                    />
+                </div>
+            </div >
         );
     }
     else {
