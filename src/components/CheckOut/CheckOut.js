@@ -15,7 +15,7 @@ const CheckOut = () => {
     let pedidoFinal = []
     let subTotal = []
     const orders = useOrders();
-    const [preference, setPreference] = useState(null);
+    const [disableButton, setDisableButton] = useState(false);
     const [precio_envio, setPrecio_envio] = useState(0);
     const [precio_regalo, setPrecio_regalo] = useState(0);
     const [userAuth, setUserAuth] = useState();
@@ -82,7 +82,7 @@ const CheckOut = () => {
 
     const generarPedido = (e) => {
         e.preventDefault();
-
+        setDisableButton(true);
         moment.tz.add(timezone.Punta_Arenas);// Establecemos zona horaria
         checkeaExtras();// Verificamos si hay o no envio gratuito y envoltorio de regalo
         const tokenPedido = firebase.database().ref(`/Users/${user.uid}`).child('pedidos').push().key; //generamos una id unica para nuestro nodo, que a la vez usaremos como control interno
@@ -90,17 +90,33 @@ const CheckOut = () => {
         const pedidoUsuario = {
             id_interno: tokenPedido,
             items: ProductosLaFortaleza(pedidoFinal),
+            precio_total: total,
             estado_pago: 'PENDIENTE',
             fecha_validacion_pago: '',
             regalo: regalo,
             delivery: envioGratuito,
             fecha_creacion_pedido: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm')
         }
+        const {name, last_name, email, number, direccion, coment} = e.target.elements;
+        const informacionCliente = {
+            id_cliente: userAuth.uid,
+            nombre: name.value,
+            apellido: last_name.value,
+            email: email.value,
+            numero: number.value,
+            direccion: direccion.value,
+            comentario: coment.value
+        }
         //Escribimos en la BD el pedido y hacemos una promesa una vez escrito que mande a pagar por mercadopago
         let updates = {};
         updates['/pedidos/' + tokenPedido] = pedidoUsuario;
 
-        return firebase.database().ref(`/Users/${user.uid}`).update(updates).then(PagoEnLinea(pedidoFinal, userAuth, tokenPedido));
+        return firebase.database().ref(`/Pedidos/${tokenPedido}/`).set({
+            pedidoUsuario,
+            informacionCliente: informacionCliente
+        }).then(
+            firebase.database().ref(`/Users/${user.uid}`).update(updates).then(PagoEnLinea(pedidoFinal, userAuth, tokenPedido))
+        );
     }
     const handleRegalo = () => {        
         setRegalo(!regalo);
@@ -138,6 +154,7 @@ const CheckOut = () => {
             console.log('entramos');
             setPrecio_envio(0)
         }
+        console.log(userAuth);
         return(
             <div style={{margin:'5% 2% 5% 2%'}}>
                 <Form onSubmit={generarPedido}>
@@ -315,7 +332,7 @@ const CheckOut = () => {
                         </>
                     )
                 }
-                    <Button variant="primary" style={{float:'right'}} type='submit'><i className="fas fa-dollar-sign fa-fw" />Ir a Pagar!</Button>
+                    <Button variant="primary" style={{float:'right'}} type='submit' disabled={disableButton}><i className="fas fa-dollar-sign fa-fw" />Ir a Pagar!</Button>
                 </Form>
             </div>
         )

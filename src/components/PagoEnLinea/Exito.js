@@ -113,17 +113,21 @@ export const Exito = () => {
                 clientOrderFb.then(data => {
                     //Cuando el cliente sea redireccionado a esta página por primera vez, se actualizará el estado de su pago en su pedido.
                     if(data.estado_pago === 'PENDIENTE'){
-                        firebase.database().ref(`/Users/${user.uid}/pedidos/${id_pedido}`).update({
+                        const key = firebase.database().ref().push().key;
+                        const aprovacion = {
                             estado_pago: 'APROVADO',
                             fecha_validacion_pago: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm')
-                        })
+                        }
+                        firebase.database().ref(`/Users/${user.uid}/pedidos/${id_pedido}`).update(aprovacion).then(
+                            firebase.database().ref(`/Pedidos/${id_pedido}/pedidoUsuario`).update(aprovacion)
+                        )
                     }
                 })
 
 
                 //TO DO -> FALTA ACTUALIZAR STOCK!!
                 //RECORRER LOS PRODUCTOS DE LA ORDEN Y CON EL ID Y CANTIDAD DE ESTOS IR A BUSCAR A LA TABLA PRODUCTOS Y ACTUALIZAR EL STOCK AL NUEVO
-                
+
                 // preference.items.map((item, i) => {
                 //     let productoFb = checkProduct(item.id);
                 //     productoFb.then(data => {
