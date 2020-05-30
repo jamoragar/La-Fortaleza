@@ -17,8 +17,6 @@ const DetalleOrden = (props) => {
         });
     }, []);
 
-    console.log(infoPedido);
-
     if (infoPedido && id_interno) {
 
         Object.keys(infoPedido).forEach((key, i) => {
@@ -32,10 +30,6 @@ const DetalleOrden = (props) => {
         const infoUsuario = orderInfo[0];
         const infoOrden = orderInfo[1];
         const infoItems = orderInfo[1].items;
-
-        console.log(infoUsuario);
-        console.log(infoOrden);
-        console.log(infoItems);
 
         return (
             <div>
