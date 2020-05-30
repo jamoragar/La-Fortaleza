@@ -71,7 +71,7 @@ const CheckOut = () => {
         if(envioGratuito){
             pedidoFinal[pedidoFinal.length] = {
                 id: 'envioGratuito',
-                nombre: 'Envio',
+                nombre: 'Envío',
                 tipo: 'Extras',
                 cantidad: 1,
                 precio_unitario: precio_envio,
@@ -199,12 +199,6 @@ const CheckOut = () => {
                                             <Form.Control name='direccion' type="text" placeholder='Ingrese su dirección' defaultValue={userAuth.direccion}  required/>
                                         </Form.Group>
                                     </Col>
-                                    <Col>
-                                        <Form.Group controlId='formAdressNumber'>
-                                            <Form.Label>Número Dirección:</Form.Label>
-                                            <Form.Control name='numero_direccion' type='text' placeholder='Ingrese el número de su dirección'  required/>
-                                        </Form.Group>
-                                    </Col>
                                 </Form.Row>
                                 <Form.Group controlId="formComment">
                                     <Form.Label>Comentario:</Form.Label>
@@ -306,11 +300,16 @@ const CheckOut = () => {
                     </tfoot>
                 </Table>
                 {
-                    total >= 30001 ? <h4>Tiene envio gratuito a su dirección!</h4> : (
+                    total >= 30001 ? (
+                        <>
+                            <h4>Tiene envio gratuito a su dirección!</h4>
+                            En <b>area rural</b> le recomendamos comunicarse al número de contacto La Fortaleza ((61) 237 1498) para confirmar el valor de este.<br/>
+                        </>
+                        ) : (
                         <>
                         <h4>¿Desea servicio de reparto?</h4>
                         El valor del envio es de $2.500 en <b>area urbana.</b><br/>
-                        En <b>area rural</b> le recomendamos comunicarse al número de contacto La Fortaleza para confirmar el valor de este.<br/>
+                        En <b>area rural</b> le recomendamos comunicarse al número de contacto La Fortaleza ((61) 237 1498) para confirmar el valor de este.<br/>
                         <i className="fas fa-shipping-fast mr-3 fa-2x" />
                         <Form.Check
                             inline
@@ -327,7 +326,7 @@ const CheckOut = () => {
                             name={'envio'}
                             type={'radio'}
                             id={`custom4`}
-                            label={`No`}
+                            label={`No, retiraré mi pedido en la tienda.`}
                             onChange={handleEnvio}
                         />
                         </>

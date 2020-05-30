@@ -120,21 +120,19 @@ export const Exito = () => {
                             estado_pago: 'APROVADO',
                             fecha_validacion_pago: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm')
                         };
-                        let updates = {};//Se declara objeto vacio
-                        //le damos atributos a nuestro objeto, dejandolos iguales al objeto aprovacion
-                        updates[`/Users/${user.uid}/pedidos/${id_pedido}`] = aprovacion;
-                        updates[`/Pedidos/${id_pedido}/pedidoUsuario`] = aprovacion;
                         
-                        database.ref().update(updates).then(
-                            productos_pedido.map((item, i) => {
-                                let product_stock = checkProductStock(item.id);
-                                if(item.id !== 'envueltoRegalo' && item.id !== 'envioGratuito'){
-                                    product_stock.then(data => {
-                                        let new_stock = data - item.quantity;
-                                        updateProductStock(item.id, new_stock);                            
-                                    })
-                                }
-                            })
+                        database.ref(`/Users/${user.uid}/pedidos/${id_pedido}`).update(aprovacion).then(
+                            database.ref(`/Pedidos/${id_pedido}/pedidoUsuario`).update(aprovacion).then(
+                                productos_pedido.map((item, i) => {
+                                    let product_stock = checkProductStock(item.id);
+                                    if(item.id !== 'envueltoRegalo' && item.id !== 'envioGratuito'){
+                                        product_stock.then(data => {
+                                            let new_stock = data - item.quantity;
+                                            updateProductStock(item.id, new_stock);                            
+                                        })
+                                    }
+                                })
+                            )
                         )
                     }
                 })
