@@ -5,7 +5,7 @@ import credentials from './credentials.json'
 import firebase from '../../config/firebase';
 import moment from 'moment';
 import timezone from './timezone.json';
-import { checkProduct, updateProductStock, checkClientOrder } from './functions/FbFunctions';
+import { checkProductStock, updateProductStock, checkClientOrder } from './functions/FbFunctions';
 
 const tableError = (tipo, orden_id, pedido_id) => {
     return (
@@ -50,6 +50,7 @@ export const Exito = () => {
     //Tomamos el query string que retorna mercadolibre en la URL
     let search = window.location.search;
     let params = new URLSearchParams(search);
+    const database = firebase.database();
     const collection_id = params.get('collection_id');//Número de operación
     const collection_status = params.get('collection_status');
     const preference_id = params.get('preference_id');
@@ -108,33 +109,37 @@ export const Exito = () => {
         if (preference) {
             if (collection) {
                 const id_pedido = preference.additional_info;
+                const productos_pedido = preference.items;
                 const clientOrderFb = checkClientOrder(user.uid, id_pedido);
                 clientOrderFb.then(data => {
                     //Cuando el cliente sea redireccionado a esta página por primera vez, se actualizará el estado de su pago en su pedido.
                     if (data.estado_pago === 'PENDIENTE') {
-                        const key = firebase.database().ref().push().key;
+                        //"Limpiamos" el local storage, mejor dicho removemos la orden, ya que en este caso ya se pago. Pero para limpiar realmente, hay que usar la funcion clear()
+                        localStorage.setItem('order', JSON.stringify({ order: [] }));
                         const aprovacion = {
                             estado_pago: 'APROVADO',
                             fecha_validacion_pago: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm')
-                        }
-                        firebase.database().ref(`/Users/${user.uid}/pedidos/${id_pedido}`).update(aprovacion).then(
-                            firebase.database().ref(`/Pedidos/${id_pedido}/pedidoUsuario`).update(aprovacion)
+                        };
+                        let updates = {};//Se declara objeto vacio
+                        //le damos atributos a nuestro objeto, dejandolos iguales al objeto aprovacion
+                        updates[`/Users/${user.uid}/pedidos/${id_pedido}`] = aprovacion;
+                        updates[`/Pedidos/${id_pedido}/pedidoUsuario`] = aprovacion;
+
+                        database.ref().update(updates).then(
+                            productos_pedido.map((item, i) => {
+                                let product_stock = checkProductStock(item.id);
+                                if (item.id !== 'envueltoRegalo' && item.id !== 'envioGratuito') {
+                                    product_stock.then(data => {
+                                        let new_stock = data - item.quantity;
+                                        updateProductStock(item.id, new_stock);
+                                    })
+                                }
+                            })
                         )
                     }
                 })
 
 
-                //TO DO -> FALTA ACTUALIZAR STOCK!!
-                //RECORRER LOS PRODUCTOS DE LA ORDEN Y CON EL ID Y CANTIDAD DE ESTOS IR A BUSCAR A LA TABLA PRODUCTOS Y ACTUALIZAR EL STOCK AL NUEVO
-
-                // preference.items.map((item, i) => {
-                //     let productoFb = checkProduct(item.id);
-                //     productoFb.then(data => {
-                //         let stock = data.stock;
-                //         let nuevo_stock = stock - item.quantity;
-                //         updateProductStock(item.id, nuevo_stock);
-                //     })
-                // })
                 return (
                     <Container>
                         <Row style={{ backgroundColor: '#28a745', marginTop: '3rem', padding: '2rem' }}>

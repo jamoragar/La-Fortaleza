@@ -152,7 +152,8 @@ const CheckOut = () => {
     else{
         if(total >= 30001){
             console.log('entramos');
-            setPrecio_envio(0)
+            setEnvioGratuito(true);
+            setPrecio_envio(0);
         }
         console.log(userAuth);
         return(

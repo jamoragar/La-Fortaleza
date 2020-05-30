@@ -76,8 +76,6 @@ const DetallePedidos = (props) => {
                         fixedHeader
                         fixedHeaderScrollHeight="600px"
                         noHeader
-                        pagination
-                        paginationComponentOptions={paginationOptions}
                     />
                 </div>
             </div >

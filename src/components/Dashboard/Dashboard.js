@@ -10,6 +10,9 @@ import Blog from './Components/Blog/Blog';
 import Productos from './Components/Productos/Productos';
 import Categorias from './Components/Categorias/Categorias';
 import Ordenes from './Components/Ordenes/Ordenes';
+import DetalleOrden from './Components/Ordenes/DetalleOrden';
+import Pedidos from './userComponents/Pedidos';
+import DetallePedidos from './userComponents/DetallePedidos'
 import VerProducto from './Components/Productos/VerProducto';
 import EditarProductos from './Components/Productos/EditarProducto';
 import Profile from './userComponents/Profile';
@@ -19,7 +22,7 @@ import EditarButtons from './Components/Slider/EditarButtons';
 import dashboardStyles from './Dashboard.module.scss'
 import mainStyles from './Main.module.scss';
 import { createBrowserHistory } from 'history';
-import Pedidos from './userComponents/Pedidos';
+
 
 
 export const history = createBrowserHistory();
@@ -42,7 +45,9 @@ const DashboardRoute = (props) => {
                                         <Route exact path='/Dashboard/:uid/Productos' component={Productos} />
                                         <Route exact path='/Dashboard/:uid/Categorias' component={Categorias} />
                                         <Route exact path='/Dashboard/:uid/Ordenes' component={Ordenes} />
+                                        <Route exact path='/Dashboard/:uid/DetalleOrden/:id_interno' component={DetalleOrden} />
                                         <Route exact path='/Dashboard/:uid/pedidos' component={Pedidos} />
+                                        <Route exact path='/Dashboard/:uid/DetallePedidos/:id_interno' component={DetallePedidos} />
                                         <Route exact path="/Dashboard/:uid/Producto/:id" component={VerProducto} />
                                         <Route exact path="/Dashboard/:uid/Producto/Editar/:id" component={EditarProductos} />
                                         <Route exact path="/Dashboard/:uid/Slider/EditarSlider/:id" component={EditarSlider} />

@@ -83,8 +83,6 @@ const Pedidos = () => {
                         noHeader
                         pagination
                         paginationComponentOptions={paginationOptions}
-                        expandableRows
-                        expandableRowsComponent={<DetallePedidos fbUserData={fbUserData} uid={uid} />}
                     />
                 </div>
             </div >

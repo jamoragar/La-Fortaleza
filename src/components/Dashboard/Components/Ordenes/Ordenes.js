@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Spinner } from 'react-bootstrap';
+import { OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import { usePedidos } from '../../../Hooks/usePedidos';
-import DetalleOrden from './DetalleOrden';
+import { Link, useParams } from 'react-router-dom';
 
 const Ordenes = () => {
     const columns = [
@@ -23,16 +23,38 @@ const Ordenes = () => {
         },
         {
             name: 'Delivery',
-            selector: 'delivery',
             sortable: true,
             grow: 1,
+            cell: (data) => {
+                return data.delivery === true ? (
+                    <div className="text-primary">
+                        <i className="fas fa-check fa-2x"></i>
+                    </div>
+                ) :
+                    (
+                        <div className="text-danger">
+                            <i className="fas fa-times fa-2x"></i>
+                        </div>
+                    )
+            },
 
         },
         {
             name: 'Envuelto para Regalo?',
-            selector: 'regalo',
             sortable: true,
             grow: 1,
+            cell: (data) => {
+                return data.regalo === true ? (
+                    <div className="text-primary">
+                        <i className="fas fa-check fa-2x"></i>
+                    </div>
+                ) :
+                    (
+                        <div className="text-danger">
+                            <i className="fas fa-times fa-2x"></i>
+                        </div>
+                    )
+            },
 
         },
         {
@@ -49,14 +71,59 @@ const Ordenes = () => {
             grow: 1,
 
         },
+        {
+            name: 'Control',
+            button: true,
+            grow: 1,
+            cell: (data) => {
+                return (
+                    <div>
+                        <div style={{ display: 'flex' }}>
+                            <OverlayTrigger key={'Detalle De La Orden'} placement={'left'}
+                                overlay={
+                                    <Tooltip id={`tooltip-bottom`}><strong>Ver</strong></Tooltip>
+                                }
+                            >
+                                <Link to={{ pathname: `/Dashboard/${uid}/DetalleOrden/${data.id_interno}`, data: data }}>
+                                    <div style={{ cursor: 'pointer' }} className="text-primary"><i className="fas fa-fw fa-search fa-lg" style={{ width: '35px', height: '20px' }} /></div>
+                                </Link>
+                            </OverlayTrigger>
+                        </div>
+                    </div>
+                )
+            },
+        },
+    ];
+
+    const conditionalRowStyles = [
+        {
+            when: row => row.estado_pago === 'APROVADO',
+            style: {
+                backgroundColor: '#28a745;',
+                color: 'white',
+            },
+        },
+        {
+            when: row => row.estado_pago === 'PENDIENTE',
+            style: {
+                backgroundColor: '#ffc107;',
+                color: 'white',
+            },
+        },
+        {
+            when: row => row.estado_pago === 'RECHAZADO',
+            style: {
+                backgroundColor: '#dc3545;',
+                color: 'white',
+            },
+        },
     ];
 
     const Pedidos = usePedidos();
     const { fbPedidos } = Pedidos;
     let pedidosToArray = [];
     let pedidos = [];
-    let infoUsuario = [];
-    let orderItems = [];
+    let { uid } = useParams();
 
     if (fbPedidos) {
 
@@ -65,15 +132,8 @@ const Ordenes = () => {
         });
 
         pedidosToArray.forEach((pedido, i) => {
-            infoUsuario[i] = pedido.pedidoUsuario;
-        });
-
-        pedidosToArray.forEach((pedido, i) => {
             pedidos[i] = pedido.pedidoUsuario;
         });
-
-        console.log(pedidosToArray)
-        const paginationOptions = { rowsPerPageText: 'Filas por página', rangeSeparatorText: 'de', selectAllRowsItem: true, selectAllRowsItemText: 'Todos' };
 
         return (
             <div>
@@ -90,10 +150,7 @@ const Ordenes = () => {
                         fixedHeader
                         fixedHeaderScrollHeight="600px"
                         noHeader
-                        pagination
-                        paginationComponentOptions={paginationOptions}
-                        expandableRows
-                        expandableRowsComponent={<DetalleOrden infoUsuario={infoUsuario} pedidos={pedidos} />}
+                        conditionalRowStyles={conditionalRowStyles}
                     />
                 </div>
             </div >
