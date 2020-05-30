@@ -1,92 +1,83 @@
 import React, { useState, useEffect } from 'react';
 import { Spinner } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
-import { usePedidos } from '../../../Hooks/usePedidos';
-import DetalleOrden from './DetalleOrden';
+import firebase from '../../../config/firebase';
+import { useParams } from 'react-router-dom';
 
-const Ordenes = () => {
+const DetallePedidos = (props) => {
     const columns = [
 
         {
-            name: 'Id de pedido',
-            selector: 'id_interno',
+            name: 'Nombre',
+            selector: 'title',
             sortable: true,
             grow: 1,
-
         },
         {
-            name: 'Estado de Pago',
-            selector: 'estado_pago',
+            name: 'Categoria',
+            selector: 'desciption',
             sortable: true,
             grow: 1,
-
         },
         {
-            name: 'Delivery',
-            selector: 'delivery',
+            name: 'id Producto',
+            selector: 'id',
             sortable: true,
             grow: 1,
-
         },
         {
-            name: 'Envuelto para Regalo?',
-            selector: 'regalo',
+            name: 'Cantidad',
+            selector: 'quantity',
             sortable: true,
             grow: 1,
-
         },
         {
-            name: 'Fecha de Pedido',
-            selector: 'fecha_creacion_pedido',
+            name: 'Tipo De Moneda',
+            selector: 'currency_id',
             sortable: true,
             grow: 1,
-
         },
         {
-            name: 'Fecha de Pago',
-            selector: 'fecha_validacion_pago',
+            name: 'Precio Unitario',
+            selector: 'unit_price',
             sortable: true,
             grow: 1,
-
         },
+
     ];
 
-    const Pedidos = usePedidos();
-    const { fbPedidos } = Pedidos;
+    let { uid } = useParams();
+    const { fbUserData } = props;
     let pedidosToArray = [];
-    let pedidos = [];
 
-    if (fbPedidos) {
+    if (fbUserData) {
 
-        Object.keys(fbPedidos).forEach((key, i) => {
-            pedidosToArray[i] = fbPedidos[key];
+        Object.keys(fbUserData).forEach((key, i) => {
+            pedidosToArray[i] = fbUserData[key];
         });
 
-        pedidosToArray.forEach((pedido, i) => {
-            pedidos[i] = pedido.data;
-        });
+        const DetallePedidos = pedidosToArray[0].items;
 
+        console.log(DetallePedidos)
         const paginationOptions = { rowsPerPageText: 'Filas por página', rangeSeparatorText: 'de', selectAllRowsItem: true, selectAllRowsItemText: 'Todos' };
 
         return (
             <div>
                 <div className="row" >
                     <div className="col text-center" >
-                        <h1 style={{ fontWeight: 'bolder', color: '#606060' }}>Listado de Ordenes</h1>
+                        <h1 style={{ fontWeight: 'bolder', color: '#606060', marginTop: '2rem', marginBottom: '2rem' }}>Detalle De Productos</h1>
                     </div>
                 </div>
                 <div>
                     < DataTable
                         columns={columns}
-                        data={pedidos}
+                        data={DetallePedidos}
                         persistTableHead
                         fixedHeader
                         fixedHeaderScrollHeight="600px"
                         noHeader
                         pagination
                         paginationComponentOptions={paginationOptions}
-                        expandableRows
-                        expandableRowsComponent={<DetalleOrden pedidos={pedidos} />}
                     />
                 </div>
             </div >
@@ -107,5 +98,4 @@ const Ordenes = () => {
         )
     }
 }
-
-export default Ordenes;
+export default DetallePedidos;
