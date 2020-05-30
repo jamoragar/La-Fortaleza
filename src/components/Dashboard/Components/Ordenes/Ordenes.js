@@ -55,6 +55,8 @@ const Ordenes = () => {
     const { fbPedidos } = Pedidos;
     let pedidosToArray = [];
     let pedidos = [];
+    let infoUsuario = [];
+    let orderItems = [];
 
     if (fbPedidos) {
 
@@ -63,9 +65,14 @@ const Ordenes = () => {
         });
 
         pedidosToArray.forEach((pedido, i) => {
-            pedidos[i] = pedido.data;
+            infoUsuario[i] = pedido.pedidoUsuario;
         });
 
+        pedidosToArray.forEach((pedido, i) => {
+            pedidos[i] = pedido.pedidoUsuario;
+        });
+
+        console.log(pedidosToArray)
         const paginationOptions = { rowsPerPageText: 'Filas por página', rangeSeparatorText: 'de', selectAllRowsItem: true, selectAllRowsItemText: 'Todos' };
 
         return (
@@ -86,7 +93,7 @@ const Ordenes = () => {
                         pagination
                         paginationComponentOptions={paginationOptions}
                         expandableRows
-                        expandableRowsComponent={<DetalleOrden pedidos={pedidos} />}
+                        expandableRowsComponent={<DetalleOrden infoUsuario={infoUsuario} pedidos={pedidos} />}
                     />
                 </div>
             </div >
