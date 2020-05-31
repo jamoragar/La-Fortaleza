@@ -22,8 +22,6 @@ const DetallePedidos = (props) => {
             pedidoToArray[i] = infoUserPedido[key];
         });
 
-        console.log(pedidoToArray);
-
         return (
             <div>
                 <div className="row" >
@@ -104,7 +102,7 @@ const DetallePedidos = (props) => {
                         </Table>
                         <div className="row" >
                             <div className="col text-center" >
-                                <h4 style={{ fontWeight: 'bolder', color: '#606060', marginTop: '2rem', marginBottom: '2rem' }}>Valor Total De La Orden: {pedidoToArray[6].toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</h4>
+                                <h4 style={{ fontWeight: 'bolder', color: '#606060', marginTop: '2rem', marginBottom: '2rem' }}>Precio Total del Pedido: {pedidoToArray[6].toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</h4>
                             </div>
                         </div>
                     </div>

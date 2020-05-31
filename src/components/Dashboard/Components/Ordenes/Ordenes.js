@@ -135,6 +135,8 @@ const Ordenes = () => {
             pedidos[i] = pedido.pedidoUsuario;
         });
 
+        const paginationOptions = { rowsPerPageText: 'Filas por página', rangeSeparatorText: 'de', selectAllRowsItem: true, selectAllRowsItemText: 'Todos' };
+
         return (
             <div>
                 <div className="row" >
@@ -151,6 +153,8 @@ const Ordenes = () => {
                         fixedHeaderScrollHeight="600px"
                         noHeader
                         conditionalRowStyles={conditionalRowStyles}
+                        pagination
+                        paginationComponentOptions={paginationOptions}
                     />
                 </div>
             </div >
