@@ -1,21 +1,25 @@
-import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
 import { Container, Row, Col, Table, Button } from 'react-bootstrap';
 import credentials from './credentials.json'
 import firebase from '../../config/firebase';
 import moment from 'moment';
 import timezone from './timezone.json';
+<<<<<<< HEAD
 import {checkProductStock, updateProductStock, checkClientOrder} from './functions/FbFunctions';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+=======
+import { checkProductStock, updateProductStock, checkClientOrder } from './functions/FbFunctions';
+>>>>>>> 8b8c60db7f4375c90d1937a74bb912355f2fcb6d
 
 const tableError = (tipo, orden_id, pedido_id) => {
-    return(
+    return (
         <>
-            <br/>
+            <br />
             <h1>{tipo} no encontrado</h1>
             <h5>Por favor comuniquese con nostros a la brevedad para dar seguimiento a su caso</h5>
-            <br/>
+            <br />
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -68,10 +72,10 @@ export const Exito = () => {
         fetch(`https://api.mercadopago.com/checkout/preferences/${id}?access_token=${credentials.access_token}`)
             .then(response => response.json())
             .then(data => {
-                if(data.status === 404){
+                if (data.status === 404) {
                     setPreference(0)
                     alert(`Error. La preferencia con el identificador ${id} no fue encontrada.`);
-                }else{
+                } else {
                     setPreference(data)
                 }
             })
@@ -83,10 +87,10 @@ export const Exito = () => {
         fetch(`https://api.mercadopago.com/v1/payments/${id}?access_token=${credentials.access_token}`)
             .then(response => response.json())
             .then(data => {
-                if(data.status === 404){
+                if (data.status === 404) {
                     setCollection(0)
                     alert(`Número de operación: ${id} no encontrado`);
-                }else{
+                } else {
                     setCollection(data)
                 }
             })
@@ -108,41 +112,41 @@ export const Exito = () => {
 
     useEffect(() => {
         firebase.auth().onAuthStateChanged(fbUser => {
-            if(fbUser){
+            if (fbUser) {
                 setUser(fbUser)
                 validatingCollection(collection_id);
                 validatingPreference(preference_id);
-            }else{
+            } else {
                 alert('No tiene una sesión activa');
                 console.log('usuario sin sesión...');
             }
         })
     }, [firebase]);
 
-    if(user && user.uid){
-        if(preference){
-            if(collection){
+    if (user && user.uid) {
+        if (preference) {
+            if (collection) {
                 const id_pedido = preference.additional_info;
                 const productos_pedido = preference.items;
                 const clientOrderFb = checkClientOrder(user.uid, id_pedido);
                 clientOrderFb.then(data => {
                     //Cuando el cliente sea redireccionado a esta página por primera vez, se actualizará el estado de su pago en su pedido.
-                    if(data.estado_pago === 'PENDIENTE'){
+                    if (data.estado_pago === 'PENDIENTE') {
                         //"Limpiamos" el local storage, mejor dicho removemos la orden, ya que en este caso ya se pago. Pero para limpiar realmente, hay que usar la funcion clear()
-                        localStorage.setItem('order', JSON.stringify({order:[]}));
+                        localStorage.setItem('order', JSON.stringify({ order: [] }));
                         const aprovacion = {
                             estado_pago: 'APROVADO',
                             fecha_validacion_pago: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm')
                         };
-                        
+
                         database.ref(`/Users/${user.uid}/pedidos/${id_pedido}`).update(aprovacion).then(
                             database.ref(`/Pedidos/${id_pedido}/pedidoUsuario`).update(aprovacion).then(
                                 productos_pedido.map((item, i) => {
                                     let product_stock = checkProductStock(item.id);
-                                    if(item.id !== 'envueltoRegalo' && item.id !== 'envioGratuito'){
+                                    if (item.id !== 'envueltoRegalo' && item.id !== 'envioGratuito') {
                                         product_stock.then(data => {
                                             let new_stock = data - item.quantity;
-                                            updateProductStock(item.id, new_stock);                            
+                                            updateProductStock(item.id, new_stock);
                                         })
                                     }
                                 })
@@ -154,7 +158,7 @@ export const Exito = () => {
                     }
                 })
 
-                
+
                 return (
                     <div id='exitoTable'>
                         <Container>
@@ -241,6 +245,7 @@ export const Exito = () => {
                                     )}
                                 </tbody>
                             </Table>
+<<<<<<< HEAD
                             <br/>
                             <h2 style={{textAlign:'center'}}>Muchas gracias por su compra! Esperamos verlo pronto</h2>
                             <br/>
@@ -251,27 +256,79 @@ export const Exito = () => {
                             {/* <Button onClick={testing}>Testing functions</Button> */}
                         </Container>
                     </div>
+=======
+                        )
+                            :
+                            <h5>Cargando...</h5>
+                        }
+
+                        <Row style={{ margin: ' 3rem 3rem 2rem 0' }}>
+                            <Col>
+                                <h4 style={{ textAlign: 'initial', fontWeight: 'bolder', color: '#343a40' }}>Detalle de su Pedido :</h4>
+                            </Col>
+                        </Row>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Producto</th>
+                                    <th>Categoria</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Unitario</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {preference ? preference.items.map((item, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{index + 1}</td>
+                                            <td>{item.title}</td>
+                                            <td>{item.description}</td>
+                                            <td>{item.quantity}</td>
+                                            <td>{item.unit_price.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
+                                            <td>{(item.unit_price * item.quantity).toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
+                                        </tr>
+                                    )
+                                })
+                                    :
+                                    (
+                                        <tr>
+                                            <td>{'Cargando información del pedido...'}</td>
+                                        </tr>
+                                    )}
+                            </tbody>
+                        </Table>
+                        <br />
+                        <h2 style={{ textAlign: 'center' }}>Muchas gracias por su compra! Esperamos verlo pronto</h2>
+                        <br />
+                        <Link to='/'>
+                            <Button style={{ marginBottom: '2em' }} variant="success" block><i className="fab fa-fort-awesome fa-fw" />Volver al Inicio</Button>
+                        </Link>
+                        {/* <Button onClick={testing}>Testing functions</Button> */}
+                    </Container>
+>>>>>>> 8b8c60db7f4375c90d1937a74bb912355f2fcb6d
                 )
 
-            }else{
-                return(
+            } else {
+                return (
                     tableError('Operación', collection_id, preference_id)
                 );
             }
-        }else if(preference === 0){
-            return(
+        } else if (preference === 0) {
+            return (
                 tableError('Pedido', collection_id, preference_id)
             );
-        }else{
-            return(<h2>Cargando...</h2>);
+        } else {
+            return (<h2>Cargando...</h2>);
         }
-    }else{
-        return(
+    } else {
+        return (
             <>
-            <h1>Sesión inactiva</h1>
-            <h5>Esta sección es solo para usuarios que han sido redireccionados por MercadoPago y que cuentan con una sesión activa</h5>
+                <h1>Sesión inactiva</h1>
+                <h5>Esta sección es solo para usuarios que han sido redireccionados por MercadoPago y que cuentan con una sesión activa</h5>
             </>
         );
     }
-    
+
 }

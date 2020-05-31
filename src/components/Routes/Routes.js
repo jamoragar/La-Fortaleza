@@ -22,6 +22,7 @@ import { Error } from "../PagoEnLinea/Error";
 //Hooks
 import { useProducts } from '../Hooks/useProducts';
 import { useCategory } from '../Hooks/useCategory';
+import Terms from "../TerminosYCon/TerminosYCon";
 
 export const history = createBrowserHistory();
 
@@ -64,6 +65,7 @@ export default function Routes(props) {
             <Route path="/Login" component={Login} />
             <Route path="/Contacto" component={Contacto} />
             <Route path="/AvisoLegal" component={AvisoLegal} />
+            <Route path="/TerminosYCondicicones" component={Terms} />
             <Route path="/Blog" component={Blog} />
             <Route path='/CheckOut' component={CheckOut} />
             <Route path="/not-found" component={_404} />

@@ -22,7 +22,7 @@ export const ProductosLaFortaleza = (order) => {
 };
 
 const PagoEnLinea = (pedido, usuario, tokenPedido) => {
-    let mpData; 
+    let mpData;
     const urlLocal = 'localhost:3000/Pago/';
 
     const config = () => {
@@ -50,7 +50,7 @@ const PagoEnLinea = (pedido, usuario, tokenPedido) => {
                 },
                 date_created: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm'),
             },
-            back_urls:{
+            back_urls: {
                 success: urlLocal + 'Exito',
                 failure: urlLocal + 'Error'
             },
@@ -63,7 +63,7 @@ const PagoEnLinea = (pedido, usuario, tokenPedido) => {
             },
             additional_info: tokenPedido
         }
-        console.log(preferences);
+
         return preferences;
     };
 
