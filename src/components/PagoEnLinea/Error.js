@@ -1,7 +1,48 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Container, Row, Col, Table } from 'react-bootstrap';
+import {Link} from 'react-router-dom'
+import credentials from './credentials.json'
+import firebase from '../../config/firebase';
+import moment from 'moment';
+import timezone from './timezone.json';
 
 export const Error = () => {
+    const [preference, setPreference] = useState(null);
+    const [collection, setCollection] = useState(null);
+    
+    moment.tz.add(timezone.Punta_Arenas);// Establecemos zona horaria
+
+    const validatingPreference = (id) => {
+        fetch(`https://api.mercadopago.com/checkout/preferences/${id}?access_token=${credentials.access_token}`)
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === 404){
+                    setPreference(0)
+                    alert(`Error. La preferencia con el identificador ${id} no fue encontrada.`);
+                }else{
+                    setPreference(data)
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    };
+    const validatingCollection = (id) => {
+        fetch(`https://api.mercadopago.com/v1/payments/${id}?access_token=${credentials.access_token}`)
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === 404){
+                    setCollection(0)
+                    alert(`Número de operación: ${id} no encontrado`);
+                }else{
+                    setCollection(data)
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    };
+
     return (
         <Container>
             <Row style={{ backgroundColor: '#dc3545', marginTop: '3rem', padding: '2rem' }}>
