@@ -5,13 +5,9 @@ import credentials from './credentials.json'
 import firebase from '../../config/firebase';
 import moment from 'moment';
 import timezone from './timezone.json';
-<<<<<<< HEAD
 import {checkProductStock, updateProductStock, checkClientOrder} from './functions/FbFunctions';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-=======
-import { checkProductStock, updateProductStock, checkClientOrder } from './functions/FbFunctions';
->>>>>>> 8b8c60db7f4375c90d1937a74bb912355f2fcb6d
 
 const tableError = (tipo, orden_id, pedido_id) => {
     return (
