@@ -80,7 +80,7 @@ const DetallePedidos = (props) => {
                         paginationComponentOptions={paginationOptions}
                     />
                 </div>
-            </div >
+            </div>
         );
     }
     else {
