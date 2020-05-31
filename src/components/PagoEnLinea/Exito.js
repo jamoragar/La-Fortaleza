@@ -5,7 +5,9 @@ import credentials from './credentials.json'
 import firebase from '../../config/firebase';
 import moment from 'moment';
 import timezone from './timezone.json';
-import { checkProductStock, updateProductStock, checkClientOrder } from './functions/FbFunctions';
+import {checkProductStock, updateProductStock, checkClientOrder} from './functions/FbFunctions';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const tableError = (tipo, orden_id, pedido_id) => {
     return (
@@ -54,6 +56,7 @@ export const Exito = () => {
     const collection_id = params.get('collection_id');//Número de operación
     const collection_status = params.get('collection_status');
     const preference_id = params.get('preference_id');
+    const [disableButton, setDisableButton] = useState(false);
     const [user, setUser] = useState(null);
     const [preference, setPreference] = useState(null);
     const [collection, setCollection] = useState(null);
@@ -90,6 +93,17 @@ export const Exito = () => {
             .catch(error => {
                 console.log(error);
             })
+    }
+    const exportPDF = () => {
+        setDisableButton(true)
+        const input = document.querySelector('#exitoTable');
+        console.log(input)
+        html2canvas(input).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'in');
+            pdf.addImage(imgData, 'PNG', 0, 0, 8.2, 10);
+            pdf.save('Comprobante_LaFortaleza.pdf');
+        });
     }
 
     useEffect(() => {
@@ -132,6 +146,9 @@ export const Exito = () => {
                                         })
                                     }
                                 })
+                            //    const formData = {
+                                   
+                            //    }
                             )
                         )
                     }
@@ -139,48 +156,103 @@ export const Exito = () => {
 
 
                 return (
-                    <Container>
-                        <Row style={{ backgroundColor: '#28a745', marginTop: '3rem', padding: '2rem' }}>
-                            <Col>
-                                <h2 style={{ textAlign: 'center', fontWeight: 'bolder', color: '#343a40' }}>Su Pago a sido Exitoso.</h2>
-                            </Col>
-                        </Row>
-                        <Row style={{ margin: ' 3rem 3rem 2rem 0' }}>
-                            <Col>
-                                <h4 style={{ textAlign: 'initial', fontWeight: 'bolder', color: '#343a40' }}>Detalle de su Transacción :</h4>
-                            </Col>
-                        </Row>
-                        {collection ? (
+                    <div id='exitoTable'>
+                        <Container>
+                            <Row style={{ backgroundColor: '#28a745', marginTop: '3rem', padding: '2rem' }}>
+                                <Col>
+                                    <h2 style={{ textAlign: 'center', fontWeight: 'bolder', color: '#343a40' }}>Su Pago a sido Exitoso.</h2>
+                                </Col>
+                            </Row>
+                            <Row style={{ margin: ' 3rem 3rem 2rem 0' }}>
+                                <Col>
+                                    <h4 style={{ textAlign: 'initial', fontWeight: 'bolder', color: '#343a40' }}>Detalle de su Transacción :</h4>
+                                </Col>
+                            </Row>
+                            {collection ? (
+                                <Table striped bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <th>Título</th>
+                                            <th>Detalle</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>ID de Operación</td>
+                                            <td>{collection.id}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fecha de creación de la orden</td>
+                                            <td>{moment(collection.date_created).locale('es').format('DD-MM-YYYY h:mm:ss a')}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fecha Aprovación</td>
+                                            <td>{moment(collection.date_approved).locale('es').format('DD-MM-YYYY h:mm:ss a')}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ID de Pedido</td>
+                                            <td>{preference.id}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Metodo de Pago</td>
+                                            <td>{collection.payment_type_id}</td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
+                                )
+                            :
+                            <h5>Cargando...</h5>
+                            }
+                            
+                            <Row style={{ margin: ' 3rem 3rem 2rem 0' }}>
+                                <Col>
+                                    <h4 style={{ textAlign: 'initial', fontWeight: 'bolder', color: '#343a40' }}>Detalle de su Pedido :</h4>
+                                </Col>
+                            </Row>
                             <Table striped bordered hover>
                                 <thead>
                                     <tr>
-                                        <th>Título</th>
-                                        <th>Detalle</th>
+                                        <th>#</th>
+                                        <th>Producto</th>
+                                        <th>Categoria</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio Unitario</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>ID de Operación</td>
-                                        <td>{collection.id}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fecha de creación de la orden</td>
-                                        <td>{moment(collection.date_created).locale('es').format('DD-MM-YYYY h:mm:ss a')}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fecha Aprovación</td>
-                                        <td>{moment(collection.date_approved).locale('es').format('DD-MM-YYYY h:mm:ss a')}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>ID de Pedido</td>
-                                        <td>{preference.id}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Metodo de Pago</td>
-                                        <td>{collection.payment_type_id}</td>
-                                    </tr>
+                                    {preference ? preference.items.map((item, index) => {
+                                        return(
+                                            <tr key={index}>
+                                                <td>{index + 1}</td>
+                                                <td>{item.title}</td>
+                                                <td>{item.description}</td>
+                                                <td>{item.quantity}</td>
+                                                <td>{item.unit_price.toLocaleString('es-CL', {style: 'currency',currency: 'CLP'})}</td>
+                                                <td>{(item.unit_price * item.quantity).toLocaleString('es-CL', {style: 'currency',currency: 'CLP'})}</td>
+                                            </tr>
+                                        )
+                                    })
+                                    :
+                                    (
+                                        <tr>
+                                            <td>{'Cargando información del pedido...'}</td>
+                                        </tr>
+                                    )}
                                 </tbody>
                             </Table>
+<<<<<<< HEAD
+                            <br/>
+                            <h2 style={{textAlign:'center'}}>Muchas gracias por su compra! Esperamos verlo pronto</h2>
+                            <br/>
+                            <Button style={{marginBottom:'1em'}} onClick={() => exportPDF()} variant="primary" block disabled={disableButton}><i className="fas fa-file-alt fa-fw" />Descargar Comprobante</Button>
+                            <Link to='/'>
+                                <Button style={{marginBottom:'2em'}} variant="success" block><i className="fab fa-fort-awesome fa-fw" />Volver al Inicio</Button>
+                            </Link>
+                            {/* <Button onClick={testing}>Testing functions</Button> */}
+                        </Container>
+                    </div>
+=======
                         )
                             :
                             <h5>Cargando...</h5>
@@ -231,6 +303,7 @@ export const Exito = () => {
                         </Link>
                         {/* <Button onClick={testing}>Testing functions</Button> */}
                     </Container>
+>>>>>>> 8b8c60db7f4375c90d1937a74bb912355f2fcb6d
                 )
 
             } else {

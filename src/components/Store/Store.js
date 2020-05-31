@@ -92,7 +92,7 @@ const Store = (props) => {
                                 {fbData.map((producto, j) => {
                                     return producto.categoria === categoriaProducto ? (
                                         <div key={j} className="card_product" >
-                                            <div className="card" style={{ width: "285px", margin: '0 25px' }}>
+                                            <div className="card">
                                                 <div className="offer offer-success">
                                                     <div className="shape">
                                                         <div className="shape-text">

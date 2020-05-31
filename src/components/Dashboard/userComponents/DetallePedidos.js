@@ -178,7 +178,7 @@ const DetallePedidos = (props) => {
                     Volver
                 </Button>
                 </div>
-            </div >
+            </div>
         );
     } else {
         return (
