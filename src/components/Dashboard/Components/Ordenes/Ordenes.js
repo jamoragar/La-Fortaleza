@@ -162,16 +162,18 @@ const Ordenes = () => {
     }
     else {
         return (
-            <>
-                <Spinner animation="grow" variant="primary" />
-                <Spinner animation="grow" variant="secondary" />
-                <Spinner animation="grow" variant="success" />
-                <Spinner animation="grow" variant="danger" />
-                <Spinner animation="grow" variant="warning" />
-                <Spinner animation="grow" variant="info" />
-                <Spinner animation="grow" variant="light" />
-                <Spinner animation="grow" variant="dark" />
-            </>
+            <div>
+                <div className="row" >
+                    <div className="col text-center" >
+                        <h1 style={{ fontWeight: 'bolder', color: '#606060', marginTop: '2rem', marginBottom: '2rem' }}>Listado de Ordenes</h1>
+                    </div>
+                </div>
+                <div className="row" >
+                    <div className="col text-center" >
+                        <h4 style={{ fontWeight: 'bolder', color: '#606060', marginTop: '2rem', marginBottom: '2rem' }}>No hay ordenes para mostrar.</h4>
+                    </div>
+                </div>
+            </div>
         )
     }
 }

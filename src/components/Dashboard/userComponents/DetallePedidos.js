@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Spinner, Table, Form, Col, Container, InputGroup, Button } from 'react-bootstrap';
 import firebase from '../../../config/firebase';
 import { useParams } from 'react-router-dom';
+import { useUserData } from '../../Hooks/useUserData';
 
 const DetallePedidos = (props) => {
     const [infoUserPedido, setInfoUserPedido] = useState();
+    const userData = useUserData();
+    const { fbUserData } = userData;
     const { history } = props;
     let { id_interno, uid } = useParams();
     let pedidoToArray = [];
-    let orderInfo = [];
+    let userDataToArray = [];
 
     useEffect(() => {
         firebase.database().ref(`Users/${uid}/pedidos/${id_interno}`).on('value', snapshot => {
@@ -16,17 +19,81 @@ const DetallePedidos = (props) => {
         });
     }, []);
 
-    if (infoUserPedido) {
+    console.log(fbUserData);
+
+    if (infoUserPedido && fbUserData) {
 
         Object.keys(infoUserPedido).forEach((key, i) => {
             pedidoToArray[i] = infoUserPedido[key];
         });
+
+        Object.keys(fbUserData).forEach((key, i) => {
+            userDataToArray[i] = fbUserData[key];
+        });
+
+        console.log(userDataToArray);
+        console.log(infoUserPedido);
 
         return (
             <div>
                 <div className="row" >
                     <div className="col text-center" >
                         <h2 style={{ fontWeight: 'bolder', color: '#606060', marginTop: '2rem', marginBottom: '2rem' }}>Detalle Orden</h2>
+                    </div>
+                </div>
+                <div className="row" >
+                    <div className="col text-center" >
+                        <h4 style={{ fontWeight: 'bolder', color: '#606060', marginTop: '2rem', marginBottom: '2rem' }}>Informacion de cliente</h4>
+                    </div>
+                </div>
+                <div className="row" >
+                    <div className="col text-center" >
+                        <Container fluid>
+                            <Form >
+                                <Form.Row>
+                                    <Col lg={6} xs={12}>
+                                        <Form.Group>
+                                            <Form.Label>Nombre(s)</Form.Label>
+                                            <Form.Control type='text' name='nombre' defaultValue={fbUserData.nombre} readOnly />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col lg={6} xs={12}>
+                                        <Form.Group>
+                                            <Form.Label>Apellido(s)</Form.Label>
+                                            <Form.Control type='text' name='last_name' defaultValue={fbUserData.apellido} readOnly />
+                                        </Form.Group>
+                                    </Col>
+                                </Form.Row>
+                                <Form.Row>
+                                    <Col lg={6} xs={12}>
+                                        <Form.Group>
+                                            <Form.Label>Dirección</Form.Label>
+                                            <Form.Control type="email" name='address' defaultValue={fbUserData.direccion} readOnly />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col lg={6} xs={12}>
+                                        <Form.Group>
+                                            <Form.Label>E-mail</Form.Label>
+                                            <Form.Control type="email" name='email' defaultValue={fbUserData.email} readOnly />
+                                        </Form.Group>
+                                    </Col>
+                                </Form.Row>
+                                <Form.Row>
+                                    <Col lg={6} xs={12}>
+                                        <Form.Group>
+                                            <Form.Label>Telefono</Form.Label>
+                                            <InputGroup>
+                                                <Form.Control type='text' name='number' defaultValue={fbUserData.numero} readOnly />
+                                            </InputGroup>
+                                        </Form.Group>
+                                    </Col>
+                                </Form.Row>
+                                <Form.Group>
+                                    <Form.Label>Comentario:</Form.Label>
+                                    <Form.Control as='textarea' rows='3' name='comentario' defaultValue={fbUserData.comentario} readOnly />
+                                </Form.Group>
+                            </Form>
+                        </Container>
                     </div>
                 </div>
                 <div className="row" >
@@ -50,12 +117,12 @@ const DetallePedidos = (props) => {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{pedidoToArray[4]}</td>
-                                    <td>{pedidoToArray[1]}</td>
-                                    <td>{pedidoToArray[2]}</td>
-                                    <td>{pedidoToArray[3]}</td>
-                                    <td>{pedidoToArray[0] === true ? <div>Si</div> : <div> no</div>} </td>
-                                    <td>{pedidoToArray[7] === true ? <div>Si</div> : <div> no</div>}</td>
+                                    <td>{infoUserPedido.id_interno}</td>
+                                    <td>{infoUserPedido.estado_pago}</td>
+                                    <td>{infoUserPedido.fecha_creacion_pedido}</td>
+                                    <td>{infoUserPedido.fecha_validacion_pago}</td>
+                                    <td>{infoUserPedido.delivery === true ? <div>Si</div> : <div> no</div>} </td>
+                                    <td>{infoUserPedido.regalo === true ? <div>Si</div> : <div> no</div>}</td>
                                 </tr>
                             </tbody>
                         </Table>

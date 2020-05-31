@@ -36,7 +36,7 @@ const Footer = (props) => {
                         <h5 className="headin5_amrc col_white_amrc pt2">Mi Cuenta</h5>
                         <ul className="footer_ul_amrc">
                             <li><a href={`/Dashboard/${uid}/Profile`}>Informacion Personal</a></li>
-                            <li><a href="/">Pedidos</a></li>
+                            <li><a href={`/Dashboard/${uid}/Pedidos/`}>Pedidos</a></li>
                             <li><a href="/">Mis Alertas</a></li>
                             <li><a href="/">Whishlist</a></li>
                         </ul>
