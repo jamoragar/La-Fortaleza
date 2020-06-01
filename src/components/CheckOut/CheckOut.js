@@ -303,13 +303,13 @@ const CheckOut = () => {
                     total >= 30001 ? (
                         <>
                             <h4>Tiene envio gratuito a su dirección!</h4>
-                            En <b>area rural</b> le recomendamos comunicarse al número de contacto La Fortaleza ((61) 237 1498) para confirmar el valor de este.<br/>
+                            En <b>area rural</b> le recomendamos comunicarse al número de contacto La Fortaleza (61) 237 1498 dentro del horario de atención, para confirmar el valor de este.<br/>
                         </>
                         ) : (
                         <>
                         <h4>¿Desea servicio de reparto?</h4>
                         El valor del envio es de $2.500 en <b>area urbana.</b><br/>
-                        En <b>area rural</b> le recomendamos comunicarse al número de contacto La Fortaleza ((61) 237 1498) para confirmar el valor de este.<br/>
+                        En <b>area rural</b> le recomendamos comunicarse al número de contacto La Fortaleza (61) 237 1498 dentro del horario de atención, para confirmar el valor de este.<br/>
                         <i className="fas fa-shipping-fast mr-3 fa-2x" />
                         <Form.Check
                             inline
