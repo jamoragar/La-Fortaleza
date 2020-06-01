@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { Container, Row, Col, Table, Button } from 'react-bootstrap';
@@ -5,7 +6,7 @@ import credentials from './credentials.json'
 import firebase from '../../config/firebase';
 import moment from 'moment';
 import timezone from './timezone.json';
-import {checkProductStock, updateProductStock, checkClientOrder} from './functions/FbFunctions';
+import { checkProductStock, updateProductStock, checkClientOrder } from './functions/FbFunctions';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -146,9 +147,9 @@ export const Exito = () => {
                                         })
                                     }
                                 })
-                            //    const formData = {
-                                   
-                            //    }
+                                //    const formData = {
+
+                                //    }
                             )
                         )
                     }
@@ -199,11 +200,11 @@ export const Exito = () => {
                                         </tr>
                                     </tbody>
                                 </Table>
-                                )
-                            :
-                            <h5>Cargando...</h5>
+                            )
+                                :
+                                <h5>Cargando...</h5>
                             }
-                            
+
                             <Row style={{ margin: ' 3rem 3rem 2rem 0' }}>
                                 <Col>
                                     <h4 style={{ textAlign: 'initial', fontWeight: 'bolder', color: '#343a40' }}>Detalle de su Pedido :</h4>
@@ -222,88 +223,76 @@ export const Exito = () => {
                                 </thead>
                                 <tbody>
                                     {preference ? preference.items.map((item, index) => {
-                                        return(
+                                        return (
                                             <tr key={index}>
                                                 <td>{index + 1}</td>
                                                 <td>{item.title}</td>
                                                 <td>{item.description}</td>
                                                 <td>{item.quantity}</td>
-                                                <td>{item.unit_price.toLocaleString('es-CL', {style: 'currency',currency: 'CLP'})}</td>
-                                                <td>{(item.unit_price * item.quantity).toLocaleString('es-CL', {style: 'currency',currency: 'CLP'})}</td>
+                                                <td>{item.unit_price.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
+                                                <td>{(item.unit_price * item.quantity).toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
                                             </tr>
                                         )
                                     })
-                                    :
-                                    (
-                                        <tr>
-                                            <td>{'Cargando información del pedido...'}</td>
-                                        </tr>
-                                    )}
+                                        :
+                                        (
+                                            <tr>
+                                                <td>{'Cargando información del pedido...'}</td>
+                                            </tr>
+                                        )}
                                 </tbody>
                             </Table>
-<<<<<<< HEAD
-                            <br/>
-                            <h2 style={{textAlign:'center'}}>Muchas gracias por su compra! Esperamos verlo pronto</h2>
-                            <br/>
-                            <Button style={{marginBottom:'1em'}} onClick={() => exportPDF()} variant="primary" block disabled={disableButton}><i className="fas fa-file-alt fa-fw" />Descargar Comprobante</Button>
-                            <Link to='/'>
-                                <Button style={{marginBottom:'2em'}} variant="success" block><i className="fab fa-fort-awesome fa-fw" />Volver al Inicio</Button>
-                            </Link>
-                            {/* <Button onClick={testing}>Testing functions</Button> */}
-                        </Container>
-                    </div>
-=======
                         )
                             :
                             <h5>Cargando...</h5>
                         }
 
                         <Row style={{ margin: ' 3rem 3rem 2rem 0' }}>
-                            <Col>
-                                <h4 style={{ textAlign: 'initial', fontWeight: 'bolder', color: '#343a40' }}>Detalle de su Pedido :</h4>
-                            </Col>
-                        </Row>
-                        <Table striped bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Producto</th>
-                                    <th>Categoria</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio Unitario</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {preference ? preference.items.map((item, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td>{index + 1}</td>
-                                            <td>{item.title}</td>
-                                            <td>{item.description}</td>
-                                            <td>{item.quantity}</td>
-                                            <td>{item.unit_price.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
-                                            <td>{(item.unit_price * item.quantity).toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
-                                        </tr>
-                                    )
-                                })
-                                    :
-                                    (
-                                        <tr>
-                                            <td>{'Cargando información del pedido...'}</td>
-                                        </tr>
-                                    )}
-                            </tbody>
-                        </Table>
-                        <br />
-                        <h2 style={{ textAlign: 'center' }}>Muchas gracias por su compra! Esperamos verlo pronto</h2>
-                        <br />
-                        <Link to='/'>
-                            <Button style={{ marginBottom: '2em' }} variant="success" block><i className="fab fa-fort-awesome fa-fw" />Volver al Inicio</Button>
-                        </Link>
-                        {/* <Button onClick={testing}>Testing functions</Button> */}
-                    </Container>
->>>>>>> 8b8c60db7f4375c90d1937a74bb912355f2fcb6d
+                                <Col>
+                                    <h4 style={{ textAlign: 'initial', fontWeight: 'bolder', color: '#343a40' }}>Detalle de su Pedido :</h4>
+                                </Col>
+                            </Row>
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Producto</th>
+                                        <th>Categoria</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio Unitario</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {preference ? preference.items.map((item, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <td>{index + 1}</td>
+                                                <td>{item.title}</td>
+                                                <td>{item.description}</td>
+                                                <td>{item.quantity}</td>
+                                                <td>{item.unit_price.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
+                                                <td>{(item.unit_price * item.quantity).toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
+                                            </tr>
+                                        )
+                                    })
+                                        :
+                                        (
+                                            <tr>
+                                                <td>{'Cargando información del pedido...'}</td>
+                                            </tr>
+                                        )}
+                                </tbody>
+                            </Table>
+                            <br />
+                            <h2 style={{ textAlign: 'center' }}>Muchas gracias por su compra! Esperamos verlo pronto</h2>
+                            <br />
+                            <Link to='/'>
+                                <Button style={{ marginBottom: '2em' }} variant="success" block><i className="fab fa-fort-awesome fa-fw" />Volver al Inicio</Button>
+                            </Link>
+                            {/* <Button onClick={testing}>Testing functions</Button> */}
+                        </Container>
+                    </div>
                 )
 
             } else {
