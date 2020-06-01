@@ -102,7 +102,7 @@ export const Exito = () => {
         html2canvas(input).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF('p', 'in');
-            pdf.addImage(imgData, 'PNG', 0, 0, 8.2, 10);
+            pdf.addImage(imgData, 'PNG', -2, 0, 13, 10);
             pdf.save('Comprobante_LaFortaleza.pdf');
         });
     }
@@ -132,7 +132,7 @@ export const Exito = () => {
                         //"Limpiamos" el local storage, mejor dicho removemos la orden, ya que en este caso ya se pago. Pero para limpiar realmente, hay que usar la funcion clear()
                         localStorage.setItem('order', JSON.stringify({ order: [] }));
                         const aprovacion = {
-                            estado_pago: 'APROVADO',
+                            estado_pago: 'APROBADO',
                             fecha_validacion_pago: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm')
                         };
 
@@ -161,7 +161,7 @@ export const Exito = () => {
                         <Container>
                             <Row style={{ backgroundColor: '#28a745', marginTop: '3rem', padding: '2rem' }}>
                                 <Col>
-                                    <h2 style={{ textAlign: 'center', fontWeight: 'bolder', color: '#343a40' }}>Su Pago a sido Exitoso.</h2>
+                                    <h2 style={{ textAlign: 'center', fontWeight: 'bolder', color: '#343a40' }}>Su Pago ha sido Exitoso.</h2>
                                 </Col>
                             </Row>
                             <Row style={{ margin: ' 3rem 3rem 2rem 0' }}>
@@ -242,51 +242,10 @@ export const Exito = () => {
                                         )}
                                 </tbody>
                             </Table>
-                        )
-                            :
-                            <h5>Cargando...</h5>
-                        }
-
-                        <Row style={{ margin: ' 3rem 3rem 2rem 0' }}>
-                                <Col>
-                                    <h4 style={{ textAlign: 'initial', fontWeight: 'bolder', color: '#343a40' }}>Detalle de su Pedido :</h4>
-                                </Col>
-                            </Row>
-                            <Table striped bordered hover>
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Producto</th>
-                                        <th>Categoria</th>
-                                        <th>Cantidad</th>
-                                        <th>Precio Unitario</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {preference ? preference.items.map((item, index) => {
-                                        return (
-                                            <tr key={index}>
-                                                <td>{index + 1}</td>
-                                                <td>{item.title}</td>
-                                                <td>{item.description}</td>
-                                                <td>{item.quantity}</td>
-                                                <td>{item.unit_price.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
-                                                <td>{(item.unit_price * item.quantity).toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
-                                            </tr>
-                                        )
-                                    })
-                                        :
-                                        (
-                                            <tr>
-                                                <td>{'Cargando información del pedido...'}</td>
-                                            </tr>
-                                        )}
-                                </tbody>
-                            </Table>
                             <br />
                             <h2 style={{ textAlign: 'center' }}>Muchas gracias por su compra! Esperamos verlo pronto</h2>
                             <br />
+                            <Button style={{ marginBottom: '1em' }} onClick={() => exportPDF()} variant="primary" block disabled={disableButton}><i className="fas fa-file-alt fa-fw" />Descargar Comprobante</Button>
                             <Link to='/'>
                                 <Button style={{ marginBottom: '2em' }} variant="success" block><i className="fab fa-fort-awesome fa-fw" />Volver al Inicio</Button>
                             </Link>
