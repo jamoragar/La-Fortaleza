@@ -45,7 +45,7 @@ const CarouselContainer = () => {
                 <div className="border-0 rounded-0 text-white overflow zoom">
                   <div className="position-relative">
                     <div className="ratio_right-cover-2 image-wrapper">
-                      <a href="https://www.instagram.com/p/B-k5sdCFSuB/?utm_source=ig_web_copy_link" target="blank">
+                      <a href="/" target="blank">
                         <img className="img-fluid"
                           src="https://firebasestorage.googleapis.com/v0/b/la-fortaleza-18fbf.appspot.com/o/Slider%2FButtons%2F2%2FButton2?alt=media&token=95c5dd19-16bb-4939-bcc6-508e977b00c6"
                           alt="Button2" />
