@@ -144,7 +144,8 @@ export const Exito = () => {
                         localStorage.setItem('order', JSON.stringify({ order: [] }));
                         const aprovacion = {
                             estado_pago: 'APROBADO',
-                            fecha_validacion_pago: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm')
+                            fecha_validacion_pago: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm'),
+                            numero_orden: collection.id
                         };
 
                         database.ref(`/Users/${user.uid}/pedidos/${id_pedido}`).update(aprovacion).then(

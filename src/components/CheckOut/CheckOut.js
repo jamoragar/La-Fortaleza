@@ -22,6 +22,7 @@ const CheckOut = () => {
     const [regalo, setRegalo] = useState(false);
     const [envioGratuito, setEnvioGratuito] = useState(false);
     const user = firebase.auth().currentUser;
+
     useEffect(() => {
         if(user) {
             firebase.database().ref(`/Users/${user.uid}`).on('value', snapshot => {
@@ -37,7 +38,6 @@ const CheckOut = () => {
         orders.state.order[index].cuantity = cantidadAux[index]; 
     })
     const [cantidad, setCantidad] = useState(cantidadAux);
-
     const handleCantidad = (index,value, max) => {
         let auxArray = [...cantidad];
         auxArray[index] = auxArray[index] + value;
@@ -80,6 +80,10 @@ const CheckOut = () => {
         }     
     }
 
+    if(total > 30001){
+        setEnvioGratuito(true)
+    }
+
     const generarPedido = (e) => {
         e.preventDefault();
         setDisableButton(true);
@@ -94,8 +98,9 @@ const CheckOut = () => {
             estado_pago: 'PENDIENTE',
             fecha_validacion_pago: '',
             regalo: regalo,
-            delivery: envioGratuito,
-            estado_pedido:1,//Distintos estados comenzando en 1 a N, onde cada numero indica un paso distinto.
+            numero_orden: 'PENDIENTE',
+            delivery: total >= 30000 ? true:false,
+            estado_pedido: 1,//Distintos estados comenzando en 1 a N, donde cada numero indica un paso distinto.
             fecha_creacion_pedido: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm')
         }
         const {name, last_name, email, number, direccion, coment} = e.target.elements;
@@ -111,7 +116,7 @@ const CheckOut = () => {
         //Escribimos en la BD el pedido y hacemos una promesa una vez escrito que mande a pagar por mercadopago
         let updates = {};
         updates['/pedidos/' + tokenPedido] = pedidoUsuario;
-
+        
         return firebase.database().ref(`/Pedidos/${tokenPedido}/`).set({
             pedidoUsuario,
             informacionCliente: informacionCliente
@@ -156,7 +161,6 @@ const CheckOut = () => {
             setEnvioGratuito(true);
             setPrecio_envio(0);
         }
-        console.log(userAuth);
         return(
             <div style={{margin:'5% 2% 5% 2%'}}>
                 <Form onSubmit={generarPedido}>

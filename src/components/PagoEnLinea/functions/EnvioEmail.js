@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_PATH = 'http://www.deltanet.cl/api/fortaleza/form_submit.php';
+const API_PATH = 'https://ingelic.cl/api/fortaleza/form_submit.php';
 
 export const sendEmail = (formData) => {
     console.log(formData)
