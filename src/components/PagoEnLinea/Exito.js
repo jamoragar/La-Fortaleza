@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 import { Container, Row, Col, Table, Button } from 'react-bootstrap';
@@ -5,8 +6,12 @@ import credentials from './credentials.json'
 import firebase from '../../config/firebase';
 import moment from 'moment';
 import timezone from './timezone.json';
+<<<<<<< HEAD
 import {checkProductStock, updateProductStock, checkClientOrder} from './functions/FbFunctions';
 import {sendEmail} from './functions/EnvioEmail';
+=======
+import { checkProductStock, updateProductStock, checkClientOrder } from './functions/FbFunctions';
+>>>>>>> f1f77257d53f2f04f5fcbfb459ecaba11543c42c
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -157,8 +162,14 @@ export const Exito = () => {
                                         })
                                     }
                                 })
+<<<<<<< HEAD
                             ).then(
                                 sendEmail(formData)
+=======
+                                //    const formData = {
+
+                                //    }
+>>>>>>> f1f77257d53f2f04f5fcbfb459ecaba11543c42c
                             )
                         )
                     }
@@ -209,11 +220,11 @@ export const Exito = () => {
                                         </tr>
                                     </tbody>
                                 </Table>
-                                )
-                            :
-                            <h5>Cargando...</h5>
+                            )
+                                :
+                                <h5>Cargando...</h5>
                             }
-                            
+
                             <Row style={{ margin: ' 3rem 3rem 2rem 0' }}>
                                 <Col>
                                     <h4 style={{ textAlign: 'initial', fontWeight: 'bolder', color: '#343a40' }}>Detalle de su Pedido :</h4>
@@ -232,31 +243,31 @@ export const Exito = () => {
                                 </thead>
                                 <tbody>
                                     {preference ? preference.items.map((item, index) => {
-                                        return(
+                                        return (
                                             <tr key={index}>
                                                 <td>{index + 1}</td>
                                                 <td>{item.title}</td>
                                                 <td>{item.description}</td>
                                                 <td>{item.quantity}</td>
-                                                <td>{item.unit_price.toLocaleString('es-CL', {style: 'currency',currency: 'CLP'})}</td>
-                                                <td>{(item.unit_price * item.quantity).toLocaleString('es-CL', {style: 'currency',currency: 'CLP'})}</td>
+                                                <td>{item.unit_price.toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
+                                                <td>{(item.unit_price * item.quantity).toLocaleString('es-CL', { style: 'currency', currency: 'CLP' })}</td>
                                             </tr>
                                         )
                                     })
-                                    :
-                                    (
-                                        <tr>
-                                            <td>{'Cargando información del pedido...'}</td>
-                                        </tr>
-                                    )}
+                                        :
+                                        (
+                                            <tr>
+                                                <td>{'Cargando información del pedido...'}</td>
+                                            </tr>
+                                        )}
                                 </tbody>
                             </Table>
-                            <br/>
-                            <h2 style={{textAlign:'center'}}>Muchas gracias por su compra! Esperamos verlo pronto</h2>
-                            <br/>
-                            <Button style={{marginBottom:'1em'}} onClick={() => exportPDF()} variant="primary" block disabled={disableButton}><i className="fas fa-file-alt fa-fw" />Descargar Comprobante</Button>
+                            <br />
+                            <h2 style={{ textAlign: 'center' }}>Muchas gracias por su compra! Esperamos verlo pronto</h2>
+                            <br />
+                            <Button style={{ marginBottom: '1em' }} onClick={() => exportPDF()} variant="primary" block disabled={disableButton}><i className="fas fa-file-alt fa-fw" />Descargar Comprobante</Button>
                             <Link to='/'>
-                                <Button style={{marginBottom:'2em'}} variant="success" block><i className="fab fa-fort-awesome fa-fw" />Volver al Inicio</Button>
+                                <Button style={{ marginBottom: '2em' }} variant="success" block><i className="fab fa-fort-awesome fa-fw" />Volver al Inicio</Button>
                             </Link>
                             {/* <Button onClick={testing}>Testing functions</Button> */}
                         </Container>

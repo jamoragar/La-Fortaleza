@@ -29,7 +29,7 @@ const CarouselContainer = () => {
           <div className="col-12 col-md-4 ">
             <div className="row">
               <div className="col-12 pt-2">
-                <div className="card border-0 rounded-0 text-white overflow zoom">
+                <div className="border-0 rounded-0 text-white overflow zoom">
                   <div className="position-relative">
                     <div className="ratio_right-cover-2 image-wrapper">
                       <a href="/Preventa">
@@ -42,7 +42,7 @@ const CarouselContainer = () => {
                 </div>
               </div>
               <div className="col-12 pt-2">
-                <div className="card border-0 rounded-0 text-white overflow zoom">
+                <div className="border-0 rounded-0 text-white overflow zoom">
                   <div className="position-relative">
                     <div className="ratio_right-cover-2 image-wrapper">
                       <a href="https://www.instagram.com/p/B-k5sdCFSuB/?utm_source=ig_web_copy_link" target="blank">
