@@ -208,7 +208,7 @@ const AgregarProducto = (props) => {
                                 <Col>
                                     <Form.Group controlId="formPriceProducts">
                                         <Form.Label>Precio:</Form.Label>
-                                        <Form.Control name='precio' type="number" placeholder='Palor del producto.' required />
+                                        <Form.Control name='precio' type="number" placeholder='Valor del producto.' required />
                                     </Form.Group>
                                 </Col>
                                 <Col>

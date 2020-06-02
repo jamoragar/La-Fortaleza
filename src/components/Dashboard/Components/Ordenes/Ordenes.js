@@ -8,8 +8,8 @@ const Ordenes = () => {
     const columns = [
 
         {
-            name: 'Id de pedido',
-            selector: 'id_interno',
+            name: 'N° De Orden',
+            selector: 'numero_orden',
             sortable: true,
             grow: 1,
 
