@@ -98,7 +98,7 @@ const Pedidos = () => {
 
     const conditionalRowStyles = [
         {
-            when: row => row.estado_pago === 'APROVADO',
+            when: row => row.estado_pago === 'APROBADO',
             style: {
                 backgroundColor: '#28a745;',
                 color: 'white',
