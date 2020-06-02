@@ -6,12 +6,8 @@ import credentials from './credentials.json'
 import firebase from '../../config/firebase';
 import moment from 'moment';
 import timezone from './timezone.json';
-<<<<<<< HEAD
 import {checkProductStock, updateProductStock, checkClientOrder} from './functions/FbFunctions';
 import {sendEmail} from './functions/EnvioEmail';
-=======
-import { checkProductStock, updateProductStock, checkClientOrder } from './functions/FbFunctions';
->>>>>>> f1f77257d53f2f04f5fcbfb459ecaba11543c42c
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -162,14 +158,8 @@ export const Exito = () => {
                                         })
                                     }
                                 })
-<<<<<<< HEAD
                             ).then(
                                 sendEmail(formData)
-=======
-                                //    const formData = {
-
-                                //    }
->>>>>>> f1f77257d53f2f04f5fcbfb459ecaba11543c42c
                             )
                         )
                     }
