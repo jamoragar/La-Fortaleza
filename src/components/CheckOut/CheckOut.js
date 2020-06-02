@@ -95,6 +95,7 @@ const CheckOut = () => {
             fecha_validacion_pago: '',
             regalo: regalo,
             delivery: envioGratuito,
+            estado_pedido:1,//Distintos estados comenzando en 1 a N, onde cada numero indica un paso distinto.
             fecha_creacion_pedido: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm')
         }
         const {name, last_name, email, number, direccion, coment} = e.target.elements;

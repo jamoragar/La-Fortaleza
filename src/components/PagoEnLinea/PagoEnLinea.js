@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import * as mp from 'mercadopago';
 import credentials from './credentials.json';
 import timezone from './timezone.json';

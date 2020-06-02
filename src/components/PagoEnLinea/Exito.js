@@ -6,6 +6,7 @@ import firebase from '../../config/firebase';
 import moment from 'moment';
 import timezone from './timezone.json';
 import {checkProductStock, updateProductStock, checkClientOrder} from './functions/FbFunctions';
+import {sendEmail} from './functions/EnvioEmail';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -54,13 +55,11 @@ export const Exito = () => {
     let params = new URLSearchParams(search);
     const database = firebase.database();
     const collection_id = params.get('collection_id');//Número de operación
-    const collection_status = params.get('collection_status');
     const preference_id = params.get('preference_id');
     const [disableButton, setDisableButton] = useState(false);
     const [user, setUser] = useState(null);
     const [preference, setPreference] = useState(null);
     const [collection, setCollection] = useState(null);
-    const [pedidoCliente, setPedidoCliente] = useState(null);
 
     moment.tz.add(timezone.Punta_Arenas);// Establecemos zona horaria
 
@@ -101,7 +100,7 @@ export const Exito = () => {
         html2canvas(input).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF('p', 'in');
-            pdf.addImage(imgData, 'PNG', -2, 0, 13, 10);
+            pdf.addImage(imgData, 'PNG', 0, 0, 9, 10);
             pdf.save('Comprobante_LaFortaleza.pdf');
         });
     }
@@ -119,12 +118,24 @@ export const Exito = () => {
         })
     }, [firebase]);
 
+
+
     if (user && user.uid) {
         if (preference) {
             if (collection) {
                 const id_pedido = preference.additional_info;
                 const productos_pedido = preference.items;
                 const clientOrderFb = checkClientOrder(user.uid, id_pedido);
+                const formData = {
+                    email: user.email,
+                    nombre: user.displayName,
+                    total: collection.transaction_amount,
+                    id_pedido: collection.id,
+                    productos: productos_pedido.map((producto) => {
+                        return producto;
+                    }),
+                    fecha_creacion_pedido: moment(collection.date_created).locale('es').format('DD-MM-YYYY h:mm:ss a'),
+                }
                 clientOrderFb.then(data => {
                     //Cuando el cliente sea redireccionado a esta página por primera vez, se actualizará el estado de su pago en su pedido.
                     if (data.estado_pago === 'PENDIENTE') {
@@ -146,9 +157,8 @@ export const Exito = () => {
                                         })
                                     }
                                 })
-                            //    const formData = {
-                                   
-                            //    }
+                            ).then(
+                                sendEmail(formData)
                             )
                         )
                     }

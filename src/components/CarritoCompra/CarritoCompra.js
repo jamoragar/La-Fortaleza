@@ -16,7 +16,6 @@ const CarritoCompra = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state.order.length]);
 
-    const discountPrice = 0.10;
 
     const orders = state.order;
     let precios = [];

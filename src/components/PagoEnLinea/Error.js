@@ -1,8 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import { Container, Row, Col, Table } from 'react-bootstrap';
-import {Link} from 'react-router-dom'
 import credentials from './credentials.json'
-import firebase from '../../config/firebase';
 import moment from 'moment';
 import timezone from './timezone.json';
 
