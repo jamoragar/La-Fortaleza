@@ -255,7 +255,8 @@ export const Exito = () => {
                             <br />
                             <h2 style={{ textAlign: 'center' }}>Muchas gracias por su compra! Esperamos verlo pronto</h2>
                             <br />
-                            <Button style={{ marginBottom: '1em' }} onClick={() => exportPDF()} variant="primary" block disabled={disableButton}><i className="fas fa-file-alt fa-fw" />Descargar Comprobante</Button>
+                            {/* TODO generar voucher para descargar */}
+                            {/* <Button style={{ marginBottom: '1em' }} onClick={() => exportPDF()} variant="primary" block disabled={disableButton}><i className="fas fa-file-alt fa-fw" />Descargar Comprobante</Button> */}
                             <Link to='/'>
                                 <Button style={{ marginBottom: '2em' }} variant="success" block><i className="fab fa-fort-awesome fa-fw" />Volver al Inicio</Button>
                             </Link>

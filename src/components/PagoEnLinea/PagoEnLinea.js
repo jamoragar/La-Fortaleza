@@ -23,6 +23,7 @@ export const ProductosLaFortaleza = (order) => {
 const PagoEnLinea = (pedido, usuario, tokenPedido) => {
     let mpData;
     const urlLocal = 'localhost:3000/Pago/';
+    const urlProduccion = 'https://lafortalezapuq.cl/Pago/'
 
     const config = () => {
         mp.configure({
@@ -50,8 +51,8 @@ const PagoEnLinea = (pedido, usuario, tokenPedido) => {
                 date_created: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm'),
             },
             back_urls: {
-                success: urlLocal + 'Exito',
-                failure: urlLocal + 'Error'
+                success: urlProduccion + 'Exito',
+                failure: urlProduccion + 'Error'
             },
             payment_methods: {
                 excluded_payment_types: [
