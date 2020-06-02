@@ -6,8 +6,8 @@ import credentials from './credentials.json'
 import firebase from '../../config/firebase';
 import moment from 'moment';
 import timezone from './timezone.json';
-import {checkProductStock, updateProductStock, checkClientOrder} from './functions/FbFunctions';
-import {sendEmail} from './functions/EnvioEmail';
+import { checkProductStock, updateProductStock, checkClientOrder } from './functions/FbFunctions';
+import { sendEmail } from './functions/EnvioEmail';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -255,6 +255,7 @@ export const Exito = () => {
                             </Table>
                             <br />
                             <h2 style={{ textAlign: 'center' }}>Muchas gracias por su compra! Esperamos verlo pronto</h2>
+                            <h2 style={{ textAlign: 'center' }}>Salidas a reparto dias Lunes - Miercoles - viernes entre 17:00 y 20:00hrs.</h2>
                             <br />
                             {/* TODO generar voucher para descargar */}
                             {/* <Button style={{ marginBottom: '1em' }} onClick={() => exportPDF()} variant="primary" block disabled={disableButton}><i className="fas fa-file-alt fa-fw" />Descargar Comprobante</Button> */}
