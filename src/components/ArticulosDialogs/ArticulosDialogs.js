@@ -21,6 +21,8 @@ const ArtciculosDialogs = (props) => {
 
     let { id } = useParams();
 
+    const discountPrice = 0.10;
+
     useEffect(() => {
         firebase.database().ref('/Productos').on('value', snapshot => {
             setProductView(snapshot.val());
@@ -31,7 +33,7 @@ const ArtciculosDialogs = (props) => {
         const newOrder = {
             title: product.nombre,
             description: product.categoria,
-            price: product.precio
+            price: product.precio - (product.precio * discountPrice)
         }
         orders.dispatch({
             type: 'ADD_ORDER',
@@ -52,7 +54,7 @@ const ArtciculosDialogs = (props) => {
 
 
         const productosView = productViewToArray;
-        const discountPrice = 0.10;
+
         return (
             <div>
                 <CarritoCompra {...cart} {...orders} authenticated={props.isAuthed} uid={props.uid} />

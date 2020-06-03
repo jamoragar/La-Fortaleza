@@ -28,7 +28,7 @@ const ArticulosXCategoria = (props) => {
         const newOrder = {
             title: product.nombre,
             description: product.categoria,
-            price: product.precio
+            price: product.precio - (product.precio * discountPrice)
         }
         orders.dispatch({
             type: 'ADD_ORDER',
