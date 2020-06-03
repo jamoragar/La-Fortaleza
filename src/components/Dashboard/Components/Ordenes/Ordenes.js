@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import { usePedidos } from '../../../Hooks/usePedidos';
 import { Link, useParams } from 'react-router-dom';
+import UpdateOrderState from './ActualizarEstadoPedido';
 
 const Ordenes = () => {
     const columns = [
@@ -89,6 +90,9 @@ const Ordenes = () => {
                                 </Link>
                             </OverlayTrigger>
                         </div>
+                        <div style={{ display: 'flex' }}>
+
+                        </div>
                     </div>
                 )
             },
@@ -124,6 +128,8 @@ const Ordenes = () => {
     let pedidosToArray = [];
     let pedidos = [];
     let { uid } = useParams();
+    const [showModal, setShowModal] = useState(false);
+    const handleShow = () => setShowModal(true);
 
     if (fbPedidos) {
 
@@ -143,6 +149,12 @@ const Ordenes = () => {
                     <div className="col text-center" >
                         <h1 style={{ fontWeight: 'bolder', color: '#606060' }}>Listado de Ordenes</h1>
                     </div>
+                </div>
+                <div>
+                    <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', marginBottom: '2rem', width: '100' }} onClick={handleShow} variant="primary"> >
+                    Actualizar Ordenes
+                    </Button>
+                    <UpdateOrderState show={showModal} onHide={() => setShowModal(false)} />
                 </div>
                 <div>
                     < DataTable
