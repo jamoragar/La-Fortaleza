@@ -33,7 +33,9 @@ const ArtciculosDialogs = (props) => {
         const newOrder = {
             title: product.nombre,
             description: product.categoria,
-            price: product.precio - (product.precio * discountPrice)
+            price: Math.ceil((product.precio - (product.precio * discountPrice))),
+            stock: parseInt(product.stock),
+            id: product.id
         }
         orders.dispatch({
             type: 'ADD_ORDER',
@@ -110,7 +112,8 @@ const ArtciculosDialogs = (props) => {
                                                 <li className="list-group-item">
                                                     <button
                                                         style={{ outline: "none" }}
-                                                        className='btn-add btn-danger'
+                                                        className={`btn-add ${contenido.stock === "0" ? 'btn-secondary':'btn-danger'}`}
+                                                        disabled={contenido.stock === "0" ? true:false}
                                                         onClick={() => addNewProduct(contenido)}
                                                     >
                                                         <i className="fas fa-shopping-cart" />

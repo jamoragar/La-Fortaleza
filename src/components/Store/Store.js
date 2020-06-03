@@ -90,6 +90,7 @@ const Store = (props) => {
                                 swipeable
                             >
                                 {fbData.map((producto, j) => {
+                                    console.log(producto)
                                     return producto.categoria === categoriaProducto ? (
                                         <div key={j} className="card_product" >
                                             <div className="card">
@@ -130,8 +131,9 @@ const Store = (props) => {
                                                             <div className="col-6">
                                                                 <button
                                                                     style={{ outline: "none" }}
-                                                                    className='btn-add btn-danger'
-                                                                    onClick={() => addNewProduct(producto)}>
+                                                                    className={`btn-add ${producto.stock === "0" ? 'btn-secondary' : 'btn-danger'}`}
+                                                                    onClick={() => addNewProduct(producto)}
+                                                                    disabled={producto.stock === "0" ? true:false }>
                                                                     <i className="fas fa-shopping-cart" />
                                                                         Comprar
                                                                     </button>
