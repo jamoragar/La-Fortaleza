@@ -1,8 +1,9 @@
-import React from 'react';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import { usePedidos } from '../../../Hooks/usePedidos';
 import { Link, useParams } from 'react-router-dom';
+import UpdateOrderState from './ActualizarEstadoPedido';
 
 const Ordenes = () => {
     const columns = [
@@ -88,13 +89,6 @@ const Ordenes = () => {
                                     <div style={{ cursor: 'pointer' }} className="text-primary"><i className="fas fa-fw fa-search fa-lg" style={{ width: '35px', height: '20px' }} /></div>
                                 </Link>
                             </OverlayTrigger>
-                            <OverlayTrigger key={'Actualizar Estado De Pago.'} placement={'left'}
-                                overlay={
-                                    <Tooltip id={`tooltip-bottom`}><strong>Actualizar Estado De Pago.</strong></Tooltip>
-                                }
-                            >
-                                <div style={{ cursor: 'pointer' }} onClick={() => { console.log(`Click de actualizar pedido`) }} > <i className="fas fa-fw fa-sync-alt fa-lg" style={{ width: '35px', height: '20px', color: "#43ff36" }} /></div>
-                            </OverlayTrigger>
                         </div>
                         <div style={{ display: 'flex' }}>
 
@@ -134,6 +128,8 @@ const Ordenes = () => {
     let pedidosToArray = [];
     let pedidos = [];
     let { uid } = useParams();
+    const [showModal, setShowModal] = useState(false);
+    const handleShow = () => setShowModal(true);
 
     if (fbPedidos) {
 
@@ -153,6 +149,12 @@ const Ordenes = () => {
                     <div className="col text-center" >
                         <h1 style={{ fontWeight: 'bolder', color: '#606060' }}>Listado de Ordenes</h1>
                     </div>
+                </div>
+                <div>
+                    <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', marginBottom: '2rem', width: '100' }} onClick={handleShow} variant="primary"> >
+                    Actualizar Ordenes
+                    </Button>
+                    <UpdateOrderState show={showModal} onHide={() => setShowModal(false)} />
                 </div>
                 <div>
                     < DataTable
