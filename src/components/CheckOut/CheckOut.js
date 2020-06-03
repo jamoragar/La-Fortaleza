@@ -162,7 +162,7 @@ const CheckOut = () => {
             setPrecio_envio(0);
         }
         return(
-            <div style={{margin:'5% 2% 5% 2%'}}>
+            <div style={{margin:'5% 2% 20% 2%'}}>
                 <Form onSubmit={generarPedido}>
                 {
                     userAuth ? 

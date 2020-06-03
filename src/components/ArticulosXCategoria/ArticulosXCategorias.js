@@ -28,7 +28,9 @@ const ArticulosXCategoria = (props) => {
         const newOrder = {
             title: product.nombre,
             description: product.categoria,
-            price: product.precio
+            price: Math.ceil((product.precio - (product.precio * discountPrice))),
+            stock: parseInt(product.stock),
+            id: product.id
         }
         orders.dispatch({
             type: 'ADD_ORDER',
