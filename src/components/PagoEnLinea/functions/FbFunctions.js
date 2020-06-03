@@ -2,7 +2,7 @@ import firebase from '../../../config/firebase';
 
 export const checkProductStock = (product_id) => { 
     return firebase.database().ref(`/Productos/${product_id}`).child('stock').once('value').then(snapshot => {
-        return snapshot.val();
+        return parseInt(snapshot.val());
     })
 }
 export const checkClientOrder = (user_id, order_id) => {

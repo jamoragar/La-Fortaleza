@@ -68,16 +68,14 @@ const PagoEnLinea = (pedido, usuario, tokenPedido) => {
     };
 
     let preferences = creatingPreferences(pedido, usuario);
-    mpData = async () => {
+    const generatingInitialPoint = () => {
         config();
-        await mp.preferences.create(preferences).then((data) => {
-            console.log(data.body.init_point)
-            window.location.replace(data.body.init_point);
-        }).catch((err) => {
-            console.log(err);
-        });
+        const data = mp.preferences.create(preferences)
+        return data;
+            // window.location.replace(data.body.init_point);
     }
-    mpData();
+    
+    return generatingInitialPoint();
 
 }
 

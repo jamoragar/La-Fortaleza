@@ -138,6 +138,7 @@ export const Exito = () => {
                     fecha_creacion_pedido: moment(collection.date_created).locale('es').format('DD-MM-YYYY h:mm:ss a'),
                 }
                 clientOrderFb.then(data => {
+                    console.log(data)
                     //Cuando el cliente sea redireccionado a esta página por primera vez, se actualizará el estado de su pago en su pedido.
                     if (data.estado_pago === 'PENDIENTE') {
                         //"Limpiamos" el local storage, mejor dicho removemos la orden, ya que en este caso ya se pago. Pero para limpiar realmente, hay que usar la funcion clear()
@@ -145,7 +146,8 @@ export const Exito = () => {
                         const aprovacion = {
                             estado_pago: 'APROBADO',
                             fecha_validacion_pago: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm'),
-                            numero_orden: collection.id
+                            numero_orden: collection.id,
+                            medio_pago: collection.payment_type_id
                         };
 
                         database.ref(`/Users/${user.uid}/pedidos/${id_pedido}`).update(aprovacion).then(
@@ -255,7 +257,7 @@ export const Exito = () => {
                             </Table>
                             <br />
                             <h2 style={{ textAlign: 'center' }}>Muchas gracias por su compra! Esperamos verlo pronto</h2>
-                            <h2 style={{ textAlign: 'center' }}>Salidas a reparto dias Lunes - Miercoles - viernes entre 17:00 y 20:00hrs.</h2>
+                            <h5 style={{ textAlign: 'center' }}>Salidas a reparto dias Lunes - Miercoles - viernes entre 17:00 y 20:00hrs.</h5>
                             <br />
                             {/* TODO generar voucher para descargar */}
                             {/* <Button style={{ marginBottom: '1em' }} onClick={() => exportPDF()} variant="primary" block disabled={disableButton}><i className="fas fa-file-alt fa-fw" />Descargar Comprobante</Button> */}

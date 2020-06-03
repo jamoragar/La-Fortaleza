@@ -90,7 +90,6 @@ const Store = (props) => {
                                 swipeable
                             >
                                 {fbData.map((producto, j) => {
-                                    console.log(producto)
                                     return producto.categoria === categoriaProducto ? (
                                         <div key={j} className="card_product" >
                                             <div className="card">
