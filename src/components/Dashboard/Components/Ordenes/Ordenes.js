@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap';
+import React from 'react';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import { usePedidos } from '../../../Hooks/usePedidos';
 import { Link, useParams } from 'react-router-dom';
@@ -88,6 +88,16 @@ const Ordenes = () => {
                                     <div style={{ cursor: 'pointer' }} className="text-primary"><i className="fas fa-fw fa-search fa-lg" style={{ width: '35px', height: '20px' }} /></div>
                                 </Link>
                             </OverlayTrigger>
+                            <OverlayTrigger key={'Actualizar Estado De Pago.'} placement={'left'}
+                                overlay={
+                                    <Tooltip id={`tooltip-bottom`}><strong>Actualizar Estado De Pago.</strong></Tooltip>
+                                }
+                            >
+                                <div style={{ cursor: 'pointer' }} onClick={() => { console.log(`Click de actualizar pedido`) }} > <i className="fas fa-fw fa-sync-alt fa-lg" style={{ width: '35px', height: '20px', color: "#43ff36" }} /></div>
+                            </OverlayTrigger>
+                        </div>
+                        <div style={{ display: 'flex' }}>
+
                         </div>
                     </div>
                 )
