@@ -57,6 +57,8 @@ export const Exito = () => {
     const database = firebase.database();
     const collection_id = params.get('collection_id');//Número de operación
     const preference_id = params.get('preference_id');
+    const payment_id = params.get('payment_id');
+    const payment_method_id = params.get('payment_method_id');
     const [disableButton, setDisableButton] = useState(false);
     const [user, setUser] = useState(null);
     const [preference, setPreference] = useState(null);
@@ -70,6 +72,7 @@ export const Exito = () => {
             .then(data => {
                 if (data.status === 404) {
                     setPreference(0)
+                    console.log('preference')
                     alert(`Error. La preferencia con el identificador ${id} no fue encontrada.`);
                 } else {
                     setPreference(data)
@@ -83,16 +86,39 @@ export const Exito = () => {
         fetch(`https://api.mercadopago.com/v1/payments/${id}?access_token=${credentials.access_token}`)
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 if (data.status === 404) {
                     setCollection(0)
+                    console.log('collection')
                     alert(`Número de operación: ${id} no encontrado`);
                 } else {
                     setCollection(data)
+                    if(payment_method_id === 'webpay'){
+                        console.log('llegamos')
+                        validatingOrder(data.order.id)
+                    }
                 }
             })
             .catch(error => {
                 console.log(error);
             })
+    }
+    const validatingOrder = id => {
+        fetch(`https://api.mercadopago.com//merchant_orders/${id}?access_token=${credentials.access_token}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                if(data.status === 400){
+                    setPreference(0)
+                    console.log('order')
+                    alert(`Número de operación: ${id} no encontrado`);
+                }else {
+                    setPreference(data)
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
     const exportPDF = () => {
         setDisableButton(true)
@@ -110,8 +136,10 @@ export const Exito = () => {
         firebase.auth().onAuthStateChanged(fbUser => {
             if (fbUser) {
                 setUser(fbUser)
-                validatingCollection(collection_id);
-                validatingPreference(preference_id);
+                validatingCollection(collection_id?collection_id:payment_id);
+                if(payment_method_id !== 'webpay'){
+                    validatingPreference(preference_id)
+                }
             } else {
                 alert('No tiene una sesión activa');
                 console.log('usuario sin sesión...');
@@ -122,8 +150,8 @@ export const Exito = () => {
 
 
     if (user && user.uid) {
-        if (preference) {
-            if (collection) {
+        if (collection) {
+            if (preference) {
                 const id_pedido = preference.additional_info;
                 const productos_pedido = preference.items;
                 const clientOrderFb = checkClientOrder(user.uid, id_pedido);
@@ -139,15 +167,17 @@ export const Exito = () => {
                 }
                 clientOrderFb.then(data => {
                     console.log(data)
+                    
                     //Cuando el cliente sea redireccionado a esta página por primera vez, se actualizará el estado de su pago en su pedido.
-                    if (data.estado_pago === 'PENDIENTE') {
+                    if (data && data.estado_pago === 'PENDIENTE') {
                         //"Limpiamos" el local storage, mejor dicho removemos la orden, ya que en este caso ya se pago. Pero para limpiar realmente, hay que usar la funcion clear()
                         localStorage.setItem('order', JSON.stringify({ order: [] }));
                         const aprovacion = {
                             estado_pago: 'APROBADO',
                             fecha_validacion_pago: moment().tz('America/Punta_Arenas').format('YYYY-MM-DD HH:mm'),
                             numero_orden: collection.id,
-                            medio_pago: collection.payment_type_id
+                            medio_pago: collection.payment_type_id,
+                            payment_method_id: collection.payment_method_id,
                         };
 
                         database.ref(`/Users/${user.uid}/pedidos/${id_pedido}`).update(aprovacion).then(
@@ -162,12 +192,12 @@ export const Exito = () => {
                                     }
                                 })
                             ).then(
-                                sendEmail(formData)
+                                sendEmail(formData),
                             )
-                        )
+                        );
                     }
-                })
 
+                }).catch(err => console.log(err));
 
                 return (
                     <div id='exitoTable'>
@@ -268,15 +298,16 @@ export const Exito = () => {
                         </Container>
                     </div>
                 )
-
-            } else {
+            }else if(preference === 0){
                 return (
-                    tableError('Operación', collection_id, preference_id)
+                    tableError('Pedido', collection_id?collection_id:payment_id, preference_id)
                 );
+            }else {
+                return (<h2>Cargando...</h2>);
             }
-        } else if (preference === 0) {
+        } else if (collection === 0) {
             return (
-                tableError('Pedido', collection_id, preference_id)
+                tableError('Operación', collection_id?collection_id:payment_id, preference_id)
             );
         } else {
             return (<h2>Cargando...</h2>);

@@ -150,12 +150,12 @@ const Ordenes = () => {
                         <h1 style={{ fontWeight: 'bolder', color: '#606060' }}>Listado de Ordenes</h1>
                     </div>
                 </div>
-                <div>
+                {/* <div>
                     <Button style={{ float: 'right', marginRight: '1rem', marginTop: '3rem', marginBottom: '2rem', width: '100' }} onClick={handleShow} variant="primary"> >
                     Actualizar Ordenes
                     </Button>
                     <UpdateOrderState show={showModal} onHide={() => setShowModal(false)} />
-                </div>
+                </div> */}
                 <div>
                     < DataTable
                         columns={columns}
