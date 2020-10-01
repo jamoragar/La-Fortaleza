@@ -109,7 +109,7 @@ const AgregarProducto = (props) => {
                                 precio: precio.value,
                                 stock: stock.value,
                                 video: video.value,
-                                fecha_creacion: moment().format('DD-MM-YYYY h:mm:ss a'),
+                                fecha_creacion: Date.now(),
                                 incluye_pestanas: checked,
                                 ficha_tecnica: checked ? {
                                     editorial: editorial.value,
