@@ -65,7 +65,7 @@ const ArticulosXCategoria = (props) => {
                                                         <div className="row">
                                                             {fbData.map((producto, j) => {
                                                                 return producto.categoria === categoriaProducto && producto.subcategoria === subcatContenido.description ? (
-                                                                    <div key={j} className="col p-3" >
+                                                                    <div key={j} className="p-1" >
                                                                         <div className="card" style={{ width: "285px" }}>
                                                                             <div className="offer offer-success">
                                                                                 {/*Activar cuando hay descuento...*/}
