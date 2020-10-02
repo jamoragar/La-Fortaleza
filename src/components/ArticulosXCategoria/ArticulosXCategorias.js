@@ -38,7 +38,7 @@ const ArticulosXCategoria = (props) => {
         })
     }
 
-    const discountPrice = 0.10;
+    const discountPrice = 0;
 
     if (fbData && category && description) {
         return (
@@ -68,11 +68,12 @@ const ArticulosXCategoria = (props) => {
                                                                     <div key={j} className="col p-3" >
                                                                         <div className="card" style={{ width: "285px" }}>
                                                                             <div className="offer offer-success">
-                                                                                <div className="shape">
+                                                                                {/*Activar cuando hay descuento...*/}
+                                                                                {/* <div className="shape">
                                                                                     <div className="shape-text">
                                                                                         -10%
                                                                                     </div>
-                                                                                </div>
+                                                                                </div> */}
                                                                                 <img className="card-img" src={producto.img} alt={producto.nombre} style={{ width: "283px", height: "283px" }} />
                                                                             </div>
                                                                             <div className="card-header-store text-center">
@@ -87,16 +88,17 @@ const ArticulosXCategoria = (props) => {
                                                                                 </li>
                                                                                 <li className="list-group-item">
                                                                                     <div className="row mt-1">
-                                                                                        <div className="col-6 text-center">
+                                                                                        <div className="col-12 text-center">
                                                                                             <h5 className="text-success">
                                                                                                 {formatPrice(producto.precio - (producto.precio * discountPrice))}
                                                                                             </h5>
                                                                                         </div>
-                                                                                        <div className="col-6 text-center">
+                                                                                        {/* Activar cuando hay descuento...
+                                                                                            <div className="col-6 text-center">
                                                                                             <h5 className="text-muted">
                                                                                                 <s>{formatPrice(producto.precio)}</s>
                                                                                             </h5>
-                                                                                        </div>
+                                                                                        </div> */}
                                                                                     </div>
                                                                                 </li>
                                                                                 <li className="list-group-item">

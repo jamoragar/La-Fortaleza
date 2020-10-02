@@ -14,7 +14,7 @@ const Store = (props) => {
 
     const { fbData, categoriaProductos, orders, category } = props;
     const order = orders;
-    const discountPrice = 0.10;
+    const discountPrice = 0;
 
     const addNewProduct = (product) => {
 
@@ -94,11 +94,12 @@ const Store = (props) => {
                                         <div key={j} className="card_product" >
                                             <div className="card">
                                                 <div className="offer offer-success">
-                                                    <div className="shape">
+                                                    {/* Activar cuando hay descuento...
+                                                        <div className="shape">
                                                         <div className="shape-text">
                                                             -10%
 					                                    </div>
-                                                    </div>
+                                                    </div> */}
                                                     <img className="card-img" src={producto.img} alt={producto.nombre} style={{ width: "283px", height: "283px" }} />
                                                 </div>
                                                 <div className="card-header-store text-center">
@@ -113,16 +114,17 @@ const Store = (props) => {
                                                     </li>
                                                     <li className="list-group-item">
                                                         <div className="row mt-1">
-                                                            <div className="col-6 text-center">
+                                                            <div className="col-12 text-center">
                                                                 <h5 className="text-success">
                                                                     {formatPrice(parseInt(Math.ceil((producto.precio) - (producto.precio * discountPrice))))}
                                                                 </h5>
                                                             </div>
-                                                            <div className="col-6 text-center">
+                                                            {/* Activar cuando hay descuento...
+                                                                <div className="col-6 text-center">
                                                                 <h5 className="text-muted">
                                                                     <s>{formatPrice(producto.precio)}</s>
                                                                 </h5>
-                                                            </div>
+                                                            </div> */}
                                                         </div>
                                                     </li>
                                                     <li className="list-group-item">

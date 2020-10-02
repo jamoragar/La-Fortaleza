@@ -5,7 +5,8 @@ export function useProducts() {
     const [fbData, setFbData] = useState(null);
 
     useEffect(() => {
-        firebase.database().ref('/Productos').on('value', snapshot => {
+        firebase.database().ref('/Productos').orderByChild('fecha_creacion').limitToLast(240).once('value').then(snapshot => {
+            console.log(snapshot.val())
             setFbData(snapshot.val());
         });
     }, []);

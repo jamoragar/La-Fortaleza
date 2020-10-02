@@ -21,7 +21,7 @@ const ArtciculosDialogs = (props) => {
 
     let { id } = useParams();
 
-    const discountPrice = 0.10;
+    const discountPrice = 0;
 
     useEffect(() => {
         firebase.database().ref('/Productos').on('value', snapshot => {
@@ -93,14 +93,15 @@ const ArtciculosDialogs = (props) => {
                                                 <li className="list-group-item ">
                                                     <h4>Precio:</h4>
                                                 </li>
-                                                <li className="list-group-item ">
+                                                {/* Activar en caso de descuento... */}
+                                                {/* <li className="list-group-item ">
                                                     <h5 className="text-muted">
                                                         Antes <s>{formatPrice(contenido.precio)}</s>
                                                     </h5>
-                                                </li>
+                                                </li> */}
                                                 <li className="list-group-item ">
                                                     <h5 className="text-success">
-                                                        Ahora {formatPrice(contenido.precio - (contenido.precio * discountPrice))}
+                                                        {formatPrice(contenido.precio - (contenido.precio * discountPrice))}
                                                     </h5>
                                                 </li>
                                                 <li className="list-group-item ">
