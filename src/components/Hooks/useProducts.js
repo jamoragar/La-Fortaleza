@@ -24,7 +24,6 @@ export function useProducts() {
         // });
         
         const unsubscribe = firebase.database().ref('/Productos').orderByChild('fecha_creacion').limitToLast(240).once('value').then(snapshot => {
-            console.log(snapshot.val())
             setFbData(snapshot.val());
         });
 
