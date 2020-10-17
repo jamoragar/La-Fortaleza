@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import { usePedidos } from '../../../Hooks/usePedidos';
 import { Link, useParams } from 'react-router-dom';
+import ordenesStyles from './ordenes.module.scss';
 import UpdateOrderState from './ActualizarEstadoPedido';
+
+const FilterComponent = ({ filterText, onFilter, onClear }) => (
+    <>
+        <input className={ordenesStyles.TextField} id="search" type="text" placeholder="Estado de pago" value={filterText} onChange={onFilter} />
+        <button className={ordenesStyles.ClearButton} type="button" onClick={onClear}>X</button>
+    </>
+);
 
 const Ordenes = () => {
     const columns = [
@@ -131,6 +139,18 @@ const Ordenes = () => {
     const [showModal, setShowModal] = useState(false);
     const handleShow = () => setShowModal(true);
 
+    //Buscador
+    const [filterText, setFilterText] = useState('');
+    const subHeaderComponentMemo = useMemo(() => {
+        const handleClear = () => {
+            if (filterText) {
+                setFilterText('');
+            }
+        };
+        return <FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />;
+    }, [filterText]);
+    //Fin buscador...   
+
     if (fbPedidos) {
 
         Object.keys(fbPedidos).forEach((key, i) => {
@@ -140,8 +160,9 @@ const Ordenes = () => {
         pedidosToArray.forEach((pedido, i) => {
             pedidos[i] = pedido.pedidoUsuario;
         });
-
-        const paginationOptions = { rowsPerPageText: 'Filas por página', rangeSeparatorText: 'de', selectAllRowsItem: true, selectAllRowsItemText: 'Todos' };
+        
+            const filteredItems = pedidos.filter(item => item.estado_pago.toLowerCase() && item.estado_pago.toLowerCase().includes(filterText.toLowerCase()));
+            const paginationOptions = { rowsPerPageText: 'Filas por página', rangeSeparatorText: 'de', selectAllRowsItem: true, selectAllRowsItemText: 'Todos' };
 
         return (
             <div>
@@ -159,14 +180,16 @@ const Ordenes = () => {
                 <div>
                     < DataTable
                         columns={columns}
-                        data={pedidos}
+                        data={filteredItems}
                         persistTableHead
                         fixedHeader
                         fixedHeaderScrollHeight="600px"
-                        noHeader
                         conditionalRowStyles={conditionalRowStyles}
                         pagination
                         paginationComponentOptions={paginationOptions}
+                        subHeader
+                        subHeaderComponent={subHeaderComponentMemo}
+                        persistTableHead
                     />
                 </div>
             </div >
