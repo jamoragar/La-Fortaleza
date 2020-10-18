@@ -1,0 +1,81 @@
+.containerImg{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.boxImg{
+    height: 100px;
+    margin: 12px 8px 8px 8px;
+    img{
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+    &:hover .optionImg{
+        display:block;
+    }
+}
+.optionImg{
+    display:none;
+    width: 100px;
+    bottom: 3.7rem;
+    position: relative;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.deleteImg{
+    background-color: transparent;
+    flex: 0 0 auto; 
+    border: 0;
+    color: rgba(0, 0, 0, 0.54);
+    padding: 12px;
+    overflow: visible;
+    font-size: 1.5rem;
+    text-align: center;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 50%;
+}
+.svgX{
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    font-size: 1.5rem;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    flex-shrink: 0;
+    user-select: none;
+    color: #fff;
+}
+.inputFile{
+    margin-bottom: 12px;
+}
+.TextField{
+    height: 32px;
+    width: 250px;
+    border-radius: 3px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 1px solid #e5e5e5;
+    padding: 0 32px 0 16px;
+    &:hover{
+        cursor: pointer;
+    }
+}.ClearButton{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #007bff;
+    color:white;
+    height: 34px;
+    width: 32px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

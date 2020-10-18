@@ -76,9 +76,6 @@ const Profile = (props) => {
                   defaultValue={userData.comuna? userData.comuna : "Aun no ha ingresado su comuna."}
                   readOnly
                 />
-                <Form.Text className="text-muted">
-                  Nunca compartiremos su e-mail con nadie más.
-                </Form.Text>
               </Form.Group>
             </Col>
           </Form.Row>
