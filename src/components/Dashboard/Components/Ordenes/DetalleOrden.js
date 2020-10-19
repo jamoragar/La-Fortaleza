@@ -31,6 +31,8 @@ const DetalleOrden = (props) => {
         const infoOrden = orderInfo[1];
         const infoItems = orderInfo[1].items;
 
+        console.log(infoUsuario)
+
         return (
             <div>
                 <div className="row" >
@@ -70,8 +72,8 @@ const DetalleOrden = (props) => {
                                     </Col>
                                     <Col lg={6} xs={12}>
                                         <Form.Group>
-                                            <Form.Label>E-mail</Form.Label>
-                                            <Form.Control type="email" name='email' defaultValue={infoUsuario.email} readOnly />
+                                            <Form.Label>Comuna</Form.Label>
+                                            <Form.Control type="comuna" name='comuna' defaultValue={infoUsuario.comuna? infoUsuario.comuna : "Comuna no Ingresada."} readOnly />
                                         </Form.Group>
                                     </Col>
                                 </Form.Row>
@@ -82,6 +84,12 @@ const DetalleOrden = (props) => {
                                             <InputGroup>
                                                 <Form.Control type='text' name='number' defaultValue={infoUsuario.numero} readOnly />
                                             </InputGroup>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col lg={6} xs={12}>
+                                        <Form.Group>
+                                            <Form.Label>E-mail</Form.Label>
+                                            <Form.Control type="email" name='email' defaultValue={infoUsuario.email} readOnly />
                                         </Form.Group>
                                     </Col>
                                 </Form.Row>
