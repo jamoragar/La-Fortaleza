@@ -38,6 +38,7 @@ export default function Routes(props) {
   let categoriaProductos = [];
 
   if (fbData) {
+    console.log(fbData)
 
     //Convertimos el objeto entregado por firebase de productos en un array
     Object.keys(fbData).forEach((key, i) => {
@@ -51,7 +52,7 @@ export default function Routes(props) {
     categoriaProductos = categoriaProductos.reduce((unique, item) =>
       unique.includes(item) ? unique : [...unique, item], []
     );
-
+    console.log(productosToArray)
     return (
       <div className="container-fluid  px-5">
         <Router history={history}>
