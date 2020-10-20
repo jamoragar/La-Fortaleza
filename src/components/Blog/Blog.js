@@ -1,19 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  Card,
-  CardColumns,
-  Col,
-  Row,
-  Image,
-} from "react-bootstrap";
+import { Card, CardColumns, Col, Row, Image } from "react-bootstrap";
 import firebase from "../../config/firebase";
 
-
-// import { useBlog } from "../Hooks/useBlog";
-
 const Blog = () => {
-  //   const blog = useBlog();
   const [blog, setBlog] = useState(null);
   let blogToArray = [];
 
@@ -34,8 +24,12 @@ const Blog = () => {
     console.log(blogToArray);
     return (
       <div className="container my-5">
-          <h1 class="display-1 text-center"><strong><em>Blog</em></strong></h1>
-        <br/>
+        <h1 class="display-1 text-center">
+          <strong>
+            <em>Blog</em>
+          </strong>
+        </h1>
+        <br />
         <CardColumns>
           {Object.entries(blogToArray).map(([index, entrada], i) => {
             return (
@@ -50,6 +44,15 @@ const Blog = () => {
                   <Card.Text className="text-right">
                     - Autor {entrada.autor}
                   </Card.Text>
+                  <div className="col-6 pl-1">
+                    <a href={`/Entrada/${entrada.id}/${entrada.titulo}`}>
+                      <button
+                        className="btn-ver btn-outline-success"
+                      >
+                        Leer Mas...
+                      </button>
+                    </a>
+                  </div>
                 </Card.Body>
                 <Card.Footer>
                   <small className="text-muted">{entrada.fecha_creacion}</small>

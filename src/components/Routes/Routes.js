@@ -15,6 +15,7 @@ import ArticulosDialogs from "../ArticulosDialogs/ArticulosDialogs";
 import Contacto from '../Contacto/Contacto';
 import AvisoLegal from '../AvisoLegal/AvisoLegal';
 import Blog from '../Blog/Blog';
+import EntradaView from "../Blog/EntradaView";
 import CheckOut from '../CheckOut/CheckOut';
 import _404 from '../404/404';
 import { Exito } from "../PagoEnLinea/Exito";
@@ -71,6 +72,7 @@ export default function Routes(props) {
             <Route path="/not-found" component={_404} />
             <Route path="/Pago/Exito" component={Exito} />
             <Route path="/Pago/Error" component={Error} />
+            <Route path="/Entrada/:id/" component={EntradaView}/>
             <Route component={NotFoundRedirect} />
           </Switch>
         </Router>
