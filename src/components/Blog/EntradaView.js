@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import firebase from "../../config/firebase";
-import { Container, Spinner, Row, Col,Image } from "react-bootstrap";
+import { Container, Spinner, Row, Col, Image } from "react-bootstrap";
 
 const EntradaView = (props) => {
   let { id } = useParams();
@@ -19,14 +19,21 @@ const EntradaView = (props) => {
   if (entrada) {
     return (
       <>
-        <Container style={{width: "80%", marginTop: "30px",borderColor: "#818182",
-                  boxShadow: "0 15px 25px 5px #818182",
-                  minWidth: "285px",
-                  color: "#606060"}}>
-
-          <Row>
+        <Container
+          style={{
+            width: "80%",
+            height: "100%",
+            marginTop: "30px",
+            borderColor: "#818182",
+            boxShadow: "0 15px 25px 5px #818182",
+            color: "#606060",
+            paddingTop:"25px",
+            paddingBottom: "25px"
+          }}
+        >
+          <Row className="mt-5">
             <Col xs={12} md={8}>
-              <Image alt="img" src={entrada.img} ></Image>
+              <Image alt="img" src={entrada.img}></Image>
             </Col>
             <Col xs={6} md={4}>
               <h2>{entrada.titulo}</h2>
@@ -34,11 +41,27 @@ const EntradaView = (props) => {
             </Col>
           </Row>
           <Row className="my-5">
-            <p className="mx-3">
-                {entrada.cuerpo}
-            </p>
+            <text className="m-4">{entrada.parrafo1}</text>
+            <text className="m-4">{entrada.parrafo2? entrada.parrafo2 : null}</text>
+            <text className="m-4">{entrada.parrafo3? entrada.parrafo2 : null}</text>
+            <text className="m-4">{entrada.parrafo4? entrada.parrafo2 : null}</text>
+            <text className="m-4">{entrada.parrafo5? entrada.parrafo2 : null}</text>
+            <text className="m-4">{entrada.parrafo6? entrada.parrafo2 : null}</text>
+            <text className="m-4">{entrada.parrafo7? entrada.parrafo2 : null}</text>
           </Row>
-    <div className="text-right"><small>Autor-</small>{entrada.autor}</div>
+          <Row >
+            <Col>
+              <Link to="/Blog">
+              <div className="btn btn-outline-primary text-left">volver</div>
+              </Link>
+            </Col>
+            <Col>
+              <div className="text-right">
+                <small>Autor-</small>
+                {entrada.autor}
+              </div>
+            </Col>
+          </Row>
         </Container>
       </>
     );

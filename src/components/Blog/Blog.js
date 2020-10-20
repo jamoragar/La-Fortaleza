@@ -40,7 +40,7 @@ const Blog = () => {
                   <Card.Subtitle className="mb-2 text-muted">
                     {entrada.subtitulo}
                   </Card.Subtitle>
-                  <p>{entrada.cuerpo}</p>
+                  <p>{entrada.parrafo1}</p>
                   <Card.Text className="text-right">
                     - Autor {entrada.autor}
                   </Card.Text>

@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import firebase from "../../../../config/firebase";
 import blogStyles from "./blog.module.scss";
-import moment from 'moment';
+import moment from "moment";
 
 const Blog = () => {
   const [image, setImage] = useState(null);
@@ -44,7 +44,7 @@ const Blog = () => {
   const submit = (e) => {
     e.preventDefault();
     const promises = [];
-    const { titulo, subtitulo, cuerpo, autor } = e.target.elements;
+    const { titulo, subtitulo, parrafo1, parrafo2, parrafo3, parrafo4, parrafo5, parrafo6, parrafo7, autor } = e.target.elements;
     const FbDownloadURL = [];
 
     if (files.length > 0) {
@@ -82,7 +82,13 @@ const Blog = () => {
                   autor: autor.value,
                   titulo: titulo.value,
                   subtitulo: subtitulo.value,
-                  cuerpo: cuerpo.value,
+                  parrafo1: parrafo1.value,
+                  parrafo2: parrafo2.value? parrafo2.value : null,
+                  parrafo3: parrafo3.value? parrafo3.value : null,
+                  parrafo4: parrafo4.value? parrafo4.value : null,
+                  parrafo5: parrafo5.value? parrafo5.value : null,
+                  parrafo6: parrafo6.value? parrafo6.value : null,
+                  parrafo7: parrafo7.value? parrafo7.value : null,
                   fecha_creacion: moment().format("DD-MM-YYYY h:mm:ss a"),
                   img: FbDownloadURL.map((img) => {
                     return img;
@@ -145,9 +151,33 @@ const Blog = () => {
             </Col>
           </Row>
         </Form.Group>
-        <Form.Group controlId="formCuerpo">
-          <Form.Label>Contenido de la entrada</Form.Label>
-          <Form.Control name="cuerpo" as="textarea" rows={5} required />
+        <Form.Group controlId="formParrafo1">
+          <Form.Label>Parrafo 1</Form.Label>
+          <Form.Control name="parrafo1" as="textarea" rows={5} placeholder="Escribe tu parrafo aca... debes completa al menos este parrafo..." required />
+        </Form.Group>
+        <Form.Group controlId="formParrafo2">
+          <Form.Label>Parrafo 2</Form.Label>
+          <Form.Control name="parrafo2" as="textarea" rows={5} placeholder="Escribe tu parrafo aca... "/>
+        </Form.Group>
+        <Form.Group controlId="formParrafo3">
+          <Form.Label>Parrafo 3</Form.Label>
+          <Form.Control name="parrafo3" as="textarea" rows={5} placeholder="Escribe tu parrafo aca... "/>
+        </Form.Group>
+        <Form.Group controlId="formParrafo4">
+          <Form.Label>Parrafo 4</Form.Label>
+          <Form.Control name="parrafo4" as="textarea" rows={5} placeholder="Escribe tu parrafo aca... "/>
+        </Form.Group>
+        <Form.Group controlId="formParrafo5">
+          <Form.Label>Parrafo 5</Form.Label>
+          <Form.Control name="parrafo5" as="textarea" rows={5} placeholder="Escribe tu parrafo aca... "/>
+        </Form.Group>
+        <Form.Group controlId="formParrafo6">
+          <Form.Label>Parrafo 6</Form.Label>
+          <Form.Control name="parrafo6" as="textarea" rows={5} placeholder="Escribe tu parrafo aca... "/>
+        </Form.Group>
+        <Form.Group controlId="formParrafo7">
+          <Form.Label>Parrafo 7</Form.Label>
+          <Form.Control name="parrafo7" as="textarea" rows={5} placeholder="Escribe tu parrafo aca... "/>
         </Form.Group>
         <Form.Group controlId="formUploadImages">
           <Form.Label>Imágenes:</Form.Label>
