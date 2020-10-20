@@ -19,19 +19,22 @@ const EntradaView = (props) => {
   if (entrada) {
     return (
       <>
-        <Container style={{width: "60%", marginTop: "30px"}}>
+        <Container style={{width: "80%", marginTop: "30px",borderColor: "#818182",
+                  boxShadow: "0 15px 25px 5px #818182",
+                  minWidth: "285px",
+                  color: "#606060"}}>
 
           <Row>
             <Col xs={12} md={8}>
               <Image alt="img" src={entrada.img} ></Image>
             </Col>
             <Col xs={6} md={4}>
-              <h1>{entrada.titulo}</h1>
+              <h2>{entrada.titulo}</h2>
               <h4>{entrada.subtitulo}</h4>
             </Col>
           </Row>
           <Row className="my-5">
-            <p>
+            <p className="mx-3">
                 {entrada.cuerpo}
             </p>
           </Row>
