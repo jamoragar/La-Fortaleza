@@ -23,42 +23,48 @@ export function useProducts() {
         //     });
         // });
         
-        const unsubscribe = firebase.database().ref('/Productos').orderByChild('fecha_creacion').limitToLast(240).once('value').then(snapshot => {
-            setFbData(snapshot.val());
-        });
+        const unsubscribe = firebase.database().ref('/Productos')
+            .orderByChild('fecha_creacion')
+            .limitToLast(240)
+            .once('value')
+            .then(snapshot => {
+                setFbData(snapshot.val());
+            });
 
         return (() => unsubscribe())
     }, []);
     
-    // if(fbData){
-    //     console.log(fbData.length)
-    //     return {
-    //         fbData,
-    //         setFbData
-    //     }
-    // }else{
-    //     return(
-    //         [],
-    //         setFbData
-    //     )
+//     if(fbData){
+//     //     console.log(fbData.length)
+//     //     return {
+//         //         fbData,
+//         //         setFbData
+//         //     }
+//         // }else{
+//             //     return(
+//                 //         [],
+//                 //         setFbData
+//                 //     )
+//     let time;
+//     Object.keys(fbData).map(key => {
+//         time = moment(fbData[key].fecha_creacion, 'DD-MM-YYYY h:mm:ss a').format('X');
+//         fbData[key].fecha_creacion = time === 'Invalid date' ? fbData[key].fecha_creacion : parseInt(time)
+
+//     });
+
+//     console.log(fbData)
+    
+//     setTimeout(() => {
+//         firebase.database().ref('/Productos').set(fbData);
+//     }, 6000)
+
+// }
     return {
         fbData,
         setFbData
     }
-    }
-    //     let time;
-    //     Object.keys(fbData).map(key => {
-    //         time = moment(fbData[key].fecha_creacion, 'DD-MM-YYYY h:mm:ss a').format('X');
-    //         fbData[key].fecha_creacion = time === 'Invalid date' ? fbData[key].fecha_creacion : parseInt(time)
+    
 
-    //     });
-
-    //     console.log(fbData)
-        
-    //     setTimeout(() => {
-    //         firebase.database().ref('/Productos').set(fbData);
-    //     }, 6000)
-
-    // }
+}
 
 //nuevo
